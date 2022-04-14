@@ -28,7 +28,9 @@ import {
   AddRole,
   AddFeeMaster,
   LeaveMaster,
-  AddLeave
+  AddLeave,
+  LeaveApplication,
+  LeaveApproval
 } from 'pages'
 import ProtectedRoute from './containers/ProtectedRoute'
 
@@ -87,6 +89,9 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.ADD_FEE_MASTER} component={AddFeeMaster} />
       <ProtectedRoute path={ROUTES.LEAVE_MASTER} component={LeaveMaster} />
       <ProtectedRoute path={ROUTES.ADD_LEAVE} component={AddLeave} />
+      <ProtectedRoute path={ROUTES.LEAVE_APPLICATION} component={LeaveApplication} />
+      <ProtectedRoute path={ROUTES.LEAVE_APPLICATION} component={LeaveApplication} />
+      <ProtectedRoute path={ROUTES.LEAVE_APPROVAL} component={LeaveApproval} />
     </Switch>
   )
 }

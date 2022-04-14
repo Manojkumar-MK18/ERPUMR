@@ -147,18 +147,33 @@ const admin: Array<Menu> = [
     childs:[
       {
         icon: ['fas', 'bars'],
+        label: 'Department',
+        to: ROUTES.LEAVE_MASTER,
+      },
+      {
+        icon: ['fas', 'bars'],
+        label: 'Designation',
+        to: ROUTES.LEAVE_MASTER,
+      },
+      {
+        icon: ['fas', 'bars'],
+        label: 'Staff Registration',
+        to: ROUTES.LEAVE_MASTER,
+      },
+      {
+        icon: ['fas', 'bars'],
         label: 'Leave Master',
         to: ROUTES.LEAVE_MASTER,
       },
       {
         icon: ['fas', 'bars'],
         label: 'Leave Application',
-        to: ROUTES.LEAVE_MASTER,
+        to: ROUTES.LEAVE_APPLICATION,
       },
       {
         icon: ['fas', 'bars'],
         label: 'Leave Approval',
-        to: ROUTES.LEAVE_MASTER,
+        to: ROUTES.LEAVE_APPROVAL,
       },
       {
         icon: ['fas', 'bars'],

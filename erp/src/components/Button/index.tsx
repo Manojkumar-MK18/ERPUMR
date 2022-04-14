@@ -6,7 +6,7 @@ const StyledButton = styled(Button)`
   background: ${colors.purple};
   border: none;
   &:focus,
-  &: hover,
+  &:hover,
   &:active {
     background: ${({ theme }) => theme.button.primarySelect} !important;
     border: none;
