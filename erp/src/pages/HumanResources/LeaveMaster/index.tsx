@@ -13,6 +13,7 @@ import { Table } from 'react-bootstrap'
 import { tableHeader } from './const'
 import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
+import { LeaveAction } from './subcomponents'
 
 const LeaveMaster = (): ReactElement => {
 
@@ -49,10 +50,15 @@ const LeaveMaster = (): ReactElement => {
                         <tbody>
                             <TableRow>
                                 <td>1</td>
-                                <td>Encaspulle</td>
-                                <td>Native Function</td>
-                                <td>5 days</td>
-                                <td></td>
+                                <td>Sick Leave</td>
+                                <td>Descripton</td>
+                                <td>YES</td>
+                                <td>
+                                    <LeaveAction
+                                        handleDelete={() => { }}
+                                        handleEdit={() => { }}
+                                     />
+                                </td>
                             </TableRow>
                         </tbody>
                     </Table>

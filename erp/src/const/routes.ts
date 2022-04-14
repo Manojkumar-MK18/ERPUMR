@@ -26,7 +26,9 @@ const ROUTES = {
   ADD_ROLE: '/addRole',
   ADD_FEE_MASTER: '/addFeeMaster',
   LEAVE_MASTER:'/leaveMaster',
-  ADD_LEAVE: '/addLeave'
+  ADD_LEAVE: '/addLeave',
+  LEAVE_APPLICATION: '/leaveApplication',
+  LEAVE_APPROVAL: '/leaveApproval',
 }
 
 export default ROUTES

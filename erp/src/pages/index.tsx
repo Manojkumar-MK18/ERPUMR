@@ -25,6 +25,8 @@ import AddRole from 'pages/AddRole'
 import AddFeeMaster from 'pages/FeesManagementSystem/AddFeeMaster'
 import LeaveMaster from './HumanResources/LeaveMaster'
 import AddLeave from './HumanResources/LeaveMaster/AddLeave'
+import LeaveApplication from './HumanResources/LeaveApplication'
+import LeaveApproval from './HumanResources/LeaveApproval'
 
 export {
   Dashboard,
@@ -53,5 +55,7 @@ export {
   AddRole,
   AddFeeMaster,
   LeaveMaster,
-  AddLeave
+  AddLeave,
+  LeaveApplication,
+  LeaveApproval
 }

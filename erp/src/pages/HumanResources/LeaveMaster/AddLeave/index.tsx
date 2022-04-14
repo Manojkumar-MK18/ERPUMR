@@ -1,7 +1,16 @@
-import { DropdownWrapper, EditableDropdown, FlexWrapper, Input, PageWrapper, SectionTitle } from 'components'
+import { ReactElement } from 'react'
+import {
+    DropdownWrapper,
+    EditableDropdown,
+    FlexWrapper,
+    Input,
+    PageWrapper,
+    SectionTitle
+} from 'components'
 import strings from 'locale/en'
+import { SearchButton } from 'pages/subcomponents'
 
-const AddLeave = () => {
+const AddLeave = (): ReactElement => {
     const {
         hrms: {
             leaveMaster: {
@@ -16,7 +25,7 @@ const AddLeave = () => {
 
     return (
         <PageWrapper>
-             <SectionTitle title={'Add Leave'} hasBackButton />
+            <SectionTitle title={'Add Leave'} hasBackButton />
             <FlexWrapper>
                 <DropdownWrapper>
                     <EditableDropdown
@@ -49,6 +58,7 @@ const AddLeave = () => {
 
                     />
                 </DropdownWrapper>
+                <SearchButton>Submit</SearchButton>
             </FlexWrapper>
         </PageWrapper>
     )
