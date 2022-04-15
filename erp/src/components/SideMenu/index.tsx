@@ -17,7 +17,7 @@ const SideMenu = ({ menus = [] }: SideMenuProps): ReactElement => {
     <MenuContainer>
       {menus.map((menu, index) => {
         const { childs = [] } = menu
-        const isSelected = selectedMenu === index
+        const isSelected = selectedMenu === index 
 
         return (
           <>

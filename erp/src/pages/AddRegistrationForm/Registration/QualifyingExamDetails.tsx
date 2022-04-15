@@ -28,7 +28,7 @@ const QualifyingExamDetails = (): ReactElement => {
     qualificationDetailsD
   } = useSelector(
     (state: RootState) => ({
-      qualifyingExamDetails: state.studentRegistration.studentRegistration.qualifyingExamDetails,
+      qualifyingExamDetails: state.studentRegistration.studentRegistration,
       boardList: state.acamedic.boardList,
       mediumType:state.acamedic.mediumType,
       qualificationDetailsD:state.acamedic.qualificationDetailsD

@@ -12,8 +12,18 @@ import Tab from 'react-bootstrap/esm/Tab'
 import Registration from './Registration'
 import MedicalForm from './MedicalForm'
 import Documents from './Documents'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from 'redux/store'
+import { studentRegistration } from 'redux/studentRegistration/api'
 
 const AddRegistrationForm = (): ReactElement => {
+  const {
+    registrationData
+  } = useSelector(
+    (state: RootState) => ({
+      registrationData: state.studentRegistration.studentRegistration,
+    })
+  )
   const {
     studentRegistration: {
       addRegistrationForm,
@@ -23,6 +33,9 @@ const AddRegistrationForm = (): ReactElement => {
     },
     button: { save, saveAndPay }
   } = strings
+  // eslint-disable-next-line no-unused-vars
+
+  const dispatch = useDispatch()
   return (
     <PageWrapper id="container">
       <SectionTitle title={addRegistrationForm} hasBackButton />
@@ -44,7 +57,11 @@ const AddRegistrationForm = (): ReactElement => {
         </Tabs>
       </TabWrapper>
       <FlexWrapper justifyContent="flex-end">
-        <Button>{save}</Button>
+        <Button
+          onClick={() => {
+            dispatch(studentRegistration({...registrationData}))
+          }}
+        >{save}</Button>
         <Button>{saveAndPay}</Button>
       </FlexWrapper>
     </PageWrapper>

@@ -9,8 +9,18 @@ import {
 } from 'components'
 import strings from 'locale/en'
 import { SearchButton } from 'pages/subcomponents'
+import { shallowEqual, useSelector } from 'react-redux'
+import { RootState } from 'redux/store'
 
 const AddLeave = (): ReactElement => {
+    const {
+        encassable
+    } = useSelector(
+        (state: RootState) => ({
+            encassable: state.leave.encassable
+        }),
+        shallowEqual
+    )
     const {
         hrms: {
             leaveMaster: {
@@ -29,7 +39,7 @@ const AddLeave = (): ReactElement => {
             <FlexWrapper>
                 <DropdownWrapper>
                     <EditableDropdown
-                        dropdownList={[]}
+                        dropdownList={encassable}
                         isRequired
                         placeholder={encassual}
                         handleSelect={() => { }}
