@@ -5,6 +5,8 @@ const ROUTES = {
   YEAR: '/year',
   STUDENTREGISTRATION: '/studentRegistartion',
   ADDREGISTRATION: '/addRegistrationForm',
+  STAFFREGISTRATION: '/staffRegistration',
+  ADDSTAFFREGISTRATION: '/addStaffRegistration',
   FEEDESCRIPTION: '/feeDescription',
   ADDFEEDESCRIPTION: '/addFeeDescription',
   FEEMASTER: '/feeMaster',
@@ -25,10 +27,10 @@ const ROUTES = {
   BALANCE_SHEET: '/BalanceSheet',
   ADD_ROLE: '/addRole',
   ADD_FEE_MASTER: '/addFeeMaster',
-  LEAVE_MASTER:'/leaveMaster',
+  LEAVE_MASTER: '/leaveMaster',
   ADD_LEAVE: '/addLeave',
   LEAVE_APPLICATION: '/leaveApplication',
-  LEAVE_APPROVAL: '/leaveApproval',
+  LEAVE_APPROVAL: '/leaveApproval'
 }
 
 export default ROUTES
