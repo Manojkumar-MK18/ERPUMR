@@ -1,10 +1,11 @@
-import { FlexWrapper, PageWrapper, SectionTitle, TableHeader, TableRow, TableWrapper } from 'components'
+import {  FlexWrapper, PageWrapper, SectionTitle, TableHeader, TableRow, TableWrapper } from 'components'
 import { ReactElement } from 'react'
 import { Table } from 'react-bootstrap'
 import { tableHeader } from './const'
 import { ActionButton } from './subcomponents'
 
 const LeaveApproval = (): ReactElement => {
+    
     return (
         <PageWrapper>
             <SectionTitle title='Leave Approval' />
@@ -42,7 +43,7 @@ const LeaveApproval = (): ReactElement => {
                         </tbody>
                     </Table>
                 </TableWrapper>
-            </FlexWrapper>
+            </FlexWrapper> 
         </PageWrapper>
     )
 }

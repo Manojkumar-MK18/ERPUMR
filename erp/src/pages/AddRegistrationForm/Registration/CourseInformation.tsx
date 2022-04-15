@@ -20,7 +20,7 @@ const CourseInformation = (): ReactElement => {
   } = useSelector(
     (state: RootState) => ({
       academic: state.acamedic,
-      childInformation: state.studentRegistration.studentRegistration.courseDetails,
+      childInformation: state.studentRegistration.studentRegistration,
       courses: state.acamedic.courses
     }),
     shallowEqual

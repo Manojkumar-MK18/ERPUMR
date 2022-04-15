@@ -5,6 +5,7 @@ import academicReducer from './academic/reducer'
 import studentRegistrationReducer from './studentRegistration/reducer'
 import financeReducer from './finance/reducer'
 import fms from './fms/reducer'
+import leaveReducer from './Leave/reducer'
 
 const initialState = {}
 
@@ -14,7 +15,8 @@ const rootReducer = {
   acamedic: academicReducer,
   studentRegistration: studentRegistrationReducer,
   finance: financeReducer,
-  fms: fms
+  fms: fms,
+  leave:leaveReducer
 }
 
 export const store = configureStore({

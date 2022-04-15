@@ -29,7 +29,7 @@ const CommunicationDetails = (): ReactElement => {
     stateList
   } = useSelector(
     (state: RootState) => ({
-      communicationDetails: state.studentRegistration.studentRegistration.communicationDetails,
+      communicationDetails: state.studentRegistration.studentRegistration,
       stateList: state.acamedic.stateList
     }),
     shallowEqual

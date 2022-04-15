@@ -17,21 +17,21 @@ import { HandleChangeOptions } from './typings'
 const PermanentDetails = (): ReactElement => {
   const {
     permanentDetails: {
-      address,
-      email,
-      mobileNumber,
-      parentMobileNumber,
-      district,
-      city,
-      taluk,
-      country,
-      postal,
+      addressPermenent,
+      emailPermenent,
+      mobileNumberPermenent,
+      parentMobileNumberPermenent,
+      districtPermenent,
+      cityPermenent,
+      talukPermenent,
+      countryPermenent,
+      postalPermenent,
       isSameAsCommunicationAddress
     },
     stateList
   } = useSelector(
     (state: RootState) => ({
-      permanentDetails: state.studentRegistration.studentRegistration.permanentDetails,
+      permanentDetails: state.studentRegistration.studentRegistration,
       stateList: state.acamedic.stateList
     }),
     shallowEqual
@@ -96,14 +96,14 @@ const PermanentDetails = (): ReactElement => {
             <Input
               label={addressLabel}
               placeholder={addressPlaceholder}
-              value={address}
+              value={addressPermenent}
               isRequired
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'address',
+                  key: 'addressPermenent',
                   value,
                   isNumericValue: false
                 })
@@ -116,13 +116,13 @@ const PermanentDetails = (): ReactElement => {
               label={emailLabel}
               isRequired
               placeholder={emailPlaceholder}
-              value={email}
+              value={emailPermenent}
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'email',
+                  key: 'emailPermenent',
                   value,
                   isNumericValue: false
                 })
@@ -134,14 +134,14 @@ const PermanentDetails = (): ReactElement => {
             <Input
               label={mobileNumberLabel}
               placeholder={mobileNumberPlaceholder}
-              value={mobileNumber}
+              value={mobileNumberPermenent}
               isRequired
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'mobileNumber',
+                  key: 'mobileNumberPermenent',
                   value,
                   isNumericValue: true
                 })
@@ -153,13 +153,13 @@ const PermanentDetails = (): ReactElement => {
             <Input
               label={parentMobileNumberLabel}
               placeholder={parentMobileNumberPlaceholder}
-              value={parentMobileNumber}
+              value={parentMobileNumberPermenent}
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'parentMobileNumber',
+                  key: 'parentMobileNumberPermenent',
                   value,
                   isNumericValue: true
                 })
@@ -177,7 +177,7 @@ const PermanentDetails = (): ReactElement => {
               error={''}
               handleSelect={(item) =>
                 handleChange({
-                  key: 'state',
+                  key: 'statePermenent',
                   value: item.name,
                   isNumericValue: false
                 })
@@ -189,13 +189,13 @@ const PermanentDetails = (): ReactElement => {
               label={districtLabel}
               isRequired
               placeholder={districtPlaceholder}
-              value={district}
+              value={districtPermenent}
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'district',
+                  key: 'districtPermenent',
                   value,
                   isNumericValue: false
                 })
@@ -208,13 +208,13 @@ const PermanentDetails = (): ReactElement => {
               label={talukLabel}
               isRequired
               placeholder={talukPlaceholder}
-              value={taluk}
+              value={talukPermenent}
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'taluk',
+                  key: 'talukPermenent',
                   value,
                   isNumericValue: false
                 })
@@ -227,13 +227,13 @@ const PermanentDetails = (): ReactElement => {
               label={cityLabel}
               isRequired
               placeholder={cityPlaceholder}
-              value={city}
+              value={cityPermenent}
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'city',
+                  key: 'cityPermenent',
                   value,
                   isNumericValue: false
                 })
@@ -245,14 +245,14 @@ const PermanentDetails = (): ReactElement => {
             <Input
               label={countryLabel}
               placeholder={countryPlaceholder}
-              value={country}
+              value={countryPermenent}
               isRequired
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'country',
+                  key: 'countryPermenent',
                   value,
                   isNumericValue: false
                 })
@@ -264,14 +264,14 @@ const PermanentDetails = (): ReactElement => {
             <Input
               label={postalLabel}
               placeholder={postalPlaceholder}
-              value={postal}
+              value={postalPermenent}
               isRequired
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'postal',
+                  key: 'postalPermenent',
                   value,
                   isNumericValue: true
                 })

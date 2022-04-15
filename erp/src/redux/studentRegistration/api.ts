@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit" 
 import apiEndpoints from "const/apiEndpoints"
 import api from "services"
-import StudentRegistration, { ChildInformation, CommunicationDetails, CourseDetails, PermanentDetails,QualifyingDetails } from "./typings"
+import { ChildInformation, CommunicationDetails, CourseDetails, PermanentDetails,QualifyingDetails, registration } from "./typings"
 
 export const AddChildApi = createAsyncThunk(
     'child/addChild',
@@ -45,7 +45,7 @@ export const AddCourseApi = createAsyncThunk(
 
 export const studentRegistration = createAsyncThunk(
     'register/addRegister',
-    async (requestData: StudentRegistration): Promise<StudentRegistration> => {
+    async (requestData: registration): Promise<registration> => {
         const response = await api.post(apiEndpoints.register,requestData)
         return response?.data
     }

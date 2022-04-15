@@ -1,10 +1,10 @@
 export const checkBoxDropdownList = [
   {
-    id: 'yes',
+    id: '01',
     name: 'Yes'
   },
   {
-    id: 'no',
+    id: '02',
     name: 'No'
   }
 ]

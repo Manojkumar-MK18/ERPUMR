@@ -11,17 +11,7 @@ const admin: Array<Menu> = [
     icon: ['fas', 'database'],
     label: 'Settings',
     to: '',
-    childs: [
-      {
-        icon: ['fas', 'bars'],
-        label: 'Academic',
-        to: ROUTES.ACADEMIC
-      },
-      {
-        icon: ['fas', 'bars'],
-        label: 'Year',
-        to: ROUTES.YEAR
-      },
+    childs: [ 
       {
         icon: ['fas', 'bars'],
         label: 'Add Role',

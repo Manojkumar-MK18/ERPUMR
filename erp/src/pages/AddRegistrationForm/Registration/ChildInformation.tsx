@@ -35,7 +35,7 @@ const ChildInformation = (): ReactElement => {
   } = useSelector(
     (state: RootState) => ({
       academic: state.acamedic,
-      childInformation: state.studentRegistration.studentRegistration.childInformation
+      childInformation: state.studentRegistration.studentRegistration
     }),
     shallowEqual
   )
