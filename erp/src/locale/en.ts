@@ -331,14 +331,14 @@ const strings = {
       postalPlaceholder: 'Enter Postal/Zipcode'
     }
   },
-  hrms:{
-    leaveMaster:{
-      title:'Leave Master',
+  hrms: {
+    leaveMaster: {
+      title: 'Leave Master',
       encassual: 'Encassable ',
       encassualDetails: 'Encassable Details',
       leaveName: 'Leave Name',
       leaveDescription: 'Leave Description',
-      description :'Description'
+      description: 'Description'
     }
   }
 }
