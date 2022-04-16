@@ -9,7 +9,7 @@ const LeaveApproval = (): ReactElement => {
     return (
         <PageWrapper>
             <SectionTitle title='Leave Approval' />
-            <FlexWrapper>
+            <FlexWrapper noPadding>
                 <TableWrapper>
                     <Table size='sm' responsive="sm">
                         <TableHeader>

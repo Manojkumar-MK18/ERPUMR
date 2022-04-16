@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { LeaveState } from './typing'
-import { encassableList } from './const'
+import { encassableList, leaveType } from './const'
 
 const initialState: LeaveState = {
-    encassable: encassableList
+    encassable: encassableList,
+    leaveType:leaveType
 }
 
 export const leaveSlice = createSlice({

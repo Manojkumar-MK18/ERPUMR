@@ -10,8 +10,17 @@ import {
 } from 'components'
 import { DatePickerWrapper } from 'pages/subcomponents'
 import DatePicker from 'react-datepicker'
+import { useSelector } from 'react-redux'
+import { RootState } from 'redux/store'
 
 const LeaveApplication = (): ReactElement => {
+    const {
+        leaveData
+    } = useSelector(
+        (state: RootState) => ({
+            leaveData: state.leave.leaveType
+        })
+    )
 
     const [fromDate, setFromDate] = useState<any>(new Date())
     const [toDate, setToDate] = useState<any>(new Date())
@@ -25,10 +34,10 @@ const LeaveApplication = (): ReactElement => {
             <FlexWrapper>
                 <DropdownWrapper>
                     <EditableDropdown
-                        dropdownList={[]}
-                        title="Leave Module"
+                        dropdownList={leaveData}
+                        title="Leave Type"
                         isRequired
-                        placeholder={'Leave Module'}
+                        placeholder={'Select Leave Type'}
                         handleSelect={() => { }}
                     />
                 </DropdownWrapper>

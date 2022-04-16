@@ -334,8 +334,8 @@ const strings = {
   hrms: {
     leaveMaster: {
       title: 'Leave Master',
-      encassual: 'Encassable ',
-      encassualDetails: 'Encassable Details',
+      encassual: 'Encashable ',
+      encassualDetails: 'Encashable Details',
       leaveName: 'Leave Name',
       leaveDescription: 'Leave Description',
       description: 'Description'

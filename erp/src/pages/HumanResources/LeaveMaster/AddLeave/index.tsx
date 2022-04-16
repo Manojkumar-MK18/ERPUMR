@@ -36,16 +36,7 @@ const AddLeave = (): ReactElement => {
     return (
         <PageWrapper>
             <SectionTitle title={'Add Leave'} hasBackButton />
-            <FlexWrapper>
-                <DropdownWrapper>
-                    <EditableDropdown
-                        dropdownList={encassable}
-                        isRequired
-                        placeholder={encassual}
-                        handleSelect={() => { }}
-                        title={encassualDetails}
-                    />
-                </DropdownWrapper>
+            <FlexWrapper noPadding> 
                 <DropdownWrapper>
                     <Input
                         value={''}
@@ -66,6 +57,15 @@ const AddLeave = (): ReactElement => {
                         height="50px"
                         placeholder={description}
 
+                    />
+                </DropdownWrapper>
+                <DropdownWrapper>
+                    <EditableDropdown
+                        dropdownList={encassable}
+                        isRequired
+                        placeholder={encassual}
+                        handleSelect={() => { }}
+                        title={encassualDetails}
                     />
                 </DropdownWrapper>
                 <SearchButton>Submit</SearchButton>
