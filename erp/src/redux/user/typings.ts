@@ -6,6 +6,23 @@ export interface UserState {
   error: string
   userNameError: string
   passwordError: string
+  userInfo: UserInfo | null
+}
+
+export interface UserInfo {
+  role: string
+  userDetail: {
+    userDetailId: string
+    usersId: string
+    status: string
+    userName: string
+    branchIds: Array<string> 
+    coachingCenterId: string
+    firstName: string
+    studentAccess: boolean
+    subject: string
+  }
+  token: string
 }
 
 export interface ValidationError {
@@ -16,3 +33,4 @@ export interface ValidationError {
 export interface AuthenticatePayload {
   loginDevice: 'mobile' | 'website'
 }
+

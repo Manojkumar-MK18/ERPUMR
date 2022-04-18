@@ -1,6 +1,7 @@
 import { UserState, ValidationError } from './typings'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { validateUsername, validatePassword } from 'helpers/formValidation'
+import { handleAuthenticate } from './api'
 
 export const initialState: UserState = {
   isLoggedIn: false,
@@ -9,7 +10,8 @@ export const initialState: UserState = {
   password: '',
   error: '',
   userNameError: '',
-  passwordError: ''
+  passwordError: '',
+  userInfo: null
 }
 
 export const userSlice = createSlice({
@@ -44,6 +46,12 @@ export const userSlice = createSlice({
       state.passwordError = action.payload?.passwordError || ''
       state.isLoading = false
     }
+  },
+  extraReducers: {
+    [handleAuthenticate.fulfilled.toString()]: (state, action) => {
+      state.isLoading = false
+      state.userInfo = action.payload
+    },
   }
 })
 

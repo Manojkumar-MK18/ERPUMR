@@ -8,7 +8,10 @@ const apiEndpoints = {
   getCourses: 'course/getCourses',
   deleteFeeMaster: 'feeMaster/delete',
   editFeeMaster: 'feeTypes/edit',
-  register:'userDetail/save'
+  register:'userDetail/save',
+  addLeave:'leave/createLeaveMaster',
+  getAdminList: 'userDetail/search',
+  applyLeave: '/leave/applyLeave'
 }
 
 export default apiEndpoints

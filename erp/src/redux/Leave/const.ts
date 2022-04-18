@@ -1,11 +1,11 @@
 export const encassableList = [
   {
     id: '01',
-    name: 'YES'
+    name: 'true'
   },
   {
     id: '02',
-    name: 'NO'
+    name: 'false'
   },
 ]
 

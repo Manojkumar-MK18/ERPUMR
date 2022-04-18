@@ -1,5 +1,5 @@
 import { userSlice } from './reducer'
-import handleAuthenticate from './api'
+import {handleAuthenticate} from './api'
 
 const {
   updateIsLoggedIn,

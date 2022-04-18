@@ -16,7 +16,6 @@ import ROUTES from 'const/routes'
 import { LeaveAction } from './subcomponents'
 
 const LeaveMaster = (): ReactElement => {
-
     const {
         hrms: {
             leaveMaster: {
@@ -24,7 +23,6 @@ const LeaveMaster = (): ReactElement => {
             }
         }
     } = strings
-
     const history = useHistory()
 
     return (
@@ -57,7 +55,7 @@ const LeaveMaster = (): ReactElement => {
                                     <LeaveAction
                                         handleDelete={() => { }}
                                         handleEdit={() => { }}
-                                     />
+                                    />
                                 </td>
                             </TableRow>
                         </tbody>

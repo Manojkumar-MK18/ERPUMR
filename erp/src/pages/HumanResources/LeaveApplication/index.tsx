@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ReactElement, useState } from 'react'
 import {
     Button,
@@ -10,15 +11,23 @@ import {
 } from 'components'
 import { DatePickerWrapper } from 'pages/subcomponents'
 import DatePicker from 'react-datepicker'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
+import { applyLeaveApi } from 'redux/Leave/api'
+import format from 'date-fns/format'
+import {
+    DATE_FORMAT_YYYYMMDD,
+    TIME_FORMAT_HHMM
+} from '../../../const/dateFormat'
 
 const LeaveApplication = (): ReactElement => {
     const {
-        leaveData
+        leaveData,
+        applyLeaveData
     } = useSelector(
         (state: RootState) => ({
-            leaveData: state.leave.leaveType
+            leaveData: state.leave.leaveType,
+            applyLeaveData: state.leave.applyLeaveDetails
         })
     )
 
@@ -27,6 +36,9 @@ const LeaveApplication = (): ReactElement => {
     const [fromTime, setFromTime] = useState<any>('')
     const [toTime, setToTime] = useState<any>('')
     const sameData = fromDate.getDate() == toDate.getDate()
+    const dispatch = useDispatch()
+
+    const [values, setValues] = useState(applyLeaveData)
 
     return (
         <PageWrapper>
@@ -38,16 +50,22 @@ const LeaveApplication = (): ReactElement => {
                         title="Leave Type"
                         isRequired
                         placeholder={'Select Leave Type'}
-                        handleSelect={() => { }}
+                        handleSelect={(value) => {
+                            setValues({ ...values, leaveType: value.name })
+                        }}
                     />
                 </DropdownWrapper>
                 <DropdownWrapper>
                     <EditableDropdown
-                        dropdownList={[]}
+                        dropdownList={[
+                            {id: '01', name:'sick'}
+                        ]}
                         title="Leave Name"
                         isRequired
                         placeholder={'Leave Name'}
-                        handleSelect={() => { }}
+                        handleSelect={(value) => {
+                            setValues({ ...values, leaveName: value.name })
+                        }}
                     />
                 </DropdownWrapper>
                 <DropdownWrapper>
@@ -87,7 +105,6 @@ const LeaveApplication = (): ReactElement => {
                                     placeholder={'To Date'}
                                     onChange={(date) => {
                                         setToDate(date)
-
                                     }}
                                     suffix={['far', 'calendar']}
                                 />
@@ -139,16 +156,28 @@ const LeaveApplication = (): ReactElement => {
                 }
                 <DropdownWrapper>
                     <Input
-                        value=''
+                        value={values?.remarks}
                         placeholder='Reason For Leave'
                         isRequired
                         label='Reason'
                         width='100%'
+                        onChange={(value: string) => {
+                            setValues({ ...values, remarks: value })
+                        }}
                     />
                 </DropdownWrapper>
             </FlexWrapper>
             <FlexWrapper justifyContent='center' noPadding>
-                <Button>Submit</Button>
+                <Button
+                    onClick={() => {
+                        dispatch(applyLeaveApi({
+                            ...values,
+                            fromDate: format(fromDate, DATE_FORMAT_YYYYMMDD),
+                            toDate: format(toDate, DATE_FORMAT_YYYYMMDD),
+                            dayStatus: 'FullDay'
+                        }))
+                    }}
+                >Submit</Button>
             </FlexWrapper>
         </PageWrapper>
     )
