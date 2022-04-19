@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import {
   FlexWrapper,
   PageWrapper,
@@ -9,7 +9,9 @@ import {
   TableHeader,
   TableRow,
   Button,
-  TabWrapper
+  TabWrapper,
+  TableFooter,
+  Loader
 } from 'components'
 import strings from 'locale/en'
 import Tabs from 'react-bootstrap/esm/Tabs'
@@ -19,28 +21,53 @@ import { Table } from 'react-bootstrap'
 import { tableHeader } from './const'
 import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
-import { useSelector, shallowEqual } from 'react-redux'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
+import { getStudentAdmissionList } from 'redux/fms/actions'
+import { getCourses } from 'redux/academic/actions'
+import { resetValues } from './const'
+import { Student } from 'redux/fms/typings'
 
 const StudentRegistartion = (): ReactElement => {
   const {
-    semester,
-    academicYear: academicYearList,
-    year: yearList
-  } = useSelector((state: RootState) => state.acamedic, shallowEqual)
+    acamedic: { academicYear: academicYearList, year: yearList, courseList },
+    fms: { studentApplicationList, isLoading }
+  } = useSelector((state: RootState) => state, shallowEqual)
   const {
     studentRegistration: {
       registration,
-      semesterOrClass,
       academicYear,
       year,
       addRegistration,
       applicationList,
       admittedList,
-      onlineApplication
-    }
+      onlineApplication,
+      childInformation: { selectCourse, course }
+    },
+    button: { clear }
   } = strings
   const history = useHistory()
+  const dispatch = useDispatch()
+  const { data = [], totalPages = 0, page = 0 } = studentApplicationList || {}
+  const [resetValuesState, setResetValuesState] = useState(resetValues)
+  const [registrationList, setRegistrationList] = useState<Array<Student>>([])
+  const filteredList = registrationList.length > 0 ? registrationList : data
+
+  const clearValues = () => {
+    setResetValuesState({
+      academicYear: true,
+      year: true,
+      course: true
+    })
+    setRegistrationList([])
+  }
+
+  useEffect(() => {
+    dispatch(getStudentAdmissionList(1))
+    dispatch(getCourses())
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <PageWrapper id="container">
@@ -48,12 +75,23 @@ const StudentRegistartion = (): ReactElement => {
       <FlexWrapper>
         <DropdownWrapper>
           <EditableDropdown
-            dropdownList={semester}
-            title={semesterOrClass}
-            placeholder={semesterOrClass}
+            dropdownList={courseList}
+            title={course}
+            placeholder={selectCourse}
             onBlur={() => {}}
             error={''}
-            handleSelect={() => {}}
+            handleSelect={(item) => {
+              setResetValuesState({
+                ...resetValuesState,
+                course: false
+              })
+
+              const filteredRegistrationList = filteredList?.filter(
+                (registration) => registration.courseId === item.id
+              )
+              setRegistrationList(filteredRegistrationList || [])
+            }}
+            reset={resetValuesState?.course}
           />
         </DropdownWrapper>
         <DropdownWrapper>
@@ -63,7 +101,18 @@ const StudentRegistartion = (): ReactElement => {
             placeholder={academicYear}
             onBlur={() => {}}
             error={''}
-            handleSelect={() => {}}
+            handleSelect={(item) => {
+              setResetValuesState({
+                ...resetValuesState,
+                academicYear: false
+              })
+
+              const filteredRegistrationList = filteredList?.filter(
+                (registration) => registration.academicYear === item.name
+              )
+              setRegistrationList(filteredRegistrationList || [])
+            }}
+            reset={resetValuesState?.academicYear}
           />
         </DropdownWrapper>
         <DropdownWrapper>
@@ -73,7 +122,17 @@ const StudentRegistartion = (): ReactElement => {
             placeholder={year}
             onBlur={() => {}}
             error={''}
-            handleSelect={() => {}}
+            handleSelect={(item) => {
+              setResetValuesState({
+                ...resetValuesState,
+                year: false
+              })
+              const filteredRegistrationList = filteredList?.filter(
+                (registration) => registration.yearOfPassing === item.name
+              )
+              setRegistrationList(filteredRegistrationList || [])
+            }}
+            reset={resetValuesState?.year}
           />
         </DropdownWrapper>
         <DropdownWrapper>
@@ -85,6 +144,9 @@ const StudentRegistartion = (): ReactElement => {
             {addRegistration}
           </Button>
         </DropdownWrapper>
+        <DropdownWrapper>
+          <Button onClick={clearValues}>{clear}</Button>
+        </DropdownWrapper>
       </FlexWrapper>
       <TabWrapper>
         <Tabs
@@ -93,39 +155,77 @@ const StudentRegistartion = (): ReactElement => {
           className="mb-3"
         >
           <Tab eventKey="applicationList" title={applicationList}></Tab>
-          <Tab eventKey="onlineApplication" title={onlineApplication}></Tab>
-          <Tab eventKey="admittedList" title={admittedList}></Tab>
+          <Tab
+            eventKey="onlineApplication"
+            title={onlineApplication}
+            disabled
+          ></Tab>
+          <Tab eventKey="admittedList" title={admittedList} disabled></Tab>
         </Tabs>
       </TabWrapper>
-      <div>
-        <TableWrapper>
-          <Table size="sm" responsive="sm">
-            <TableHeader>
-              <TableRow>
-                {tableHeader?.map((header, index) => (
-                  <th key={`header-${index}`}>{header}</th>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <tbody>
-              <TableRow>
-                <td>{'1'}</td>
-                <td>{'Student Name'}</td>
-                <td>{'Semester/Class'}</td>
-                <td>{'001'}</td>
-                <td>{'General'}</td>
-                <td>{'Father Name'}</td>
-                <td>{'Father Number'}</td>
-                <td>{'UID'}</td>
-                <td>{'20/04/2021'}</td>
-                <td>
-                  <ActionWrapper />
-                </td>
-              </TableRow>
-            </tbody>
-          </Table>
-        </TableWrapper>
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div>
+          <TableWrapper>
+            <Table size="sm" responsive="sm">
+              <TableHeader>
+                <TableRow>
+                  {tableHeader?.map((header, index) => (
+                    <th key={`header-${index}`}>{header}</th>
+                  ))}
+                </TableRow>
+              </TableHeader>
+              <tbody>
+                {filteredList?.map(
+                  (
+                    {
+                      firstName = '',
+                      lastName = '',
+                      courseId = '',
+                      regNo,
+                      fatherName,
+                      parentNumber,
+                      updatedAt,
+                      aadhar
+                    },
+                    index
+                  ) => {
+                    const selectedCourse = courseList.find(
+                      (course) => course.id === courseId
+                    )
+                    return (
+                      <TableRow key={`student-list${index}`}>
+                        <td>{index + 1}</td>
+                        <td>{`${firstName} ${lastName}`}</td>
+                        <td>{selectedCourse?.name || courseId}</td>
+                        <td>{regNo}</td>
+                        <td>{fatherName}</td>
+                        <td>{parentNumber}</td>
+                        <td>{aadhar}</td>
+                        <td>{updatedAt}</td>
+                        <td>
+                          <ActionWrapper />
+                        </td>
+                      </TableRow>
+                    )
+                  }
+                )}
+              </tbody>
+            </Table>
+            <TableFooter
+              currentPage={page}
+              totalPages={totalPages}
+              handleNext={() => {
+                dispatch(getStudentAdmissionList(page + 1))
+              }}
+              handlePrevious={() => {
+                dispatch(getStudentAdmissionList(page - 1))
+              }}
+            />
+          </TableWrapper>
+        </div>
+      )}
     </PageWrapper>
   )
 }

@@ -8,8 +8,9 @@ import {
   InputWrapper,
   Image
 } from './subcomponents'
+import PhotoUploaderProps from './typings'
 
-const PhotoUploader = (): ReactElement => {
+const PhotoUploader = ({ handleUpload }: PhotoUploaderProps): ReactElement => {
   const [image, setImage] = useState<any>()
 
   const {
@@ -29,6 +30,9 @@ const PhotoUploader = (): ReactElement => {
           const reader = new FileReader()
           reader.onload = function (event) {
             setImage(event?.target?.result)
+            if (handleUpload) {
+              handleUpload(event?.target?.result)
+            }
           }
           if (selectedFile) {
             reader.readAsDataURL(selectedFile)

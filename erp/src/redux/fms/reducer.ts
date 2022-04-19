@@ -1,18 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { AddFeeDescriptionResponse, AddFeeDescriptionState } from './typings'
+import {
+  AddFeeDescriptionResponse,
+  AddFeeDescriptionState,
+  StudentList
+} from './typings'
 import {
   addNewFeeDescription,
   getFeeDescriptions,
   getFeeMaster,
-  deleteFeeMaster
+  deleteFeeMaster,
+  getStudentAdmissionList
 } from './api'
+import strings from 'locale/en'
 
 const initialState: AddFeeDescriptionState = {
   feeDescriptionList: [],
   isLoading: false,
   editDescriptionId: 0,
   feeMasterList: [],
-  editFeeMaster: null
+  editFeeMaster: null,
+  studentApplicationList: null,
+  error: ''
 }
 
 export const fmsSlice = createSlice({
@@ -27,9 +35,26 @@ export const fmsSlice = createSlice({
       action: PayloadAction<AddFeeDescriptionResponse | null>
     ) => {
       state.editFeeMaster = action.payload
+    },
+    resetError: (state) => {
+      state.error = ''
     }
   },
   extraReducers: {
+    [getStudentAdmissionList.pending.toString()]: (state) => {
+      state.isLoading = true
+    },
+    [getStudentAdmissionList.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<StudentList>
+    ) => {
+      state.isLoading = false
+      state.studentApplicationList = action.payload
+    },
+    [getStudentAdmissionList.rejected.toString()]: (state) => {
+      state.isLoading = false
+      state.error = strings?.studentRegistration.getStudentsError
+    },
     [deleteFeeMaster.pending.toString()]: (state) => {
       state.isLoading = true
     },

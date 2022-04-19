@@ -82,33 +82,6 @@ const strings = {
     title: 'Change/Upgrade Fees',
     allotedFeeMaster: 'Alloted Fee Master'
   },
-  validationMessages: {
-    userName: {
-      required: 'Username is required'
-    },
-    phone: {
-      required: 'Phone number is required',
-      numberOnly: 'Please enter only numbers',
-      invalid: 'Please enter valid phone number'
-    },
-    email: {
-      required: 'Email is required',
-      invalid: 'Please enter valid email'
-    },
-    password: {
-      required: 'Password is required',
-      confirmPasswordRequired: 'Confirm Password is required',
-      invalid:
-        'Password must contain 8 characters, One uppercase, One lowercase, One number and one special case character',
-      nonMatch: 'Passwords must match'
-    },
-    field: {
-      required: 'This is a required field'
-    },
-    date: {
-      academicYearInvalid: 'Please enter a valid Academic year to proceed'
-    }
-  },
   header: {
     logout: 'Logout'
   },
@@ -127,7 +100,8 @@ const strings = {
     add: 'Add',
     remove: 'Remove',
     cancel: 'Cancel',
-    print: 'Print'
+    print: 'Print',
+    clear: 'Clear'
   },
   chart: {
     stacked: {
@@ -197,9 +171,40 @@ const strings = {
       showHistory: 'Show History'
     }
   },
+  validationMessages: {
+    userName: {
+      required: 'Username is required'
+    },
+    phone: {
+      required: 'Phone number is required',
+      numberOnly: 'Please enter only numbers',
+      invalid: 'Please enter valid phone number'
+    },
+    email: {
+      required: 'Email is required',
+      invalid: 'Please enter valid email'
+    },
+    password: {
+      required: 'Password is required',
+      confirmPasswordRequired: 'Confirm Password is required',
+      invalid:
+        'Password must contain 8 characters, One uppercase, One lowercase, One number and one special case character',
+      nonMatch: 'Passwords must match'
+    },
+    field: {
+      required: 'This is a required field'
+    },
+    date: {
+      academicYearInvalid: 'Please enter a valid Academic year to proceed'
+    },
+    studentRegistration: 'Please enter all required fields!',
+    dob: 'MM-DD-YYYY'
+  },
   studentRegistration: {
+    getStudentsError: 'Unable to fetch details. Please try again later.',
+    saveStudentsError: 'Unable to save details. Please try again later.',
     registration: 'Applied & Admitted Lists',
-    semesterOrClass: 'Course',
+    semesterOrClass: 'Class',
     academicYear: 'Academic Year',
     year: 'Year',
     pay: 'Pay',
@@ -231,7 +236,13 @@ const strings = {
       combinationTypePlaceholder: 'Select Combination',
       primaryLanguage: 'I - Language',
       secondaryLanguage: 'II - Language',
-      languagePlaceholder: 'Select Language'
+      languagePlaceholder: 'Select Language',
+      instituteName: 'Institute',
+      selectInstituteName: 'Select Institute',
+      branchName: 'Branch',
+      selectBranch: 'Select Branch',
+      batch: 'Batch',
+      selectBatch: 'Select Batch'
     },
     childInformation: {
       title: 'Personal Details',
@@ -245,7 +256,10 @@ const strings = {
       genderLabel: 'Gender',
       genderPlaceholder: 'Select Gender',
       dobPlaceholder: 'Select Date Of Birth',
+      enterDob: 'MM-DD-YYYY',
       dobLabel: 'Date of Birth',
+      enrollmentNumberLabel: 'Enrollment Number',
+      enterEnrollment: 'Enter Enrollment Number',
       bloodGroupPlaceholder: 'Enter Blood Group',
       bloodGroupLabel: 'Blood Group',
       nationalityPlaceholder: 'Select Nationality',
@@ -281,7 +295,11 @@ const strings = {
       admissionNo: 'Admission No.',
       fatherName: 'Fathers Name',
       feePayable: 'Fee Payable',
-      lastYearBalance: 'Last Year Balance'
+      lastYearBalance: 'Last Year Balance',
+      userNameLabel: 'User Name',
+      userNamePlaceholder: 'Enter User Name',
+      passwordLabel: 'Password',
+      passwordPlaceHolder: 'Enter Password'
     },
     qualifyingExamDetails: {
       title: 'Qualifying Exam Details',

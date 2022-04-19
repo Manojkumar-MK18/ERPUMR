@@ -1,23 +1,49 @@
-import { InitialState, OnChangeHandler, registration } from './typings'
+import StudentRegistration, { OnChangeHandler } from './typings'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { studentRegistration } from './api'
+import addNewStudent from './api'
+import strings from 'locale/en'
 
-const initialState: InitialState = {
-  isLoading: false,
-  studentRegistration: {
+const initialState: StudentRegistration = {
+  childInformation: {
     studentsName: '',
     fathersName: '',
     mothersName: '',
-    dateOfBirth: new Date().toDateString(),
+    dateOfBirth: '',
     gender: '',
     bloodGroup: '',
-    physicallyChallenged: '',
+    physicallyChallenged: 'no',
     studentType: '',
     aadharNumber: '',
     nationality: '',
     religion: '',
     caste: '',
     community: '',
+    instituteId: '',
+    courseId: '',
+    branchId: '',
+    batchId: '',
+    primaryLanguage: '',
+    secondaryLanguage: '',
+    admissionType: '',
+    profileImage: null,
+    enrollmentNumber: '',
+    academicYear: '',
+    userName: '',
+    password: ''
+  },
+  communicationDetails: {
+    address: '',
+    email: '',
+    mobileNumber: '',
+    parentMobileNumber: '',
+    state: '',
+    district: '',
+    taluk: '',
+    city: '',
+    country: '',
+    postal: ''
+  },
+  permanentDetails: {
     address: '',
     email: '',
     mobileNumber: '',
@@ -28,18 +54,9 @@ const initialState: InitialState = {
     city: '',
     country: '',
     postal: '',
-    addressPermenent: '',
-    emailPermenent: '',
-    mobileNumberPermenent: '',
-    parentMobileNumberPermenent: '',
-    statePermenent: '',
-    districtPermenent: '',
-    talukPermenent: '',
-    cityPermenent: '',
-    countryPermenent: '',
-    postalPermenent: '',
-
-    isSameAsCommunicationAddress: false,
+    isSameAsCommunicationAddress: false
+  },
+  qualifyingExamDetails: {
     qualifyingExam: '',
     medium: '',
     previousExamRegNo: '',
@@ -48,38 +65,26 @@ const initialState: InitialState = {
     school: '',
     yearOfPassing: '',
     obtainedMarks: '',
-    percentage: '',
-    academicYear: '',
-    admissionTypeList: '',
-    semester: '',
-    primaryLanguage: '',
-    secondaryLanguage: '',
-  }
-
+    percentage: ''
+  },
+  error: '',
+  isLoading: false
 }
 
 export const studentRegistrationSlice = createSlice({
   name: 'studentRegistrationSlice',
   initialState,
   reducers: {
-    updateCourseInformation: (
-      state,
-      action: PayloadAction<OnChangeHandler>
-    ) => {
-      const key = Object.keys(action.payload)[0]
-      const courseInfo = {
-        ...state.studentRegistration,
-        [key]: action.payload[key]
-      }
-      state.studentRegistration = courseInfo
+    resetError: (state) => {
+      state.error = ''
     },
     updateChildInformation: (state, action: PayloadAction<OnChangeHandler>) => {
       const key = Object.keys(action.payload)[0]
       const childInfo = {
-        ...state.studentRegistration,
+        ...state.childInformation,
         [key]: action.payload[key]
       }
-      state.studentRegistration = childInfo
+      state.childInformation = childInfo
     },
     updateCommunicationDetails: (
       state,
@@ -87,18 +92,18 @@ export const studentRegistrationSlice = createSlice({
     ) => {
       const key = Object.keys(action.payload)[0]
       const communicationInfo = {
-        ...state.studentRegistration,
+        ...state.communicationDetails,
         [key]: action.payload[key]
       }
-      state.studentRegistration = communicationInfo
+      state.communicationDetails = communicationInfo
     },
     updatePermanentDetails: (state, action: PayloadAction<OnChangeHandler>) => {
       const key = Object.keys(action.payload)[0]
       const communicationInfo = {
-        ...state.studentRegistration,
+        ...state.permanentDetails,
         [key]: action.payload[key]
       }
-      state.studentRegistration = communicationInfo
+      state.permanentDetails = communicationInfo
     },
     updateQualifyingExamDetails: (
       state,
@@ -106,23 +111,25 @@ export const studentRegistrationSlice = createSlice({
     ) => {
       const key = Object.keys(action.payload)[0]
       const qualifyingExamInfo = {
-        ...state.studentRegistration,
+        ...state.qualifyingExamDetails,
         [key]: action.payload[key]
       }
-      state.studentRegistration = qualifyingExamInfo
+      state.qualifyingExamDetails = qualifyingExamInfo
     }
   },
   extraReducers: {
-    [studentRegistration.pending.toString()]: (state) => {
-      state.isLoading = true;
+    [addNewStudent.pending.toString()]: (state) => {
+      state.isLoading = true
     },
-    [studentRegistration.fulfilled.toString()]: (state, action: PayloadAction<registration>) => {
+    [addNewStudent.fulfilled.toString()]: (state) => {
       state.isLoading = false
-      state.studentRegistration = action?.payload
     },
-    [studentRegistration.rejected.toString()]: (state) => {
-      state.isLoading = false;
-    },
+    [addNewStudent.rejected.toString()]: (state, action) => {
+      state.isLoading = false
+      state.error =
+        action.payload || strings.studentRegistration.saveStudentsError
+      window.scrollTo({ top: 0 })
+    }
   }
 })
 

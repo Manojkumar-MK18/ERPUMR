@@ -4,7 +4,9 @@ import {
   SectionTitle,
   TabWrapper,
   FlexWrapper,
-  Button
+  Button,
+  TostMessage,
+  Loader
 } from 'components'
 import strings from 'locale/en'
 import Tabs from 'react-bootstrap/esm/Tabs'
@@ -12,18 +14,17 @@ import Tab from 'react-bootstrap/esm/Tab'
 import Registration from './Registration'
 import MedicalForm from './MedicalForm'
 import Documents from './Documents'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { studentRegistration } from 'redux/studentRegistration/api'
+import { resetError, addNewStudent } from 'redux/studentRegistration/actions'
 
 const AddRegistrationForm = (): ReactElement => {
-  const {
-    registrationData
-  } = useSelector(
-    (state: RootState) => ({
-      registrationData: state.studentRegistration.studentRegistration,
-    })
+  const { error, isLoading } = useSelector(
+    (state: RootState) => state.studentRegistration,
+    shallowEqual
   )
+  const dispatch = useDispatch()
+
   const {
     studentRegistration: {
       addRegistrationForm,
@@ -31,14 +32,18 @@ const AddRegistrationForm = (): ReactElement => {
       medicalFormTab,
       documentsTab
     },
-    button: { save, saveAndPay }
+    button: { save }
   } = strings
-  // eslint-disable-next-line no-unused-vars
-
-  const dispatch = useDispatch()
   return (
     <PageWrapper id="container">
       <SectionTitle title={addRegistrationForm} hasBackButton />
+      {error && (
+        <TostMessage
+          show={!!error}
+          message={error}
+          onCloseHandler={() => dispatch(resetError())}
+        />
+      )}
       <TabWrapper>
         <Tabs
           defaultActiveKey="applicationList"
@@ -48,21 +53,26 @@ const AddRegistrationForm = (): ReactElement => {
           <Tab eventKey="applicationList" title={registrationTab}>
             <Registration />
           </Tab>
-          <Tab eventKey="onlineApplication" title={medicalFormTab}>
+          <Tab eventKey="onlineApplication" title={medicalFormTab} disabled>
             <MedicalForm />
           </Tab>
-          <Tab eventKey="admittedList" title={documentsTab}>
+          <Tab eventKey="admittedList" title={documentsTab} disabled>
             <Documents />
           </Tab>
         </Tabs>
       </TabWrapper>
-      <FlexWrapper justifyContent="flex-end">
-        <Button
-          onClick={() => {
-            dispatch(studentRegistration({...registrationData}))
-          }}
-        >{save}</Button>
-        <Button>{saveAndPay}</Button>
+      <FlexWrapper justifyContent="center">
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Button
+            onClick={() => {
+              dispatch(addNewStudent())
+            }}
+          >
+            {save}
+          </Button>
+        )}
       </FlexWrapper>
     </PageWrapper>
   )

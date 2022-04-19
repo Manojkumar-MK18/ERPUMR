@@ -24,14 +24,14 @@ const QualifyingExamDetails = (): ReactElement => {
       percentage
     },
     boardList,
-    mediumType,
-    qualificationDetailsD
+    mediumList,
+    qualififactionList
   } = useSelector(
     (state: RootState) => ({
-      qualifyingExamDetails: state.studentRegistration.studentRegistration,
+      qualifyingExamDetails: state.studentRegistration.qualifyingExamDetails,
       boardList: state.acamedic.boardList,
-      mediumType:state.acamedic.mediumType,
-      qualificationDetailsD:state.acamedic.qualificationDetailsD
+      mediumList: state.acamedic.mediumList,
+      qualififactionList: state.acamedic.qualififactionList
     }),
     shallowEqual
   )
@@ -78,7 +78,7 @@ const QualifyingExamDetails = (): ReactElement => {
         <FlexWrapper width="100%">
           <DropdownWrapper>
             <EditableDropdown
-              dropdownList={qualificationDetailsD}
+              dropdownList={qualififactionList}
               title={qualifyingExamLabel}
               placeholder={qualifyingExamPlaceholder}
               onBlur={() => {}}
@@ -94,9 +94,8 @@ const QualifyingExamDetails = (): ReactElement => {
           </DropdownWrapper>
           <DropdownWrapper>
             <EditableDropdown
-              dropdownList={mediumType}
+              dropdownList={mediumList}
               title={mediumLabel}
-              isRequired
               placeholder={mediumPlaceholder}
               onBlur={() => {}}
               error={''}
@@ -112,7 +111,6 @@ const QualifyingExamDetails = (): ReactElement => {
           <DropdownWrapper>
             <EditableDropdown
               dropdownList={boardList}
-              isRequired
               title={boardLabel}
               placeholder={boardPlaceholder}
               onBlur={() => {}}
@@ -240,4 +238,4 @@ const QualifyingExamDetails = (): ReactElement => {
   )
 }
 
-export default QualifyingExamDetails 
+export default QualifyingExamDetails

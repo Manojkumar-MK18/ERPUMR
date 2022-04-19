@@ -3,50 +3,70 @@ import { PageWrapper, EditableDropdown, DropdownWrapper } from 'components'
 import { InfoWrapper, FlexWrapper } from '../subcomponents'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { updateCourseInformation } from 'redux/studentRegistration/actions'
+import { updateChildInformation } from 'redux/studentRegistration/actions'
 import strings from 'locale/en'
-import getCourses from 'redux/academic/api'
-import getCoursesDropdown from '../../../redux/academic/helpers'
+import {
+  getCourses,
+  getInstitutes,
+  getBranchesByInstitute,
+  getAllCoursesByInstitute,
+  getBatchesForCourse
+} from 'redux/academic/actions'
+import {
+  getBranchDropdown,
+  getInstituteDropdown,
+  getBatchDropdown
+} from 'helpers'
 
 const CourseInformation = (): ReactElement => {
   const {
     academic: {
       academicYear: academicYearList,
-      admissionTypeList: admissionDropLists, 
-      primaryLanguageList: primaryDropdown,
-      secondaryLanguageList: secondaryDropdown
+      feeTypeList,
+      primaryLanguageList,
+      secondaryLanguageList,
+      courseList,
+      instituteList,
+      branchList,
+      batchList
     },
-    courses
+    childInformation
   } = useSelector(
     (state: RootState) => ({
       academic: state.acamedic,
-      childInformation: state.studentRegistration.studentRegistration,
-      courses: state.acamedic.courses
+      childInformation: state.studentRegistration.childInformation
     }),
     shallowEqual
   )
   const dispatch = useDispatch()
   const {
     studentRegistration: {
-      semesterOrClass,
-      childInformation: { selectYear, academicYear },
+      childInformation: { selectYear, academicYear, selectCourse, course },
       courseInformation: {
         admisionTypeLabel,
         admissionTypePlaceholder,
         primaryLanguage,
         secondaryLanguage,
-        languagePlaceholder
+        languagePlaceholder,
+        instituteName,
+        selectInstituteName,
+        branchName,
+        selectBranch,
+        batch,
+        selectBatch
       }
     }
   } = strings
-
-  const CourseDrop = courses ? getCoursesDropdown(courses) : []
+  const institutes = instituteList ? getInstituteDropdown(instituteList) : []
+  const branches = branchList ? getBranchDropdown(branchList) : []
+  const batches = batchList ? getBatchDropdown(batchList) : []
 
   useEffect(() => {
     dispatch(getCourses())
+    dispatch(getInstitutes())
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
 
   return (
     <PageWrapper>
@@ -57,58 +77,108 @@ const CourseInformation = (): ReactElement => {
               dropdownList={academicYearList}
               title={academicYear}
               placeholder={selectYear}
-              onBlur={() => { }}
+              onBlur={() => {}}
+              isRequired
               error={''}
               handleSelect={(item) =>
-                dispatch(updateCourseInformation({ academicYear: item.name }))
+                dispatch(updateChildInformation({ academicYear: item.name }))
               }
             />
           </DropdownWrapper>
           <DropdownWrapper>
             <EditableDropdown
-              dropdownList={admissionDropLists}
+              dropdownList={feeTypeList}
               title={admisionTypeLabel}
               placeholder={admissionTypePlaceholder}
-              onBlur={() => { }}
+              onBlur={() => {}}
               error={''}
               handleSelect={(item) =>
-                dispatch(updateCourseInformation({ admissionTypeList: item.name }))
+                dispatch(updateChildInformation({ admissionType: item.name }))
               }
             />
           </DropdownWrapper>
           <DropdownWrapper>
             <EditableDropdown
-              dropdownList={CourseDrop}
-              title={semesterOrClass}
-              placeholder={semesterOrClass}
-              onBlur={() => { }}
-              error={''}
-              handleSelect={(item) =>
-                dispatch(updateCourseInformation({ semester: item.name }))
-              }
+              dropdownList={institutes}
+              title={instituteName}
+              placeholder={selectInstituteName}
+              isRequired
+              handleSelect={(item) => {
+                dispatch(updateChildInformation({ instituteId: item.id }))
+                dispatch(getAllCoursesByInstitute(item.id))
+              }}
             />
           </DropdownWrapper>
           <DropdownWrapper>
             <EditableDropdown
-              dropdownList={primaryDropdown}
+              dropdownList={courseList}
+              title={course}
+              placeholder={selectCourse}
+              onBlur={() => {}}
+              error={''}
+              handleSelect={(item) => {
+                dispatch(updateChildInformation({ courseId: item.id }))
+                dispatch(
+                  getBranchesByInstitute({
+                    coachingCentreId: childInformation?.instituteId,
+                    courseId: item?.id
+                  })
+                )
+              }}
+            />
+          </DropdownWrapper>
+          <DropdownWrapper>
+            <EditableDropdown
+              dropdownList={branches}
+              title={branchName}
+              placeholder={selectBranch}
+              isRequired
+              handleSelect={(item) => {
+                dispatch(updateChildInformation({ branchId: item.id }))
+                dispatch(
+                  getBatchesForCourse({
+                    courseId: childInformation?.courseId,
+                    coachingCentreId: childInformation?.instituteId,
+                    branchId: item.id
+                  })
+                )
+              }}
+            />
+          </DropdownWrapper>
+          <DropdownWrapper>
+            <EditableDropdown
+              dropdownList={batches}
+              title={batch}
+              placeholder={selectBatch}
+              isRequired
+              handleSelect={(item) => {
+                dispatch(updateChildInformation({ batchId: item.id }))
+              }}
+            />
+          </DropdownWrapper>
+          <DropdownWrapper>
+            <EditableDropdown
+              dropdownList={primaryLanguageList}
               title={primaryLanguage}
               placeholder={languagePlaceholder}
-              onBlur={() => { }}
+              onBlur={() => {}}
               error={''}
               handleSelect={(item) =>
-                dispatch(updateCourseInformation({ primaryLanguage: item.name }))
+                dispatch(updateChildInformation({ primaryLanguage: item.name }))
               }
             />
           </DropdownWrapper>
           <DropdownWrapper>
             <EditableDropdown
-              dropdownList={secondaryDropdown}
+              dropdownList={secondaryLanguageList}
               title={secondaryLanguage}
               placeholder={languagePlaceholder}
-              onBlur={() => { }}
+              onBlur={() => {}}
               error={''}
               handleSelect={(item) =>
-                dispatch(updateCourseInformation({ secondaryLanguage: item.name }))
+                dispatch(
+                  updateChildInformation({ secondaryLanguage: item.name })
+                )
               }
             />
           </DropdownWrapper>

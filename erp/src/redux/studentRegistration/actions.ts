@@ -1,29 +1,19 @@
 import { studentRegistrationSlice } from './reducer'
-import {
-  AddChildApi,
-  AddCommunicationApi,
-  AddPermenentApi,
-  AddQualifyApi,
-  AddCourseApi
-} from './api'
+import addNewStudent from './api'
 
 const {
   updateChildInformation,
   updatePermanentDetails,
   updateCommunicationDetails,
   updateQualifyingExamDetails,
-  updateCourseInformation
+  resetError
 } = studentRegistrationSlice.actions
 
 export {
   updateChildInformation,
-  updateCourseInformation,
   updatePermanentDetails,
   updateCommunicationDetails,
   updateQualifyingExamDetails,
-  AddChildApi,
-  AddCommunicationApi,
-  AddPermenentApi,
-  AddQualifyApi,
-  AddCourseApi
+  addNewStudent,
+  resetError
 }

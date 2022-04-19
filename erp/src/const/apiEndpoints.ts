@@ -8,10 +8,15 @@ const apiEndpoints = {
   getCourses: 'course/getCourses',
   deleteFeeMaster: 'feeMaster/delete',
   editFeeMaster: 'feeTypes/edit',
-  register:'userDetail/save',
-  addLeave:'leave/createLeaveMaster',
-  getAdminList: 'userDetail/search',
-  applyLeave: '/leave/applyLeave'
+  register: 'userDetail/save',
+  addLeave: 'leave/createLeaveMaster',
+  studentRegistration: 'userDetail/save',
+  applyLeave: '/leave/applyLeave',
+  getBatchesForCourse: 'batch/batchesByCourse',
+  getBranchesForCourse: 'coachingCentreBranch/branchesForCourse',
+  getAllCoursesByInstitute: 'course/allCoursesByCoaching',
+  getInstitutes: 'coachingCentre',
+  getstudents: '/userDetail/search',
 }
 
 export default apiEndpoints
