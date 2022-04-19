@@ -97,3 +97,9 @@ export const validateYear = (value: string): string => {
   const regExp = /^(19|20)\d{2}$/
   return !value.match(regExp) ? academicYearInvalid : ''
 }
+
+export const validateDateOfBirth = (value: string): string => {
+  const { dob } = validationMessages
+  const pattern = /^([0-9]{2})-([0-9]{2})-([0-9]{4})$/
+  return pattern.test(value) ? '' : dob
+}

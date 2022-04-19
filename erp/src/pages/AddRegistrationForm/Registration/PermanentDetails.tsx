@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import {
   PageWrapper,
   DropdownWrapper,
@@ -13,30 +13,34 @@ import { RootState } from 'redux/store'
 import { updatePermanentDetails } from 'redux/studentRegistration/actions'
 import isNumeric from 'helpers/isNumeric'
 import { HandleChangeOptions } from './typings'
+import { validateEmail, validatePhone } from 'helpers/formValidation'
 
 const PermanentDetails = (): ReactElement => {
   const {
     permanentDetails: {
-      addressPermenent,
-      emailPermenent,
-      mobileNumberPermenent,
-      parentMobileNumberPermenent,
-      districtPermenent,
-      cityPermenent,
-      talukPermenent,
-      countryPermenent,
-      postalPermenent,
+      address,
+      email,
+      mobileNumber,
+      parentMobileNumber,
+      district,
+      city,
+      taluk,
+      country,
+      postal,
       isSameAsCommunicationAddress
     },
     stateList
   } = useSelector(
     (state: RootState) => ({
-      permanentDetails: state.studentRegistration.studentRegistration,
+      permanentDetails: state.studentRegistration.permanentDetails,
       stateList: state.acamedic.stateList
     }),
     shallowEqual
   )
   const dispatch = useDispatch()
+  const [emailError, setEmailError] = useState('')
+  const [mobileError, setMobileError] = useState('')
+  const [parentMobileError, setParentMobileError] = useState('')
 
   const {
     studentRegistration: {
@@ -96,19 +100,20 @@ const PermanentDetails = (): ReactElement => {
             <Input
               label={addressLabel}
               placeholder={addressPlaceholder}
-              value={addressPermenent}
+              value={address}
               isRequired
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'addressPermenent',
+                  key: 'address',
                   value,
                   isNumericValue: false
                 })
               }}
               height="50px"
+              isDisabled={isSameAsCommunicationAddress}
             />
           </DropdownWrapper>
           <DropdownWrapper>
@@ -116,55 +121,67 @@ const PermanentDetails = (): ReactElement => {
               label={emailLabel}
               isRequired
               placeholder={emailPlaceholder}
-              value={emailPermenent}
-              onBlur={() => {}}
-              error={''}
+              value={email}
+              onBlur={() => {
+                const error = validateEmail(email)
+                setEmailError(error)
+              }}
+              error={emailError}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'emailPermenent',
+                  key: 'email',
                   value,
                   isNumericValue: false
                 })
               }}
               height="50px"
+              isDisabled={isSameAsCommunicationAddress}
             />
           </DropdownWrapper>
           <DropdownWrapper>
             <Input
               label={mobileNumberLabel}
               placeholder={mobileNumberPlaceholder}
-              value={mobileNumberPermenent}
+              value={mobileNumber}
               isRequired
-              onBlur={() => {}}
-              error={''}
+              onBlur={() => {
+                const error = validatePhone(mobileNumber)
+                setMobileError(error)
+              }}
+              error={mobileError}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'mobileNumberPermenent',
+                  key: 'mobileNumber',
                   value,
                   isNumericValue: true
                 })
               }}
               height="50px"
+              isDisabled={isSameAsCommunicationAddress}
             />
           </DropdownWrapper>
           <DropdownWrapper>
             <Input
               label={parentMobileNumberLabel}
               placeholder={parentMobileNumberPlaceholder}
-              value={parentMobileNumberPermenent}
-              onBlur={() => {}}
-              error={''}
+              value={parentMobileNumber}
+              onBlur={() => {
+                const error = validatePhone(parentMobileNumber)
+                setParentMobileError(error)
+              }}
+              error={parentMobileError}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'parentMobileNumberPermenent',
+                  key: 'parentMobileNumber',
                   value,
                   isNumericValue: true
                 })
               }}
               height="50px"
+              isDisabled={isSameAsCommunicationAddress}
             />
           </DropdownWrapper>
           <DropdownWrapper>
@@ -177,11 +194,12 @@ const PermanentDetails = (): ReactElement => {
               error={''}
               handleSelect={(item) =>
                 handleChange({
-                  key: 'statePermenent',
+                  key: 'state',
                   value: item.name,
                   isNumericValue: false
                 })
               }
+              isDisabled={isSameAsCommunicationAddress}
             />
           </DropdownWrapper>
           <DropdownWrapper>
@@ -189,18 +207,19 @@ const PermanentDetails = (): ReactElement => {
               label={districtLabel}
               isRequired
               placeholder={districtPlaceholder}
-              value={districtPermenent}
+              value={district}
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'districtPermenent',
+                  key: 'district',
                   value,
                   isNumericValue: false
                 })
               }}
               height="50px"
+              isDisabled={isSameAsCommunicationAddress}
             />
           </DropdownWrapper>
           <DropdownWrapper>
@@ -208,18 +227,19 @@ const PermanentDetails = (): ReactElement => {
               label={talukLabel}
               isRequired
               placeholder={talukPlaceholder}
-              value={talukPermenent}
+              value={taluk}
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'talukPermenent',
+                  key: 'taluk',
                   value,
                   isNumericValue: false
                 })
               }}
               height="50px"
+              isDisabled={isSameAsCommunicationAddress}
             />
           </DropdownWrapper>
           <DropdownWrapper>
@@ -227,56 +247,59 @@ const PermanentDetails = (): ReactElement => {
               label={cityLabel}
               isRequired
               placeholder={cityPlaceholder}
-              value={cityPermenent}
+              value={city}
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'cityPermenent',
+                  key: 'city',
                   value,
                   isNumericValue: false
                 })
               }}
               height="50px"
+              isDisabled={isSameAsCommunicationAddress}
             />
           </DropdownWrapper>
           <DropdownWrapper>
             <Input
               label={countryLabel}
               placeholder={countryPlaceholder}
-              value={countryPermenent}
+              value={country}
               isRequired
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'countryPermenent',
+                  key: 'country',
                   value,
                   isNumericValue: false
                 })
               }}
               height="50px"
+              isDisabled={isSameAsCommunicationAddress}
             />
           </DropdownWrapper>
           <DropdownWrapper>
             <Input
               label={postalLabel}
               placeholder={postalPlaceholder}
-              value={postalPermenent}
+              value={postal}
               isRequired
               onBlur={() => {}}
               error={''}
               width="100%"
               onChange={(value) => {
                 handleChange({
-                  key: 'postalPermenent',
+                  key: 'postal',
                   value,
                   isNumericValue: true
                 })
               }}
               height="50px"
+              isDisabled={isSameAsCommunicationAddress}
             />
           </DropdownWrapper>
         </FlexWrapper>

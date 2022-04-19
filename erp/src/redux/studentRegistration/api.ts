@@ -1,53 +1,140 @@
-import { createAsyncThunk } from "@reduxjs/toolkit" 
-import apiEndpoints from "const/apiEndpoints"
-import api from "services"
-import { ChildInformation, CommunicationDetails, CourseDetails, PermanentDetails,QualifyingDetails, registration } from "./typings"
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import apiEndpoints from 'const/apiEndpoints'
+import { RootState } from 'redux/store'
+import api from 'services'
+import strings from 'locale/en'
 
-export const AddChildApi = createAsyncThunk(
-    'child/addChild',
-    async (requestData: ChildInformation): Promise<ChildInformation> => {
-        const response = await api.post(apiEndpoints.register,requestData)
-        return response?.data
+const addNewStudent = createAsyncThunk(
+  'studentRegistration/new',
+  async (_undefined, { getState, rejectWithValue }): Promise<any> => {
+    const {
+      studentRegistration: {
+        childInformation: {
+          academicYear,
+          instituteId,
+          branchId,
+          courseId,
+          batchId,
+          studentsName,
+          fathersName,
+          mothersName,
+          gender,
+          dateOfBirth,
+          nationality,
+          religion,
+          aadharNumber,
+          userName,
+          password,
+          admissionType,
+          primaryLanguage,
+          secondaryLanguage,
+          caste,
+          community,
+          bloodGroup,
+          physicallyChallenged,
+          studentType,
+          enrollmentNumber
+        },
+        communicationDetails: {
+          address,
+          parentMobileNumber,
+          mobileNumber,
+          email,
+          state,
+          district,
+          taluk,
+          city,
+          country,
+          postal
+        },
+        qualifyingExamDetails: {
+          medium,
+          previousExamRegNo,
+          satsNo,
+          board,
+          percentage,
+          yearOfPassing,
+          school,
+          obtainedMarks
+        }
+      }
+    } = getState() as RootState
+
+    if (
+      academicYear &&
+      instituteId &&
+      branchId &&
+      courseId &&
+      batchId &&
+      studentsName &&
+      fathersName &&
+      mothersName &&
+      gender &&
+      dateOfBirth &&
+      nationality &&
+      religion &&
+      aadharNumber &&
+      address &&
+      parentMobileNumber &&
+      mobileNumber &&
+      email &&
+      state &&
+      district &&
+      taluk &&
+      city &&
+      country &&
+      postal &&
+      userName &&
+      password
+    ) {
+      const requestPayload = {
+        courseId: courseId,
+        admissionType,
+        lang1: primaryLanguage || '',
+        lang2: secondaryLanguage || '',
+        studentName: studentsName,
+        aadhar: aadharNumber || '',
+        caste: caste || '',
+        religion: religion,
+        community,
+        nationality,
+        gender,
+        bloodGroup,
+        challenged: physicallyChallenged === 'yes',
+        studentTpe: studentType,
+        address,
+        parentNumber: parentMobileNumber,
+        district,
+        taluk,
+        city,
+        state,
+        zipCode: postal,
+        medium,
+        regNo: previousExamRegNo,
+        statNo: satsNo,
+        board,
+        lastAttended: school,
+        yearOfPassing: yearOfPassing,
+        markObtained: obtainedMarks,
+        percentage: percentage,
+        userType: 'STUDENT',
+        enrollmentNumber: enrollmentNumber,
+        email,
+        dob: dateOfBirth,
+        country: country,
+        coachingCenterId: instituteId,
+        branchIds: [branchId],
+        batchIds: [batchId]
+      }
+      const response = await api.post(
+        apiEndpoints.studentRegistration,
+        requestPayload
+      )
+      return response?.data
+    } else {
+      return rejectWithValue(strings?.validationMessages?.studentRegistration)
     }
+  }
 )
 
-export const AddCommunicationApi = createAsyncThunk(
-    'communication/addCommunication',
-    async (requestData: CommunicationDetails): Promise<CommunicationDetails> => {
-        const response = await api.post(apiEndpoints.register,requestData)
-        return response?.data
-    }
-)
-
-export const AddPermenentApi = createAsyncThunk(
-    'permenentadd/addPermenentAdd',
-    async (requestData: PermanentDetails): Promise<PermanentDetails> => {
-        const response = await api.post(apiEndpoints.register,requestData)
-        return response?.data
-    }
-)
-
-export const AddQualifyApi = createAsyncThunk(
-    'qualify/addQualify',
-    async (requestData: QualifyingDetails): Promise<QualifyingDetails> => {
-        const response = await api.post(apiEndpoints.register,requestData)
-        return response?.data
-    }
-)
-
-export const AddCourseApi = createAsyncThunk(
-    'course/addCourse',
-    async (requestData: CourseDetails): Promise<CourseDetails> => {
-        const response = await api.post(apiEndpoints.register,requestData)
-        return response?.data
-    }
-)
-
-export const studentRegistration = createAsyncThunk(
-    'register/addRegister',
-    async (requestData: registration): Promise<registration> => {
-        const response = await api.post(apiEndpoints.register,requestData)
-        return response?.data
-    }
-)
-
+export default addNewStudent

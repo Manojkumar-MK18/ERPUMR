@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import {
   PageWrapper,
   DropdownWrapper,
@@ -12,6 +12,7 @@ import { RootState } from 'redux/store'
 import { updateCommunicationDetails } from 'redux/studentRegistration/actions'
 import { HandleChangeOptions } from './typings'
 import isNumeric from 'helpers/isNumeric'
+import { validateEmail, validatePhone } from 'helpers/formValidation'
 
 const CommunicationDetails = (): ReactElement => {
   const {
@@ -29,12 +30,15 @@ const CommunicationDetails = (): ReactElement => {
     stateList
   } = useSelector(
     (state: RootState) => ({
-      communicationDetails: state.studentRegistration.studentRegistration,
+      communicationDetails: state.studentRegistration.communicationDetails,
       stateList: state.acamedic.stateList
     }),
     shallowEqual
   )
   const dispatch = useDispatch()
+  const [emailError, setEmailError] = useState('')
+  const [mobileError, setMobileError] = useState('')
+  const [parentMobileError, setParentMobileError] = useState('')
 
   const {
     studentRegistration: {
@@ -102,8 +106,11 @@ const CommunicationDetails = (): ReactElement => {
               isRequired
               placeholder={emailPlaceholder}
               value={email}
-              onBlur={() => {}}
-              error={''}
+              onBlur={() => {
+                const error = validateEmail(email)
+                setEmailError(error)
+              }}
+              error={emailError}
               width="100%"
               onChange={(value) => {
                 handleChange({
@@ -121,8 +128,11 @@ const CommunicationDetails = (): ReactElement => {
               placeholder={mobileNumberPlaceholder}
               value={mobileNumber}
               isRequired
-              onBlur={() => {}}
-              error={''}
+              onBlur={() => {
+                const error = validatePhone(mobileNumber)
+                setMobileError(error)
+              }}
+              error={mobileError}
               width="100%"
               onChange={(value) => {
                 handleChange({
@@ -139,8 +149,11 @@ const CommunicationDetails = (): ReactElement => {
               label={parentMobileNumberLabel}
               placeholder={parentMobileNumberPlaceholder}
               value={parentMobileNumber}
-              onBlur={() => {}}
-              error={''}
+              onBlur={() => {
+                const error = validatePhone(parentMobileNumber)
+                setParentMobileError(error)
+              }}
+              error={parentMobileError}
               width="100%"
               onChange={(value) => {
                 handleChange({

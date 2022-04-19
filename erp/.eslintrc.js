@@ -44,7 +44,7 @@ module.exports = {
         'src/redux/**'
       ],
       rules: {
-        'max-lines-per-function': ['error', 65]
+        'max-lines-per-function': ['error', 150]
       }
     }
   ]

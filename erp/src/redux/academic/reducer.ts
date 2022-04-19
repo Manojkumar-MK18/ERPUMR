@@ -1,5 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { AcademicState, Course, DropdownList } from './typings'
+import {
+  AcademicState,
+  Batch,
+  Branch,
+  Course,
+  DropdownList,
+  Institute
+} from './typings'
 import {
   semesterList,
   academicYearList,
@@ -23,10 +30,16 @@ import {
   boardList,
   stateList,
   registrationTypeList,
-  mediumType,
-  qualificationDetailsD
+  mediumList,
+  qualififactionList
 } from './const'
-import getCourses from './api' 
+import getCourses, {
+  getInstitutes,
+  getBranchesByInstitute,
+  getAllCoursesByInstitute,
+  getBatchesForCourse
+} from './api'
+import getCoursesDropdown from './helpers'
 
 const initialState: AcademicState = {
   semester: semesterList,
@@ -51,10 +64,12 @@ const initialState: AcademicState = {
   studentTypeList,
   boardList,
   stateList,
-  mediumType,
-  qualificationDetailsD,
   registrationTypeList: registrationTypeList,
-  courses: [],
+  instituteList: [],
+  branchList: [],
+  batchList: [],
+  mediumList: mediumList,
+  qualififactionList: qualififactionList
 }
 
 export const academicSlice = createSlice({
@@ -76,7 +91,31 @@ export const academicSlice = createSlice({
       state,
       action: PayloadAction<Array<Course>>
     ) => {
-      state.courses = action.payload
+      state.courseList = getCoursesDropdown(action.payload)
+    },
+    [getInstitutes.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<Array<Institute>>
+    ) => {
+      state.instituteList = action.payload
+    },
+    [getBranchesByInstitute.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<Array<Branch>>
+    ) => {
+      state.branchList = action.payload
+    },
+    [getAllCoursesByInstitute.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<Array<Course>>
+    ) => {
+      state.courseList = getCoursesDropdown(action.payload)
+    },
+    [getBatchesForCourse.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<Array<Batch>>
+    ) => {
+      state.batchList = action.payload
     }
   }
 })

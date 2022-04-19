@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import {
   PageWrapper,
   PhotoUploader,
@@ -6,13 +6,13 @@ import {
   DropdownWrapper,
   Input
 } from 'components'
-import { InfoWrapper, FlexWrapper, DatePickerWrapper } from '../subcomponents'
+import { InfoWrapper, FlexWrapper } from '../subcomponents'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import DatePicker from 'react-datepicker'
 import { updateChildInformation } from 'redux/studentRegistration/actions'
 import strings from 'locale/en'
 import { checkBoxDropdownList } from 'const'
+import { validateDateOfBirth } from 'helpers/formValidation'
 
 const ChildInformation = (): ReactElement => {
   const {
@@ -22,7 +22,6 @@ const ChildInformation = (): ReactElement => {
       categoryList,
       casteList,
       religionList,
-      bloodGroupList,
       studentTypeList
     },
     childInformation: {
@@ -30,16 +29,22 @@ const ChildInformation = (): ReactElement => {
       fathersName,
       mothersName,
       dateOfBirth,
-      aadharNumber
+      aadharNumber,
+      bloodGroup,
+      enrollmentNumber,
+      userName,
+      password
     }
   } = useSelector(
     (state: RootState) => ({
       academic: state.acamedic,
-      childInformation: state.studentRegistration.studentRegistration
+      childInformation: state.studentRegistration.childInformation
     }),
     shallowEqual
   )
   const dispatch = useDispatch()
+  const [dobError, setDobError] = useState('')
+
   const {
     studentRegistration: {
       childInformation: {
@@ -49,12 +54,10 @@ const ChildInformation = (): ReactElement => {
         fathersNamePlaceholder,
         mothersNameLabel,
         mothersNamePlaceholder,
-        dobPlaceholder,
+        enterDob,
         genderLabel,
         genderPlaceholder,
         dobLabel,
-        bloodGroupLabel,
-        bloodGroupPlaceholder,
         nationalityLabel,
         nationalityPlaceholder,
         communityPlaceholder,
@@ -67,7 +70,15 @@ const ChildInformation = (): ReactElement => {
         studentTypeLabel,
         physicallyChallengedLabel,
         aadharNumberPlaceHolder,
-        aadharNumberLabel
+        aadharNumberLabel,
+        enterEnrollment,
+        enrollmentNumberLabel,
+        bloodGroupLabel,
+        bloodGroupPlaceholder,
+        userNameLabel,
+        userNamePlaceholder,
+        passwordLabel,
+        passwordPlaceHolder
       }
     }
   } = strings
@@ -75,7 +86,11 @@ const ChildInformation = (): ReactElement => {
   return (
     <PageWrapper>
       <InfoWrapper>
-        <PhotoUploader />
+        <PhotoUploader
+          handleUpload={(image) => {
+            dispatch(updateChildInformation({ profileImage: image }))
+          }}
+        />
         <FlexWrapper width="100%">
           <DropdownWrapper>
             <Input
@@ -126,6 +141,7 @@ const ChildInformation = (): ReactElement => {
             <EditableDropdown
               dropdownList={genderList}
               title={genderLabel}
+              isRequired
               placeholder={genderPlaceholder}
               onBlur={() => {}}
               error={''}
@@ -135,57 +151,26 @@ const ChildInformation = (): ReactElement => {
             />
           </DropdownWrapper>
           <DropdownWrapper>
-            <DatePickerWrapper>
-              <DatePicker
-                selected={new Date(dateOfBirth)}
-                onSelect={(date) =>
-                  dispatch(
-                    updateChildInformation({
-                      dateOfBirth: date?.toDateString()
-                    })
-                  )
-                }
-                onChange={(date: Date) => {
-                  if (date) {
-                    dispatch(
-                      updateChildInformation({
-                        dateOfBirth: date.toDateString()
-                      })
-                    )
-                  }
-                }}
-                placeholderText={dobPlaceholder}
-                customInput={
-                  <Input
-                    label={dobLabel}
-                    value={dateOfBirth}
-                    inputType="text"
-                    placeholder={dobPlaceholder}
-                    onChange={(date) =>
-                      dispatch(updateChildInformation({ dateOfBirth: date }))
-                    }
-                    suffix={['far', 'calendar']}
-                  />
-                }
-              />
-            </DatePickerWrapper>
-          </DropdownWrapper> 
-          <DropdownWrapper>
-            <EditableDropdown
-              dropdownList={bloodGroupList}
-              title={bloodGroupLabel}
-              placeholder={bloodGroupPlaceholder}
-              onBlur={() => {}}
-              error={''}
-              handleSelect={(item) =>
-                dispatch(updateChildInformation({ bloodGroup: item.name }))
-              }
+            <Input
+              label={dobLabel}
+              placeholder={enterDob}
+              value={dateOfBirth}
+              onBlur={() => {
+                const error = validateDateOfBirth(dateOfBirth)
+                setDobError(error)
+              }}
+              error={dobError}
+              isRequired
+              width="100%"
+              onChange={(value: string) => {
+                dispatch(updateChildInformation({ dateOfBirth: value }))
+              }}
+              height="50px"
             />
           </DropdownWrapper>
           <DropdownWrapper>
             <EditableDropdown
               dropdownList={studentTypeList}
-              isRequired
               title={studentTypeLabel}
               placeholder={studentTypePlaceholder}
               onBlur={() => {}}
@@ -216,6 +201,7 @@ const ChildInformation = (): ReactElement => {
               value={aadharNumber}
               onBlur={() => {}}
               error={''}
+              isRequired
               width="100%"
               onChange={(value: string) => {
                 dispatch(updateChildInformation({ aadharNumber: value }))
@@ -252,7 +238,6 @@ const ChildInformation = (): ReactElement => {
             <EditableDropdown
               dropdownList={categoryList}
               title={communityLabel}
-              isRequired
               placeholder={communityPlaceholder}
               onBlur={() => {}}
               error={''}
@@ -272,6 +257,65 @@ const ChildInformation = (): ReactElement => {
               handleSelect={(item) =>
                 dispatch(updateChildInformation({ nationality: item.name }))
               }
+            />
+          </DropdownWrapper>
+          <DropdownWrapper>
+            <Input
+              label={bloodGroupLabel}
+              placeholder={bloodGroupPlaceholder}
+              value={bloodGroup}
+              onBlur={() => {}}
+              error={''}
+              width="100%"
+              onChange={(value: string) => {
+                dispatch(updateChildInformation({ bloodGroup: value }))
+              }}
+              height="50px"
+            />
+          </DropdownWrapper>
+          <DropdownWrapper>
+            <Input
+              label={enrollmentNumberLabel}
+              placeholder={enterEnrollment}
+              value={enrollmentNumber}
+              onBlur={() => {}}
+              isRequired
+              error={''}
+              width="100%"
+              onChange={(value: string) => {
+                dispatch(updateChildInformation({ enrollmentNumber: value }))
+              }}
+              height="50px"
+            />
+          </DropdownWrapper>
+          <DropdownWrapper>
+            <Input
+              label={userNameLabel}
+              placeholder={userNamePlaceholder}
+              value={userName}
+              onBlur={() => {}}
+              isRequired
+              error={''}
+              width="100%"
+              onChange={(value: string) => {
+                dispatch(updateChildInformation({ userName: value }))
+              }}
+              height="50px"
+            />
+          </DropdownWrapper>
+          <DropdownWrapper>
+            <Input
+              label={passwordLabel}
+              placeholder={passwordPlaceHolder}
+              value={password}
+              onBlur={() => {}}
+              isRequired
+              error={''}
+              width="100%"
+              onChange={(value: string) => {
+                dispatch(updateChildInformation({ password: value }))
+              }}
+              height="50px"
             />
           </DropdownWrapper>
         </FlexWrapper>

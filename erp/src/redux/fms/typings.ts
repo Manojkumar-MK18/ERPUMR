@@ -13,12 +13,72 @@ export interface AddFeeDescriptionResponse {
   year?: string
 }
 
+interface User {
+  id: string
+  userName: string
+}
+
+export interface Student {
+  address1?: string
+  address2?: string
+  batchIds?: any
+  batchList?: any
+  branchIds?: any
+  branchList?: any
+  city?: string
+  coachingCenterId?: string
+  coachingCentre?: any
+  country?: string
+  createdAt?: number
+  createdBy?: string
+  courseId?: any
+  dob?: string
+  email: string
+  enrollmentNumber?: string
+  fatherName: string
+  firstName: string
+  id: string
+  lastName: string
+  mobileNumber: string
+  profileImagePath?: any
+  qualification?: string
+  salutation?: string
+  shortDiscription?: string
+  state?: string
+  status: string
+  studentAccess?: boolean
+  subject?: string
+  updatedAt?: number
+  updatedBy?: any
+  uploadFileId?: string
+  user: User
+  userId?: string
+  userType: string
+  yearOfExperience?: string
+  zipCode?: string
+  regNo: string
+  parentNumber: string
+  aadhar: string
+  academicYear: string
+  yearOfPassing: string
+}
+
+export interface StudentList {
+  data: Array<Student>
+  page: number
+  pageSize: number
+  totalCount: number
+  totalPages: number
+}
+
 export interface AddFeeDescriptionState {
   feeDescriptionList: Array<AddFeeDescriptionResponse>
   isLoading: boolean
   editDescriptionId: number
   feeMasterList: Array<AddFeeDescriptionResponse>
   editFeeMaster: AddFeeDescriptionResponse | null
+  studentApplicationList: StudentList | null
+  error: string
 }
 
 export interface AddFeeMasterPayload {

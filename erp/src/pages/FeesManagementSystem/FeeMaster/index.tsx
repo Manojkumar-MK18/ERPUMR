@@ -54,7 +54,7 @@ const FeeMaster = (): ReactElement => {
   const history = useHistory()
   const [resetValuesState, setResetValuesState] = useState(resetValues)
   const [fees, setFees] = useState<Array<AddFeeDescriptionResponse>>([])
-  const filteredList = fees.length > 0 ? fees : feeMasterList
+  const filteredList  = fees.length > 0 ? fees : feeMasterList
 
   useEffect(() => {
     dispatch(getCourses())
@@ -183,7 +183,7 @@ const FeeMaster = (): ReactElement => {
               </TableHeader>
               <tbody>
                 {filteredList.map((feeMaster, index) => {
-                  const { title, description, terms, amount, courseId, id } =
+                  const { title, description, terms, amount, courseId ,id } =
                     feeMaster
                   const selectedCourse = courseList.find(
                     (course) => course.id === courseId

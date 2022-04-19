@@ -2,28 +2,32 @@ export type OnChangeHandler = {
   [key: string]: string | boolean
 }
 
-export interface CourseDetails {
-  academicYear: string
-  admissionTypeList: string
-  semester: string 
-  primaryLanguage: string
-  secondaryLanguage: string
-}
-
 export interface ChildInformation {
+  academicYear: string
   studentsName: string
   fathersName: string
   mothersName: string
   dateOfBirth: string
   gender: string
   bloodGroup: string
-  physicallyChallenged: boolean
+  physicallyChallenged: string
   studentType: string
   aadharNumber: string
   nationality: string
   religion: string
   caste: string
   community: string
+  instituteId: string
+  courseId: string
+  branchId: string
+  batchId: string
+  admissionType: string
+  primaryLanguage: string
+  secondaryLanguage: string
+  profileImage: any
+  enrollmentNumber: string
+  userName: string
+  password: string
 }
 
 export interface CommunicationDetails {
@@ -65,74 +69,13 @@ export interface QualifyingDetails {
   percentage: string
 }
 
-interface StudentRegistration { 
-  courseDetails: CourseDetails
+interface StudentRegistration {
   childInformation: ChildInformation
   communicationDetails: CommunicationDetails
   permanentDetails: PermanentDetails
   qualifyingExamDetails: QualifyingDetails
+  error: string
+  isLoading: boolean
 }
 
 export default StudentRegistration
-
-export interface InitialState { 
-  isLoading: boolean
-  studentRegistration: registration
-}
-
-
-
-
-export interface registration {
-  academicYear: string
-  admissionTypeList: string
-  semester: string 
-  primaryLanguage: string
-  secondaryLanguage: string
-
-  studentsName: string
-  fathersName: string
-  mothersName: string
-  dateOfBirth: string
-  gender: string
-  bloodGroup: string
-  physicallyChallenged: string
-  studentType: string
-  aadharNumber: string
-  nationality: string
-  religion: string
-  caste: string
-  community: string
-  address: string
-  email: string
-  mobileNumber: string
-  parentMobileNumber: string
-  state: string
-  district: string
-  taluk: string
-  city: string
-  country: string
-  postal: string
-
-  addressPermenent: string
-  emailPermenent: string
-  mobileNumberPermenent: string
-  parentMobileNumberPermenent: string
-  statePermenent: string
-  districtPermenent: string
-  talukPermenent: string
-  cityPermenent: string
-  countryPermenent: string
-  postalPermenent: string
-
-  qualifyingExam: string
-  medium: string
-  previousExamRegNo: string
-  satsNo: string
-  board: string
-  school: string
-  yearOfPassing: string
-  obtainedMarks: string
-  percentage: string
-  isSameAsCommunicationAddress: boolean
-}

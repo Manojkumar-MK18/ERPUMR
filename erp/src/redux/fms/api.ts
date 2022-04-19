@@ -90,3 +90,23 @@ export const editFeeMasterRequest = createAsyncThunk(
     return response
   }
 )
+
+export const getStudentAdmissionList = createAsyncThunk(
+  'fms/getStudentAdmissionList',
+  async (pageNo: number): Promise<any> => {
+    const payloadData = {
+      ascDesc: 'Desc',
+      batchIds: null,
+      branchIds: null,
+      coachingCenterId: null,
+      pageNo: pageNo || 1,
+      pageSize: 30,
+      searchCriteria: { userType: 'STUDENT' },
+      sortBy: 'created_at'
+    }
+
+    const response = await api.post(`${apiEndpoints.getstudents}`, payloadData)
+
+    return response?.data
+  }
+)

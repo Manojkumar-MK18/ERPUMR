@@ -1,12 +1,17 @@
 export const tableHeader = [
   'SNo',
   'Student Name',
-  'Semester/Class Section',
+  'Course',
   'Admission No',
-  'Qaota',
   'Father Name',
   'Father Number',
   'UID',
   'Admission Date',
   'Action'
 ]
+
+export const resetValues = {
+  academicYear: false,
+  year: false,
+  course: false
+}

@@ -35,7 +35,7 @@ const AddLeave = (): ReactElement => {
     )
 
     const {
-        hrms: {
+         hrms: {
             leaveMaster: {
                 description,
                 leaveDescription,

@@ -248,7 +248,64 @@ export const casteList = [
   {
     id: 'brahmin',
     name: 'Brahmin'
-  }
+  },
+  {
+    id: 'Devanagar',
+    name: 'Devanagar'
+  },
+  {
+    id: 'Dhobi',
+    name: 'Dhobi'
+  },
+  {
+    id: 'Gowdas',
+    name: 'Gowdas'
+  },
+  {
+    id: 'Iyengar',
+    name: 'Iyengar'
+  },
+  {
+    id: 'Jain communities',
+    name: 'Jain communities'
+  },
+  {
+    id: 'Kurubas',
+    name: 'Kurubas'
+  },
+  {
+    id: 'Lingayats',
+    name: 'Lingayats'
+  },
+  {
+    id: 'Nadar',
+    name: 'Nadar'
+  },
+  {
+    id: 'Others',
+    name: 'Others'
+  },
+  {
+    id: 'Reddy',
+    name: 'Reddy'
+  },
+  {
+    id: 'Udaiyar',
+    name: 'Udaiyar'
+  },
+  {
+    id: 'Vanniar',
+    name: 'Vanniar'
+  },
+  {
+    id: 'Vokkaligas',
+    name: 'Vokkaligas'
+  },
+  {
+    id: 'Yadavar',
+    name: 'Yadavar'
+  },
+
 ]
 
 export const feeTypeList = [
@@ -560,18 +617,18 @@ export const registrationTypeList = [
   }
 ]
 
-export const mediumType = [
+export const mediumList = [
   {
     id: 'english',
-    name: 'English Medium'
+    name: 'English'
   },
   {
     id: 'kannada',
-    name: 'Kannada Medium'
-  }, 
+    name: 'Kannada'
+  }
 ]
 
-export const qualificationDetailsD = [
+export const qualififactionList = [
   {
     id: 'pass',
     name: 'Pass'
@@ -579,5 +636,5 @@ export const qualificationDetailsD = [
   {
     id: 'fail',
     name: 'Fail'
-  }, 
+  }
 ]
