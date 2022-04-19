@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import {
   PageWrapper,
   PhotoUploader,
@@ -6,419 +6,223 @@ import {
   DropdownWrapper,
   Input,
   CardWrapper,
-  CardHeader,
   FlexWrapper,
   SectionTitle,
   Button
 } from 'components'
 import { InfoWrapper } from './subcomponents'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { RootState } from 'redux/store'
+import { AddNewStaff } from 'redux/Leave/api'
 
 const AddStaffRegistration = (): ReactElement => {
+
+  const {
+    staffDropdown: {
+      gender: genderList,
+      nationality: nationalityList,
+      marital_Status: marrtialStatus,
+      technical_flag: staffRole
+    },
+    staffDetails
+  } = useSelector(
+    (state: RootState) => ({
+      staffDetails: state.leave.addStaff,
+      staffDropdown: state.leave
+    }),
+    shallowEqual
+  )
+  const dispatch = useDispatch()
+  // eslint-disable-next-line no-unused-vars
+  const [values, setValues] = useState(staffDetails)
+
+  const handleSubmit = () => {
+    dispatch(AddNewStaff(values))
+  }
+
   return (
-    <div>
-      <CardWrapper>
-        <PageWrapper>
-          <FlexWrapper noPadding>
-            <SectionTitle title='Staff Registration' />
-          </FlexWrapper>
-          <FlexWrapper width="100%" justifyContent="center" noPadding>
+    <CardWrapper>
+      <PageWrapper>
+        <FlexWrapper noPadding>
+          <SectionTitle title='Staff Registration' />
+        </FlexWrapper>
+        <FlexWrapper width="100%" justifyContent="center" noPadding>
+          <DropdownWrapper>
+            <EditableDropdown
+              dropdownList={staffRole}
+              title={'Select Role'}
+              placeholder={'Role'}
+              onBlur={() => { }}
+              error={''}
+              handleSelect={(role) => {
+                setValues({ ...values, technical_flag: role.name })
+              }} />
+          </DropdownWrapper>
+        </FlexWrapper>
+        <InfoWrapper>
+          <PhotoUploader />
+          <FlexWrapper width="100%">
             <DropdownWrapper>
-              <EditableDropdown
-                dropdownList={[
-                  { id: '01', name: 'Teacher' },
-                  { id: '02', name: 'Non-Teacher' }
-                ]}
-                title={'Select Role'}
-                placeholder={'Role'}
+              <Input
+                label={'First Name'}
+                isRequired
+                placeholder={'Enter First Name'}
+                value={values?.firstName}
+                width="100%"
+                onChange={(value: string) => {
+                  setValues({ ...values, firstName: value })
+                }}
+                height="50px" />
+            </DropdownWrapper>
+            <DropdownWrapper>
+              <Input
+                label={'Last Name'}
+                isRequired
+                placeholder={'Enter Last Name'}
+                value={values?.lastName}
                 onBlur={() => { }}
                 error={''}
-                handleSelect={() => { }} />
+                width="100%"
+                onChange={(value: string) => {
+                  setValues({ ...values, lastName: value })
+                }}
+                height="50px" />
             </DropdownWrapper>
+            <DropdownWrapper>
+              <EditableDropdown
+                dropdownList={genderList}
+                title={'Gender'}
+                placeholder={'Select Gender'}
+                onBlur={() => { }}
+                error={''}
+                handleSelect={(genderList) => {
+                  setValues({ ...values, gender: genderList.name })
+                }} />
+            </DropdownWrapper>
+            <DropdownWrapper>
+              <Input
+                label={'Address'}
+                isRequired
+                placeholder={'Enter Address'}
+                value={values?.address}
+                onBlur={() => { }}
+                error={''}
+                width="100%"
+                onChange={(value: string) => {
+                  setValues({ ...values, address: value })
+                }}
+                height="50px" />
+            </DropdownWrapper>
+            <DropdownWrapper>
+              <Input
+                label={'Date of Birth'}
+                isRequired
+                placeholder={'Enter DoB'}
+                value={values?.dob}
+                onBlur={() => { }}
+                error={''}
+                width="100%"
+                onChange={(value: string) => {
+                  setValues({ ...values, dob: value })
+                }}
+                height="50px" />
+            </DropdownWrapper>
+            <DropdownWrapper>
+              <EditableDropdown
+                dropdownList={marrtialStatus}
+                title={'Marital status'}
+                placeholder={'Select Marital status'}
+                onBlur={() => { }}
+                error={''}
+                handleSelect={(status) => {
+                  setValues({ ...values, marital_Status: status.name })
+                }} />
+            </DropdownWrapper>
+            <DropdownWrapper>
+              <Input
+                label={'Mobile No'}
+                placeholder={'Enter Mobile No'}
+                value={values?.mobileNumber}
+                onBlur={() => { }}
+                error={''}
+                width="100%"
+                onChange={(value: string) => {
+                  setValues({ ...values, mobileNumber: value })
+                }}
+                height="50px" />
+            </DropdownWrapper>
+            <DropdownWrapper>
+              <Input
+                label={'Email'}
+                placeholder={'Enter Email'}
+                value={values?.emailID}
+                onBlur={() => { }}
+                error={''}
+                width="100%"
+                onChange={(value: string) => {
+                  setValues({ ...values, emailID: value })
+                }}
+                height="50px" />
+            </DropdownWrapper>
+            <DropdownWrapper>
+              <Input
+                label={'Qualification'}
+                placeholder={'Qualification'}
+                value={values?.qualification}
+                onBlur={() => { }}
+                error={''}
+                width="100%"
+                onChange={(value: string) => {
+                  setValues({ ...values, qualification: value })
+                }}
+                height="50px" />
+            </DropdownWrapper>
+            <DropdownWrapper>
+              <EditableDropdown
+                dropdownList={nationalityList}
+                title={'Nationality'}
+                placeholder={'Select Nationality'}
+                onBlur={() => { }}
+                error={''}
+                handleSelect={(item) => {
+                  setValues({ ...values, nationality: item.name })
+                }} />
+            </DropdownWrapper>
+            <DropdownWrapper>
+              <Input
+                label={'Blood Group'}
+                placeholder={'Enter Blood Group'}
+                value={values?.blood_Group} 
+                onBlur={() => { }}
+                error={''}
+                width="100%"
+                onChange={(value: string) => {
+                  setValues({ ...values, blood_Group: value })
+                }}
+                height="50px" />
+            </DropdownWrapper>
+            <DropdownWrapper>
+            <Input
+                label={'Department'}
+                placeholder={'Enter Department'}
+                value={values?.department}
+                onBlur={() => { }}
+                error={''}
+                width="100%"
+                onChange={(value: string) => {
+                  setValues({ ...values, department: value })
+                }}
+                height="50px" />
+            </DropdownWrapper> 
           </FlexWrapper>
-          <InfoWrapper>
-            <PhotoUploader />
-            <FlexWrapper width="100%">
-              <DropdownWrapper>
-                <Input
-                  label={'First Name'}
-                  isRequired
-                  placeholder={'Enter First Name'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Middle Name'}
-                  isRequired
-                  placeholder={'Enter Middle Name'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Last Name'}
-                  isRequired
-                  placeholder={'Enter Last Name'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <EditableDropdown
-                  dropdownList={[
-                    { id: 'male', name: 'Male' },
-                    { id: 'female', name: 'Female' }
-                  ]}
-                  title={'Gender'}
-                  placeholder={'Select Gender'}
-                  onBlur={() => { }}
-                  error={''}
-                  handleSelect={() => { }} />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Present Address'}
-                  isRequired
-                  placeholder={'Enter Present Address'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Permanent Address'}
-                  isRequired
-                  placeholder={'Enter Address'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Date of Birth'}
-                  isRequired
-                  placeholder={'Enter DoB'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <EditableDropdown
-                  dropdownList={[
-                    { id: '01', name: 'Married' },
-                    { id: '02', name: 'UnMarried' }
-                  ]}
-                  title={'Marital status'}
-                  placeholder={'Select Marital status'}
-                  onBlur={() => { }}
-                  error={''}
-                  handleSelect={() => { }} />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Mobile No'}
-                  placeholder={'Enter Mobile No'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Email'}
-                  placeholder={'Enter Email'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Qualification'}
-                  placeholder={'Qualification'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <EditableDropdown
-                   dropdownList={[
-                    { id: '01', name: 'Indian' },
-                    { id: '02', name: 'NRI' }
-                  ]}
-                  title={'Nationality'}
-                  placeholder={'Select Nationality'}
-                  onBlur={() => { }}
-                  error={''}
-                  handleSelect={() => { }} />
-              </DropdownWrapper>
-
-              <DropdownWrapper>
-                <EditableDropdown
-                  dropdownList={[
-                    { id: '01', name: 'A+' },
-                    { id: '02', name: 'O+' },
-                    { id: '03', name: 'B+' },
-                    { id: '04', name: 'AB+' },
-                    { id: '05', name: 'A-' }, 
-                    { id: '06', name: 'B-' },
-                    { id: '07', name: 'O-' },
-                    { id: '08', name: 'AB-' },
-                  ]}
-                  title={'Blood Group'}
-                  placeholder={'Select Blood Group'}
-                  onBlur={() => { }}
-                  error={''}
-                  handleSelect={() => { }} />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Height'}
-                  placeholder={'Height'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Weight'}
-                  placeholder={'Weight'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <EditableDropdown
-                  dropdownList={[]}
-                  title={'Finance Group'}
-                  isRequired
-                  placeholder={'Select..'}
-                  onBlur={() => { }}
-                  error={''}
-                  handleSelect={() => { }} />
-              </DropdownWrapper>
-            </FlexWrapper>
-          </InfoWrapper>
-        </PageWrapper>
-      </CardWrapper>
-      <CardWrapper>
-        <CardHeader>Other Details</CardHeader>
-        <PageWrapper>
-          <InfoWrapper>
-            <FlexWrapper width="100%" noPadding>
-              <DropdownWrapper>
-                <EditableDropdown
-                  dropdownList={[]}
-                  title={'Department'}
-                  placeholder={'Select Department'}
-                  onBlur={() => { }}
-                  error={''}
-                  handleSelect={() => { }} />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <EditableDropdown
-                  dropdownList={[]}
-                  title={'Designation'}
-                  placeholder={'Select Designation'}
-                  onBlur={() => { }}
-                  error={''}
-                  handleSelect={() => { }} />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Total Experience'}
-                  isRequired
-                  placeholder={'Eg. 4 year 4 months'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Vehical No'}
-                  isRequired
-                  placeholder={'Enter Vehical No'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Bank Account'}
-                  placeholder={'Enter Bank Account'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Email'}
-                  placeholder={'Enter Email'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Start Date'}
-                  placeholder={'Start Date'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'QID'}
-                  placeholder={'Enter QID'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-
-              <DropdownWrapper>
-                <Input
-                  label={'Expiry Date of QID'}
-                  placeholder={'Enter QID'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Passport No'}
-                  placeholder={'Enter Passport No'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Sponsored By'}
-                  placeholder={'Sponsored By'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Contract Date'}
-                  placeholder={'Contract Date'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Labour Card Date'}
-                  placeholder={'Labour Card Date'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <EditableDropdown
-                  dropdownList={[]}
-                  title={'Medicals'}
-                  placeholder={'Medicals'}
-                  onBlur={() => { }}
-                  error={''}
-                  handleSelect={() => { }} />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Device Id'}
-                  placeholder={'Device Id'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-              <DropdownWrapper>
-                <Input
-                  label={'Device User Id'}
-                  placeholder={'Device User Id'}
-                  value={''}
-                  onBlur={() => { }}
-                  error={''}
-                  width="100%"
-                  onChange={() => { }}
-                  height="50px" />
-              </DropdownWrapper>
-            </FlexWrapper>
-          </InfoWrapper>
-          <FlexWrapper justifyContent='center'>
-            <Button>Submit</Button>
-          </FlexWrapper>
-        </PageWrapper>
-      </CardWrapper></div>
+        </InfoWrapper>
+        <FlexWrapper justifyContent='center'>
+          <Button
+            onClick={handleSubmit}
+          >Submit</Button>
+        </FlexWrapper>
+      </PageWrapper>
+    </CardWrapper>
   )
 }
 

@@ -32,7 +32,8 @@ import {
   LeaveApplication,
   LeaveApproval,
   StaffRegistration,
-  AddStaffRegistration
+  AddStaffRegistration,
+  Desgination
 } from 'pages'
 import ProtectedRoute from './containers/ProtectedRoute'
 
@@ -108,6 +109,7 @@ const Routes = () => {
         path={ROUTES.ADDSTAFFREGISTRATION}
         component={AddStaffRegistration}
       />
+      <ProtectedRoute path={ROUTES.DESGINATION} component={Desgination} />
     </Switch>
   )
 }
