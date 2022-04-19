@@ -143,7 +143,7 @@ const admin: Array<Menu> = [
       {
         icon: ['fas', 'bars'],
         label: 'Designation',
-        to: ROUTES.LEAVE_MASTER
+        to: ROUTES.DESGINATION
       },
       {
         icon: ['fas', 'bars'],

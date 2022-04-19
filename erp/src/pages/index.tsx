@@ -29,6 +29,7 @@ import LeaveApplication from './HumanResources/LeaveApplication'
 import LeaveApproval from './HumanResources/LeaveApproval'
 import StaffRegistration from './StaffRegistration'
 import AddStaffRegistration from './StaffRegistration/AddRegistration'
+import Desgination from './HumanResources/Desgination'
 
 export {
   Dashboard,
@@ -61,5 +62,6 @@ export {
   LeaveApplication,
   LeaveApproval,
   StaffRegistration,
-  AddStaffRegistration
+  AddStaffRegistration,
+  Desgination
 }

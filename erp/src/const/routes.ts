@@ -30,7 +30,8 @@ const ROUTES = {
   LEAVE_MASTER: '/leaveMaster',
   ADD_LEAVE: '/addLeave',
   LEAVE_APPLICATION: '/leaveApplication',
-  LEAVE_APPROVAL: '/leaveApproval'
+  LEAVE_APPROVAL: '/leaveApproval',
+  DESGINATION: '/desgination'
 }
 
 export default ROUTES

@@ -1,11 +1,18 @@
-import { AddLeaveapi,applyLeaveApi } from "./api";
+import {
+    AddLeaveapi,
+    applyLeaveApi,
+    AddNewdesignationName,
+    AddNewStaff
+} from "./api";
 import { leaveSlice } from "./reducer";
 
-const { updateSelectedUser,updteFormValues } = leaveSlice.actions
+const { updateSelectedUser, updteFormValues } = leaveSlice.actions
 
 export {
     updateSelectedUser,
     AddLeaveapi,
     applyLeaveApi,
-    updteFormValues
+    updteFormValues,
+    AddNewdesignationName,
+    AddNewStaff
 }

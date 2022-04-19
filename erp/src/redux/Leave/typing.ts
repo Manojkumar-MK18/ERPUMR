@@ -17,8 +17,8 @@ export interface AddLeavebyUserId {
 
 export interface ApplyLeave {
     leaveType: string
-    fromDate: string  | Date
-    toDate: string  | Date
+    fromDate: string | Date
+    toDate: string | Date
     remarks: string
     leaveName: string
     dayStatus: string
@@ -34,14 +34,38 @@ export interface UpdateFormValue {
     value: string | Date
 }
 
+export interface NewDesignation {
+    designationName: string
+}
 
+export interface NewStaff {
+    technical_flag: string
+    department: string
+    firstName: string
+    lastName: string
+    gender: string
+    address: string
+    dob: string
+    marital_Status: string
+    mobileNumber: string
+    emailID: string
+    qualification: string
+    nationality: string
+    blood_Group: string
+}
 
 export interface LeaveState {
     isLoading: boolean
     encassable: DropdownList
     leaveType: DropdownList
+    gender: DropdownList,
+    nationality: DropdownList
+    technical_flag: DropdownList
+    marital_Status: DropdownList
     addLeaveDetails: AddLeave
     selectedUser: AddLeavebyUserId
-    applyLeaveDetails: ApplyLeave  
+    applyLeaveDetails: ApplyLeave
     selectFormValues: ApplyLeaveDate | any
+    adddesignation: NewDesignation
+    addStaff: NewStaff
 }

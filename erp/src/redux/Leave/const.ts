@@ -19,3 +19,25 @@ export const leaveType = [
     name: 'Permission'
   },
 ]
+
+export const staffRole = [
+  {
+    id: '01',
+    name: 'Teacher'
+  },
+  {
+    id: '02',
+    name: 'Non-Teacher'
+  },
+]
+
+export const marrtialStatus = [
+  {
+    id: '01',
+    name: 'Married'
+  },
+  {
+    id: '02',
+    name: 'Un-Married'
+  },
+]

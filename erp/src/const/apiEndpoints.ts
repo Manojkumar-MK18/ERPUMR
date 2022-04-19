@@ -17,6 +17,8 @@ const apiEndpoints = {
   getAllCoursesByInstitute: 'course/allCoursesByCoaching',
   getInstitutes: 'coachingCentre',
   getstudents: '/userDetail/search',
+  newDesignation: 'staff/newdesignation',
+  newStaff: 'staff/newstaff'
 }
 
 export default apiEndpoints
