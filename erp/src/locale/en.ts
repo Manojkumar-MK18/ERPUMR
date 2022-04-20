@@ -4,6 +4,15 @@ const strings = {
     addRolePlaceholder: 'Enter a new Role',
     addRoleLabel: 'Want to add a new Role?'
   },
+  roleUser: {
+    title: 'Add User Role',
+    userName: 'UserName',
+    enterUserName: 'Enter UserName',
+    password: 'Password',
+    enterPassword: 'Enter Password',
+    admin: 'Admin',
+    adminPalceholder: 'Select Admin'
+  },
   login: {
     title: 'Login',
     description: 'Sign In to your account',

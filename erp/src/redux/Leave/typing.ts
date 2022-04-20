@@ -24,15 +24,6 @@ export interface ApplyLeave {
     dayStatus: string
 }
 
-export interface ApplyLeaveDate {
-    fromDate: string
-    toDate: string
-}
-
-export interface UpdateFormValue {
-    key: string
-    value: string | Date
-}
 
 export interface NewDesignation {
     designationName: string
@@ -54,6 +45,17 @@ export interface NewStaff {
     blood_Group: string
 }
 
+export interface GetLeaveDetailsPayload {
+    id: string
+    leaveType: string
+    fromDate: string
+    toDate: string
+    dayStatus: string
+    remarks: string
+    action: string
+    leaveName: string
+}
+
 export interface LeaveState {
     isLoading: boolean
     encassable: DropdownList
@@ -65,7 +67,7 @@ export interface LeaveState {
     addLeaveDetails: AddLeave
     selectedUser: AddLeavebyUserId
     applyLeaveDetails: ApplyLeave
-    selectFormValues: ApplyLeaveDate | any
     adddesignation: NewDesignation
     addStaff: NewStaff
+    getLeave: Array<GetLeaveDetailsPayload>
 }

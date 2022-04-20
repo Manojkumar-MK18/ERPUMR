@@ -31,7 +31,10 @@ const ROUTES = {
   ADD_LEAVE: '/addLeave',
   LEAVE_APPLICATION: '/leaveApplication',
   LEAVE_APPROVAL: '/leaveApproval',
-  DESGINATION: '/desgination'
+  DESGINATION: '/desgination',
+  ADD_ROLEUSER: '/addroleUser',
+  ADD_PIVILEGES: '/addPrivileges',
+  VIEW_PIVILEGES: '/viewPrivileges',
 }
 
 export default ROUTES

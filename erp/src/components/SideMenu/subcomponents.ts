@@ -21,7 +21,7 @@ export const Anchor = styled(Link)<ListProps>`
   width: 100%;
   padding: 16px 4px;
   text-decoration: none;
-  font-size: ${fonts.small}px;
+  font-size: ${fonts.tiny}px;
   color: ${({ $isSelected, theme }) =>
     $isSelected ? theme?.sideMenu.icon.selected : theme?.sideMenu.icon.normal};
   display: block;

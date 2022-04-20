@@ -111,7 +111,7 @@ const FeeReceipt = (): ReactElement => {
             handleSelect={() => {}}
           />
         </DropdownWrapper>
-        <DropdownWrapper>
+        <DropdownWrapper >
           <EditableDropdown
             dropdownList={academicYearList}
             title={academicYear}

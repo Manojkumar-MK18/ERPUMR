@@ -187,7 +187,7 @@ const StudentRegistartion = (): ReactElement => {
                       fatherName,
                       parentNumber,
                       updatedAt,
-                      aadhar
+                      aadhar, 
                     },
                     index
                   ) => {
@@ -203,7 +203,7 @@ const StudentRegistartion = (): ReactElement => {
                         <td>{fatherName}</td>
                         <td>{parentNumber}</td>
                         <td>{aadhar}</td>
-                        <td>{updatedAt}</td>
+                        <td>{updatedAt}</td> 
                         <td>
                           <ActionWrapper />
                         </td>

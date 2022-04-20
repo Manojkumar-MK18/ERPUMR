@@ -8,8 +8,7 @@ export interface ChildInformation {
   fathersName: string
   mothersName: string
   dateOfBirth: string
-  gender: string
-  bloodGroup: string
+  gender: string 
   physicallyChallenged: string
   studentType: string
   aadharNumber: string
@@ -27,7 +26,7 @@ export interface ChildInformation {
   profileImage: any
   enrollmentNumber: string
   userName: string
-  password: string
+  passwordUpdated: string
 }
 
 export interface CommunicationDetails {

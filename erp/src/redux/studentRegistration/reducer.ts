@@ -9,8 +9,7 @@ const initialState: StudentRegistration = {
     fathersName: '',
     mothersName: '',
     dateOfBirth: '',
-    gender: '',
-    bloodGroup: '',
+    gender: '', 
     physicallyChallenged: 'no',
     studentType: '',
     aadharNumber: '',
@@ -29,7 +28,7 @@ const initialState: StudentRegistration = {
     enrollmentNumber: '',
     academicYear: '',
     userName: '',
-    password: ''
+    passwordUpdated: ''
   },
   communicationDetails: {
     address: '',

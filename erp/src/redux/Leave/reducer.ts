@@ -3,13 +3,13 @@ import {
     AddLeave,
     AddLeavebyUserId,
     ApplyLeave,
+    GetLeaveDetailsPayload,
     LeaveState,
     NewDesignation,
     NewStaff,
-    UpdateFormValue
 } from './typing'
 import { encassableList, leaveType, marrtialStatus, staffRole } from './const'
-import { AddLeaveapi, AddNewdesignationName, AddNewStaff, applyLeaveApi } from './api'
+import { AddLeaveapi, AddNewdesignationName, AddNewStaff, applyLeaveApi, getLeaveDetails } from './api'
 import { nationalityList, genderList } from '../../redux/academic/const'
 
 const initialState: LeaveState = {
@@ -39,10 +39,6 @@ const initialState: LeaveState = {
         remarks: '',
         dayStatus: ''
     },
-    selectFormValues: {
-        fromDate: '',
-        toDate: ''
-    },
     adddesignation: {
         designationName: ''
     },
@@ -61,6 +57,8 @@ const initialState: LeaveState = {
         nationality: '',
         blood_Group: ''
     },
+    getLeave:[]
+        
 }
 
 export const leaveSlice = createSlice({
@@ -69,9 +67,6 @@ export const leaveSlice = createSlice({
     reducers: {
         updateSelectedUser: (state, action: PayloadAction<AddLeavebyUserId>) => {
             state.selectedUser = action?.payload
-        },
-        updteFormValues: (state, action: PayloadAction<UpdateFormValue>) => {
-            state.selectFormValues[action.payload.key] = action?.payload?.value
         },
     },
     extraReducers: {
@@ -113,6 +108,16 @@ export const leaveSlice = createSlice({
             state.addStaff = action?.payload
         },
         [AddNewStaff.rejected.toString()]: (state) => {
+            state.isLoading = false;
+        },
+        [getLeaveDetails.pending.toString()]: (state) => {
+            state.isLoading = true;
+        },
+        [getLeaveDetails.fulfilled.toString()]: (state, action: PayloadAction<Array<GetLeaveDetailsPayload>>) => {
+            state.isLoading = false
+            state.getLeave = action?.payload
+        },
+        [getLeaveDetails.rejected.toString()]: (state) => {
             state.isLoading = false;
         },
     }

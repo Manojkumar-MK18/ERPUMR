@@ -2,11 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import apiEndpoints from 'const/apiEndpoints'
 import { RootState } from 'redux/store'
 import api from 'services'
-import strings from 'locale/en'
 
 const addNewStudent = createAsyncThunk(
   'studentRegistration/new',
-  async (_undefined, { getState, rejectWithValue }): Promise<any> => {
+  async (_undefined, { getState }): Promise<void> => {
     const {
       studentRegistration: {
         childInformation: {
@@ -24,13 +23,12 @@ const addNewStudent = createAsyncThunk(
           religion,
           aadharNumber,
           userName,
-          password,
+          passwordUpdated,
           admissionType,
           primaryLanguage,
           secondaryLanguage,
           caste,
-          community,
-          bloodGroup,
+          community, 
           physicallyChallenged,
           studentType,
           enrollmentNumber
@@ -85,7 +83,7 @@ const addNewStudent = createAsyncThunk(
       country &&
       postal &&
       userName &&
-      password
+      passwordUpdated
     ) {
       const requestPayload = {
         courseId: courseId,
@@ -98,8 +96,7 @@ const addNewStudent = createAsyncThunk(
         religion: religion,
         community,
         nationality,
-        gender,
-        bloodGroup,
+        gender, 
         challenged: physicallyChallenged === 'yes',
         studentTpe: studentType,
         address,
@@ -118,22 +115,23 @@ const addNewStudent = createAsyncThunk(
         markObtained: obtainedMarks,
         percentage: percentage,
         userType: 'STUDENT',
+        roleId: '04476e15-dfae-4068-8beb-e5bce310ee3e',
         enrollmentNumber: enrollmentNumber,
         email,
         dob: dateOfBirth,
         country: country,
         coachingCenterId: instituteId,
         branchIds: [branchId],
-        batchIds: [batchId]
+        batchIds: [batchId],
+        userName: userName,
+        passwordUpdated: passwordUpdated
       }
       const response = await api.post(
         apiEndpoints.studentRegistration,
         requestPayload
       )
       return response?.data
-    } else {
-      return rejectWithValue(strings?.validationMessages?.studentRegistration)
-    }
+    } 
   }
 )
 

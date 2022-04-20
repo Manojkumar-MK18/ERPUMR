@@ -60,7 +60,8 @@ const AddStaffRegistration = (): ReactElement => {
           </DropdownWrapper>
         </FlexWrapper>
         <InfoWrapper>
-          <PhotoUploader />
+          <PhotoUploader  
+          />
           <FlexWrapper width="100%">
             <DropdownWrapper>
               <Input

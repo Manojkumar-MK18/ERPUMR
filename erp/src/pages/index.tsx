@@ -21,7 +21,7 @@ import AddPayment from 'pages/Finance/AddPayment'
 import AddContra from 'pages/Finance/AddContra'
 import AddJournal from 'pages/Finance/AddJournal'
 import BalanceSheet from 'pages/Finance/BalanceSheet'
-import AddRole from 'pages/AddRole'
+import AddRole from 'pages/Settings/AddRole'
 import AddFeeMaster from 'pages/FeesManagementSystem/AddFeeMaster'
 import LeaveMaster from './HumanResources/LeaveMaster'
 import AddLeave from './HumanResources/LeaveMaster/AddLeave'
@@ -30,6 +30,9 @@ import LeaveApproval from './HumanResources/LeaveApproval'
 import StaffRegistration from './StaffRegistration'
 import AddStaffRegistration from './StaffRegistration/AddRegistration'
 import Desgination from './HumanResources/Desgination'
+import AddRoleUser from './Settings/AddRoleUser'
+import AddPrivileges from './Settings/AddPrivileges'
+import ViewPrivileges from './Settings/ViewPrivileges'
 
 export {
   Dashboard,
@@ -63,5 +66,8 @@ export {
   LeaveApproval,
   StaffRegistration,
   AddStaffRegistration,
-  Desgination
+  Desgination,
+  AddRoleUser,
+  AddPrivileges,
+  ViewPrivileges
 }
