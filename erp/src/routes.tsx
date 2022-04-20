@@ -33,7 +33,10 @@ import {
   LeaveApproval,
   StaffRegistration,
   AddStaffRegistration,
-  Desgination
+  Desgination,
+  AddRoleUser,
+  AddPrivileges,
+  ViewPrivileges
 } from 'pages'
 import ProtectedRoute from './containers/ProtectedRoute'
 
@@ -110,6 +113,9 @@ const Routes = () => {
         component={AddStaffRegistration}
       />
       <ProtectedRoute path={ROUTES.DESGINATION} component={Desgination} />
+      <ProtectedRoute path={ROUTES.ADD_ROLEUSER} component={AddRoleUser} />
+      <ProtectedRoute path={ROUTES.ADD_PIVILEGES} component={AddPrivileges} />
+      <ProtectedRoute path={ROUTES.VIEW_PIVILEGES} component={ViewPrivileges} />
     </Switch>
   )
 }

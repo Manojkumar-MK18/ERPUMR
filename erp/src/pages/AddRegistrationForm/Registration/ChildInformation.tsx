@@ -29,11 +29,10 @@ const ChildInformation = (): ReactElement => {
       fathersName,
       mothersName,
       dateOfBirth,
-      aadharNumber,
-      bloodGroup,
+      aadharNumber,   
       enrollmentNumber,
       userName,
-      password
+      passwordUpdated
     }
   } = useSelector(
     (state: RootState) => ({
@@ -263,7 +262,7 @@ const ChildInformation = (): ReactElement => {
             <Input
               label={bloodGroupLabel}
               placeholder={bloodGroupPlaceholder}
-              value={bloodGroup}
+              value={''}
               onBlur={() => {}}
               error={''}
               width="100%"
@@ -307,13 +306,13 @@ const ChildInformation = (): ReactElement => {
             <Input
               label={passwordLabel}
               placeholder={passwordPlaceHolder}
-              value={password}
+              value={passwordUpdated}
               onBlur={() => {}}
               isRequired
               error={''}
               width="100%"
               onChange={(value: string) => {
-                dispatch(updateChildInformation({ password: value }))
+                dispatch(updateChildInformation({ passwordUpdated: value }))
               }}
               height="50px"
             />

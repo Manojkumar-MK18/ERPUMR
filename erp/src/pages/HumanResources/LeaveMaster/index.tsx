@@ -47,7 +47,7 @@ const LeaveMaster = (): ReactElement => {
                         </TableHeader>
                         <tbody>
                             <TableRow>
-                                <td>1</td>
+                                <td>1</td> 
                                 <td>Sick Leave</td>
                                 <td>Descripton</td>
                                 <td>YES</td>

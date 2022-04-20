@@ -12,7 +12,7 @@ import strings from 'locale/en'
 import { SearchButton } from 'pages/subcomponents'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
-import { AddLeaveapi } from 'redux/Leave/api'
+import { AddLeaveapi, getLeaveDetails } from 'redux/Leave/api'
 import { DropdownListProps } from 'components/EditableDropdown/typings'
 import { updateSelectedUser } from 'redux/Leave/action'
 
@@ -52,6 +52,7 @@ const AddLeave = (): ReactElement => {
 
 
     useEffect(() => {
+        dispatch(getLeaveDetails())
         dispatch(updateSelectedUser({
             adminType: role,
             userId: userid
