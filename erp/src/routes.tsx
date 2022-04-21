@@ -36,7 +36,8 @@ import {
   Desgination,
   AddRoleUser,
   AddPrivileges,
-  ViewPrivileges
+  ViewPrivileges,
+  StudentPay
 } from 'pages'
 import ProtectedRoute from './containers/ProtectedRoute'
 
@@ -116,6 +117,7 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.ADD_ROLEUSER} component={AddRoleUser} />
       <ProtectedRoute path={ROUTES.ADD_PIVILEGES} component={AddPrivileges} />
       <ProtectedRoute path={ROUTES.VIEW_PIVILEGES} component={ViewPrivileges} />
+      <ProtectedRoute path={ROUTES.STUDENT_PAY} component={StudentPay} />
     </Switch>
   )
 }

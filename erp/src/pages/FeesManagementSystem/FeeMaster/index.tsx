@@ -139,6 +139,8 @@ const FeeMaster = (): ReactElement => {
                 (fee) => fee.title === item.name
               )
               setFees(filteredFeeMasterList)
+              console.log(filteredFeeMasterList);
+              
             }}
             reset={resetValuesState?.feeType}
           />
@@ -159,6 +161,8 @@ const FeeMaster = (): ReactElement => {
                 (fee) => fee.courseId === item.id
               )
               setFees(filteredFeeMasterList)
+              console.log(filteredFeeMasterList);
+              
             }}
             reset={resetValuesState?.course}
           />

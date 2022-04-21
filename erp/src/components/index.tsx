@@ -12,7 +12,7 @@ import SectionTitle from './SectionTitle'
 import Card from './Card'
 import Notes from './Notes'
 import Stickies from './Stickies'
-import TableHeader, { TableWrapper } from './TableHeader'
+import TableHeader, { TableWrapper, ViewCardWrapper } from './TableHeader'
 import TableFooter from './TableFooter'
 import { TableRow, Icon } from './TableBody'
 import DropdownWrapper from './DropdownWrapper'
@@ -22,6 +22,7 @@ import TabWrapper from './TabWrapper'
 import PhotoUploader from './PhotoUploader'
 import FileUploader from './FileUploader'
 import CheckBox from './CheckBox'
+import Column from './Column'
 
 export {
   BackButton,
@@ -49,5 +50,7 @@ export {
   TabWrapper,
   PhotoUploader,
   FileUploader,
-  CheckBox
+  CheckBox,
+  Column,
+  ViewCardWrapper
 }

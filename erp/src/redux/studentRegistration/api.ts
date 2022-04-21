@@ -1,11 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import apiEndpoints from 'const/apiEndpoints'
+import strings from 'locale/en'
+import { getStudentAdmissionList } from 'redux/fms/api'
 import { RootState } from 'redux/store'
 import api from 'services'
 
 const addNewStudent = createAsyncThunk(
   'studentRegistration/new',
-  async (_undefined, { getState }): Promise<void> => {
+  async (_undefined, { getState,rejectWithValue ,dispatch}): Promise<any> => {
     const {
       studentRegistration: {
         childInformation: {
@@ -130,8 +132,11 @@ const addNewStudent = createAsyncThunk(
         apiEndpoints.studentRegistration,
         requestPayload
       )
-      return response?.data
-    } 
+      dispatch(getStudentAdmissionList(1))
+      return response?.data.message
+    } else {
+      return rejectWithValue(strings?.validationMessages?.studentRegistration)
+    }
   }
 )
 

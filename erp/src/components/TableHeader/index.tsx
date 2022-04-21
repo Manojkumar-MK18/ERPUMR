@@ -1,4 +1,14 @@
+import { Card } from 'react-bootstrap'
 import styled from 'styled-components'
+
+export const ViewCardWrapper = styled(Card)`
+  width: 45%;
+  padding: 1px 3px 6px 10px;
+  @media (max-width: 415px) {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+`
 
 export const TableWrapper = styled.div`
   margin-top: 12px;

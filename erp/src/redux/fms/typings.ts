@@ -10,6 +10,8 @@ export interface AddFeeDescriptionResponse {
   terms?: string
   courseId?: string
   academicYear?: string
+  feeTypeList?: string
+  termList?: string
   year?: string
 }
 
@@ -33,34 +35,34 @@ export interface Student {
   createdBy?: string
   courseId?: any
   dob?: string
-  email: string
+  email?: string
   enrollmentNumber?: string
-  fatherName: string
+  fatherName?: string
   firstName: string
-  id: string
-  lastName: string
-  mobileNumber: string
+  id?: string
+  lastName?: string
+  mobileNumber?: string
   profileImagePath?: any
   qualification?: string
   salutation?: string
   shortDiscription?: string
   state?: string
-  status: string
+  status?: string
   studentAccess?: boolean
   subject?: string
   updatedAt?: number
   updatedBy?: any
   uploadFileId?: string
-  user: User
+  user?: User
   userId?: string
-  userType: string
+  userType?: string
   yearOfExperience?: string
   zipCode?: string
-  regNo: string
-  parentNumber: string
-  aadhar: string
-  academicYear: string
-  yearOfPassing: string
+  regNo?: string
+  parentNumber?: string
+  aadhar?: string
+  academicYear?: string
+  yearOfPassing?: string
 }
 
 export interface StudentList {
@@ -79,6 +81,7 @@ export interface AddFeeDescriptionState {
   editFeeMaster: AddFeeDescriptionResponse | null
   studentApplicationList: StudentList | null
   error: string
+  selectedStudentDetails: Student | null 
 }
 
 export interface AddFeeMasterPayload {

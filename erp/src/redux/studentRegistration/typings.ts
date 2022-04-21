@@ -8,7 +8,7 @@ export interface ChildInformation {
   fathersName: string
   mothersName: string
   dateOfBirth: string
-  gender: string 
+  gender: string
   physicallyChallenged: string
   studentType: string
   aadharNumber: string
