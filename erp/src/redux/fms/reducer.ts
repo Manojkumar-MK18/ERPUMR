@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {
   AddFeeDescriptionResponse,
   AddFeeDescriptionState,
+  Student,
   StudentList
 } from './typings'
 import {
@@ -9,7 +10,7 @@ import {
   getFeeDescriptions,
   getFeeMaster,
   deleteFeeMaster,
-  getStudentAdmissionList
+  getStudentAdmissionList,
 } from './api'
 import strings from 'locale/en'
 
@@ -20,7 +21,8 @@ const initialState: AddFeeDescriptionState = {
   feeMasterList: [],
   editFeeMaster: null,
   studentApplicationList: null,
-  error: ''
+  error: '',
+  selectedStudentDetails: null,
 }
 
 export const fmsSlice = createSlice({
@@ -38,7 +40,10 @@ export const fmsSlice = createSlice({
     },
     resetError: (state) => {
       state.error = ''
-    }
+    },
+    updateStudentDetails: (state, action: PayloadAction<Student | null>) => {
+      state.selectedStudentDetails = action.payload
+    },
   },
   extraReducers: {
     [getStudentAdmissionList.pending.toString()]: (state) => {
@@ -49,7 +54,7 @@ export const fmsSlice = createSlice({
       action: PayloadAction<StudentList>
     ) => {
       state.isLoading = false
-      state.studentApplicationList = action.payload
+      state.studentApplicationList = action?.payload
     },
     [getStudentAdmissionList.rejected.toString()]: (state) => {
       state.isLoading = false
@@ -95,7 +100,7 @@ export const fmsSlice = createSlice({
     },
     [getFeeMaster.rejected.toString()]: (state) => {
       state.isLoading = false
-    }
+    },
   }
 })
 

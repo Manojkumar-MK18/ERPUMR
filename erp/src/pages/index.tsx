@@ -33,6 +33,7 @@ import Desgination from './HumanResources/Desgination'
 import AddRoleUser from './Settings/AddRoleUser'
 import AddPrivileges from './Settings/AddPrivileges'
 import ViewPrivileges from './Settings/ViewPrivileges'
+import StudentPay from './StudentRegistration/Pay'
 
 export {
   Dashboard,
@@ -69,5 +70,6 @@ export {
   Desgination,
   AddRoleUser,
   AddPrivileges,
-  ViewPrivileges
+  ViewPrivileges,
+  StudentPay
 }

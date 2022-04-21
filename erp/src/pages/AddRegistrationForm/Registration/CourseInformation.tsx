@@ -22,7 +22,7 @@ const CourseInformation = (): ReactElement => {
   const {
     academic: {
       academicYear: academicYearList,
-      feeTypeList,
+      admissionTypeList,
       primaryLanguageList,
       secondaryLanguageList,
       courseList,
@@ -87,7 +87,7 @@ const CourseInformation = (): ReactElement => {
           </DropdownWrapper>
           <DropdownWrapper>
             <EditableDropdown
-              dropdownList={feeTypeList}
+              dropdownList={admissionTypeList}
               title={admisionTypeLabel}
               placeholder={admissionTypePlaceholder}
               onBlur={() => {}}

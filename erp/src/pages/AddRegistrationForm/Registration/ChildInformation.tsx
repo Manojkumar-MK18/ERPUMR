@@ -71,9 +71,7 @@ const ChildInformation = (): ReactElement => {
         aadharNumberPlaceHolder,
         aadharNumberLabel,
         enterEnrollment,
-        enrollmentNumberLabel,
-        bloodGroupLabel,
-        bloodGroupPlaceholder,
+        enrollmentNumberLabel, 
         userNameLabel,
         userNamePlaceholder,
         passwordLabel,
@@ -210,18 +208,6 @@ const ChildInformation = (): ReactElement => {
           </DropdownWrapper>
           <DropdownWrapper>
             <EditableDropdown
-              dropdownList={casteList}
-              title={casteLabel}
-              placeholder={castePlaceholder}
-              onBlur={() => {}}
-              error={''}
-              handleSelect={(item) =>
-                dispatch(updateChildInformation({ caste: item.name }))
-              }
-            />
-          </DropdownWrapper>
-          <DropdownWrapper>
-            <EditableDropdown
               dropdownList={religionList}
               title={religionLabel}
               isRequired
@@ -247,6 +233,18 @@ const ChildInformation = (): ReactElement => {
           </DropdownWrapper>
           <DropdownWrapper>
             <EditableDropdown
+              dropdownList={casteList}
+              title={casteLabel}
+              placeholder={castePlaceholder}
+              onBlur={() => {}}
+              error={''}
+              handleSelect={(item) =>
+                dispatch(updateChildInformation({ caste: item.name }))
+              }
+            />
+          </DropdownWrapper>
+          <DropdownWrapper>
+            <EditableDropdown
               dropdownList={nationalityList}
               title={nationalityLabel}
               isRequired
@@ -256,20 +254,6 @@ const ChildInformation = (): ReactElement => {
               handleSelect={(item) =>
                 dispatch(updateChildInformation({ nationality: item.name }))
               }
-            />
-          </DropdownWrapper>
-          <DropdownWrapper>
-            <Input
-              label={bloodGroupLabel}
-              placeholder={bloodGroupPlaceholder}
-              value={''}
-              onBlur={() => {}}
-              error={''}
-              width="100%"
-              onChange={(value: string) => {
-                dispatch(updateChildInformation({ bloodGroup: value }))
-              }}
-              height="50px"
             />
           </DropdownWrapper>
           <DropdownWrapper>

@@ -11,22 +11,23 @@ import {
   Button,
   TabWrapper,
   TableFooter,
-  Loader
+  Loader,
+  Icon
 } from 'components'
 import strings from 'locale/en'
 import Tabs from 'react-bootstrap/esm/Tabs'
 import Tab from 'react-bootstrap/esm/Tab'
-import { ActionWrapper } from './subcomponents'
 import { Table } from 'react-bootstrap'
 import { tableHeader } from './const'
 import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { getStudentAdmissionList } from 'redux/fms/actions'
+import { getStudentAdmissionList, updateStudentDetails } from 'redux/fms/actions'
 import { getCourses } from 'redux/academic/actions'
 import { resetValues } from './const'
 import { Student } from 'redux/fms/typings'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const StudentRegistartion = (): ReactElement => {
   const {
@@ -78,7 +79,7 @@ const StudentRegistartion = (): ReactElement => {
             dropdownList={courseList}
             title={course}
             placeholder={selectCourse}
-            onBlur={() => {}}
+            onBlur={() => { }}
             error={''}
             handleSelect={(item) => {
               setResetValuesState({
@@ -99,7 +100,7 @@ const StudentRegistartion = (): ReactElement => {
             dropdownList={academicYearList}
             title={academicYear}
             placeholder={academicYear}
-            onBlur={() => {}}
+            onBlur={() => { }}
             error={''}
             handleSelect={(item) => {
               setResetValuesState({
@@ -120,7 +121,7 @@ const StudentRegistartion = (): ReactElement => {
             dropdownList={yearList}
             title={year}
             placeholder={year}
-            onBlur={() => {}}
+            onBlur={() => { }}
             error={''}
             handleSelect={(item) => {
               setResetValuesState({
@@ -183,7 +184,7 @@ const StudentRegistartion = (): ReactElement => {
                       firstName = '',
                       lastName = '',
                       courseId = '',
-                      regNo,   
+                      regNo,
                     },
                     index
                   ) => {
@@ -195,9 +196,24 @@ const StudentRegistartion = (): ReactElement => {
                         <td>{index + 1}</td>
                         <td>{`${firstName} ${lastName}`}</td>
                         <td>{selectedCourse?.name || courseId}</td>
-                        <td>{regNo}</td>   
+                        <td>{regNo}</td>
                         <td>
-                          <ActionWrapper />
+                          <Button
+                            onClick={() => {
+                              {
+                                history.push(ROUTES.STUDENT_PAY);
+                                dispatch(updateStudentDetails({
+                                  firstName: firstName,
+                                  lastName: lastName, 
+                                  courseId: selectedCourse?.name || courseId,
+                                  regNo: regNo
+                                }))
+                              }
+                            }}
+                          >{strings.studentRegistration.pay}</Button>
+                          <Icon variant="outline-light" onClick={() => { }}>
+                            <FontAwesomeIcon icon={['far', 'trash-alt']} />
+                          </Icon>
                         </td>
                       </TableRow>
                     )

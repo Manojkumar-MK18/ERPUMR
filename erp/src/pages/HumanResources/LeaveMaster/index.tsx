@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ReactElement } from 'react'
 import {
     Button,
@@ -13,7 +14,7 @@ import { Table } from 'react-bootstrap'
 import { tableHeader } from './const'
 import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
-import { LeaveAction } from './subcomponents'
+import { LeaveAction } from './subcomponents'  
 
 const LeaveMaster = (): ReactElement => {
     const {
@@ -23,10 +24,10 @@ const LeaveMaster = (): ReactElement => {
             }
         }
     } = strings
-    const history = useHistory()
-
+    const history = useHistory()   
+ 
     return (
-        <PageWrapper>
+        <PageWrapper> 
             <SectionTitle title={title} />
             <FlexWrapper noPadding justifyContent='flex-end'>
                 <Button
@@ -47,7 +48,7 @@ const LeaveMaster = (): ReactElement => {
                         </TableHeader>
                         <tbody>
                             <TableRow>
-                                <td>1</td> 
+                                <td>1</td>
                                 <td>Sick Leave</td>
                                 <td>Descripton</td>
                                 <td>YES</td>

@@ -10,10 +10,15 @@ import {
   SectionTitle,
   Button
 } from 'components'
-import { InfoWrapper } from './subcomponents'
+import { DatePickerWrapper, InfoWrapper } from './subcomponents'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
 import { AddNewStaff } from 'redux/Leave/api'
+import DatePicker from 'react-datepicker'
+import format from 'date-fns/format'
+import {
+  DATE_FORMAT_YYYYMMDD,
+} from '../../../const/dateFormat'
 
 const AddStaffRegistration = (): ReactElement => {
 
@@ -35,9 +40,13 @@ const AddStaffRegistration = (): ReactElement => {
   const dispatch = useDispatch()
   // eslint-disable-next-line no-unused-vars
   const [values, setValues] = useState(staffDetails)
+  const [fromDate, setFromDate] = useState<any>(new Date())
 
   const handleSubmit = () => {
-    dispatch(AddNewStaff(values))
+    dispatch(AddNewStaff({
+      ...values,
+      dob: format(fromDate, DATE_FORMAT_YYYYMMDD),
+    }))
   }
 
   return (
@@ -60,7 +69,7 @@ const AddStaffRegistration = (): ReactElement => {
           </DropdownWrapper>
         </FlexWrapper>
         <InfoWrapper>
-          <PhotoUploader  
+          <PhotoUploader
           />
           <FlexWrapper width="100%">
             <DropdownWrapper>
@@ -115,18 +124,25 @@ const AddStaffRegistration = (): ReactElement => {
                 height="50px" />
             </DropdownWrapper>
             <DropdownWrapper>
-              <Input
-                label={'Date of Birth'}
-                isRequired
-                placeholder={'Enter DoB'}
-                value={values?.dob}
-                onBlur={() => { }}
-                error={''}
-                width="100%"
-                onChange={(value: string) => {
-                  setValues({ ...values, dob: value })
-                }}
-                height="50px" />
+              <DatePickerWrapper>
+                <DatePicker
+                  selected={fromDate}
+                  onSelect={(date) => setFromDate(date)}
+                  onChange={(date) => setFromDate(date)}
+                  placeholderText={'From Dtae'}
+                  customInput={
+                    <Input
+                      label={'From Date'}
+                      value={fromDate}
+                      isRequired
+                      inputType="text"
+                      placeholder={'From Date'}
+                      onChange={(date) => setFromDate(date)}
+                      suffix={['far', 'calendar']}
+                    />
+                  }
+                />
+              </DatePickerWrapper>
             </DropdownWrapper>
             <DropdownWrapper>
               <EditableDropdown
@@ -193,7 +209,7 @@ const AddStaffRegistration = (): ReactElement => {
               <Input
                 label={'Blood Group'}
                 placeholder={'Enter Blood Group'}
-                value={values?.blood_Group} 
+                value={values?.blood_Group}
                 onBlur={() => { }}
                 error={''}
                 width="100%"
@@ -203,7 +219,7 @@ const AddStaffRegistration = (): ReactElement => {
                 height="50px" />
             </DropdownWrapper>
             <DropdownWrapper>
-            <Input
+              <Input
                 label={'Department'}
                 placeholder={'Enter Department'}
                 value={values?.department}
@@ -214,7 +230,7 @@ const AddStaffRegistration = (): ReactElement => {
                   setValues({ ...values, department: value })
                 }}
                 height="50px" />
-            </DropdownWrapper> 
+            </DropdownWrapper>
           </FlexWrapper>
         </InfoWrapper>
         <FlexWrapper justifyContent='center'>
