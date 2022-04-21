@@ -15,7 +15,7 @@ const MenuWrapper = styled.div<MenuWrapperProps>`
     position: absolute;
     height: 100%;
   }
-  width: ${({ isMenuOpen }) => (isMenuOpen ? '18%' : '0')};
+  width: ${({ isMenuOpen }) => (isMenuOpen ? '20%' : '0')};
   transition: all 0.3s;
 `
 

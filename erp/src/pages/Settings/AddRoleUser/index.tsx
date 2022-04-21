@@ -12,8 +12,8 @@ import {
     TableRow,
     TableWrapper,
     Icon
-} from "components"
-import strings from "locale/en"
+} from "../../../components"
+import strings from "../../../locale/en"
 import { ReactElement } from "react"
 import { Table } from "react-bootstrap"
 import { tableHeader } from "./const"
@@ -60,7 +60,7 @@ const AddRoleUser = (): ReactElement => {
                         onChange={(value: string) => {
                             console.log(value)
                         }}
-                    height="50px"
+                        height="50px"
                     />
                 </DropdownWrapper>
                 <DropdownWrapper>

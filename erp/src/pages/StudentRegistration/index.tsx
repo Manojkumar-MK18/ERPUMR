@@ -183,11 +183,7 @@ const StudentRegistartion = (): ReactElement => {
                       firstName = '',
                       lastName = '',
                       courseId = '',
-                      regNo,
-                      fatherName,
-                      parentNumber,
-                      updatedAt,
-                      aadhar, 
+                      regNo,   
                     },
                     index
                   ) => {
@@ -199,11 +195,7 @@ const StudentRegistartion = (): ReactElement => {
                         <td>{index + 1}</td>
                         <td>{`${firstName} ${lastName}`}</td>
                         <td>{selectedCourse?.name || courseId}</td>
-                        <td>{regNo}</td>
-                        <td>{fatherName}</td>
-                        <td>{parentNumber}</td>
-                        <td>{aadhar}</td>
-                        <td>{updatedAt}</td> 
+                        <td>{regNo}</td>   
                         <td>
                           <ActionWrapper />
                         </td>

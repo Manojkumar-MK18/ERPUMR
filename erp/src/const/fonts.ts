@@ -1,5 +1,5 @@
 const fonts = {
-  tiny: 16,
+  tiny: 14,
   small: 16,
   medium: 18,
   large: 20,

@@ -1,8 +1,9 @@
-import styled from 'styled-components'
+
+import styled from "styled-components"
 
 export const TableWrapper = styled.div`
   margin-top: 12px;
-  border: 1px solid ${({ theme }) => theme.table.border};
+  padding: 10px; 
   --bs-gutter-x: 0;
   width: 100%;
   > * table {
@@ -10,10 +11,12 @@ export const TableWrapper = styled.div`
   }
 `
 
-const TableHeader = styled.thead`
+export const TableHeader = styled.thead`
   background-color: ${({ theme }) => theme.table.background};
   color: ${({ theme }) => theme.table.color};
   height: 35px; 
 `
 
-export default TableHeader
+export const TableRow = styled.tr`
+vertical-align: baseline;  
+`

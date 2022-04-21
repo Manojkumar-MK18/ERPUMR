@@ -2,11 +2,7 @@ export const tableHeader = [
   'SNo',
   'Student Name',
   'Course',
-  'Admission No',
-  'Father Name',
-  'Father Number',
-  'UID',
-  'Admission Date',
+  'Admission No',   
   'Action'
 ]
 

@@ -10,7 +10,7 @@ export interface Menu {
   icon: IconProp
   label: string
   to: string
-  childs?: Array<Item>
+  childs?: Array<Item> 
 }
 
 export interface MenuWrapperProps {
