@@ -66,7 +66,7 @@ export interface Student {
 }
 
 export interface StudentList {
-  data: Array<Student>
+  content: Array<Student>
   page: number
   pageSize: number
   totalCount: number

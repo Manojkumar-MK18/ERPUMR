@@ -6,7 +6,8 @@ const {
   updatePermanentDetails,
   updateCommunicationDetails,
   updateQualifyingExamDetails,
-  resetError
+  resetError,
+  updateSelectedStudentId
 } = studentRegistrationSlice.actions
 
 export {
@@ -15,5 +16,6 @@ export {
   updateCommunicationDetails,
   updateQualifyingExamDetails,
   addNewStudent,
-  resetError
+  resetError,
+  updateSelectedStudentId
 }

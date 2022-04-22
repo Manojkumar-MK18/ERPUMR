@@ -1,3 +1,4 @@
+
 import { ReactElement, useEffect } from 'react'
 import { PageWrapper, EditableDropdown, DropdownWrapper } from 'components'
 import { InfoWrapper, FlexWrapper } from '../subcomponents'
@@ -17,6 +18,8 @@ import {
   getInstituteDropdown,
   getBatchDropdown
 } from 'helpers'
+import { ChildInformation } from 'redux/studentRegistration/typings'
+
 
 const CourseInformation = (): ReactElement => {
   const {
@@ -34,11 +37,11 @@ const CourseInformation = (): ReactElement => {
   } = useSelector(
     (state: RootState) => ({
       academic: state.acamedic,
-      childInformation: state.studentRegistration.childInformation
+      childInformation: state.studentRegistration.childInformation as ChildInformation
     }),
     shallowEqual
   )
-  const dispatch = useDispatch()
+
   const {
     studentRegistration: {
       childInformation: { selectYear, academicYear, selectCourse, course },
@@ -57,6 +60,9 @@ const CourseInformation = (): ReactElement => {
       }
     }
   } = strings
+
+
+  const dispatch = useDispatch()
   const institutes = instituteList ? getInstituteDropdown(instituteList) : []
   const branches = branchList ? getBranchDropdown(branchList) : []
   const batches = batchList ? getBatchDropdown(batchList) : []
@@ -64,9 +70,9 @@ const CourseInformation = (): ReactElement => {
   useEffect(() => {
     dispatch(getCourses())
     dispatch(getInstitutes())
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
 
   return (
     <PageWrapper>
@@ -77,7 +83,7 @@ const CourseInformation = (): ReactElement => {
               dropdownList={academicYearList}
               title={academicYear}
               placeholder={selectYear}
-              onBlur={() => {}}
+              onBlur={() => { }}
               isRequired
               error={''}
               handleSelect={(item) =>
@@ -90,7 +96,7 @@ const CourseInformation = (): ReactElement => {
               dropdownList={admissionTypeList}
               title={admisionTypeLabel}
               placeholder={admissionTypePlaceholder}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               handleSelect={(item) =>
                 dispatch(updateChildInformation({ admissionType: item.name }))
@@ -104,17 +110,19 @@ const CourseInformation = (): ReactElement => {
               placeholder={selectInstituteName}
               isRequired
               handleSelect={(item) => {
-                dispatch(updateChildInformation({ instituteId: item.id }))
-                dispatch(getAllCoursesByInstitute(item.id))
+                dispatch(updateChildInformation({ instituteId: item.id }));
+                dispatch(getAllCoursesByInstitute(item.id));
+
               }}
             />
+
           </DropdownWrapper>
           <DropdownWrapper>
             <EditableDropdown
               dropdownList={courseList}
               title={course}
               placeholder={selectCourse}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               handleSelect={(item) => {
                 dispatch(updateChildInformation({ courseId: item.id }))
@@ -161,7 +169,7 @@ const CourseInformation = (): ReactElement => {
               dropdownList={primaryLanguageList}
               title={primaryLanguage}
               placeholder={languagePlaceholder}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               handleSelect={(item) =>
                 dispatch(updateChildInformation({ primaryLanguage: item.name }))
@@ -173,7 +181,7 @@ const CourseInformation = (): ReactElement => {
               dropdownList={secondaryLanguageList}
               title={secondaryLanguage}
               placeholder={languagePlaceholder}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               handleSelect={(item) =>
                 dispatch(

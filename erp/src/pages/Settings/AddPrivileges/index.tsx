@@ -50,38 +50,67 @@ const AddPrivileges = (): ReactElement => {
                                         <td><Form.Check checked={!isSelectAll}></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
+                                        <td>Settings</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
+                                        <td>Add Role</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
+                                        <td>Add User Role</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
+                                        <td>Add Privileges</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
+                                        <td>View Privileges</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
+                                        <td>Admissions</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow><TableRow >
-                                        <td>dome</td>
+                                        <td>Student Registration</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
+                                        <td>FMS</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
+                                        <td>Fee Description</td>
+                                        <td><Form.Check></Form.Check></td>
+                                    </TableRow>
+                                    <TableRow >
+                                        <td>Fee Master</td>
+                                        <td><Form.Check></Form.Check></td>
+                                    </TableRow>
+                                    <TableRow >
+                                        <td>Fee Receipt</td>
+                                        <td><Form.Check></Form.Check></td>
+                                    </TableRow>
+                                    <TableRow >
+                                        <td>Student Concession</td>
+                                        <td><Form.Check></Form.Check></td>
+                                    </TableRow>
+                                    <TableRow >
+                                        <td>Change Student Fee</td>
+                                        <td><Form.Check></Form.Check></td>
+                                    </TableRow>
+                                    <TableRow >
+                                        <td>Finance</td>
+                                        <td><Form.Check></Form.Check></td>
+                                    </TableRow>
+                                    <TableRow >
+                                        <td>Group Category</td>
+                                        <td><Form.Check></Form.Check></td>
+                                    </TableRow>
+
+                                    <TableRow >
+                                        <td>Group</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                 </tbody>
@@ -95,44 +124,31 @@ const AddPrivileges = (): ReactElement => {
                                 </TableHeader>
                                 <tbody>
                                     <TableRow >
-                                        <td>Home</td>
+                                        <td>Sub-Group</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
+                                        <td>Bank Master</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
+                                        <td>Add Receipt</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
+                                        <td>Ledger List</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
+                                        <td>Bill Payment</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
-                                        <td><Form.Check></Form.Check></td>
-                                    </TableRow>
-
-                                    <TableRow >
-                                        <td>dome</td>
+                                        <td>Application Receipt</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                     <TableRow >
-                                        <td>dome</td>
-                                        <td><Form.Check></Form.Check></td>
-                                    </TableRow>
-                                    <TableRow >
-                                        <td>dome</td>
-                                        <td><Form.Check></Form.Check></td>
-                                    </TableRow>
-                                    <TableRow >
-                                        <td>dome</td>
+                                        <td>Payment</td>
                                         <td><Form.Check></Form.Check></td>
                                     </TableRow>
                                 </tbody>

@@ -68,6 +68,30 @@ export interface QualifyingDetails {
   percentage: string
 }
 
+export interface getFeeMasterByTerm {
+  term: string
+  title: string
+  year: string
+  academicYear: string
+  courseId: string
+  regType: string
+}
+
+export interface FeesAdd {
+  id: string
+  studentId: string
+  paid: string
+  amount: string
+  referenceId: any
+  modeOfPayment: string
+  description: string
+  paidTypes: string
+}
+
+export interface updateStudentIdForFees {
+  studentId: any
+}
+
 interface StudentRegistration {
   childInformation: ChildInformation
   communicationDetails: CommunicationDetails
@@ -75,6 +99,9 @@ interface StudentRegistration {
   qualifyingExamDetails: QualifyingDetails
   error: string
   isLoading: boolean
+  getFeeByTerm: Array<getFeeMasterByTerm>
+  addFee: FeesAdd
+  selectStudentId: updateStudentIdForFees
 }
 
 export default StudentRegistration

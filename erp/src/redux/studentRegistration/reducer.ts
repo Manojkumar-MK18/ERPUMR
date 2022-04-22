@@ -1,6 +1,6 @@
-import StudentRegistration, { OnChangeHandler } from './typings'
+import StudentRegistration, { FeesAdd, getFeeMasterByTerm, OnChangeHandler, updateStudentIdForFees } from './typings'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import addNewStudent from './api'
+import addNewStudent, { fessPaid, getFeeMasterByTermApi } from './api'
 import strings from 'locale/en'
 
 const initialState: StudentRegistration = {
@@ -9,7 +9,7 @@ const initialState: StudentRegistration = {
     fathersName: '',
     mothersName: '',
     dateOfBirth: '',
-    gender: '', 
+    gender: '',
     physicallyChallenged: 'no',
     studentType: '',
     aadharNumber: '',
@@ -67,7 +67,21 @@ const initialState: StudentRegistration = {
     percentage: ''
   },
   error: '',
-  isLoading: false
+  isLoading: false,
+  getFeeByTerm: [],
+  addFee: {
+    paid: '',
+    paidTypes: '',
+    referenceId: '',
+    id: '',
+    description: '',
+    studentId: '',
+    amount: '',
+    modeOfPayment: ''
+  },
+  selectStudentId: {
+    studentId: ''
+  }
 }
 
 export const studentRegistrationSlice = createSlice({
@@ -114,7 +128,10 @@ export const studentRegistrationSlice = createSlice({
         [key]: action.payload[key]
       }
       state.qualifyingExamDetails = qualifyingExamInfo
-    }
+    },
+    updateSelectedStudentId: (state, action: PayloadAction<updateStudentIdForFees>) => {
+      state.selectStudentId = action?.payload
+  },
   },
   extraReducers: {
     [addNewStudent.pending.toString()]: (state) => {
@@ -128,7 +145,21 @@ export const studentRegistrationSlice = createSlice({
       state.error =
         action.payload || strings.studentRegistration.saveStudentsError
       window.scrollTo({ top: 0 })
-    }
+    },
+    [getFeeMasterByTermApi.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<Array<getFeeMasterByTerm>>
+    ) => {
+      state.isLoading = false
+      state.getFeeByTerm = action.payload
+    },
+    [fessPaid.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<FeesAdd>
+    ) => {
+      state.isLoading = false
+      state.addFee = action.payload
+    },
   }
 })
 
