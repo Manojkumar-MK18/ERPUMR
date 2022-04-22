@@ -40,12 +40,12 @@ const AddStaffRegistration = (): ReactElement => {
   const dispatch = useDispatch()
   // eslint-disable-next-line no-unused-vars
   const [values, setValues] = useState(staffDetails)
-  const [fromDate, setFromDate] = useState<any>(new Date())
+  const [dob, setDOB] = useState<any>(new Date())
 
   const handleSubmit = () => {
     dispatch(AddNewStaff({
       ...values,
-      dob: format(fromDate, DATE_FORMAT_YYYYMMDD),
+      dob: format(dob, DATE_FORMAT_YYYYMMDD),
     }))
   }
 
@@ -126,18 +126,18 @@ const AddStaffRegistration = (): ReactElement => {
             <DropdownWrapper>
               <DatePickerWrapper>
                 <DatePicker
-                  selected={fromDate}
-                  onSelect={(date) => setFromDate(date)}
-                  onChange={(date) => setFromDate(date)}
-                  placeholderText={'From Dtae'}
+                  selected={dob}
+                  onSelect={(date) => setDOB(date)}
+                  onChange={(date) => setDOB(date)}
+                  placeholderText={'Date of Birth'}
                   customInput={
                     <Input
-                      label={'From Date'}
-                      value={fromDate}
+                      label={'Date of Birth'}
+                      value={dob}
                       isRequired
                       inputType="text"
-                      placeholder={'From Date'}
-                      onChange={(date) => setFromDate(date)}
+                      placeholder={'Date of birth'}
+                      onChange={(date) => setDOB(date)}
                       suffix={['far', 'calendar']}
                     />
                   }

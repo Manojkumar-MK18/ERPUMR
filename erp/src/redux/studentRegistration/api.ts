@@ -1,13 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import apiEndpoints from 'const/apiEndpoints'
-import strings from 'locale/en'
-import { getStudentAdmissionList } from 'redux/fms/api'
 import { RootState } from 'redux/store'
 import api from 'services'
+import strings from 'locale/en'
+import { getRoleId } from 'helpers'
+import { AdminType } from 'const'
+import history from 'const/history'
+import { FeesAdd } from './typings'
 
 const addNewStudent = createAsyncThunk(
   'studentRegistration/new',
-  async (_undefined, { getState,rejectWithValue ,dispatch}): Promise<any> => {
+  async (_undefined, { getState, rejectWithValue }): Promise<any> => {
     const {
       studentRegistration: {
         childInformation: {
@@ -30,7 +33,7 @@ const addNewStudent = createAsyncThunk(
           primaryLanguage,
           secondaryLanguage,
           caste,
-          community, 
+          community,
           physicallyChallenged,
           studentType,
           enrollmentNumber
@@ -98,7 +101,7 @@ const addNewStudent = createAsyncThunk(
         religion: religion,
         community,
         nationality,
-        gender, 
+        gender,
         challenged: physicallyChallenged === 'yes',
         studentTpe: studentType,
         address,
@@ -116,8 +119,7 @@ const addNewStudent = createAsyncThunk(
         yearOfPassing: yearOfPassing,
         markObtained: obtainedMarks,
         percentage: percentage,
-        userType: 'STUDENT',
-        roleId: '04476e15-dfae-4068-8beb-e5bce310ee3e',
+        userType: AdminType.STUDENT,
         enrollmentNumber: enrollmentNumber,
         email,
         dob: dateOfBirth,
@@ -125,15 +127,20 @@ const addNewStudent = createAsyncThunk(
         coachingCenterId: instituteId,
         branchIds: [branchId],
         batchIds: [batchId],
-        userName: userName,
-        passwordUpdated: passwordUpdated
+        userName,
+        passwordUpdated: passwordUpdated,
+        roleId: getRoleId(AdminType.STUDENT)
       }
       const response = await api.post(
         apiEndpoints.studentRegistration,
         requestPayload
       )
-      dispatch(getStudentAdmissionList(1))
-      return response?.data.message
+
+      if (response) {
+        history.goBack()
+      }
+
+      return response?.data
     } else {
       return rejectWithValue(strings?.validationMessages?.studentRegistration)
     }
@@ -141,3 +148,23 @@ const addNewStudent = createAsyncThunk(
 )
 
 export default addNewStudent
+
+export const getFeeMasterByTermApi = createAsyncThunk(
+  'feeMaster/getFeeMaster',
+  async (AcademicFees: string): Promise<any> => {
+    const response =await api.get(
+      `${apiEndpoints.getFeeMasterByTerm}?groupBy=${AcademicFees}`
+    )
+    return response
+  }
+)
+
+export const fessPaid = createAsyncThunk(
+  'fees/addFees',
+  async (requestPayload: FeesAdd): Promise<FeesAdd> => {
+    const response =await api.put(
+      `${apiEndpoints.addfees}`,requestPayload
+    )
+    return  response?.data
+  }
+)

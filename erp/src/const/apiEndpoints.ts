@@ -16,10 +16,12 @@ const apiEndpoints = {
   getBranchesForCourse: 'coachingCentreBranch/branchesForCourse',
   getAllCoursesByInstitute: 'course/allCoursesByCoaching',
   getInstitutes: 'coachingCentre',
-  getstudents: '/userDetail/search',
+  getstudents: 'userDetail/getAll',
   addDesignation: 'staff/newdesignation',
   staffRegistration: 'staff/newstaff',
-  getLeave: 'leave/getLeaveStatus'
+  getLeave: 'leave/getLeaveStatus',
+  getFeeMasterByTerm: 'feeTypes/getMasterFees',
+  addfees:'feesPaid/add'
 }
 
 export default apiEndpoints

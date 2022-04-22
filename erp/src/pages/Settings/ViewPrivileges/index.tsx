@@ -1,8 +1,13 @@
+import { PageWrapper, SectionTitle } from 'components'
 import { ReactElement } from 'react'
 
 const ViewPrivileges = (): ReactElement => {
     return (
-        <div>ViewPrivileges</div>
+        <PageWrapper>
+            <SectionTitle title='View Privileges' />
+            <>
+            </>
+        </PageWrapper>
     )
 }
 

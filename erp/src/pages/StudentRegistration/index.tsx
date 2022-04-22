@@ -28,6 +28,7 @@ import { getCourses } from 'redux/academic/actions'
 import { resetValues } from './const'
 import { Student } from 'redux/fms/typings'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { updateSelectedStudentId } from 'redux/studentRegistration/actions'
 
 const StudentRegistartion = (): ReactElement => {
   const {
@@ -49,10 +50,14 @@ const StudentRegistartion = (): ReactElement => {
   } = strings
   const history = useHistory()
   const dispatch = useDispatch()
-  const { data = [], totalPages = 0, page = 0 } = studentApplicationList || {}
+  const {
+    content = [],
+    totalPages = 0,
+    page = 0
+  } = studentApplicationList || {}
   const [resetValuesState, setResetValuesState] = useState(resetValues)
   const [registrationList, setRegistrationList] = useState<Array<Student>>([])
-  const filteredList = registrationList.length > 0 ? registrationList : data
+  const filteredList = registrationList.length > 0 ? registrationList : content
 
   const clearValues = () => {
     setResetValuesState({
@@ -185,6 +190,7 @@ const StudentRegistartion = (): ReactElement => {
                       lastName = '',
                       courseId = '',
                       regNo,
+                      id
                     },
                     index
                   ) => {
@@ -194,7 +200,7 @@ const StudentRegistartion = (): ReactElement => {
                     return (
                       <TableRow key={`student-list${index}`}>
                         <td>{index + 1}</td>
-                        <td>{`${firstName} ${lastName}`}</td>
+                        <td>{`${firstName} ${lastName || ''}`}</td>
                         <td>{selectedCourse?.name || courseId}</td>
                         <td>{regNo}</td>
                         <td>
@@ -204,9 +210,12 @@ const StudentRegistartion = (): ReactElement => {
                                 history.push(ROUTES.STUDENT_PAY);
                                 dispatch(updateStudentDetails({
                                   firstName: firstName,
-                                  lastName: lastName, 
+                                  lastName: lastName,
                                   courseId: selectedCourse?.name || courseId,
                                   regNo: regNo
+                                }));
+                                dispatch(updateSelectedStudentId({
+                                  studentId: id,
                                 }))
                               }
                             }}

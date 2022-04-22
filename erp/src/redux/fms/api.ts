@@ -1,4 +1,3 @@
-
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import apiEndpoints from 'const/apiEndpoints'
 import api from 'services'
@@ -95,18 +94,9 @@ export const editFeeMasterRequest = createAsyncThunk(
 export const getStudentAdmissionList = createAsyncThunk(
   'fms/getStudentAdmissionList',
   async (pageNo: number): Promise<any> => {
-    const payloadData = {
-      ascDesc: 'Desc',
-      batchIds: null,
-      branchIds: null,
-      coachingCenterId: null,
-      pageNo: pageNo || 1,
-      pageSize: 30,
-      searchCriteria: { userType: 'STUDENT' },
-      sortBy: 'created_at'
-    }
-
-    const response = await api.post(`${apiEndpoints.getstudents}`, payloadData)
+    const response = await api.get(
+      `${apiEndpoints.getstudents}?pageNo=${pageNo}&size=10`
+    )
 
     return response?.data
   }

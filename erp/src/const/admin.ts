@@ -1,17 +1,5 @@
 /* eslint-disable no-unused-vars */
-
-export const checkBoxDropdownList = [
-  {
-    id: 'yes',
-    name: 'Yes'
-  },
-  {
-    id: 'no',
-    name: 'No'
-  }
-]
-
-export enum AdminType {
+enum AdminType {
   SUPERADMIN = 'SUPERADMIN',
   BRANCHADMIN = 'BRANCHADMIN',
   INSTITUTEADMIN = 'COACHINGADMIN',
@@ -26,3 +14,5 @@ export enum AdminId {
   TEACHER = '03476e15-dfae-4068-8beb-e5bce310ee3e',
   STUDENT = '04476e15-dfae-4068-8beb-e5bce310ee3e'
 }
+
+export default AdminType

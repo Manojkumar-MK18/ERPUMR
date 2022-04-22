@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Button, Column, DropdownWrapper, EditableDropdown, FlexWrapper, Input, PageWrapper, SectionTitle, ViewCardWrapper } from 'components'
 import { ReactElement, useEffect, useState } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
@@ -6,6 +5,7 @@ import getCourses from 'redux/academic/api'
 import { getFeeMaster } from 'redux/fms/api'
 import { AddFeeDescriptionResponse, Student } from 'redux/fms/typings'
 import { RootState } from 'redux/store'
+import { fessPaid, getFeeMasterByTermApi } from 'redux/studentRegistration/api'
 
 const StudentPay = (): ReactElement => {
     const {
@@ -15,12 +15,16 @@ const StudentPay = (): ReactElement => {
             termList,
         },
         fms: { feeMasterList },
-        selectedStudentDetails
+        selectedStudentDetails,
+        addFee,
+        selectStudentId
     } = useSelector(
         (state: RootState) => ({
             selectedStudentDetails: state.fms.selectedStudentDetails,
             acamedic: state.acamedic,
-            fms: state.fms
+            fms: state.fms,
+            addFee: state.studentRegistration.addFee,
+            selectStudentId: state.studentRegistration.selectStudentId
         }),
         shallowEqual
     )
@@ -28,6 +32,8 @@ const StudentPay = (): ReactElement => {
     const { courseId, firstName, lastName, regNo } = selectedStudentDetails as Student
     const [fees, setFees] = useState<Array<AddFeeDescriptionResponse>>([])
     const filteredList = fees.length > 0 ? fees : feeMasterList
+    // eslint-disable-next-line no-unused-vars
+    const [values, setValues] = useState(addFee)
 
     useEffect(() => {
         dispatch(getCourses())
@@ -55,7 +61,8 @@ const StudentPay = (): ReactElement => {
                             const filteredFeeMasterList = filteredList.filter(
                                 (fee) => fee.feeTypeList === item.name
                             )
-                            setFees(filteredFeeMasterList)
+                            setFees(filteredFeeMasterList);
+                            dispatch(getFeeMasterByTermApi(`${item?.name}`))
                         }}
                     />
                 </DropdownWrapper>
@@ -82,29 +89,85 @@ const StudentPay = (): ReactElement => {
                                 (fee) => fee.termList === item.id
                             )
                             setFees(filteredFeeMasterList)
-                            console.log(filteredFeeMasterList);
+                            dispatch(getFeeMasterByTermApi(`${item?.id}`))
 
                         }}
 
                     />
-
                 </DropdownWrapper>
                 <DropdownWrapper>
                     <Input
-                        value=''
+                        value={values?.amount}
                         placeholder='Enter Amount'
                         label='Amount'
                         height='50px'
+                        onChange={(value: string) => {
+                            setValues({ ...values, amount: value })
+                        }}
+                    />
+                </DropdownWrapper>
+                <DropdownWrapper>
+                    <Input
+                        value={values?.description}
+                        placeholder='Description'
+                        label='Description'
+                        height='50px'
+                        onChange={(value: string) => {
+                            setValues({ ...values, description: value })
+                        }}
+                    />
+                </DropdownWrapper>
+                <DropdownWrapper>
+                    <Input
+                        value={values?.paid}
+                        placeholder='Paid'
+                        label='Paid'
+                        height='50px'
+                        onChange={(value: string) => {
+                            setValues({ ...values, paid: value })
+                        }}
+                    />
+                </DropdownWrapper>
+                <DropdownWrapper>
+                    <Input
+                        value={values?.referenceId}
+                        placeholder='Reference Id'
+                        label='Reference Id'
+                        height='50px'
+                        onChange={(value: string) => {
+                            setValues({ ...values, referenceId: value })
+                        }}
+                    />
+                </DropdownWrapper>
+                <DropdownWrapper>
+                    <Input
+                        value={values?.modeOfPayment}
+                        placeholder='Mode of Payment'
+                        label='Mode Of Payment'
+                        height='50px'
+                        onChange={(value: string) => {
+                            setValues({ ...values, modeOfPayment: value })
+                        }}
+                    />
+                </DropdownWrapper>
+                <DropdownWrapper>
+                    <Input
+                        value={values?.paidTypes}
+                        placeholder="Paid Type"
+                        label="Paid Type"
+                        height='50px'
+                        onChange={(value: string) => {
+                            setValues({ ...values, paidTypes: value })
+                        }}
                     />
                 </DropdownWrapper>
             </FlexWrapper>
-            <div>Amount: {filteredList.map((feeMaster, index) => {
-                return (
-                    <div key={`fee-master-${index}`}>{feeMaster?.amount}</div>
-                )
-            })}</div>
             <FlexWrapper justifyContent='center'>
-                <Button>{'Pay'}</Button>
+                <Button
+                    onClick={() => {
+                        dispatch(fessPaid({ ...values, ...selectStudentId }))
+                    }}
+                >{'Pay'}</Button>
             </FlexWrapper>
         </PageWrapper>
     )
