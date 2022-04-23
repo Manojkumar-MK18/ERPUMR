@@ -333,19 +333,19 @@ export const feeTypeList = [
 
 export const termList = [
   {
-    id: '1',
+    id: 'term 1',
     name: 'I-Term'
   },
   {
-    id: '2',
+    id: 'term 2',
     name: 'II-Term'
   },
   {
-    id: '3',
+    id: 'term 3',
     name: 'III-Term'
   },
   {
-    id: '4',
+    id: 'term 4',
     name: 'IV-Term'
   }
 ]

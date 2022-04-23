@@ -6,7 +6,6 @@ export const tableHeader = [
   'Terms',
   'Fee Amount',
   'Edit',
-  'Delete'
 ]
 
 export const resetValues = {

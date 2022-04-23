@@ -23,7 +23,6 @@ import ROUTES from 'const/routes'
 import { getCourses } from 'redux/academic/actions'
 import {
   getFeeMaster,
-  deleteFeeMaster,
   updateEditFeeMaster
 } from 'redux/fms/actions'
 import { AddFeeDescriptionResponse } from 'redux/fms/typings'
@@ -187,7 +186,7 @@ const FeeMaster = (): ReactElement => {
               </TableHeader>
               <tbody>
                 {filteredList.map((feeMaster, index) => {
-                  const { title, description, terms, amount, courseId ,id } =
+                  const { title, description, terms, amount, courseId  } =
                     feeMaster
                   const selectedCourse = courseList.find(
                     (course) => course.id === courseId
@@ -209,16 +208,6 @@ const FeeMaster = (): ReactElement => {
                           }}
                         >
                           <FontAwesomeIcon icon={['far', 'edit']} />
-                        </Icon>
-                      </td>
-                      <td>
-                        <Icon
-                          variant="outline-light"
-                          onClick={() => {
-                            dispatch(deleteFeeMaster(`${id}`))
-                          }}
-                        >
-                          <FontAwesomeIcon icon={['far', 'trash-alt']} />
                         </Icon>
                       </td>
                     </TableRow>

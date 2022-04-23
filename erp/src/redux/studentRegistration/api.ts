@@ -151,9 +151,9 @@ export default addNewStudent
 
 export const getFeeMasterByTermApi = createAsyncThunk(
   'feeMaster/getFeeMaster',
-  async (AcademicFees: string): Promise<any> => {
+  async (term: string): Promise<any> => {
     const response =await api.get(
-      `${apiEndpoints.getFeeMasterByTerm}?groupBy=${AcademicFees}`
+       `${apiEndpoints.getFeeMasterByTerm}?groupBy=${term}`
     )
     return response
   }
