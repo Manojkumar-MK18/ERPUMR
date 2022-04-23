@@ -34,6 +34,9 @@ import AddRoleUser from './Settings/AddRoleUser'
 import AddPrivileges from './Settings/AddPrivileges'
 import ViewPrivileges from './Settings/ViewPrivileges'
 import StudentPay from './StudentRegistration/Pay'
+import LeaveStatus from './HumanResources/LeaveStatus'
+import LessonUpdate from './LessonPlane/LessonUpdate'
+import AssignLessonUpdates from './LessonPlane/LessonUpdate/Assign'
 
 export {
   Dashboard,
@@ -71,5 +74,8 @@ export {
   AddRoleUser,
   AddPrivileges,
   ViewPrivileges,
-  StudentPay
+  StudentPay,
+  LeaveStatus,
+  LessonUpdate,
+  AssignLessonUpdates
 }

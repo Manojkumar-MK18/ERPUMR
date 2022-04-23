@@ -18,20 +18,23 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
 import {
   addNewFeeDescription,
-  updateEditDescriptionId
+  editFeeDescriptionRequest,
+  getFeeDescriptions,
+  updateEditDescriptionId,
+  updateEditFeeMaster
 } from 'redux/fms/actions'
 import initialState from './const'
 import AddFeeDescriptionValues from './typings'
-import getCourses from 'redux/academic/api'
 
 const AddFeeDescription = (): ReactElement => {
-  const { feeTypeList, isLoading, editDescriptionId, feeDescriptionList } =
+  const { feeTypeList, isLoading, editDescriptionId, editFeeMaster } =
     useSelector(
       (state: RootState) => ({
         feeTypeList: state.acamedic.feeTypeList,
         isLoading: state.fms.isLoading,
         editDescriptionId: state.fms.editDescriptionId,
-        feeDescriptionList: state.fms.feeDescriptionList
+        feeDescriptionList: state.fms.feeDescriptionList,
+        editFeeMaster: state.fms.editFeeMaster,
       }),
       shallowEqual
     )
@@ -51,26 +54,34 @@ const AddFeeDescription = (): ReactElement => {
   } = strings
   const history = useHistory()
   const dispatch = useDispatch()
-  const editFeeDesciptionList = feeDescriptionList.filter(
-    (description) => description.id === editDescriptionId
-  )
-  const defaultFeeTypeDescription = editFeeDesciptionList?.length
-    ? editFeeDesciptionList[0].description
-    : ''
+
+
+  const filteredFeeType = editFeeMaster
+    ? feeTypeList.find((fee) => fee.name === editFeeMaster.title)
+    : null
+  const feeTypeDefaultValue = {
+    id: filteredFeeType?.id || '',
+    name: filteredFeeType?.name || ''
+  }
+
   const [values, setValues] = useState<AddFeeDescriptionValues>({
     ...initialState,
-    description: defaultFeeTypeDescription
+    description: editFeeMaster?.description || initialState.description ,
+    title: filteredFeeType?.name || initialState.title,
   })
-  const canSave = !!values.title && !!values.description
+  // eslint-disable-next-line no-unused-vars
+  const canSave = 
+  !!values.title && 
+  !!values.description
+
   const isEdit = editDescriptionId > 0
 
   useEffect(() => {
-    dispatch(getCourses())
-
-    return () => {
+    dispatch(getFeeDescriptions())
+    return () => { 
       dispatch(updateEditDescriptionId(0))
+      dispatch(updateEditFeeMaster(null))
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -90,7 +101,7 @@ const AddFeeDescription = (): ReactElement => {
               dropdownList={feeTypeList}
               title={selectFeeType}
               placeholder={feeType}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               handleSelect={(item) => {
                 setValues({
@@ -98,6 +109,7 @@ const AddFeeDescription = (): ReactElement => {
                   title: item.name
                 })
               }}
+              defaultValue={feeTypeDefaultValue}
             />
           </DropdownWrapper>
           <DropdownWrapper width="90%">
@@ -105,7 +117,7 @@ const AddFeeDescription = (): ReactElement => {
               label={enterFeeDescription}
               placeholder={feeDescription}
               value={values.description}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               onChange={(value: string) => {
                 setValues({
@@ -124,13 +136,22 @@ const AddFeeDescription = (): ReactElement => {
               <Button
                 disabled={!canSave}
                 onClick={() => {
-                  const { title, description } = values
-                  dispatch(
-                    addNewFeeDescription({
-                      title: title,
-                      description: description
-                    })
-                  )
+                  const {
+                    title,
+                    description,
+                  } = values
+                   editFeeMaster
+                   ? dispatch(
+                      editFeeDescriptionRequest({
+                        id: `${editFeeMaster?.id}`,
+                        title,
+                        description,
+                      })
+                    )
+                    : dispatch (addNewFeeDescription({
+                      title,
+                      description 
+                    }))
                 }}
               >
                 {save}

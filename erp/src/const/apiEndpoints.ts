@@ -21,7 +21,8 @@ const apiEndpoints = {
   staffRegistration: 'staff/newstaff',
   getLeave: 'leave/getLeaveStatus',
   getFeeMasterByTerm: 'feeTypes/getMasterFees',
-  addfees:'feesPaid/add'
+  addfees:'feesPaid/add',
+  editDescription:'feeMaster/edit'
 }
 
 export default apiEndpoints

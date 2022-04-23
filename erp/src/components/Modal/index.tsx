@@ -4,35 +4,43 @@ import { colors } from '../../const/theme'
 import { Body, H3 } from '../../typography'
 import strings from '../../locale/en'
 import ModalProps from './typings'
+import PrimaryButton from '../../components/Button'
 
 const Modal = ({
   title,
   description,
+  isLargeModal,
   handleCancel,
-  handleSubmit
+  handleSubmit,
+  children,
+  submitButtonText,
+  cancelButtonText
 }: ModalProps): ReactElement => {
   return (
     <BootstrapModal
       show={true}
+      size={isLargeModal ? 'lg' : 'sm'}
       onHide={handleCancel}
       backdrop="static"
+      centered
       keyboard={false}
     >
       <BootstrapModal.Header closeButton>
-        {title && <H3 color={colors.red}>{title}</H3>}
+        {title && <H3 color={colors.purple}>{title}</H3>}
       </BootstrapModal.Header>
       {description && (
         <BootstrapModal.Body>
           <Body>{description}</Body>
         </BootstrapModal.Body>
       )}
+      {children && children}
       <BootstrapModal.Footer>
         <Button variant="outline-secondary" onClick={handleCancel}>
-          {strings.modal.cancel}
+          {cancelButtonText || strings.modal.cancel}
         </Button>
-        <Button variant="outline-danger" onClick={handleSubmit}>
-          {strings.modal.submit}
-        </Button>
+        <PrimaryButton onClick={handleSubmit}>
+          {submitButtonText || strings.modal.submit}
+        </PrimaryButton>
       </BootstrapModal.Footer>
     </BootstrapModal>
   )

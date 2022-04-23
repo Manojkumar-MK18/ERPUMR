@@ -147,6 +147,18 @@ const admin: Array<Menu> = [
   },
   {
     icon: ['fas', 'home'],
+    label: 'Lesson Plane',
+    to: '',
+    childs: [
+      {
+        icon: ['fas', 'bars'],
+        label: 'Lesson Updates',
+        to: ROUTES.LESSON_UPDATES
+      }
+    ]
+  },
+  {
+    icon: ['fas', 'home'],
     label: 'HRMS',
     to: '',
     childs: [
@@ -183,7 +195,7 @@ const admin: Array<Menu> = [
       {
         icon: ['fas', 'bars'],
         label: 'Leave Status',
-        to: ROUTES.LEAVE_MASTER
+        to: ROUTES.LEAVE_STATUS
       }
     ]
   }

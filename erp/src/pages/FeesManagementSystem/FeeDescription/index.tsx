@@ -17,7 +17,11 @@ import { tableHeader } from './const'
 import strings from 'locale/en'
 import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
-import { getFeeDescriptions, updateEditDescriptionId } from 'redux/fms/actions'
+import {
+  getFeeDescriptions,
+  updateEditDescriptionId, 
+  updateEditFeeMaster
+} from 'redux/fms/actions'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
 import { getCourses } from 'redux/academic/actions'
@@ -76,6 +80,11 @@ const FeeDescription = (): ReactElement => {
                           variant="outline-light"
                           onClick={() => {
                             dispatch(updateEditDescriptionId(id))
+                            dispatch(updateEditFeeMaster({
+                              id,
+                              description,
+                              title
+                            }))
                             history.push(ROUTES.ADDFEEDESCRIPTION)
                           }}
                         >
