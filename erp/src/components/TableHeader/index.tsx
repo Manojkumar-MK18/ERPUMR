@@ -18,6 +18,15 @@ export const TableWrapper = styled.div`
   > * table {
     margin-bottom: 0; 
   }
+  #privilage{
+    margin-top: 12px;
+  padding: 10px; 
+  --bs-gutter-x: 0;
+  width: 100%;
+  > * table {
+    margin-bottom: 0; 
+  }
+  }
 `
 
 const TableHeader = styled.thead`

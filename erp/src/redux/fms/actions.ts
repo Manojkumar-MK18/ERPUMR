@@ -5,11 +5,17 @@ import {
   addNewFeeMaster,
   deleteFeeMaster,
   editFeeMasterRequest,
-  getStudentAdmissionList
+  getStudentAdmissionList,
+  editFeeDescriptionRequest
 } from './api'
 import { fmsSlice } from './reducer'
 
-const { updateEditDescriptionId, updateEditFeeMaster, resetError, updateStudentDetails } =
+const {
+  updateEditDescriptionId,
+  updateEditFeeMaster,
+  resetError,
+  updateStudentDetails,
+} =
   fmsSlice.actions
 
 export {
@@ -23,5 +29,6 @@ export {
   editFeeMasterRequest,
   getStudentAdmissionList,
   resetError,
-  updateStudentDetails
+  updateStudentDetails,
+  editFeeDescriptionRequest
 }

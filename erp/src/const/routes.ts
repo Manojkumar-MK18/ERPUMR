@@ -35,7 +35,10 @@ const ROUTES = {
   ADD_ROLEUSER: '/addroleUser',
   ADD_PIVILEGES: '/addPrivileges',
   VIEW_PIVILEGES: '/viewPrivileges',
-  STUDENT_PAY: '/studentPay'
+  STUDENT_PAY: '/studentPay',
+  LEAVE_STATUS: '/leaveStatus',
+  LESSON_UPDATES: '/lessonUpdates',
+  ASSIGN_LESSONUPDATES: '/assignLessonUpdates'
 }
 
 export default ROUTES

@@ -22,7 +22,6 @@ import {
   getFeeDescriptions,
   updateEditFeeMaster
 } from 'redux/fms/actions'
-import getFeeDescriptionDropdown from './helpers'
 
 const AddFeeMaster = (): ReactElement => {
   const {
@@ -32,9 +31,9 @@ const AddFeeMaster = (): ReactElement => {
       year: yearList,
       courseList,
       termList,
-      registrationTypeList
+      registrationTypeList,
     },
-    fms: { feeDescriptionList, isLoading, editFeeMaster }
+    fms: { isLoading, editFeeMaster,feeDescriptionListDropdown }
   } = useSelector((state: RootState) => state, shallowEqual)
 
   const filteredFeeType = editFeeMaster
@@ -58,6 +57,7 @@ const AddFeeMaster = (): ReactElement => {
     id: filteredYearList?.id || '',
     name: filteredYearList?.name || ''
   }
+
   const filteredCourseList = editFeeMaster
     ? courseList.find((type) => type.id === editFeeMaster.courseId)
     : null
@@ -72,6 +72,24 @@ const AddFeeMaster = (): ReactElement => {
     id: filteredTermList?.id || '',
     name: filteredTermList?.name || ''
   }
+
+  const filteredDescriptionList = editFeeMaster
+    ? feeDescriptionListDropdown.find((type) => type.name === editFeeMaster.description)
+    : null
+ 
+  const desDefaultValue = {
+    id: filteredDescriptionList?.id || '',
+    name: filteredDescriptionList?.name || ''
+  }
+
+  const filteredRegistreation = editFeeMaster
+    ? registrationTypeList.find((type) => type.name === editFeeMaster.regType)
+    : null
+  const RegDefaultValue = {
+    id: filteredRegistreation?.id || '',
+    name: filteredRegistreation?.name || ''
+  }
+
   const [values, setValues] = useState<AddFeeMasterValues>({
     ...initialState,
     title: filteredFeeType?.name || initialState.title,
@@ -79,7 +97,9 @@ const AddFeeMaster = (): ReactElement => {
     year: filteredYearList?.name || initialState.year,
     courseId: filteredCourseList?.id || initialState.courseId,
     terms: filteredTermList?.name || initialState.terms,
-    amount: editFeeMaster?.amount || initialState.amount
+    amount: editFeeMaster?.amount || initialState.amount,
+    description: editFeeMaster?.description || initialState.description,
+    regType: editFeeMaster?.regType || initialState.regType
   })
 
   const {
@@ -154,10 +174,7 @@ const AddFeeMaster = (): ReactElement => {
         </DropdownWrapper>
         <DropdownWrapper>
           <EditableDropdown
-            dropdownList={getFeeDescriptionDropdown(
-              feeDescriptionList,
-              values?.title
-            )}
+            dropdownList={feeDescriptionListDropdown}
             title={selectFeeDescription}
             placeholder={feeDescription}
             onBlur={() => { }}
@@ -168,6 +185,7 @@ const AddFeeMaster = (): ReactElement => {
                 description: item.name
               })
             }}
+            defaultValue={desDefaultValue }
           />
         </DropdownWrapper>
         <DropdownWrapper>
@@ -183,6 +201,7 @@ const AddFeeMaster = (): ReactElement => {
                 regType: item.name
               })
             }}
+            defaultValue={RegDefaultValue}
           />
         </DropdownWrapper>
         <DropdownWrapper>
@@ -298,7 +317,7 @@ const AddFeeMaster = (): ReactElement => {
                       academicYear,
                       year,
                       amount,
-                      courseId,
+                      courseId: `${editFeeMaster?.courseId}`,
                       regType
                     })
                   )

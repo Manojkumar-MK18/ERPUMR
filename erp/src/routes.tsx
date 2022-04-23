@@ -37,7 +37,10 @@ import {
   AddRoleUser,
   AddPrivileges,
   ViewPrivileges,
-  StudentPay
+  StudentPay,
+  LeaveStatus,
+  LessonUpdate,
+  AssignLessonUpdates
 } from 'pages'
 import ProtectedRoute from './containers/ProtectedRoute'
 
@@ -118,6 +121,9 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.ADD_PIVILEGES} component={AddPrivileges} />
       <ProtectedRoute path={ROUTES.VIEW_PIVILEGES} component={ViewPrivileges} />
       <ProtectedRoute path={ROUTES.STUDENT_PAY} component={StudentPay} />
+      <ProtectedRoute path={ROUTES.LEAVE_STATUS} component={LeaveStatus} />
+      <ProtectedRoute path={ROUTES.LESSON_UPDATES} component={LessonUpdate} />
+      <ProtectedRoute path={ROUTES.ASSIGN_LESSONUPDATES} component={AssignLessonUpdates} />
     </Switch>
   )
 }

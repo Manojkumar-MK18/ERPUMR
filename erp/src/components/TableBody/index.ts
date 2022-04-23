@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { colors } from 'const/theme'
 
 export const TableRow = styled.tr`
- vertical-align: baseline; 
+ //vertical-align: baseline; 
   #scope-row{ 
     display: flex;
     justify-content:center; 

@@ -3,7 +3,7 @@ import { Dropdown } from '../typings'
 export type DropdownList = Array<Dropdown>
 
 export interface AddFeeDescriptionResponse {
-  id: number
+  id: number 
   description: string
   title: string
   amount?: string
@@ -13,6 +13,7 @@ export interface AddFeeDescriptionResponse {
   feeTypeList?: string
   termList?: string
   year?: string
+  regType?: string
 }
 
 interface User {
@@ -75,6 +76,7 @@ export interface StudentList {
 
 export interface AddFeeDescriptionState {
   feeDescriptionList: Array<AddFeeDescriptionResponse>
+  feeDescriptionListDropdown: DropdownList
   isLoading: boolean
   editDescriptionId: number
   feeMasterList: Array<AddFeeDescriptionResponse>
@@ -97,6 +99,7 @@ export interface AddFeeMasterPayload {
 }
 
 export interface AddFeeDescriptionPayload {
+  id?: any
   title: string
   description: string
 }

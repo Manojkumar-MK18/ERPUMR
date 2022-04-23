@@ -13,6 +13,7 @@ import {
   getStudentAdmissionList,
 } from './api'
 import strings from 'locale/en'
+import getFeeDescriptionDropdown from 'pages/FeesManagementSystem/AddFeeMaster/helpers'
 
 const initialState: AddFeeDescriptionState = {
   feeDescriptionList: [],
@@ -23,6 +24,7 @@ const initialState: AddFeeDescriptionState = {
   studentApplicationList: null,
   error: '',
   selectedStudentDetails: null,
+  feeDescriptionListDropdown:[]
 }
 
 export const fmsSlice = createSlice({
@@ -84,6 +86,7 @@ export const fmsSlice = createSlice({
     ) => {
       state.isLoading = false
       state.feeDescriptionList = action.payload
+      state.feeDescriptionListDropdown = getFeeDescriptionDropdown(action.payload)
     },
     [getFeeDescriptions.rejected.toString()]: (state) => {
       state.isLoading = false

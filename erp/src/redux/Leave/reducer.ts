@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {
     AddLeave,
     AddLeavebyUserId,
-    ApplyLeave,
     GetLeaveDetailsPayload,
     LeaveState,
     NewDesignation,
@@ -83,7 +82,7 @@ export const leaveSlice = createSlice({
         [applyLeaveApi.pending.toString()]: (state) => {
             state.isLoading = true;
         },
-        [applyLeaveApi.fulfilled.toString()]: (state, action: PayloadAction<ApplyLeave>) => {
+        [applyLeaveApi.fulfilled.toString()]: (state, action: PayloadAction<GetLeaveDetailsPayload>) => {
             state.isLoading = false
             state.applyLeaveDetails = action?.payload
         },

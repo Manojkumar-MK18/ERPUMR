@@ -101,3 +101,20 @@ export const getStudentAdmissionList = createAsyncThunk(
     return response?.data
   }
 )
+
+export const editFeeDescriptionRequest = createAsyncThunk(
+  'fms/editFeeMaster',
+  async ({
+    id,
+    title,
+    description,
+  }: AddFeeDescriptionPayload): Promise<any> => {
+    const response = await api.put(
+      `${apiEndpoints.editDescription}?description=${description}&title=${title}&id=${id}`
+    )
+    if (response) {
+      history.goBack()
+    }
+    return response
+  }
+)
