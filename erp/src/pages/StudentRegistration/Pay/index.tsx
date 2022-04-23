@@ -89,7 +89,7 @@ const StudentPay = (): ReactElement => {
                                 (fee) => fee.termList === item.id
                             )
                             setFees(filteredFeeMasterList)
-                            dispatch(getFeeMasterByTermApi(`${item?.id}`))
+                            dispatch(getFeeMasterByTermApi(`${item?.name}`))
 
                         }}
 
