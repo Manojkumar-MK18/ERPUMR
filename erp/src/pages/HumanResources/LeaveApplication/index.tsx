@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ReactElement, useState } from 'react'
 import {
     Button,
@@ -17,7 +16,6 @@ import { applyLeaveApi } from 'redux/Leave/api'
 import format from 'date-fns/format'
 import {
     DATE_FORMAT_YYYYMMDD,
-    TIME_FORMAT_HHMM
 } from '../../../const/dateFormat'
 
 const LeaveApplication = (): ReactElement => {
@@ -35,7 +33,6 @@ const LeaveApplication = (): ReactElement => {
     const [toDate, setToDate] = useState<any>(new Date())
     const [fromTime, setFromTime] = useState<any>('')
     const [toTime, setToTime] = useState<any>('')
-    const sameData = fromDate.getDate() == toDate.getDate()
     const dispatch = useDispatch()
 
     const [values, setValues] = useState(applyLeaveData)
@@ -58,7 +55,7 @@ const LeaveApplication = (): ReactElement => {
                 <DropdownWrapper>
                     <EditableDropdown
                         dropdownList={[
-                            {id: '01', name:'sick'}
+                            { id: '01', name: 'sick' }
                         ]}
                         title="Leave Name"
                         isRequired
@@ -112,7 +109,7 @@ const LeaveApplication = (): ReactElement => {
                         />
                     </DatePickerWrapper>
                 </DropdownWrapper>
-                {sameData &&
+                {fromDate.getDate() == toDate.getDate() &&
                     <>
                         <DropdownWrapper>
                             <DatePicker

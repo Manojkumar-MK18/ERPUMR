@@ -112,6 +112,7 @@ export interface AcademicState {
   batchList: Array<Batch>
   mediumList: DropdownList
   qualififactionList: DropdownList
+  paymentModes: DropdownList
 }
 
 export interface getBranchesForCoursePayload {

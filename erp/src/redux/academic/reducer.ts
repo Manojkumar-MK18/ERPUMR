@@ -31,7 +31,8 @@ import {
   stateList,
   registrationTypeList,
   mediumList,
-  qualififactionList
+  qualififactionList,
+  paymentModes
 } from './const'
 import getCourses, {
   getInstitutes,
@@ -69,7 +70,8 @@ const initialState: AcademicState = {
   branchList: [],
   batchList: [],
   mediumList: mediumList,
-  qualififactionList: qualififactionList
+  qualififactionList: qualififactionList,
+  paymentModes: paymentModes
 }
 
 export const academicSlice = createSlice({

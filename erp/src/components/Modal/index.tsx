@@ -14,7 +14,8 @@ const Modal = ({
   handleSubmit,
   children,
   submitButtonText,
-  cancelButtonText
+  cancelButtonText,
+  isDisabled
 }: ModalProps): ReactElement => {
   return (
     <BootstrapModal
@@ -38,7 +39,11 @@ const Modal = ({
         <Button variant="outline-secondary" onClick={handleCancel}>
           {cancelButtonText || strings.modal.cancel}
         </Button>
-        <PrimaryButton onClick={handleSubmit}>
+        <PrimaryButton
+          variant="outline-danger"
+          onClick={handleSubmit}
+          disabled={isDisabled}
+        >
           {submitButtonText || strings.modal.submit}
         </PrimaryButton>
       </BootstrapModal.Footer>

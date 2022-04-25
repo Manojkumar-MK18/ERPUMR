@@ -21,6 +21,15 @@ const strings = {
       'Login failed. Please check the credentials or try after sometime.',
     invalidLogin: 'Please check the username or password'
   },
+  pay: {
+    title: 'Payment Details',
+    selectAmountLabel: 'Amount',
+    selectAmountPlaceholder: 'Select Amount',
+    paymentTypePlaceholder: 'Select Payment Mode',
+    paymentTypeLabel: 'Payment Mode',
+    referenceId: 'Reference id',
+    pamentFailed: 'Unable to add Fee Payment!'
+  },
   finance: {
     categoryList: 'Group Category List',
     groupList: 'Group List',

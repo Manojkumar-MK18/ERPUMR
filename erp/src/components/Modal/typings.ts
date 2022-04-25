@@ -9,6 +9,7 @@ interface ModalProps {
   children?: ReactNode
   submitButtonText?: string
   cancelButtonText?: string
+  isDisabled?: boolean
 }
 
 export default ModalProps

@@ -6,7 +6,8 @@ import {
   deleteFeeMaster,
   editFeeMasterRequest,
   getStudentAdmissionList,
-  editFeeDescriptionRequest
+  editFeeDescriptionRequest,
+  addFeePayment
 } from './api'
 import { fmsSlice } from './reducer'
 
@@ -30,5 +31,6 @@ export {
   getStudentAdmissionList,
   resetError,
   updateStudentDetails,
-  editFeeDescriptionRequest
+  editFeeDescriptionRequest,
+  addFeePayment
 }

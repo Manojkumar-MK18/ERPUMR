@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState } from 'react'
 import {
     Button,
+    DropdownWrapper,
     EditableDropdown,
     FlexWrapper,
     PageWrapper,
@@ -80,28 +81,30 @@ const LessonUpdate = (): ReactElement => {
                     handleSubmit={() => {
                         showCourseModal(false)
                     }}
-                    isLargeModal={false}
+                    isLargeModal={true}
                     title="Select Course & Subject"
                     description=''
                 >
-                    <PageWrapper>
-
-                        <EditableDropdown
-                            placeholder='Select Course'
-                            title='Select Course'
-                            isRequired
-                            dropdownList={courseList}
-                            handleSelect={() => { }} 
-                        />
-                        <EditableDropdown
-                            placeholder='Select Course'
-                            title='Select Course'
-                            isRequired
-                            dropdownList={[]}
-                            handleSelect={() => { }}
-                        />
-
-                    </PageWrapper>
+                    <FlexWrapper width="100%" justifyContent="center">
+                        <DropdownWrapper >
+                            <EditableDropdown
+                                placeholder='Select Course'
+                                title='Select Course'
+                                isRequired
+                                dropdownList={courseList}
+                                handleSelect={() => { }}
+                            />
+                        </DropdownWrapper>
+                        <DropdownWrapper>
+                            <EditableDropdown
+                                placeholder='Select Subject'
+                                title='Select Subject'
+                                isRequired
+                                dropdownList={[]}
+                                handleSelect={() => { }}
+                            />
+                        </DropdownWrapper>
+                    </FlexWrapper>
                 </BootstrapModal>
             }
         </PageWrapper>

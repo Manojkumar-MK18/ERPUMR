@@ -638,3 +638,14 @@ export const qualififactionList = [
     name: 'Fail'
   }
 ]
+
+export const paymentModes = [
+  {
+    id: 'online',
+    name: 'Online'
+  },
+  {
+    id: 'cash',
+    name: 'Cash'
+  }
+]

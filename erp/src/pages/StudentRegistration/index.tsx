@@ -12,23 +12,24 @@ import {
   TabWrapper,
   TableFooter,
   Loader,
-  Icon
+  Modal
 } from 'components'
-import strings from 'locale/en'
 import Tabs from 'react-bootstrap/esm/Tabs'
 import Tab from 'react-bootstrap/esm/Tab'
+import { ActionWrapper } from './subcomponents'
 import { Table } from 'react-bootstrap'
 import { tableHeader } from './const'
 import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { getStudentAdmissionList, updateStudentDetails } from 'redux/fms/actions'
+import { getStudentAdmissionList, addFeePayment } from 'redux/fms/actions'
 import { getCourses } from 'redux/academic/actions'
 import { resetValues } from './const'
 import { Student } from 'redux/fms/typings'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { updateSelectedStudentId } from 'redux/studentRegistration/actions'
+import Pay from './Pay'
+import strings from 'locale/en'
+import { initialPaymentValues } from './const'
 
 const StudentRegistartion = (): ReactElement => {
   const {
@@ -55,6 +56,8 @@ const StudentRegistartion = (): ReactElement => {
     totalPages = 0,
     page = 0
   } = studentApplicationList || {}
+  const [payId, setPayId] = useState('')
+  const [values, setValues] = useState(initialPaymentValues)
   const [resetValuesState, setResetValuesState] = useState(resetValues)
   const [registrationList, setRegistrationList] = useState<Array<Student>>([])
   const filteredList = registrationList.length > 0 ? registrationList : content
@@ -67,6 +70,15 @@ const StudentRegistartion = (): ReactElement => {
     })
     setRegistrationList([])
   }
+
+  const canSubmit =
+    !!values?.feeType &&
+    !!values?.description &&
+    !!values?.courseId &&
+    !!values?.term &&
+    !!values?.amount &&
+    !!values?.paymentMode
+  console.log(values)
 
   useEffect(() => {
     dispatch(getStudentAdmissionList(1))
@@ -190,7 +202,7 @@ const StudentRegistartion = (): ReactElement => {
                       lastName = '',
                       courseId = '',
                       regNo,
-                      id
+                      userId = ''
                     },
                     index
                   ) => {
@@ -204,25 +216,11 @@ const StudentRegistartion = (): ReactElement => {
                         <td>{selectedCourse?.name || courseId}</td>
                         <td>{regNo}</td>
                         <td>
-                          <Button
-                            onClick={() => {
-                              {
-                                history.push(ROUTES.STUDENT_PAY);
-                                dispatch(updateStudentDetails({
-                                  firstName: firstName,
-                                  lastName: lastName,
-                                  courseId: selectedCourse?.name || courseId,
-                                  regNo: regNo
-                                }));
-                                dispatch(updateSelectedStudentId({
-                                  studentId: id,
-                                }))
-                              }
+                          <ActionWrapper
+                            handlePay={() => {
+                              setPayId(userId)
                             }}
-                          >{strings.studentRegistration.pay}</Button>
-                          <Icon variant="outline-light" onClick={() => { }}>
-                            <FontAwesomeIcon icon={['far', 'trash-alt']} />
-                          </Icon>
+                          />
                         </td>
                       </TableRow>
                     )
@@ -242,6 +240,31 @@ const StudentRegistartion = (): ReactElement => {
             />
           </TableWrapper>
         </div>
+      )}
+      {payId && (
+        <Modal
+          title={strings.pay.title}
+          isLargeModal={true}
+          handleSubmit={() => {
+            setPayId('')
+            const payload = {
+              id: (Math.random() + 1).toString(36).substring(7),
+              studentId: payId,
+              paid: 'paid',
+              amount: values?.amount,
+              referenceId: values?.referenceId,
+              modeOfPayment: values?.paymentMode,
+              description: values?.description,
+              paidTypes: [values?.feeType]
+            }
+            dispatch(addFeePayment(payload))
+            dispatch(getStudentAdmissionList(1))
+          }}
+          handleCancel={() => setPayId('')}
+          isDisabled={!canSubmit}
+        >
+          <Pay values={values} setValues={setValues} />
+        </Modal>
       )}
     </PageWrapper>
   )

@@ -3,6 +3,7 @@ import apiEndpoints from 'const/apiEndpoints'
 import api from 'services'
 import { AddFeeDescriptionPayload, AddFeeMasterPayload } from './typings'
 import history from 'const/history'
+import strings from 'locale/en'
 
 export const addNewFeeDescription = createAsyncThunk(
   'fms/addFeeDescription',
@@ -116,5 +117,23 @@ export const editFeeDescriptionRequest = createAsyncThunk(
       history.goBack()
     }
     return response
+  }
+)
+
+
+export const addFeePayment = createAsyncThunk(
+  'fms/addFeePayment',
+  async (payload: any, { rejectWithValue }): Promise<any> => {
+    try {
+      const response = await api.put(`${apiEndpoints.feePayment}`, payload)
+      console.log(response)
+      if (!response) {
+        return rejectWithValue(strings.pay.pamentFailed)
+      }
+      return response?.data
+    } catch (error) {
+      console.log(error)
+      return rejectWithValue(strings.pay.pamentFailed)
+    }
   }
 )
