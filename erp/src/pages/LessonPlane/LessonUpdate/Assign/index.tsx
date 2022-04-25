@@ -1,12 +1,116 @@
-import { PageWrapper } from 'components'
-import { ReactElement } from 'react'
+import { DropdownWrapper, EditableDropdown, FlexWrapper, Input } from 'components'
+import { DatePickerWrapper } from 'pages/subcomponents'
+import { ReactElement, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import getCourses, { getChildCourses } from 'redux/academic/api'
+import { RootState } from 'redux/store'
+import { AssignProps } from '../typing'
+import DatePicker from 'react-datepicker'
+import { DropdownListProps } from 'components/EditableDropdown/typings'
 
-const AssignLessonUpdates = (): ReactElement => {
+const AssignList = ({ values, setValues }: AssignProps): ReactElement => {
+    const {
+        courseList,
+        subjectlist,
+        chapterList,
+        topicList
+    } = useSelector((state: RootState) => ({
+        courseList: state.acamedic.courseList,
+        subjectlist: state.acamedic.subjectlist,
+        chapterList: state.acamedic.chapterList,
+        topicList: state.acamedic.topicList
+    }))
+
+    const dispatch = useDispatch()
+    const [date, setDate] = useState<any>(new Date())
+
+    useEffect(() => {
+        dispatch(getCourses())
+        /* eslint-disable react-hooks/exhaustive-deps */
+    }, [])
+console.log(values?.date );
+
     return (
-        <PageWrapper>
-            
-        </PageWrapper>
+        <FlexWrapper width="100%" justifyContent="center">
+            <DropdownWrapper width='50%'>
+                <EditableDropdown
+                    placeholder='Select Course'
+                    title='Select Course'
+                    isRequired
+                    dropdownList={courseList}
+                    handleSelect={(item: DropdownListProps) => {
+                        setValues({ ...values, course: item?.name })
+                        dispatch(getChildCourses({
+                            courseId: item?.id,
+                            type: 'SUBJECT'
+                        }))
+                    }}
+                />
+            </DropdownWrapper>
+            <DropdownWrapper width='50%'>
+                <EditableDropdown
+                    placeholder='Select Subject'
+                    title='Select Subject'
+                    isRequired
+                    dropdownList={subjectlist}
+                    handleSelect={(item: DropdownListProps) => {
+                        setValues({ ...values, subject: item?.name })
+                        dispatch(getChildCourses({
+                            courseId: item?.id,
+                            type: 'CHAPTER'
+                        }))
+                    }}
+                />
+            </DropdownWrapper>
+            <DropdownWrapper width='50%'>
+                <EditableDropdown
+                    placeholder='Select Chapter'
+                    title='Select Chapter'
+                    isRequired
+                    dropdownList={chapterList}
+                    handleSelect={(item: DropdownListProps) => {
+                        setValues({ ...values, chapter: item?.name })
+                        dispatch(getChildCourses({
+                            courseId: item?.id,
+                            type: 'TOPIC'
+                        }))
+                    }}
+                />
+            </DropdownWrapper>
+            <DropdownWrapper width='50%'>
+                <EditableDropdown
+                    placeholder='Select Topic'
+                    title='Select Topic'
+                    isRequired
+                    dropdownList={topicList}
+                    handleSelect={(item: DropdownListProps) => {
+                        setValues({ ...values, topic: item?.name })
+                    }}
+                />
+            </DropdownWrapper>
+            <DropdownWrapper width='50%'>
+                <DatePickerWrapper>
+                    <DatePicker
+                        selected={date}
+                        onSelect={(date: Date) => setDate(date)}
+                        onChange={(date: Date) => setDate(date)}
+                        customInput={
+                            <Input
+                                value={date}
+                                label={'Select Assign Date'}
+                                isRequired
+                                suffix={['far', 'calendar']}
+                                onChange={(date) => {
+                                    setDate(date)
+                                    setValues({...values, date:date})
+                                }}
+                            />
+                        }
+                    />
+                </DatePickerWrapper>
+            </DropdownWrapper>
+        </FlexWrapper>
     )
 }
 
-export default AssignLessonUpdates
+export default AssignList

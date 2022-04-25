@@ -5,6 +5,7 @@ import {
   Branch,
   Course,
   DropdownList,
+  GetChildCoursesResponse,
   Institute
 } from './typings'
 import {
@@ -38,7 +39,8 @@ import getCourses, {
   getInstitutes,
   getBranchesByInstitute,
   getAllCoursesByInstitute,
-  getBatchesForCourse
+  getBatchesForCourse,
+  getChildCourses
 } from './api'
 import getCoursesDropdown from './helpers'
 
@@ -71,7 +73,13 @@ const initialState: AcademicState = {
   batchList: [],
   mediumList: mediumList,
   qualififactionList: qualififactionList,
-  paymentModes: paymentModes
+  paymentModes: paymentModes,
+  subjects: [],
+  chapters: [],
+  topics: [],
+  subjectlist: [],
+  chapterList:[],
+  topicList:[]
 }
 
 export const academicSlice = createSlice({
@@ -118,6 +126,26 @@ export const academicSlice = createSlice({
       action: PayloadAction<Array<Batch>>
     ) => {
       state.batchList = action.payload
+    },
+    [getChildCourses.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<GetChildCoursesResponse>
+    ) => {
+      const { response, type } = action?.payload
+      switch (type) {
+        case 'SUBJECT':
+          state.subjects = response
+          state.subjectlist = getCoursesDropdown(response)
+          break
+        case 'CHAPTER':
+          state.chapters = response
+          state.chapterList = getCoursesDropdown(response)
+          break
+        default:
+          state.topics = response
+          state.topicList = getCoursesDropdown(response)
+          break
+      }
     }
   }
 })

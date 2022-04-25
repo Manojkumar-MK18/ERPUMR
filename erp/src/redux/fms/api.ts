@@ -96,7 +96,7 @@ export const getStudentAdmissionList = createAsyncThunk(
   'fms/getStudentAdmissionList',
   async (pageNo: number): Promise<any> => {
     const response = await api.get(
-      `${apiEndpoints.getstudents}?pageNo=${pageNo}&size=10`
+      `${apiEndpoints.getstudents}?pageNo=${pageNo}&size=30`
     )
 
     return response?.data

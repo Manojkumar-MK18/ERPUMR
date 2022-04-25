@@ -40,7 +40,6 @@ import {
   StudentPay,
   LeaveStatus,
   LessonUpdate,
-  AssignLessonUpdates
 } from 'pages'
 import ProtectedRoute from './containers/ProtectedRoute'
 
@@ -123,7 +122,6 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.STUDENT_PAY} component={StudentPay} />
       <ProtectedRoute path={ROUTES.LEAVE_STATUS} component={LeaveStatus} />
       <ProtectedRoute path={ROUTES.LESSON_UPDATES} component={LessonUpdate} />
-      <ProtectedRoute path={ROUTES.ASSIGN_LESSONUPDATES} component={AssignLessonUpdates} />
     </Switch>
   )
 }

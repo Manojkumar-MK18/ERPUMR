@@ -38,7 +38,6 @@ const ROUTES = {
   STUDENT_PAY: '/studentPay',
   LEAVE_STATUS: '/leaveStatus',
   LESSON_UPDATES: '/lessonUpdates',
-  ASSIGN_LESSONUPDATES: '/assignLessonUpdates'
 }
 
 export default ROUTES

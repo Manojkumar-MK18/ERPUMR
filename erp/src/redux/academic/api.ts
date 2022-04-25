@@ -7,7 +7,9 @@ import {
   Institute,
   getBranchesForCoursePayload,
   getBatchesForCoursePayload,
-  Batch
+  Batch,
+  GetChildCoursesPayload,
+  GetChildCoursesResponse
 } from './typings'
 
 export const getCourses = createAsyncThunk(
@@ -71,3 +73,14 @@ export const getBatchesForCourse = createAsyncThunk(
 )
 
 export default getCourses
+
+export const getChildCourses = createAsyncThunk(
+  'course/getChildCourses',
+  async ({
+    courseId,
+    type
+  }: GetChildCoursesPayload): Promise<GetChildCoursesResponse> => {
+    const { data } = await api.get(`${apiEndpoints.getChildCourse}${courseId}`)
+    return { response: data?.data, type }
+  }
+)
