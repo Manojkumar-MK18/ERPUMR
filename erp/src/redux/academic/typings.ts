@@ -83,6 +83,16 @@ export interface Batch {
   course?: any
 }
 
+export interface GetChildCoursesPayload {
+  courseId: string
+  type: string
+}
+
+export interface GetChildCoursesResponse {
+  response: Array<Course>
+  type?: string
+}
+
 export interface AcademicState {
   semester: DropdownList
   academicYear: DropdownList
@@ -112,7 +122,13 @@ export interface AcademicState {
   batchList: Array<Batch>
   mediumList: DropdownList
   qualififactionList: DropdownList
-  paymentModes: DropdownList
+  paymentModes: DropdownList,
+  subjects: Array<Course>
+  chapters: Array<Course>
+  topics: Array<Course> 
+  subjectlist:DropdownList
+  chapterList:DropdownList
+  topicList:DropdownList
 }
 
 export interface getBranchesForCoursePayload {

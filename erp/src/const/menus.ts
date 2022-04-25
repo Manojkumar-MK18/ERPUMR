@@ -147,7 +147,7 @@ const admin: Array<Menu> = [
   },
   {
     icon: ['fas', 'home'],
-    label: 'Lesson Plane',
+    label: 'Lesson Plan',
     to: '',
     childs: [
       {

@@ -5,3 +5,11 @@ export const tableHeader = [
     'Topic',
     'Action'
 ]
+
+export const initialModalValues = {
+    course:'',
+    subject: '',
+    chapter:'',
+    topic:'',
+    date:''
+}

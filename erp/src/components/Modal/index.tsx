@@ -15,7 +15,7 @@ const Modal = ({
   children,
   submitButtonText,
   cancelButtonText,
-  isDisabled
+  isDisabled 
 }: ModalProps): ReactElement => {
   return (
     <BootstrapModal

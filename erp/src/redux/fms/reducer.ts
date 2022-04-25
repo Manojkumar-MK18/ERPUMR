@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {
   AddFeeDescriptionResponse,
   AddFeeDescriptionState,
-  Student,
+  Student, 
   StudentList
 } from './typings'
 import {

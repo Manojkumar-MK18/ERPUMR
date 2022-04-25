@@ -36,7 +36,6 @@ import ViewPrivileges from './Settings/ViewPrivileges'
 import StudentPay from './StudentRegistration/Pay'
 import LeaveStatus from './HumanResources/LeaveStatus'
 import LessonUpdate from './LessonPlane/LessonUpdate'
-import AssignLessonUpdates from './LessonPlane/LessonUpdate/Assign'
 
 export {
   Dashboard,
@@ -77,5 +76,4 @@ export {
   StudentPay,
   LeaveStatus,
   LessonUpdate,
-  AssignLessonUpdates
 }

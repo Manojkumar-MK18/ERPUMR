@@ -23,7 +23,8 @@ const apiEndpoints = {
   addfees:'feesPaid/add',
   editDescription:'feeMaster/edit',
   studentRegistration: 'userDetail/save',
-  feePayment: 'feesPaid/add'
+  feePayment: 'feesPaid/add',
+  getChildCourse: 'course/child/',
 }
 
 export default apiEndpoints
