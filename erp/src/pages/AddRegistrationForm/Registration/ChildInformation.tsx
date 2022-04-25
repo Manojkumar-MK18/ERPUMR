@@ -12,7 +12,7 @@ import { RootState } from 'redux/store'
 import { updateChildInformation } from 'redux/studentRegistration/actions'
 import strings from 'locale/en'
 import { checkBoxDropdownList } from 'const'
-import { validateDateOfBirth } from 'helpers/formValidation'
+import { validateAadhar, validateDateOfBirth } from 'helpers/formValidation'
 
 const ChildInformation = (): ReactElement => {
   const {
@@ -29,7 +29,7 @@ const ChildInformation = (): ReactElement => {
       fathersName,
       mothersName,
       dateOfBirth,
-      aadharNumber,   
+      aadharNumber,
       enrollmentNumber,
       userName,
       passwordUpdated
@@ -43,6 +43,7 @@ const ChildInformation = (): ReactElement => {
   )
   const dispatch = useDispatch()
   const [dobError, setDobError] = useState('')
+  const [aadhaarError, setaadhaarError] = useState('')
 
   const {
     studentRegistration: {
@@ -71,7 +72,7 @@ const ChildInformation = (): ReactElement => {
         aadharNumberPlaceHolder,
         aadharNumberLabel,
         enterEnrollment,
-        enrollmentNumberLabel, 
+        enrollmentNumberLabel,
         userNameLabel,
         userNamePlaceholder,
         passwordLabel,
@@ -95,7 +96,7 @@ const ChildInformation = (): ReactElement => {
               isRequired
               placeholder={studentsNamePlaceholder}
               value={studentsName}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               width="100%"
               onChange={(value: string) => {
@@ -110,7 +111,7 @@ const ChildInformation = (): ReactElement => {
               isRequired
               placeholder={fathersNamePlaceholder}
               value={fathersName}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               width="100%"
               onChange={(value: string) => {
@@ -125,7 +126,7 @@ const ChildInformation = (): ReactElement => {
               isRequired
               placeholder={mothersNamePlaceholder}
               value={mothersName}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               width="100%"
               onChange={(value: string) => {
@@ -140,7 +141,7 @@ const ChildInformation = (): ReactElement => {
               title={genderLabel}
               isRequired
               placeholder={genderPlaceholder}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               handleSelect={(item) =>
                 dispatch(updateChildInformation({ gender: item.name }))
@@ -170,7 +171,7 @@ const ChildInformation = (): ReactElement => {
               dropdownList={studentTypeList}
               title={studentTypeLabel}
               placeholder={studentTypePlaceholder}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               handleSelect={(item) =>
                 dispatch(updateChildInformation({ studentType: item.name }))
@@ -182,7 +183,7 @@ const ChildInformation = (): ReactElement => {
               dropdownList={checkBoxDropdownList}
               title={physicallyChallengedLabel}
               placeholder={'Select'}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               handleSelect={(item) =>
                 dispatch(
@@ -196,8 +197,11 @@ const ChildInformation = (): ReactElement => {
               label={aadharNumberLabel}
               placeholder={aadharNumberPlaceHolder}
               value={aadharNumber}
-              onBlur={() => {}}
-              error={''}
+              onBlur={() => {
+                const error = validateAadhar(aadharNumber)
+                setaadhaarError(error)
+              }}
+              error={aadhaarError}
               isRequired
               width="100%"
               onChange={(value: string) => {
@@ -212,7 +216,7 @@ const ChildInformation = (): ReactElement => {
               title={religionLabel}
               isRequired
               placeholder={religionPlaceholder}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               handleSelect={(item) =>
                 dispatch(updateChildInformation({ religion: item.name }))
@@ -224,7 +228,7 @@ const ChildInformation = (): ReactElement => {
               dropdownList={categoryList}
               title={communityLabel}
               placeholder={communityPlaceholder}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               handleSelect={(item) =>
                 dispatch(updateChildInformation({ community: item.name }))
@@ -236,7 +240,7 @@ const ChildInformation = (): ReactElement => {
               dropdownList={casteList}
               title={casteLabel}
               placeholder={castePlaceholder}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               handleSelect={(item) =>
                 dispatch(updateChildInformation({ caste: item.name }))
@@ -249,7 +253,7 @@ const ChildInformation = (): ReactElement => {
               title={nationalityLabel}
               isRequired
               placeholder={nationalityPlaceholder}
-              onBlur={() => {}}
+              onBlur={() => { }}
               error={''}
               handleSelect={(item) =>
                 dispatch(updateChildInformation({ nationality: item.name }))
@@ -261,7 +265,7 @@ const ChildInformation = (): ReactElement => {
               label={enrollmentNumberLabel}
               placeholder={enterEnrollment}
               value={enrollmentNumber}
-              onBlur={() => {}}
+              onBlur={() => { }}
               isRequired
               error={''}
               width="100%"
@@ -276,7 +280,7 @@ const ChildInformation = (): ReactElement => {
               label={userNameLabel}
               placeholder={userNamePlaceholder}
               value={userName}
-              onBlur={() => {}}
+              onBlur={() => { }}
               isRequired
               error={''}
               width="100%"
@@ -291,7 +295,7 @@ const ChildInformation = (): ReactElement => {
               label={passwordLabel}
               placeholder={passwordPlaceHolder}
               value={passwordUpdated}
-              onBlur={() => {}}
+              onBlur={() => { }}
               isRequired
               error={''}
               width="100%"

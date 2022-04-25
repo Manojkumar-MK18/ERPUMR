@@ -103,3 +103,18 @@ export const validateDateOfBirth = (value: string): string => {
   const pattern = /^([0-9]{2})-([0-9]{2})-([0-9]{4})$/
   return pattern.test(value) ? '' : dob
 }
+
+export const validateAadhar = (aadhar: string): string => {
+  const AadharRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  const { required, numberOnly, invalid } = validationMessages.aahar
+  if (!aadhar) {
+    return required
+  } else if (!aadhar.match(/^[0-9\b]+$/)) {
+    return numberOnly
+  } else if (!aadhar.match(AadharRegExp) || aadhar.length !== 12) {
+    return invalid
+  } else {
+    return ''
+  }
+}

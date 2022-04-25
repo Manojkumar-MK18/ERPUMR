@@ -93,7 +93,6 @@ const LessonUpdate = (): ReactElement => {
                             dropdownList={courseList}
                             handleSelect={() => { }} 
                         />
-
                         <EditableDropdown
                             placeholder='Select Course'
                             title='Select Course'

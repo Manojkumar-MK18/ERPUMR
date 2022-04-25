@@ -184,6 +184,11 @@ const strings = {
     userName: {
       required: 'Username is required'
     },
+    aahar:{
+      required: 'Aadhaar number is required',
+      numberOnly: 'Please enter only numbers',
+      invalid: 'Please enter valid aadhaar number'
+    },
     phone: {
       required: 'Phone number is required',
       numberOnly: 'Please enter only numbers',
