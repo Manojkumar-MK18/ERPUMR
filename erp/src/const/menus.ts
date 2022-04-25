@@ -154,6 +154,16 @@ const admin: Array<Menu> = [
         icon: ['fas', 'bars'],
         label: 'Lesson Updates',
         to: ROUTES.LESSON_UPDATES
+      },
+      {
+        icon: ['fas', 'bars'],
+        label: 'Assign Lesson',
+        to: ROUTES.ASSIGN_LESSON
+      },
+      {
+        icon: ['fas', 'bars'],
+        label: 'Lesson Status',
+        to: ROUTES.LESSON_STATUS
       }
     ]
   },

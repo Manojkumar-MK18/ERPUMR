@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from 'react'
 import {
     Button,
     FlexWrapper,
+    Icon,
     PageWrapper,
     SectionTitle,
     TableHeader,
@@ -14,6 +15,7 @@ import { BootstrapModal } from './subcomponent'
 import { useDispatch } from 'react-redux'
 import getCourses from 'redux/academic/api'
 import AssignList from './Assign'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const LessonUpdate = (): ReactElement => {
 
@@ -52,7 +54,11 @@ const LessonUpdate = (): ReactElement => {
                                 <td>Course</td>
                                 <td>Subject</td>
                                 <td>Chapter</td>
-                                <td>Topic</td>
+                                <td>
+                                    <Icon>
+                                        <FontAwesomeIcon icon={['far', 'edit']} /> 
+                                    </Icon>
+                                </td>
                             </TableRow>
                         </tbody>
                     </Table>
