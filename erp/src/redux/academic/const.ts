@@ -649,3 +649,13 @@ export const paymentModes = [
     name: 'Cash'
   }
 ]
+export const status = [
+  {
+    id: '01',
+    name: 'ACTIVE'
+  },
+  {
+    id: '02',
+    name: 'INACTIVE'
+  }
+]

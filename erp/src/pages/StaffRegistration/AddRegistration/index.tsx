@@ -42,6 +42,13 @@ const AddStaffRegistration = (): ReactElement => {
   const [values, setValues] = useState(staffDetails)
   const [dob, setDOB] = useState<any>(new Date())
 
+  const canSave =
+    !!values?.emailID &&
+    !!values?.firstName &&
+    !!values?.technical_flag &&
+    !!values?.lastName &&
+    !!values?.gender 
+
   const handleSubmit = () => {
     dispatch(AddNewStaff({
       ...values,
@@ -235,6 +242,7 @@ const AddStaffRegistration = (): ReactElement => {
         </InfoWrapper>
         <FlexWrapper justifyContent='center'>
           <Button
+            disabled={!canSave}
             onClick={handleSubmit}
           >Submit</Button>
         </FlexWrapper>

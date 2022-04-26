@@ -2,15 +2,15 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import apiEndpoints from 'const/apiEndpoints'
 import { RootState } from 'redux/store'
 import api from 'services'
-import strings from 'locale/en'
 import { getRoleId } from 'helpers'
 import { AdminType } from 'const'
 import history from 'const/history'
 import { FeesAdd } from './typings'
+import strings from 'locale/en'
 
 const addNewStudent = createAsyncThunk(
   'studentRegistration/new',
-  async (_undefined, { getState, rejectWithValue }): Promise<any> => {
+  async (_undefined, { getState,rejectWithValue }): Promise<any> => {
     const {
       studentRegistration: {
         childInformation: {
@@ -129,7 +129,8 @@ const addNewStudent = createAsyncThunk(
         batchIds: [batchId],
         userName,
         passwordUpdated: passwordUpdated,
-        roleId: getRoleId(AdminType.STUDENT)
+        roleId: getRoleId(AdminType.STUDENT),
+        status: 'ACTIVE'
       }
       const response = await api.post(
         apiEndpoints.studentRegistration,
@@ -138,11 +139,11 @@ const addNewStudent = createAsyncThunk(
 
       if (response) {
         history.goBack()
+      } else {
+        return rejectWithValue(strings?.validationMessages?.studentRegistration)
       }
 
       return response?.data
-    } else {
-      return rejectWithValue(strings?.validationMessages?.studentRegistration)
     }
   }
 )
@@ -152,8 +153,8 @@ export default addNewStudent
 export const getFeeMasterByTermApi = createAsyncThunk(
   'feeMaster/getFeeMaster',
   async (term: string): Promise<any> => {
-    const response =await api.get(
-       `${apiEndpoints.getFeeMasterByTerm}?groupBy=${term}`
+    const response = await api.get(
+      `${apiEndpoints.getFeeMasterByTerm}?groupBy=${term}`
     )
     return response
   }
@@ -162,9 +163,9 @@ export const getFeeMasterByTermApi = createAsyncThunk(
 export const fessPaid = createAsyncThunk(
   'fees/addFees',
   async (requestPayload: FeesAdd): Promise<FeesAdd> => {
-    const response =await api.put(
-      `${apiEndpoints.addfees}`,requestPayload
+    const response = await api.put(
+      `${apiEndpoints.addfees}`, requestPayload
     )
-    return  response?.data
+    return response?.data
   }
 )

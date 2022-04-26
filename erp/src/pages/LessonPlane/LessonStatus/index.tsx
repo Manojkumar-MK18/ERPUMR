@@ -11,7 +11,7 @@ import {
     TableWrapper,
     Button
 } from "components"
-import {  Table } from "react-bootstrap"
+import { Table } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { tableHeader } from "./const"
 import { ActionButton } from "pages/HumanResources/LeaveApproval/subcomponents"
@@ -48,7 +48,7 @@ const LessonStatus = (): ReactElement => {
                                 <td>Date</td>
                                 <td>Topic</td>
                                 <td>
-                                     <ActionButton
+                                    <ActionButton
                                         variant="outline-secondary"
                                         onClick={() => { }}
                                     >
@@ -60,7 +60,7 @@ const LessonStatus = (): ReactElement => {
                                     >
                                         NotCompleted
                                     </ActionButton>
-                                    </td>
+                                </td>
                                 <td>
                                     <Icon>
                                         <FontAwesomeIcon icon={['far', 'edit']} />

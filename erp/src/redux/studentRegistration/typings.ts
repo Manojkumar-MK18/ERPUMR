@@ -66,6 +66,7 @@ export interface QualifyingDetails {
   yearOfPassing: string
   obtainedMarks: string
   percentage: string
+  status: string
 }
 
 export interface getFeeMasterByTerm {

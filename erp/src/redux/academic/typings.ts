@@ -125,10 +125,11 @@ export interface AcademicState {
   paymentModes: DropdownList,
   subjects: Array<Course>
   chapters: Array<Course>
-  topics: Array<Course> 
-  subjectlist:DropdownList
-  chapterList:DropdownList
-  topicList:DropdownList
+  topics: Array<Course>
+  subjectlist: DropdownList
+  chapterList: DropdownList
+  topicList: DropdownList
+  statuslist: DropdownList
 }
 
 export interface getBranchesForCoursePayload {
