@@ -39,7 +39,8 @@ const ROUTES = {
   LEAVE_STATUS: '/leaveStatus',
   LESSON_UPDATES: '/lessonUpdates',
   ASSIGN_LESSON:'/assignLesson',
-  LESSON_STATUS:'/lessonStatus'
+  LESSON_STATUS:'/lessonStatus',
+  REC:'/rec'
 }
 
 export default ROUTES

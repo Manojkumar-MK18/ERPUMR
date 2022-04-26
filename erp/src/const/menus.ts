@@ -206,6 +206,11 @@ const admin: Array<Menu> = [
         icon: ['fas', 'bars'],
         label: 'Leave Status',
         to: ROUTES.LEAVE_STATUS
+      },
+      {
+        icon: ['fas', 'bars'],
+        label: 'REC',
+        to: ROUTES.REC
       }
     ]
   }

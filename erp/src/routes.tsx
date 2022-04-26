@@ -44,6 +44,7 @@ import {
   LessonStatus,
 } from 'pages'
 import ProtectedRoute from './containers/ProtectedRoute'
+import Rec from 'pages/rec'
 
 const Routes = () => {
   return (
@@ -126,6 +127,7 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.LESSON_UPDATES} component={LessonUpdate} />
       <ProtectedRoute path={ROUTES.ASSIGN_LESSON} component={AssignLesson} />
       <ProtectedRoute path={ROUTES.LESSON_STATUS} component={LessonStatus} />
+      <ProtectedRoute path={ROUTES.REC} component={Rec} />
     </Switch>
   )
 }

@@ -7,6 +7,7 @@ interface TypographyProps {
   isHelpText?: boolean
   hasPadding?: boolean
   isBold?: boolean
+  hasBorder?: boolean
 }
 
 export const H1 = styled.h1<TypographyProps>`
@@ -31,8 +32,14 @@ export const H3 = styled.h3<TypographyProps>`
 `
 
 export const H4 = styled.h4<TypographyProps>`
+  #footer {
+    padding-left: 30px;
+  }
   color: ${({ color }) => (color ? color : colors.heavyGray)};
   font-size: ${fonts.small}px;
+  padding: ${({ hasPadding }) => (hasPadding ? '8px' : '0')};
+  ${({ hasBorder, theme }) =>
+    hasBorder && `border-bottom: 1px solid ${theme.border}`}
 `
 
 export const Small = styled.small<TypographyProps>`
@@ -60,9 +67,8 @@ export const Body = styled.p<TypographyProps>`
 
 export const Span = styled.span<TypographyProps>`
   color: ${({ color }) => (color ? color : colors.gray)};
-  font-weight: ${({isBold}) => isBold ? weight.bold : weight.normal};
-  font-size: ${({isBold}) => isBold ? fonts.large : fonts.small}px;
-
+  font-weight: ${({ isBold }) => (isBold ? weight.bold : weight.normal)};
+  font-size: ${({ isBold }) => (isBold ? fonts.large : fonts.small)}px;
 `
 
 export const Label = styled.label<TypographyProps>`
