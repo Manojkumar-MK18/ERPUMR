@@ -249,7 +249,6 @@ const StudentRegistartion = (): ReactElement => {
           handleSubmit={() => {
             setPayId('')
             const payload = {
-              id: (Math.random() + 1).toString(36).substring(7),
               studentId: payId,
               paid: 'paid',
               amount: values?.amount,

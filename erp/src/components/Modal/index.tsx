@@ -4,7 +4,6 @@ import { colors } from '../../const/theme'
 import { Body, H3 } from '../../typography'
 import strings from '../../locale/en'
 import ModalProps from './typings'
-import PrimaryButton from '../../components/Button'
 
 const Modal = ({
   title,
@@ -27,7 +26,7 @@ const Modal = ({
       keyboard={false}
     >
       <BootstrapModal.Header closeButton>
-        {title && <H3 color={colors.purple}>{title}</H3>}
+        {title && <H3 color={colors.red}>{title}</H3>}
       </BootstrapModal.Header>
       {description && (
         <BootstrapModal.Body>
@@ -39,13 +38,13 @@ const Modal = ({
         <Button variant="outline-secondary" onClick={handleCancel}>
           {cancelButtonText || strings.modal.cancel}
         </Button>
-        <PrimaryButton
+        <Button
           variant="outline-danger"
           onClick={handleSubmit}
           disabled={isDisabled}
         >
           {submitButtonText || strings.modal.submit}
-        </PrimaryButton>
+        </Button>
       </BootstrapModal.Footer>
     </BootstrapModal>
   )

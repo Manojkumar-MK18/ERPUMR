@@ -104,14 +104,3 @@ export interface AddFeeDescriptionPayload {
   title: string
   description: string
 }
-
-export interface AddFeeApi {
-  description: string
-  amount: string
-  title: string
-  terms: string
-  year: string
-  academicYear: string
-  courseId: string
-  regType: string
-}

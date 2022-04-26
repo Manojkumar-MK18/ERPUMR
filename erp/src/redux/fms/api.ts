@@ -137,24 +137,3 @@ export const addFeePayment = createAsyncThunk(
     }
   }
 )
-
-// export const addFeePayment = createAsyncThunk(
-//   'fms/addFeePayment',
-//   async ({
-//     description,
-//     amount,
-//     title,
-//     terms,
-//     year,
-//     academicYear,
-//     courseId,
-//     regType
-//   }: AddFeeApi): Promise<any> => {
-
-//     const response = await api.put(`${apiEndpoints.feePayment}?description=${description}&amount=${amount}&title=${title}&term=${terms}&year=${year}&academicYear=${academicYear}&courseId=${courseId}&regType=${regType}`)
-//     console.log(response)
-
-//     return response
-
-//   }
-// )
