@@ -52,7 +52,7 @@ const StudentRegistartion = (): ReactElement => {
   const history = useHistory()
   const dispatch = useDispatch()
   const {
-    content = [], 
+    content = [],
     totalPages = 0,
     page = 0
   } = studentApplicationList || {}
@@ -61,8 +61,8 @@ const StudentRegistartion = (): ReactElement => {
   const [resetValuesState, setResetValuesState] = useState(resetValues)
   const [registrationList, setRegistrationList] = useState<Array<Student>>([])
   const filteredList = registrationList.length > 0 ? registrationList : content
-console.log(filteredList);
-console.log(registrationList);
+  console.log(filteredList);
+  console.log(registrationList);
 
   const clearValues = () => {
     setResetValuesState({
@@ -200,8 +200,7 @@ console.log(registrationList);
                 {filteredList?.map(
                   (
                     {
-                      firstName = '',
-                      lastName = '',
+                      studentName = '',
                       courseId = '',
                       regNo,
                       userId = '',
@@ -214,10 +213,10 @@ console.log(registrationList);
                     return (
                       <TableRow key={`student-list${index}`}>
                         <td>{index + 1}</td>
-                        <td>{`${firstName} ${lastName || ''}`}</td>
+                        <td>{studentName}</td>
                         <td>{selectedCourse?.name || courseId}</td>
                         <td>{regNo}</td>
-                        <td> 
+                        <td>
                           <ActionWrapper
                             handlePay={() => {
                               setPayId(userId)

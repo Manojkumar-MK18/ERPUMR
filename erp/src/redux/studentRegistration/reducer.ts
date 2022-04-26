@@ -64,7 +64,8 @@ const initialState: StudentRegistration = {
     school: '',
     yearOfPassing: '',
     obtainedMarks: '',
-    percentage: ''
+    percentage: '',
+    status:''
   },
   error: '',
   isLoading: false,

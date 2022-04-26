@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import apiEndpoints from 'const/apiEndpoints'
 import api from 'services'
-import { AddFeeDescriptionPayload, AddFeeMasterPayload } from './typings'
+import {  AddFeeDescriptionPayload, AddFeeMasterPayload } from './typings'
 import history from 'const/history'
 import strings from 'locale/en'
 
@@ -58,7 +58,7 @@ export const getFeeMaster = createAsyncThunk(
 
 export const deleteFeeMaster = createAsyncThunk(
   'fms/deleteFeeMaster',
-  async (id: string, { dispatch }): Promise<any> => {
+  async (id, { dispatch }): Promise<any> => {
     const response = await api.delete(
       `${apiEndpoints.deleteFeeMaster}?id=${id}`
     )
@@ -137,3 +137,24 @@ export const addFeePayment = createAsyncThunk(
     }
   }
 )
+
+// export const addFeePayment = createAsyncThunk(
+//   'fms/addFeePayment',
+//   async ({
+//     description,
+//     amount,
+//     title,
+//     terms,
+//     year,
+//     academicYear,
+//     courseId,
+//     regType
+//   }: AddFeeApi): Promise<any> => {
+
+//     const response = await api.put(`${apiEndpoints.feePayment}?description=${description}&amount=${amount}&title=${title}&term=${terms}&year=${year}&academicYear=${academicYear}&courseId=${courseId}&regType=${regType}`)
+//     console.log(response)
+
+//     return response
+
+//   }
+// )
