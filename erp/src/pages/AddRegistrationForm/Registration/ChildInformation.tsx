@@ -212,18 +212,6 @@ const ChildInformation = (): ReactElement => {
           </DropdownWrapper>
           <DropdownWrapper>
             <EditableDropdown
-              dropdownList={casteList}
-              title={casteLabel}
-              placeholder={castePlaceholder}
-              onBlur={() => { }}
-              error={''}
-              handleSelect={(item) =>
-                dispatch(updateChildInformation({ caste: item.name }))
-              }
-            />
-          </DropdownWrapper>
-          <DropdownWrapper>
-            <EditableDropdown
               dropdownList={religionList}
               title={religionLabel}
               isRequired
@@ -244,6 +232,18 @@ const ChildInformation = (): ReactElement => {
               error={''}
               handleSelect={(item) =>
                 dispatch(updateChildInformation({ community: item.name }))
+              }
+            />
+          </DropdownWrapper>
+          <DropdownWrapper>
+            <EditableDropdown
+              dropdownList={casteList}
+              title={casteLabel}
+              placeholder={castePlaceholder}
+              onBlur={() => { }}
+              error={''}
+              handleSelect={(item) =>
+                dispatch(updateChildInformation({ caste: item.name }))
               }
             />
           </DropdownWrapper>
