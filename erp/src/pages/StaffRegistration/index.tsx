@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
 import {
   PageWrapper,
   SectionTitle,
@@ -6,53 +6,58 @@ import {
   TableHeader,
   TableRow,
   Button,
-  TabWrapper
+  FlexWrapper,
+  Icon
 } from 'components'
-import strings from 'locale/en'
-import Tabs from 'react-bootstrap/esm/Tabs'
-import Tab from 'react-bootstrap/esm/Tab'
 import { Table } from 'react-bootstrap'
 import { tableHeader } from './const'
 import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
-import { DropdownWrapper } from './subcomponents'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { RootState } from 'redux/store'
+import { GetStaffListApi } from 'redux/Leave/api'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { updateStaffDetails } from 'redux/Leave/action'
+import strings from 'locale/en'
 
 const StaffRegistration = (): ReactElement => {
   const {
-    studentRegistration: {
-      registration,
-      addRegistration,
-      applicationList,
-      admittedList,
-      onlineApplication
+    getStaffList
+  } = useSelector(
+    (state: RootState) => ({
+      getStaffList: state.leave.getStaffList
+    }),
+    shallowEqual
+  )
+
+  const {
+    staffRegistration: {
+      title,
+      addStaff
     }
   } = strings
+
   const history = useHistory()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(GetStaffListApi())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <PageWrapper id="container">
-      <SectionTitle title={registration} />
-      <DropdownWrapper>
+      <FlexWrapper justifyContent='space-between'>
+        <SectionTitle title={title} />
         <Button
           onClick={() => {
             history.push(ROUTES.ADDSTAFFREGISTRATION)
           }}
         >
-          {addRegistration}
+          {addStaff}
         </Button>
-      </DropdownWrapper>
-      <TabWrapper>
-        <Tabs
-          defaultActiveKey="applicationList"
-          id="uncontrolled-tab-example"
-          className="mb-3"
-        >
-          <Tab eventKey="applicationList" title={applicationList}></Tab>
-          <Tab eventKey="onlineApplication" title={onlineApplication}></Tab>
-          <Tab eventKey="admittedList" title={admittedList}></Tab>
-        </Tabs>
-      </TabWrapper>
-      <div>
+      </FlexWrapper>
+      <>
         <TableWrapper>
           <Table size="sm" responsive="sm">
             <TableHeader>
@@ -63,21 +68,37 @@ const StaffRegistration = (): ReactElement => {
               </TableRow>
             </TableHeader>
             <tbody>
-              <TableRow>
-                <td>{'1'}</td>
-                <td>{'Student Name'}</td>
-                <td>{'Semester/Class'}</td>
-                <td>{'001'}</td>
-                <td>{'General'}</td>
-                <td>{'Father Name'}</td>
-                <td>{'Father Number'}</td>
-                <td>{'UID'}</td>
-                <td>{'20/04/2021'}</td>
-              </TableRow>
+              {getStaffList.map((staffList, index) => {
+                const {
+                  firstName,
+                  lastName,
+                  department,
+                  qualification,
+                  technical_flag
+                } = staffList
+                return (
+                  <TableRow key={`staff-${index}`}>
+                    <td>{index + 1}</td>
+                    <td>{`${firstName}${lastName}`}</td>
+                    <td>{technical_flag}</td>
+                    <td>{department}</td>
+                    <td>{qualification}</td>
+                    <td>
+                      <Icon onClick={() => {
+                        dispatch(updateStaffDetails(staffList))
+                        history.push(ROUTES.STAFF_VIEW)
+                      }}>
+                        <FontAwesomeIcon icon={['far', 'eye']} />
+                      </Icon>
+                    </td>
+                  </TableRow>
+                )
+              })}
+
             </tbody>
           </Table>
         </TableWrapper>
-      </div>
+      </>
     </PageWrapper>
   )
 }

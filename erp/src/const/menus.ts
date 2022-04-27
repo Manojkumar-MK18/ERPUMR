@@ -180,12 +180,12 @@ const admin: Array<Menu> = [
       {
         icon: ['fas', 'bars'],
         label: 'Designation',
-        to: ROUTES.DESGINATION
+        to: ROUTES.DESGINATION_LIST
       },
       {
         icon: ['fas', 'bars'],
         label: 'Staff Registration',
-        to: ROUTES.ADDSTAFFREGISTRATION
+        to: ROUTES.STAFFREGISTRATION 
       },
       {
         icon: ['fas', 'bars'],
@@ -209,7 +209,7 @@ const admin: Array<Menu> = [
       },
       {
         icon: ['fas', 'bars'],
-        label: 'REC',
+        label: 'Receipt',
         to: ROUTES.REC
       }
     ]

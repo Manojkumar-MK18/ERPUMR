@@ -1,8 +1,11 @@
+import { PageWrapper, SectionTitle } from 'components'
 import React, { ReactElement } from 'react'
 
 const LeaveStatus = ():ReactElement => {
   return (
-      <div>LeaveStatus</div>
+      <PageWrapper>
+        <SectionTitle title='Leave Status'/> 
+      </PageWrapper>
       )
 }
 

@@ -58,6 +58,8 @@ const strings = {
     godOwnName: 'Godown Name',
     amount: 'Amount',
     totalAmountPaid: 'Total Amount Paid',
+    otherAmount: 'Other Amount',
+    otherAmountPlaceHolder: 'Enter Other amount',
     ledgerOrBankName: 'Ledger / Bank Name',
     netAmount: 'Net Amount',
     addContra: 'Add Contra',
@@ -193,7 +195,7 @@ const strings = {
     userName: {
       required: 'Username is required'
     },
-    aahar:{
+    aahar: {
       required: 'Aadhaar number is required',
       numberOnly: 'Please enter only numbers',
       invalid: 'Please enter valid aadhaar number'
@@ -381,6 +383,22 @@ const strings = {
       leaveDescription: 'Leave Description',
       description: 'Description'
     }
+  },
+  staffRegistration: {
+    title: 'Staff Details',
+    addStaff: 'Add New Staff',
+    view: 'Staff Detail',
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    dob: 'Date Of Birth',
+    blood: 'Blood Group',
+    address: 'Address',
+    gender: 'Gender',
+    role: 'Role',
+    martialStatus: 'Martial Status',
+    mobileno: ' Mobile No',
+    mail: 'E-Mail Id',
+    qualification: 'Qualification'
   }
 }
 

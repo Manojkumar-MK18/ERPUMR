@@ -30,7 +30,7 @@ const Rec = (): ReactElement => {
                         </TableRow>
                     </TableHeader>
                     <tbody>
-                        <td>DER345</td>
+                        <td>DER345453</td>
                         <td>Cash</td>
                         <td>22/22/2222</td>
                     </tbody>
@@ -59,6 +59,9 @@ const Rec = (): ReactElement => {
                     handlePaidAmount={12000}
                     handleDue={33000}
                 />
+                <FlexWrapper justifyContent='center'>
+                    <div>Thank You</div>
+                </FlexWrapper>
             </>
         </PageWrapper>
     )

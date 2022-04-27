@@ -29,7 +29,7 @@ import LeaveApplication from './HumanResources/LeaveApplication'
 import LeaveApproval from './HumanResources/LeaveApproval'
 import StaffRegistration from './StaffRegistration'
 import AddStaffRegistration from './StaffRegistration/AddRegistration'
-import Desgination from './HumanResources/Desgination'
+import Desgination from './HumanResources/Desgination/AddDesgination'
 import AddRoleUser from './Settings/AddRoleUser'
 import AddPrivileges from './Settings/AddPrivileges'
 import ViewPrivileges from './Settings/ViewPrivileges'
@@ -38,6 +38,8 @@ import LeaveStatus from './HumanResources/LeaveStatus'
 import LessonUpdate from './LessonPlane/LessonUpdate'
 import AssignLesson from './LessonPlane/Assign Lesson'
 import LessonStatus from './LessonPlane/LessonStatus'
+import DesginationList from './HumanResources/Desgination'
+import StaffDetails from './StaffRegistration/View'
 
 export {
   Dashboard,
@@ -79,5 +81,7 @@ export {
   LeaveStatus,
   LessonUpdate,
   AssignLesson,
-  LessonStatus
+  LessonStatus,
+  DesginationList,
+  StaffDetails
 }

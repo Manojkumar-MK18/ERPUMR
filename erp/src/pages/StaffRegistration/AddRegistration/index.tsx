@@ -19,6 +19,7 @@ import format from 'date-fns/format'
 import {
   DATE_FORMAT_YYYYMMDD,
 } from '../../../const/dateFormat'
+import { validateEmail, validatePhone } from 'helpers/formValidation'
 
 const AddStaffRegistration = (): ReactElement => {
 
@@ -41,13 +42,15 @@ const AddStaffRegistration = (): ReactElement => {
   // eslint-disable-next-line no-unused-vars
   const [values, setValues] = useState(staffDetails)
   const [dob, setDOB] = useState<any>(new Date())
+  const [mobilenoerror, setmobileError] = useState('')
+  const [mailError, setMailError] = useState('')
 
   const canSave =
     !!values?.emailID &&
     !!values?.firstName &&
     !!values?.technical_flag &&
     !!values?.lastName &&
-    !!values?.gender 
+    !!values?.gender
 
   const handleSubmit = () => {
     dispatch(AddNewStaff({
@@ -60,7 +63,7 @@ const AddStaffRegistration = (): ReactElement => {
     <CardWrapper>
       <PageWrapper>
         <FlexWrapper noPadding>
-          <SectionTitle title='Staff Registration' />
+          <SectionTitle title='Staff Registration' hasBackButton />
         </FlexWrapper>
         <FlexWrapper width="100%" justifyContent="center" noPadding>
           <DropdownWrapper>
@@ -167,8 +170,11 @@ const AddStaffRegistration = (): ReactElement => {
                 label={'Mobile No'}
                 placeholder={'Enter Mobile No'}
                 value={values?.mobileNumber}
-                onBlur={() => { }}
-                error={''}
+                onBlur={() => {
+                  const error = validatePhone(values?.mobileNumber)
+                  setmobileError(error)
+                }}
+                error={mobilenoerror}
                 width="100%"
                 onChange={(value: string) => {
                   setValues({ ...values, mobileNumber: value })
@@ -180,8 +186,11 @@ const AddStaffRegistration = (): ReactElement => {
                 label={'Email'}
                 placeholder={'Enter Email'}
                 value={values?.emailID}
-                onBlur={() => { }}
-                error={''}
+                onBlur={() => {
+                  const error = validateEmail(values?.emailID)
+                  setMailError(error)
+                }}
+                error={mailError}
                 width="100%"
                 onChange={(value: string) => {
                   setValues({ ...values, emailID: value })

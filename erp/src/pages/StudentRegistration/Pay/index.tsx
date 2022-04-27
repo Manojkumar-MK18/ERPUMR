@@ -20,7 +20,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
   } = useSelector((state: RootState) => state, shallowEqual)
   const dispatch = useDispatch()
   const [resetValues, setResetValues] = useState(resetPaymentValues)
-  
+  const [showOtherAmount, setShowOtherAmount] = useState(false)
   const filteredDescriptions = values.feeType
     ? feeMasterList.filter(
         (description) => description.title === values.feeType
@@ -57,10 +57,23 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
       course.title === values?.feeType &&
       course.terms === values?.term
   )
-  const amountDefaultValue = {
-    id: 'amount',
-    name: amountToPay?.amount || ''
-  }
+  const amountList = amountToPay
+    ? [
+        {
+          id: 'amount',
+          name: amountToPay?.amount || ''
+        },
+        {
+          id: 'other',
+          name: 'Other'
+        }
+      ]
+    : [
+        {
+          id: 'other',
+          name: 'Other'
+        }
+      ]
 
   const {
     fms: {
@@ -80,7 +93,8 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
     },
     studentRegistration: {
       childInformation: { selectCourse, course, selectTerm, term }
-    }
+    },
+    finance: { otherAmount, otherAmountPlaceHolder }
   } = strings
 
   useEffect(() => {
@@ -204,28 +218,55 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
       </DropdownWrapper>
       <DropdownWrapper width="50%">
         <EditableDropdown
-          dropdownList={[amountDefaultValue]}
+          dropdownList={amountList}
           title={selectAmountLabel}
+          isDisabled={showOtherAmount}
           placeholder={selectAmountPlaceholder}
           onBlur={() => {}}
           error={''}
           handleSelect={(item) => {
             setValues({
               ...values,
-              amount: item.name,
+              amount: item.name === 'Other' ? '' : item.name,
               paymentMode: '',
               referenceId: ''
             })
+            if (item.name === 'Other') {
+              setShowOtherAmount(true)
+            }
             setResetValues({
               ...resetPaymentValues,
               paymentMode: true,
               referenceId: true
             })
           }}
-          defaultValue={amountDefaultValue}
           reset={resetValues?.amount}
         />
       </DropdownWrapper>
+      {showOtherAmount && (
+        <DropdownWrapper width="50%">
+          <Input
+            label={otherAmount}
+            placeholder={otherAmountPlaceHolder}
+            value={values?.amount}
+            onBlur={() => {}}
+            error={''}
+            width="100%"
+            onChange={(value: string) => {
+              const amountValue = Number(value)
+              if (amountValue > 0 && !isNaN(amountValue)) {
+                setValues({
+                  ...values,
+                  amount: value,
+                  paymentMode: '',
+                  referenceId: ''
+                })
+              }
+            }}
+            height="50px"
+          />
+        </DropdownWrapper>
+      )}
       <DropdownWrapper width="50%">
         <EditableDropdown
           dropdownList={paymentModes}

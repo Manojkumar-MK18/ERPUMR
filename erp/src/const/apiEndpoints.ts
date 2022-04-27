@@ -25,6 +25,9 @@ const apiEndpoints = {
   studentRegistration: 'userDetail/save',
   feePayment: 'feesPaid/add',
   getChildCourse: 'course/child/',
+  getSatffList:'staff/liststaff',
+  getDesginationList: 'staff/designationList',
+  getLeaveMasterList:'leave/getLeaveMasterDetails'
 }
 
 export default apiEndpoints

@@ -41,6 +41,11 @@ export const H4 = styled.h4<TypographyProps>`
   ${({ hasBorder, theme }) =>
     hasBorder && `border-bottom: 1px solid ${theme.border}`}
 `
+export const H5 = styled.h4<TypographyProps>`
+  color: ${({ color }) => (color ? color : colors.heavyGray)};
+  font-size: ${fonts.small}px;
+  font-weight: ${weight.normal};
+`
 
 export const Small = styled.small<TypographyProps>`
   font-size: ${fonts.tiny}px;

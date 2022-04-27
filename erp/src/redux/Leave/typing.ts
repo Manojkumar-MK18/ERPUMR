@@ -44,6 +44,32 @@ export interface GetLeaveDetailsPayload {
     leaveName: string
 }
 
+export interface GetStaffList {
+    technical_flag: string
+    department: string
+    firstName: string
+    lastName: string
+    gender: string
+    address: string
+    dob: string
+    marital_Status: string
+    mobileNumber: string
+    emailID: string
+    qualification: string
+    nationality: string
+    blood_Group: string
+}
+
+export interface GetDesginationList {
+    designationName: string
+    designationId: string
+}
+
+export interface GetLeaveMasterList{
+    id:string
+    adminType:string
+}
+
 export interface LeaveState {
     isLoading: boolean
     encassable: DropdownList
@@ -58,4 +84,8 @@ export interface LeaveState {
     adddesignation: NewDesignation
     addStaff: NewStaff
     getLeave: Array<GetLeaveDetailsPayload>
+    getStaffList: Array<GetStaffList>
+    getDesginationList: Array<GetDesginationList>
+    setStaffSelected: GetStaffList | null
+    getLeaveMasterList: Array<GetLeaveMasterList>
 }

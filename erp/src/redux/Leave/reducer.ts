@@ -2,13 +2,25 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {
     AddLeave,
     AddLeavebyUserId,
+    GetDesginationList,
     GetLeaveDetailsPayload,
+    GetLeaveMasterList,
+    GetStaffList,
     LeaveState,
     NewDesignation,
     NewStaff,
 } from './typing'
 import { encassableList, leaveType, marrtialStatus, staffRole } from './const'
-import { AddLeaveapi, AddNewdesignationName, AddNewStaff, applyLeaveApi, getLeaveDetails } from './api'
+import {
+    AddLeaveapi,
+    AddNewdesignationName,
+    AddNewStaff,
+    applyLeaveApi,
+    GetDesginationListApi,
+    getLeaveDetails,
+    GetLeaveMasterListApi,
+    GetStaffListApi
+} from './api'
 import { nationalityList, genderList } from '../../redux/academic/const'
 
 const initialState: LeaveState = {
@@ -56,8 +68,11 @@ const initialState: LeaveState = {
         nationality: '',
         blood_Group: ''
     },
-    getLeave:[]
-        
+    getLeave: [],
+    getStaffList: [],
+    getDesginationList: [],
+    setStaffSelected: null,
+    getLeaveMasterList: []
 }
 
 export const leaveSlice = createSlice({
@@ -67,6 +82,9 @@ export const leaveSlice = createSlice({
         updateSelectedUser: (state, action: PayloadAction<AddLeavebyUserId>) => {
             state.selectedUser = action?.payload
         },
+        updateStaffDetails: (state, action: PayloadAction<GetStaffList | null>) => {
+            state.setStaffSelected = action?.payload
+        }
     },
     extraReducers: {
         [AddLeaveapi.pending.toString()]: (state) => {
@@ -118,6 +136,18 @@ export const leaveSlice = createSlice({
         },
         [getLeaveDetails.rejected.toString()]: (state) => {
             state.isLoading = false;
+        },
+        [GetStaffListApi.fulfilled.toString()]: (state, action: PayloadAction<Array<GetStaffList>>) => {
+            state.isLoading = false
+            state.getStaffList = action?.payload
+        },
+        [GetDesginationListApi.fulfilled.toString()]: (state, action: PayloadAction<Array<GetDesginationList>>) => {
+            state.isLoading = false
+            state.getDesginationList = action?.payload
+        },
+        [GetLeaveMasterListApi.fulfilled.toString()]: (state, action: PayloadAction<Array<GetLeaveMasterList>>) => {
+            state.isLoading = false
+            state.getLeaveMasterList = action?.payload
         },
     }
 })

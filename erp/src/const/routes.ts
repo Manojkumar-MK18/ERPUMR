@@ -40,7 +40,9 @@ const ROUTES = {
   LESSON_UPDATES: '/lessonUpdates',
   ASSIGN_LESSON:'/assignLesson',
   LESSON_STATUS:'/lessonStatus',
-  REC:'/rec'
+  REC:'/rec',
+  DESGINATION_LIST:'/desginationList',
+  STAFF_VIEW: '/staffView'
 }
 
 export default ROUTES
