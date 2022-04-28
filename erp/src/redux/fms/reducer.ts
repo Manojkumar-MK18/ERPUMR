@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {
   AddFeeDescriptionResponse,
   AddFeeDescriptionState,
+  FeeDetails,
   Student, 
   StudentList
 } from './typings'
@@ -26,7 +27,9 @@ const initialState: AddFeeDescriptionState = {
   error: '',
   selectedStudentDetails: null,
   feeDescriptionListDropdown: [],
-  updateStudent: []
+  updateStudent: [],
+  selectedFeeDetails: null,
+  selectedFeetotalDetails: null
 }
 
 export const fmsSlice = createSlice({
@@ -47,6 +50,12 @@ export const fmsSlice = createSlice({
     },
     updateStudentDetails: (state, action: PayloadAction<Student | null>) => {
       state.selectedStudentDetails = action.payload
+    },
+    updateFeeDetails: (state, action: PayloadAction<FeeDetails | null>) => {
+      state.selectedFeeDetails = action.payload
+    },
+    updateTotalFeeDetails: (state, action: PayloadAction<AddFeeDescriptionResponse | null>) => {
+      state.selectedFeetotalDetails = action.payload
     },
   },
   extraReducers: {

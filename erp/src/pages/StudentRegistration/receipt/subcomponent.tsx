@@ -21,22 +21,23 @@ export const Subtitle= styled.div`
   font-size: 15px;
 `
 
+export const Border = styled.div`
+  border-bottom: 1px dotted gray;
+  margin: 5px;
+`
+
 interface FeesProps {
   handleYear: string| any
   handleClass: string| any
   handleName: string | any
   handleAdmNo: string| any
-  handleFatherName: string| any
-  handleMobileNo: string| any
 }
 
 export const FeeAction = ({
   handleAdmNo,
   handleClass,
   handleName,
-  handleYear,
-  handleFatherName,
-  handleMobileNo
+  handleYear
 }: FeesProps): ReactElement => {
   return (
     <PageWrapper>
@@ -54,20 +55,12 @@ export const FeeAction = ({
           AdmissionNo:<b>{handleAdmNo}</b>
         </H4>
       </FlexWrapper>
-      <FlexWrapper justifyContent="space-between" noPadding width={'70%'}>
-        <H4>
-          Father Name:<b>{handleFatherName}</b>
-        </H4>
-        <H4>
-          MobileNo:<b> {handleMobileNo}</b>
-        </H4>
-      </FlexWrapper>
     </PageWrapper>
   )
 }
 
 interface FeeTableProps {
-  handleAmount: number
+  handleAmount: number |any
   handleConcession: number
   handlePaidAmount: number
   handleDue: number

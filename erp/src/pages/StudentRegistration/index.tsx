@@ -23,7 +23,7 @@ import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { getStudentAdmissionList, addFeePayment, updateStudentDetails } from 'redux/fms/actions'
+import { getStudentAdmissionList, addFeePayment, updateStudentDetails, updateFeeDetails } from 'redux/fms/actions'
 import { getCourses } from 'redux/academic/actions'
 import { resetValues } from './const'
 import { Student } from 'redux/fms/typings'
@@ -230,7 +230,7 @@ const StudentRegistartion = (): ReactElement => {
                                 courseId: selectedCourse?.name || courseId,
                                 regNo: regNo,
                                 mobileNumber: mobileNumber,
-                                fatherName:fatherName
+                                fatherName: fatherName
                               }))
                             }}
                           />
@@ -270,6 +270,9 @@ const StudentRegistartion = (): ReactElement => {
               paidTypes: [values?.feeType]
             }
             dispatch(addFeePayment(payload))
+            dispatch(updateFeeDetails({
+              amount: values?.amount
+            }))
             dispatch(getStudentAdmissionList(1))
           }}
           handleCancel={() => setPayId('')}

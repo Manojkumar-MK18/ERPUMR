@@ -64,7 +64,7 @@ export interface Student {
   aadhar?: string
   academicYear?: string
   yearOfPassing?: string
-  studentName?: string 
+  studentName?: string
 }
 
 export interface StudentList {
@@ -73,6 +73,11 @@ export interface StudentList {
   pageSize: number
   totalCount: number
   totalPages: number
+}
+
+export interface FeeDetails {
+  amount: string
+
 }
 
 export interface AddFeeDescriptionState {
@@ -84,8 +89,10 @@ export interface AddFeeDescriptionState {
   editFeeMaster: AddFeeDescriptionResponse | null
   studentApplicationList: StudentList | null
   error: string
-  updateStudent:Array<Student>
+  updateStudent: Array<Student>
   selectedStudentDetails: Student | null
+  selectedFeeDetails: FeeDetails | null
+  selectedFeetotalDetails: AddFeeDescriptionResponse | null
 }
 
 export interface AddFeeMasterPayload {

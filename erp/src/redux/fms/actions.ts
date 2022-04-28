@@ -16,6 +16,8 @@ const {
   updateEditFeeMaster,
   resetError,
   updateStudentDetails,
+  updateFeeDetails,
+  updateTotalFeeDetails
 } =
   fmsSlice.actions
 
@@ -32,5 +34,7 @@ export {
   resetError,
   updateStudentDetails,
   editFeeDescriptionRequest,
-  addFeePayment
+  addFeePayment,
+  updateFeeDetails,
+  updateTotalFeeDetails
 }

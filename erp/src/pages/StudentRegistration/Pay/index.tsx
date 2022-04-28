@@ -99,7 +99,6 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
 
   useEffect(() => {
     dispatch(getFeeMaster())
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
