@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import apiEndpoints from 'const/apiEndpoints'
 import api from 'services'
-import {  AddFeeDescriptionPayload, AddFeeMasterPayload } from './typings'
+import { AddFeeDescriptionPayload, AddFeeMasterPayload } from './typings'
 import history from 'const/history'
 import strings from 'locale/en'
+import ROUTES from 'const/routes'
 
 export const addNewFeeDescription = createAsyncThunk(
   'fms/addFeeDescription',
@@ -129,6 +130,9 @@ export const addFeePayment = createAsyncThunk(
       console.log(response)
       if (!response) {
         return rejectWithValue(strings.pay.pamentFailed)
+      }
+      if (response?.data) {
+        history.push(ROUTES.RECEIPT)
       }
       return response?.data
     } catch (error) {

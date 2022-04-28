@@ -46,7 +46,7 @@ import {
   StaffDetails,
 } from 'pages'
 import ProtectedRoute from './containers/ProtectedRoute'
-import Rec from 'pages/rec'
+import Rec from 'pages/StudentRegistration/receipt'
 
 const Routes = () => {
   return (
@@ -129,7 +129,7 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.LESSON_UPDATES} component={LessonUpdate} />
       <ProtectedRoute path={ROUTES.ASSIGN_LESSON} component={AssignLesson} />
       <ProtectedRoute path={ROUTES.LESSON_STATUS} component={LessonStatus} />
-      <ProtectedRoute path={ROUTES.REC} component={Rec} />
+      <ProtectedRoute path={ROUTES.RECEIPT} component={Rec} />
       <ProtectedRoute path={ROUTES.DESGINATION_LIST} component={DesginationList} />
       <ProtectedRoute path={ROUTES.STAFF_VIEW} component={StaffDetails} />
     </Switch>

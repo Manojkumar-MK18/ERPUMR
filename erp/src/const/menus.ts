@@ -146,7 +146,7 @@ const admin: Array<Menu> = [
     ]
   },
   {
-    icon: ['fas', 'home'],
+    icon: ['fas', 'book'],
     label: 'Lesson Plan',
     to: '',
     childs: [
@@ -206,11 +206,6 @@ const admin: Array<Menu> = [
         icon: ['fas', 'bars'],
         label: 'Leave Status',
         to: ROUTES.LEAVE_STATUS
-      },
-      {
-        icon: ['fas', 'bars'],
-        label: 'Receipt',
-        to: ROUTES.REC
       }
     ]
   }

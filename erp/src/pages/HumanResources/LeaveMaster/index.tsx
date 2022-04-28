@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
 import {
     Button,
     FlexWrapper,
@@ -14,9 +13,20 @@ import { Table } from 'react-bootstrap'
 import { tableHeader } from './const'
 import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
-import { LeaveAction } from './subcomponents'  
+import { LeaveAction } from './subcomponents'
+import { useDispatch, useSelector } from 'react-redux'
+import { GetLeaveMasterListApi } from 'redux/Leave/api'
+import { RootState } from 'redux/store'
 
 const LeaveMaster = (): ReactElement => {
+    const {
+        getLeaveMasterList
+    } = useSelector(
+        (state: RootState) => ({
+            getLeaveMasterList: state.leave.getLeaveMasterList
+        })
+    )
+
     const {
         hrms: {
             leaveMaster: {
@@ -24,10 +34,16 @@ const LeaveMaster = (): ReactElement => {
             }
         }
     } = strings
-    const history = useHistory()   
- 
+    const history = useHistory()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(GetLeaveMasterListApi())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     return (
-        <PageWrapper> 
+        <PageWrapper>
             <SectionTitle title={title} />
             <FlexWrapper noPadding justifyContent='flex-end'>
                 <Button
@@ -47,18 +63,27 @@ const LeaveMaster = (): ReactElement => {
                             </TableRow>
                         </TableHeader>
                         <tbody>
-                            <TableRow>
-                                <td>1</td>
-                                <td>Sick Leave</td>
-                                <td>Descripton</td>
-                                <td>YES</td>
-                                <td>
-                                    <LeaveAction
-                                        handleDelete={() => { }}
-                                        handleEdit={() => { }}
-                                    />
-                                </td>
-                            </TableRow>
+                            {getLeaveMasterList.map((master, index) => {
+                                const {
+                                    leaveName,
+                                    leaveDescription,
+                                    encashable,
+                                } = master
+                                return (
+                                    <TableRow key={`master-list-${index}`}>
+                                        <td>{index + 1}</td>
+                                        <td>{leaveName}</td>
+                                        <td>{leaveDescription}</td>
+                                        <td>{encashable}</td>
+                                        <td>
+                                            <LeaveAction
+                                                handleDelete={() => { }}
+                                                handleEdit={() => { }}
+                                            />
+                                        </td>
+                                    </TableRow>
+                                )
+                            })}
                         </tbody>
                     </Table>
                 </TableWrapper>

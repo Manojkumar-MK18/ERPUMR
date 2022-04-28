@@ -25,7 +25,8 @@ const initialState: AddFeeDescriptionState = {
   studentApplicationList: null,
   error: '',
   selectedStudentDetails: null,
-  feeDescriptionListDropdown: []
+  feeDescriptionListDropdown: [],
+  updateStudent: []
 }
 
 export const fmsSlice = createSlice({

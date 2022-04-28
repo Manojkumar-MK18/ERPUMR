@@ -3,13 +3,7 @@ import styled from 'styled-components'
 import { colors } from 'const/theme'
 
 export const TableRow = styled.tr`
- //vertical-align: baseline; 
-  #scope-row{ 
-    display: flex;
-    justify-content:center; 
-    height: 35px;
-    border-bottom: 1px solid ${colors.lightGrey};
-  }
+ vertical-align: baseline; 
 `
 
 export const Icon = styled(Button)`

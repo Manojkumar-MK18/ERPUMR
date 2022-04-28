@@ -8,6 +8,9 @@ export const AddLeaveapi = createAsyncThunk(
     'leave/addLeave',
     async (requestData: AddLeave): Promise<AddLeave> => {
         const response = await api.post(apiEndpoints.addLeave, requestData)
+        if (response) {
+            history.goBack()
+        }
         return response?.data
     }
 )
@@ -79,6 +82,14 @@ export const GetLeaveMasterListApi = createAsyncThunk(
     'leavemaster/getLeaveMasterList',
     async (): Promise<any> => {
         const response = await api.get(apiEndpoints.getLeaveMasterList)
+        return response?.data
+    }
+)
+
+export const GetLeaveDetailsList = createAsyncThunk(
+    'leaveDetails/getDetaisl',
+    async (): Promise<any> => {
+        const response = await api.get(apiEndpoints.getLeaveDetailsList)
         return response?.data
     }
 )

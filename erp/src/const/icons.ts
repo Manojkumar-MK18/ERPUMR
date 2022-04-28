@@ -17,7 +17,8 @@ import {
   faUserCheck,
   faChevronLeft,
   faCloudUploadAlt,
-  faPlusCircle
+  faPlusCircle,
+  faBook
 } from '@fortawesome/free-solid-svg-icons'
 import { faUser, faEdit, faTrashAlt, faEye, } from '@fortawesome/free-regular-svg-icons'
 
@@ -44,4 +45,5 @@ library.add(
   faCloudUploadAlt,
   faPlusCircle,
   faEye,
+  faBook
 )

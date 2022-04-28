@@ -65,9 +65,13 @@ export interface GetDesginationList {
     designationId: string
 }
 
-export interface GetLeaveMasterList{
-    id:string
-    adminType:string
+export interface GetLeaveMasterList {
+    id: string
+    adminType: string
+    leaveName: string
+    leaveDescription: string
+    encashable: string
+    userId: string
 }
 
 export interface LeaveState {

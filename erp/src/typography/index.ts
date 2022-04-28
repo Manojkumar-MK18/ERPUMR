@@ -37,14 +37,17 @@ export const H4 = styled.h4<TypographyProps>`
   }
   color: ${({ color }) => (color ? color : colors.heavyGray)};
   font-size: ${fonts.small}px;
+  text-align: center;
   padding: ${({ hasPadding }) => (hasPadding ? '8px' : '0')};
   ${({ hasBorder, theme }) =>
     hasBorder && `border-bottom: 1px solid ${theme.border}`}
 `
 export const H5 = styled.h4<TypographyProps>`
+
   color: ${({ color }) => (color ? color : colors.heavyGray)};
-  font-size: ${fonts.small}px;
-  font-weight: ${weight.normal};
+  font-weight: 700;
+  font-size: ${fonts.medium}px;
+  
 `
 
 export const Small = styled.small<TypographyProps>`

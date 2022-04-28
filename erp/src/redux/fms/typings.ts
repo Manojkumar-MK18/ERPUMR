@@ -39,7 +39,7 @@ export interface Student {
   email?: string
   enrollmentNumber?: string
   fatherName?: string
-  firstName: string
+  firstName?: string
   id?: string
   lastName?: string
   mobileNumber?: string
@@ -64,7 +64,7 @@ export interface Student {
   aadhar?: string
   academicYear?: string
   yearOfPassing?: string
-  studentName?: string
+  studentName?: string 
 }
 
 export interface StudentList {
@@ -84,6 +84,7 @@ export interface AddFeeDescriptionState {
   editFeeMaster: AddFeeDescriptionResponse | null
   studentApplicationList: StudentList | null
   error: string
+  updateStudent:Array<Student>
   selectedStudentDetails: Student | null
 }
 

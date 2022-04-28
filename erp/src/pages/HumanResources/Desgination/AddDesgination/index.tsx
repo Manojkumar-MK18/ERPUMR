@@ -41,7 +41,7 @@ const Desgination = (): ReactElement => {
                 <Button
                     disabled={!canSave}
                     onClick={() => {
-                        dispatch(AddNewdesignationName(values))
+                        dispatch(AddNewdesignationName(values)) 
                     }}
                 >Submit</Button>
             </FlexWrapper>

@@ -22,7 +22,16 @@ import useBreakpoint from 'use-breakpoint'
 import { updateIsMenuOpen } from 'redux/menu/actions'
 
 const Header = (): ReactElement => {
-  const { isMenuOpen } = useSelector((state: RootState) => state.menu)
+  const {
+    isMenuOpen,
+    userName = ""
+  } =
+    useSelector(
+      (state: RootState) => ({
+        isMenuOpen: state.menu,
+        userName: state.user.userInfo?.userDetail.userName
+      })
+    )
   const { breakpoint } = useBreakpoint(BREAKPOINTS)
   const showMenu = breakpoint === 'mobile' && !isMenuOpen
   const {
@@ -47,7 +56,7 @@ const Header = (): ReactElement => {
       )}
       <ProfileDropDown>
         <Dropdown.Toggle variant="light" id="profile-dropdown">
-          <UserName>{'userName'}</UserName>
+          <UserName>{userName}</UserName>
           <FontAwesomeIcon
             icon={['fas', 'user-circle']}
             size="2x"

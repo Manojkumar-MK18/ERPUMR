@@ -23,7 +23,7 @@ import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { getStudentAdmissionList, addFeePayment } from 'redux/fms/actions'
+import { getStudentAdmissionList, addFeePayment, updateStudentDetails } from 'redux/fms/actions'
 import { getCourses } from 'redux/academic/actions'
 import { resetValues } from './const'
 import { Student } from 'redux/fms/typings'
@@ -35,7 +35,10 @@ const StudentRegistartion = (): ReactElement => {
   const {
     acamedic: { academicYear: academicYearList, year: yearList, courseList },
     fms: { studentApplicationList, isLoading }
-  } = useSelector((state: RootState) => state, shallowEqual)
+  } = useSelector((state: RootState) => ({
+    acamedic: state.acamedic,
+    fms: state.fms,
+  }), shallowEqual)
   const {
     studentRegistration: {
       registration,
@@ -204,6 +207,8 @@ const StudentRegistartion = (): ReactElement => {
                       courseId = '',
                       regNo,
                       userId = '',
+                      mobileNumber,
+                      fatherName
                     },
                     index
                   ) => {
@@ -220,6 +225,13 @@ const StudentRegistartion = (): ReactElement => {
                           <ActionWrapper
                             handlePay={() => {
                               setPayId(userId)
+                              dispatch(updateStudentDetails({
+                                studentName: studentName,
+                                courseId: selectedCourse?.name || courseId,
+                                regNo: regNo,
+                                mobileNumber: mobileNumber,
+                                fatherName:fatherName
+                              }))
                             }}
                           />
                         </td>

@@ -27,7 +27,8 @@ const apiEndpoints = {
   getChildCourse: 'course/child/',
   getSatffList:'staff/liststaff',
   getDesginationList: 'staff/designationList',
-  getLeaveMasterList:'leave/getLeaveMasterDetails'
+  getLeaveMasterList:'leave/getLeaveMasterDetails',
+  getLeaveDetailsList: 'leave/getLeaveDetails'
 }
 
 export default apiEndpoints

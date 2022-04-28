@@ -1,12 +1,24 @@
-import { PageWrapper, SectionTitle } from 'components'
-import React, { ReactElement } from 'react'
+import {
+  PageWrapper,
+  SectionTitle,
+  TableWrapper
+} from 'components'
+import { ReactElement } from 'react'
+import { Table } from 'react-bootstrap'
 
-const LeaveStatus = ():ReactElement => {
+const LeaveStatus = (): ReactElement => {
   return (
-      <PageWrapper>
-        <SectionTitle title='Leave Status'/> 
-      </PageWrapper>
-      )
+    <PageWrapper>
+      <SectionTitle title='Leave Status' />
+      <>
+        <TableWrapper>
+          <Table>
+
+          </Table>
+        </TableWrapper>
+      </>
+    </PageWrapper>
+  )
 }
 
 export default LeaveStatus

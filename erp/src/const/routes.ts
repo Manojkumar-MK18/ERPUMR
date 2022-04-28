@@ -40,7 +40,7 @@ const ROUTES = {
   LESSON_UPDATES: '/lessonUpdates',
   ASSIGN_LESSON:'/assignLesson',
   LESSON_STATUS:'/lessonStatus',
-  REC:'/rec',
+  RECEIPT:'/recipt',
   DESGINATION_LIST:'/desginationList',
   STAFF_VIEW: '/staffView'
 }
