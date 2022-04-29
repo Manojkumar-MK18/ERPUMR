@@ -12,14 +12,19 @@ import { RootState } from 'redux/store'
 const Receipt = (): ReactElement => {
     const {
         selectedStudentDetails,
-        selectedFeeDetails
+        selectedFeeDetails,
+        selectedFeetotalDetails,
+        selectedPaymentMode
     } = useSelector(
         (state: RootState) => ({
             selectedStudentDetails: state.fms.selectedStudentDetails,
-            selectedFeeDetails:state.fms.selectedFeeDetails
+            selectedFeeDetails: state.fms.selectedFeeDetails,
+            selectedFeetotalDetails: state.fms.selectedFeetotalDetails,
+            selectedPaymentMode: state.fms.selectedPaymentMode
         }),
         shallowEqual
     )
+
     return (
         <PageWrapper>
             <>
@@ -55,9 +60,9 @@ const Receipt = (): ReactElement => {
                             </TableRow>
                         </TableHeader>
                         <tbody>
-                            <td>DER345453-768</td>
-                            <td>Cash</td>
-                            <td>22/22/2222</td>
+                            <td>DSE5643-09</td>
+                            <td>{selectedPaymentMode?.cash}</td>
+                            <td>{`${new Date().toLocaleDateString()}`} </td>
                         </tbody>
                     </Table>
                 </TableWrapper>
@@ -87,10 +92,10 @@ const Receipt = (): ReactElement => {
                         </Table>
                     </TableWrapper>
                     <FeeFooter
-                        handleAmount={selectedFeeDetails?.amount}
+                        handleAmount={selectedFeetotalDetails?.amount}
                         handleConcession={0}
-                        handlePaidAmount={12000}
-                        handleDue={33000}
+                        handlePaidAmount={selectedFeeDetails?.amount}
+                        handleDue={Number(selectedFeetotalDetails?.amount) - Number(selectedFeeDetails?.amount)}
                     />
                     <FlexWrapper justifyContent='center'>
                         <div>Thank You</div>
@@ -120,7 +125,7 @@ const Receipt = (): ReactElement => {
                     handleClass={selectedStudentDetails?.courseId}
                     handleName={selectedStudentDetails?.studentName}
                     handleAdmNo={selectedStudentDetails?.regNo}
-                /> 
+                />
                 <TableWrapper>
                     <Table size='sm' responsive="sm">
                         <TableHeader>
@@ -131,9 +136,9 @@ const Receipt = (): ReactElement => {
                             </TableRow>
                         </TableHeader>
                         <tbody>
-                            <td>DER345453-768</td>
-                            <td>Cash</td>
-                            <td>22/22/2222</td>
+                            <td>DSE5643-09</td>
+                            <td>{selectedPaymentMode?.cash}</td>
+                            <td>{`${new Date().toLocaleDateString()}`} </td>
                         </tbody>
                     </Table>
                 </TableWrapper>
@@ -163,10 +168,10 @@ const Receipt = (): ReactElement => {
                         </Table>
                     </TableWrapper>
                     <FeeFooter
-                        handleAmount={45000}
+                        handleAmount={selectedFeetotalDetails?.amount}
                         handleConcession={0}
-                        handlePaidAmount={12000}
-                        handleDue={33000}
+                        handlePaidAmount={selectedFeeDetails?.amount}
+                        handleDue={Number(selectedFeetotalDetails?.amount) - Number(selectedFeeDetails?.amount)}
                     />
                     <FlexWrapper justifyContent='center'>
                         <div>Thank You</div>

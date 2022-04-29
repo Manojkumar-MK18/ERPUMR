@@ -23,7 +23,8 @@ import ROUTES from 'const/routes'
 import { getCourses } from 'redux/academic/actions'
 import {
   getFeeMaster,
-  updateEditFeeMaster
+  updateEditFeeMaster,
+  updateTotalFeeDetails
 } from 'redux/fms/actions'
 import { AddFeeDescriptionResponse } from 'redux/fms/typings'
 
@@ -53,11 +54,12 @@ const FeeMaster = (): ReactElement => {
   const history = useHistory()
   const [resetValuesState, setResetValuesState] = useState(resetValues)
   const [fees, setFees] = useState<Array<AddFeeDescriptionResponse>>([])
-  const filteredList  = fees.length > 0 ? fees : feeMasterList
+  const filteredList = fees.length > 0 ? fees : feeMasterList
 
   useEffect(() => {
     dispatch(getCourses())
     dispatch(getFeeMaster())
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -87,7 +89,7 @@ const FeeMaster = (): ReactElement => {
             dropdownList={academicYearList}
             title={academicYear}
             placeholder={academicYear}
-            onBlur={() => {}}
+            onBlur={() => { }}
             error={''}
             handleSelect={(item) => {
               setResetValuesState({
@@ -107,7 +109,7 @@ const FeeMaster = (): ReactElement => {
             dropdownList={yearList}
             title={year}
             placeholder={year}
-            onBlur={() => {}}
+            onBlur={() => { }}
             error={''}
             handleSelect={(item) => {
               setResetValuesState({
@@ -127,7 +129,7 @@ const FeeMaster = (): ReactElement => {
             dropdownList={feeTypeList}
             title={selectFeeType}
             placeholder={feeType}
-            onBlur={() => {}}
+            onBlur={() => { }}
             error={''}
             handleSelect={(item) => {
               setResetValuesState({
@@ -139,7 +141,7 @@ const FeeMaster = (): ReactElement => {
               )
               setFees(filteredFeeMasterList)
               console.log(filteredFeeMasterList);
-              
+
             }}
             reset={resetValuesState?.feeType}
           />
@@ -149,7 +151,7 @@ const FeeMaster = (): ReactElement => {
             dropdownList={courseList}
             title={course}
             placeholder={selectCourse}
-            onBlur={() => {}}
+            onBlur={() => { }}
             error={''}
             handleSelect={(item) => {
               setResetValuesState({
@@ -161,13 +163,13 @@ const FeeMaster = (): ReactElement => {
               )
               setFees(filteredFeeMasterList)
               console.log(filteredFeeMasterList);
-              
+
             }}
             reset={resetValuesState?.course}
           />
         </DropdownWrapper>
         <DropdownWrapper>
-          <Button onClick={() => {}}>{search}</Button>
+          <Button onClick={() => { }}>{search}</Button>
           <Button onClick={clearValues}>{'clear'}</Button>
         </DropdownWrapper>
       </FlexWrapper>
@@ -186,7 +188,7 @@ const FeeMaster = (): ReactElement => {
               </TableHeader>
               <tbody>
                 {filteredList.map((feeMaster, index) => {
-                  const { title, description, terms, amount, courseId  } =
+                  const { title, description, terms, amount, courseId } =
                     feeMaster
                   const selectedCourse = courseList.find(
                     (course) => course.id === courseId
@@ -205,6 +207,9 @@ const FeeMaster = (): ReactElement => {
                           onClick={() => {
                             dispatch(updateEditFeeMaster(feeMaster))
                             history.push(ROUTES.ADD_FEE_MASTER)
+                            dispatch(updateTotalFeeDetails({
+                              amount
+                            }))
                           }}
                         >
                           <FontAwesomeIcon icon={['far', 'edit']} />

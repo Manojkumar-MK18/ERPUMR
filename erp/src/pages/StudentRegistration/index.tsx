@@ -267,7 +267,8 @@ const StudentRegistartion = (): ReactElement => {
               referenceId: values?.referenceId,
               modeOfPayment: values?.paymentMode,
               description: values?.description,
-              paidTypes: [values?.feeType]
+              paidTypes: [values?.feeType],
+              date:values?.dateOn
             }
             dispatch(addFeePayment(payload))
             dispatch(updateFeeDetails({

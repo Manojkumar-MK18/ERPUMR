@@ -8,10 +8,13 @@ import {
 import strings from 'locale/en'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { getFeeMaster } from 'redux/fms/actions'
+import { getFeeMaster, updatePaymentMode, updateTotalFeeDetails } from 'redux/fms/actions'
 import getDescriptionDropdown from 'helpers/getDescriptionDropdown'
 import { resetPaymentValues } from '../const'
 import { PayProps } from '../typings'
+import DatePicker from 'react-datepicker'
+import { format } from 'date-fns'
+import { DATE_FORMAT_MMDDYYYY } from 'const/dateFormat'
 
 const Pay = ({ values, setValues }: PayProps): ReactElement => {
   const {
@@ -23,17 +26,17 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
   const [showOtherAmount, setShowOtherAmount] = useState(false)
   const filteredDescriptions = values.feeType
     ? feeMasterList.filter(
-        (description) => description.title === values.feeType
-      )
+      (description) => description.title === values.feeType
+    )
     : []
 
   const coursesToFilter =
     values.feeType && values.description
       ? feeMasterList.filter(
-          (description) =>
-            description.title === values.feeType &&
-            description.description === values.description
-        )
+        (description) =>
+          description.title === values.feeType &&
+          description.description === values.description
+      )
       : []
   const courses = coursesToFilter.map((course) =>
     courseList.find((obj) => obj.id === course.courseId)
@@ -59,21 +62,21 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
   )
   const amountList = amountToPay
     ? [
-        {
-          id: 'amount',
-          name: amountToPay?.amount || ''
-        },
-        {
-          id: 'other',
-          name: 'Other'
-        }
-      ]
+      {
+        id: 'amount',
+        name: amountToPay?.amount || ''
+      },
+      {
+        id: 'other',
+        name: 'Other'
+      }
+    ]
     : [
-        {
-          id: 'other',
-          name: 'Other'
-        }
-      ]
+      {
+        id: 'other',
+        name: 'Other'
+      }
+    ]
 
   const {
     fms: {
@@ -97,6 +100,8 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
     finance: { otherAmount, otherAmountPlaceHolder }
   } = strings
 
+  //const [fromDate, setFromDate] = useState<any>(new Date())
+
   useEffect(() => {
     dispatch(getFeeMaster())
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -109,7 +114,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
           dropdownList={feeTypeList}
           title={feeType}
           placeholder={selectFeeType}
-          onBlur={() => {}}
+          onBlur={() => { }}
           error={''}
           handleSelect={(item) => {
             setValues({
@@ -139,7 +144,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
           dropdownList={getDescriptionDropdown(filteredDescriptions)}
           title={feeDescription}
           placeholder={selectFeeDescription}
-          onBlur={() => {}}
+          onBlur={() => { }}
           error={''}
           handleSelect={(item) => {
             setValues({
@@ -168,7 +173,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
           dropdownList={filteredCourses}
           title={course}
           placeholder={selectCourse}
-          onBlur={() => {}}
+          onBlur={() => { }}
           error={''}
           handleSelect={(item) => {
             setValues({
@@ -195,7 +200,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
           dropdownList={[...terms]}
           title={term}
           placeholder={selectTerm}
-          onBlur={() => {}}
+          onBlur={() => { }}
           error={''}
           handleSelect={(item) => {
             setValues({
@@ -221,7 +226,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
           title={selectAmountLabel}
           isDisabled={showOtherAmount}
           placeholder={selectAmountPlaceholder}
-          onBlur={() => {}}
+          onBlur={() => { }}
           error={''}
           handleSelect={(item) => {
             setValues({
@@ -230,6 +235,9 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
               paymentMode: '',
               referenceId: ''
             })
+            dispatch(updateTotalFeeDetails({
+              amount: amountToPay?.amount
+            }))
             if (item.name === 'Other') {
               setShowOtherAmount(true)
             }
@@ -248,7 +256,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
             label={otherAmount}
             placeholder={otherAmountPlaceHolder}
             value={values?.amount}
-            onBlur={() => {}}
+            onBlur={() => { }}
             error={''}
             width="100%"
             onChange={(value: string) => {
@@ -262,8 +270,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
                 })
               }
             }}
-            height="50px"
-          />
+            height="50px" />
         </DropdownWrapper>
       )}
       <DropdownWrapper width="50%">
@@ -271,7 +278,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
           dropdownList={paymentModes}
           title={paymentTypeLabel}
           placeholder={paymentTypePlaceholder}
-          onBlur={() => {}}
+          onBlur={() => { }}
           error={''}
           handleSelect={(item) => {
             setValues({
@@ -279,28 +286,60 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
               paymentMode: item.name,
               referenceId: ''
             })
+            dispatch(updatePaymentMode({
+              cash: item.name
+            }))
             setResetValues({ ...resetPaymentValues, referenceId: true })
           }}
           reset={resetValues?.paymentMode}
         />
       </DropdownWrapper>
       {values?.paymentMode === 'Online' && (
-        <DropdownWrapper width="50%">
-          <Input
-            placeholder={referenceId}
-            value={values?.referenceId}
-            onBlur={() => {}}
-            error={''}
-            onChange={(value: string) => {
-              setValues({
-                ...values,
-                referenceId: value
-              })
-              setResetValues(resetPaymentValues)
-            }}
-            height="50px"
-          />
-        </DropdownWrapper>
+        <>
+          <DropdownWrapper width="50%">
+            <Input
+              placeholder={referenceId}
+              value={values?.referenceId}
+              onBlur={() => { }}
+              error={''}
+              onChange={(value: string) => {
+                setValues({
+                  ...values,
+                  referenceId: value
+                })
+                setResetValues(resetPaymentValues)
+              }}
+              height="50px"
+            />
+          </DropdownWrapper>
+          <DropdownWrapper width='50%'>
+            <DatePicker
+              selected={values?.dateOn ? new Date(values?.dateOn) : new Date()}
+              onSelect={(dates: Date) => {
+                setValues({
+                  ...values,
+                  dateOn: dates ? format(dates, DATE_FORMAT_MMDDYYYY) : ''
+                })
+              }}
+              onChange={(dates: Date) => {
+                setValues({
+                  ...values,
+                  dateOn: dates ? format(dates, DATE_FORMAT_MMDDYYYY) : ''
+                })
+              }}
+              placeholderText={'Date'}
+              customInput={
+                <Input
+                  value={values?.dateOn}
+                  isRequired
+                  inputType="text"
+                  placeholder={'From Date'}
+                  suffix={['far', 'calendar']}
+                />
+              }
+            />
+          </DropdownWrapper>
+        </>
       )}
     </FlexWrapper>
   )

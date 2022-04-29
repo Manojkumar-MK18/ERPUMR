@@ -3,7 +3,8 @@ import {
   AddFeeDescriptionResponse,
   AddFeeDescriptionState,
   FeeDetails,
-  Student, 
+  Payment,
+  Student,
   StudentList
 } from './typings'
 import {
@@ -29,7 +30,8 @@ const initialState: AddFeeDescriptionState = {
   feeDescriptionListDropdown: [],
   updateStudent: [],
   selectedFeeDetails: null,
-  selectedFeetotalDetails: null
+  selectedFeetotalDetails: null,
+  selectedPaymentMode: null
 }
 
 export const fmsSlice = createSlice({
@@ -54,8 +56,11 @@ export const fmsSlice = createSlice({
     updateFeeDetails: (state, action: PayloadAction<FeeDetails | null>) => {
       state.selectedFeeDetails = action.payload
     },
-    updateTotalFeeDetails: (state, action: PayloadAction<AddFeeDescriptionResponse | null>) => {
+    updateTotalFeeDetails: (state, action: PayloadAction<FeeDetails | null>) => {
       state.selectedFeetotalDetails = action.payload
+    },
+    updatePaymentMode: (state, action: PayloadAction<Payment | null>) => {
+      state.selectedPaymentMode = action.payload
     },
   },
   extraReducers: {

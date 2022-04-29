@@ -16,7 +16,7 @@ export const ReceiptLogo = styled.img`
   width: 100%;
 `
 
-export const Subtitle= styled.div`
+export const Subtitle = styled.div`
   text-align: center;
   font-size: 15px;
 `
@@ -27,10 +27,10 @@ export const Border = styled.div`
 `
 
 interface FeesProps {
-  handleYear: string| any
-  handleClass: string| any
+  handleYear: string | any
+  handleClass: string | any
   handleName: string | any
-  handleAdmNo: string| any
+  handleAdmNo: string | any
 }
 
 export const FeeAction = ({
@@ -60,9 +60,9 @@ export const FeeAction = ({
 }
 
 interface FeeTableProps {
-  handleAmount: number |any
+  handleAmount: number | any
   handleConcession: number
-  handlePaidAmount: number
+  handlePaidAmount: number | any
   handleDue: number
 }
 
@@ -98,4 +98,3 @@ export const FeeFooter = ({
     </PageWrapper>
   )
 }
- 

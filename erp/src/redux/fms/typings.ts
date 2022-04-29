@@ -6,7 +6,7 @@ export interface AddFeeDescriptionResponse {
   id: number
   description: string
   title: string
-  amount?: string
+  amount: string
   terms?: string
   courseId?: string
   academicYear?: string
@@ -14,6 +14,10 @@ export interface AddFeeDescriptionResponse {
   termList?: string
   year?: string
   regType?: string
+}
+
+export interface TotalFeeUpdate {
+  amount?: string
 }
 
 interface User {
@@ -76,8 +80,10 @@ export interface StudentList {
 }
 
 export interface FeeDetails {
-  amount: string
-
+  amount: string | any
+}
+export interface Payment {
+  cash: string
 }
 
 export interface AddFeeDescriptionState {
@@ -92,7 +98,8 @@ export interface AddFeeDescriptionState {
   updateStudent: Array<Student>
   selectedStudentDetails: Student | null
   selectedFeeDetails: FeeDetails | null
-  selectedFeetotalDetails: AddFeeDescriptionResponse | null
+  selectedFeetotalDetails: FeeDetails | null
+  selectedPaymentMode: Payment | null
 }
 
 export interface AddFeeMasterPayload {

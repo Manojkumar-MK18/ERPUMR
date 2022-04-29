@@ -69,7 +69,7 @@ const FeeDescription = (): ReactElement => {
                 </TableRow>
               </TableHeader>
               <tbody>
-                {feeDescriptions.map(({ description, title, id }, index) => {
+                {feeDescriptions.map(({ description, title, id,amount }, index) => {
                   return (
                     <TableRow key={`fee-description-${index}`}>
                       <td>{index + 1}</td>
@@ -83,7 +83,8 @@ const FeeDescription = (): ReactElement => {
                             dispatch(updateEditFeeMaster({
                               id,
                               description,
-                              title
+                              title,
+                              amount
                             }))
                             history.push(ROUTES.ADDFEEDESCRIPTION)
                           }}

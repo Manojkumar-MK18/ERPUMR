@@ -19,7 +19,8 @@ export const initialPaymentValues = {
   amount: '',
   courseId: '',
   term: '',
-  referenceId: ''
+  referenceId: '',
+  dateOn:''
 }
 
 export const resetPaymentValues = {
