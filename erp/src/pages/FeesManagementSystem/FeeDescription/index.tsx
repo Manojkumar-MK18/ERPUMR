@@ -19,7 +19,7 @@ import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
 import {
   getFeeDescriptions,
-  updateEditDescriptionId, 
+  updateEditDescriptionId,
   updateEditFeeMaster
 } from 'redux/fms/actions'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
@@ -69,7 +69,7 @@ const FeeDescription = (): ReactElement => {
                 </TableRow>
               </TableHeader>
               <tbody>
-                {feeDescriptions.map(({ description, title, id,amount }, index) => {
+                {feeDescriptions.map(({ description, title, id, amount }, index) => {
                   return (
                     <TableRow key={`fee-description-${index}`}>
                       <td>{index + 1}</td>

@@ -84,6 +84,7 @@ export interface FeeDetails {
 }
 export interface Payment {
   cash: string
+  dateOn: string
 }
 
 export interface AddFeeDescriptionState {

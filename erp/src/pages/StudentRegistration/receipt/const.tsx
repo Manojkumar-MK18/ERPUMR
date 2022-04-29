@@ -1,6 +1,6 @@
 export const tableHeader = [
     'Receipt No',
-    'Paymeent Mode',
+    'Payment Mode',
     'Issue Date'
 ]
 

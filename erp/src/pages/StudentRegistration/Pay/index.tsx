@@ -8,7 +8,7 @@ import {
 import strings from 'locale/en'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { getFeeMaster, updatePaymentMode, updateTotalFeeDetails } from 'redux/fms/actions'
+import { getFeeMaster, updateTotalFeeDetails } from 'redux/fms/actions'
 import getDescriptionDropdown from 'helpers/getDescriptionDropdown'
 import { resetPaymentValues } from '../const'
 import { PayProps } from '../typings'
@@ -235,7 +235,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
               paymentMode: '',
               referenceId: ''
             })
-            dispatch(updateTotalFeeDetails({
+            dispatch(updateTotalFeeDetails({ 
               amount: amountToPay?.amount
             }))
             if (item.name === 'Other') {
@@ -286,9 +286,6 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
               paymentMode: item.name,
               referenceId: ''
             })
-            dispatch(updatePaymentMode({
-              cash: item.name
-            }))
             setResetValues({ ...resetPaymentValues, referenceId: true })
           }}
           reset={resetValues?.paymentMode}

@@ -45,10 +45,12 @@ const Receipt = (): ReactElement => {
                     <SectionTitle title='Fee Receipt' />
                 </FlexWrapper>
                 <FeeAction
-                    handleYear={'2022'}
+                    handleYear={selectedStudentDetails?.academicYear}
                     handleClass={selectedStudentDetails?.courseId}
                     handleName={selectedStudentDetails?.studentName}
                     handleAdmNo={selectedStudentDetails?.regNo}
+                    handleBranch={undefined}
+                    handleBatch={undefined}
                 />
                 <TableWrapper>
                     <Table size='sm' responsive="sm">
@@ -61,7 +63,7 @@ const Receipt = (): ReactElement => {
                         </TableHeader>
                         <tbody>
                             <td>DSE5643-09</td>
-                            <td>{selectedPaymentMode?.cash}</td>
+                            <td>{`${selectedPaymentMode?.cash}${selectedPaymentMode?.cash === 'Online' ? ( selectedPaymentMode?.dateOn ) : ''}`}</td>
                             <td>{`${new Date().toLocaleDateString()}`} </td>
                         </tbody>
                     </Table>
@@ -81,7 +83,6 @@ const Receipt = (): ReactElement => {
                                     <td>1</td>
                                     <td >
                                         <div >ACADEMIC FEES</div>
-                                        <div >Late Payment Fee</div>
                                         <div>Remarks</div>
                                     </td>
                                     <td>
@@ -125,6 +126,8 @@ const Receipt = (): ReactElement => {
                     handleClass={selectedStudentDetails?.courseId}
                     handleName={selectedStudentDetails?.studentName}
                     handleAdmNo={selectedStudentDetails?.regNo}
+                    handleBranch={undefined}
+                    handleBatch={undefined}
                 />
                 <TableWrapper>
                     <Table size='sm' responsive="sm">
@@ -157,7 +160,6 @@ const Receipt = (): ReactElement => {
                                     <td>1</td>
                                     <td >
                                         <div >ACADEMIC FEES</div>
-                                        <div >Late Payment Fee</div>
                                         <div>Remarks</div>
                                     </td>
                                     <td>

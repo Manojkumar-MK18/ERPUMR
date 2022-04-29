@@ -31,28 +31,41 @@ interface FeesProps {
   handleClass: string | any
   handleName: string | any
   handleAdmNo: string | any
+  handleBranch: string | any
+  handleBatch: string | any
 }
 
 export const FeeAction = ({
   handleAdmNo,
   handleClass,
   handleName,
-  handleYear
+  handleYear,
+  handleBatch,
+  handleBranch
 }: FeesProps): ReactElement => {
   return (
     <PageWrapper>
-      <FlexWrapper justifyContent="space-between" noPadding height={47}>
+      <FlexWrapper justifyContent="space-between" noPadding height={45}>
         <H4>
           Year:<b> {handleYear}</b>
-        </H4>
-        <H4>
-          Class:<b>{handleClass}</b>
         </H4>
         <H4>
           Name:<b>{handleName}</b>
         </H4>
         <H4>
           AdmissionNo:<b>{handleAdmNo}</b>
+        </H4>
+      </FlexWrapper>
+      <FlexWrapper justifyContent="space-between" noPadding height={47}>
+       
+        <H4>
+          Course:<b>{handleClass}</b>
+        </H4>
+        <H4>
+          Branch:<b>{handleBranch}</b>
+        </H4>
+        <H4>
+          Batch:<b>{handleBatch}</b>
         </H4>
       </FlexWrapper>
     </PageWrapper>

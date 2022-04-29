@@ -23,7 +23,7 @@ import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { getStudentAdmissionList, addFeePayment, updateStudentDetails, updateFeeDetails } from 'redux/fms/actions'
+import { getStudentAdmissionList, addFeePayment, updateStudentDetails, updateFeeDetails, updatePaymentMode } from 'redux/fms/actions'
 import { getCourses } from 'redux/academic/actions'
 import { resetValues } from './const'
 import { Student } from 'redux/fms/typings'
@@ -268,11 +268,15 @@ const StudentRegistartion = (): ReactElement => {
               modeOfPayment: values?.paymentMode,
               description: values?.description,
               paidTypes: [values?.feeType],
-              date:values?.dateOn
+              date: values?.dateOn
             }
             dispatch(addFeePayment(payload))
             dispatch(updateFeeDetails({
               amount: values?.amount
+            }))
+            dispatch(updatePaymentMode({
+              cash: values?.paymentMode,
+              dateOn: values?.dateOn
             }))
             dispatch(getStudentAdmissionList(1))
           }}

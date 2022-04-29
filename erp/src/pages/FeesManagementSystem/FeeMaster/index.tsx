@@ -23,8 +23,7 @@ import ROUTES from 'const/routes'
 import { getCourses } from 'redux/academic/actions'
 import {
   getFeeMaster,
-  updateEditFeeMaster,
-  updateTotalFeeDetails
+  updateEditFeeMaster
 } from 'redux/fms/actions'
 import { AddFeeDescriptionResponse } from 'redux/fms/typings'
 
@@ -207,9 +206,7 @@ const FeeMaster = (): ReactElement => {
                           onClick={() => {
                             dispatch(updateEditFeeMaster(feeMaster))
                             history.push(ROUTES.ADD_FEE_MASTER)
-                            dispatch(updateTotalFeeDetails({
-                              amount
-                            }))
+                           
                           }}
                         >
                           <FontAwesomeIcon icon={['far', 'edit']} />
