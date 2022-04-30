@@ -23,7 +23,7 @@ import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { getStudentAdmissionList, addFeePayment, updateStudentDetails, updateFeeDetails, updatePaymentMode } from 'redux/fms/actions'
+import { getStudentAdmissionList, addFeePayment, updateStudentDetails, updatePaymentMode, updateFeeDetails } from 'redux/fms/actions'
 import { getCourses } from 'redux/academic/actions'
 import { resetValues } from './const'
 import { Student } from 'redux/fms/typings'
@@ -208,7 +208,8 @@ const StudentRegistartion = (): ReactElement => {
                       regNo,
                       userId = '',
                       mobileNumber,
-                      fatherName
+                      fatherName,
+                      coachingCentre
                     },
                     index
                   ) => {
@@ -219,18 +220,18 @@ const StudentRegistartion = (): ReactElement => {
                       <TableRow key={`student-list${index}`}>
                         <td>{index + 1}</td>
                         <td>{studentName}</td>
-                        <td>{selectedCourse?.name || courseId}</td>
+                        <td>{selectedCourse?.name || coachingCentre?.coachingCentreName}</td>
                         <td>{regNo}</td>
                         <td>
                           <ActionWrapper
-                            handlePay={() => {
+                            handlePay={() => { 
                               setPayId(userId)
                               dispatch(updateStudentDetails({
                                 studentName: studentName,
-                                courseId: selectedCourse?.name || courseId,
                                 regNo: regNo,
                                 mobileNumber: mobileNumber,
-                                fatherName: fatherName
+                                fatherName: fatherName,
+                                coachingCentre: coachingCentre?.coachingCentreName
                               }))
                             }}
                           />
@@ -271,12 +272,12 @@ const StudentRegistartion = (): ReactElement => {
               date: values?.dateOn
             }
             dispatch(addFeePayment(payload))
-            dispatch(updateFeeDetails({
-              amount: values?.amount
-            }))
             dispatch(updatePaymentMode({
               cash: values?.paymentMode,
               dateOn: values?.dateOn
+            }))
+            dispatch(updateFeeDetails({
+              amount: values?.amount
             }))
             dispatch(getStudentAdmissionList(1))
           }}

@@ -1,6 +1,8 @@
-export const data = [
-   'kg',
-   'kg',
-   'kg',
-   'kg'
+export const tableHeader = [
+   'S.No',
+   'Leave Name',
+   'Status',
+   'Date',
+   'Time',
+   'Action'
 ]

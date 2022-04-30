@@ -74,6 +74,10 @@ export interface GetLeaveMasterList {
     userId: string
 }
 
+export interface LeaveStatusListPayload {
+    value: string
+}
+
 export interface LeaveState {
     isLoading: boolean
     encassable: DropdownList

@@ -1,11 +1,13 @@
-import {  FlexWrapper, PageWrapper, SectionTitle, TableHeader, TableRow, TableWrapper } from 'components'
+import { FlexWrapper, PageWrapper, SectionTitle, TableHeader, TableRow, TableWrapper } from 'components'
 import { ReactElement } from 'react'
 import { Table } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
+import { GetLeaveStatusList } from 'redux/Leave/api'
 import { tableHeader } from './const'
 import { ActionButton } from './subcomponents'
 
 const LeaveApproval = (): ReactElement => {
-    
+    const dispatch = useDispatch()
     return (
         <PageWrapper>
             <SectionTitle title='Leave Approval' />
@@ -28,7 +30,11 @@ const LeaveApproval = (): ReactElement => {
                                 <td>
                                     <ActionButton
                                         variant="outline-secondary"
-                                        onClick={() => { }}
+                                        onClick={() => {
+                                            dispatch(GetLeaveStatusList({
+                                                value:'approved'
+                                            }))
+                                        }}
                                     >
                                         Approval
                                     </ActionButton>
@@ -43,7 +49,7 @@ const LeaveApproval = (): ReactElement => {
                         </tbody>
                     </Table>
                 </TableWrapper>
-            </FlexWrapper> 
+            </FlexWrapper>
         </PageWrapper>
     )
 }

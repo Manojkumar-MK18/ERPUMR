@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import apiEndpoints from "const/apiEndpoints"
 import history from "const/history"
 import api from "services"
-import { AddLeave, GetLeaveDetailsPayload, NewDesignation, NewStaff } from "./typing"
+import { AddLeave, GetLeaveDetailsPayload, LeaveStatusListPayload, NewDesignation, NewStaff } from "./typing"
 
 export const AddLeaveapi = createAsyncThunk(
     'leave/addLeave',
@@ -90,6 +90,16 @@ export const GetLeaveDetailsList = createAsyncThunk(
     'leaveDetails/getDetaisl',
     async (): Promise<any> => {
         const response = await api.get(apiEndpoints.getLeaveDetailsList)
+        return response?.data
+    }
+)
+
+export const GetLeaveStatusList = createAsyncThunk(
+    'leaveStatus/getLeaveStatus',
+    async ({
+        value
+    }: LeaveStatusListPayload): Promise<any> => {
+        const response = await api.get(`${apiEndpoints.getLeaveStatusList}?value=${value}`)
         return response?.data
     }
 )

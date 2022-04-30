@@ -38,7 +38,10 @@ const AddRole = (): ReactElement => {
           }}
           height="72px"
         />
-        <Button>{save}</Button>
+        <Button
+          onClick={() => {
+          }}
+        >{save}</Button>
       </FlexWrapper>
       <>
         <TableWrapper>

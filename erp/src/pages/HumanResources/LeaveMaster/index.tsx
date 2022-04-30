@@ -74,7 +74,7 @@ const LeaveMaster = (): ReactElement => {
                                         <td>{index + 1}</td>
                                         <td>{leaveName}</td>
                                         <td>{leaveDescription}</td>
-                                        <td>{encashable}</td>
+                                        <td>{encashable ? 'YES' : 'NO'}</td>
                                         <td>
                                             <LeaveAction
                                                 handleDelete={() => { }}

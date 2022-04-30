@@ -50,20 +50,18 @@ const DesginationList = (): ReactElement => {
             <TableHeader>
               <TableRow>
                 {tableHeader.map((header, index) => (
-                  <th key={index}>{header}</th> 
+                  <th key={index}>{header}</th>
                 ))}
               </TableRow>
             </TableHeader>
             <tbody>
               {getDesginationList.map((deslist, index) => {
                 const {
-                  designationName,
-                  designationId
+                  designationName 
                 } = deslist
                 return (
                   <TableRow key={`des-${index}`}>
                     <td>{index + 1}</td>
-                    <td>{designationId}</td>
                     <td>{designationName}</td>
                   </TableRow>
                 )

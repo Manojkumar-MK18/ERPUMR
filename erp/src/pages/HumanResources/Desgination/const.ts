@@ -1,5 +1,4 @@
 export const tableHeader = [
-    'SI.No',
-    'Id',
+    'SI.No', 
     'Desgination Name'
 ]

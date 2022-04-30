@@ -20,15 +20,16 @@ const apiEndpoints = {
   staffRegistration: 'staff/newstaff',
   getLeave: 'leave/getLeaveStatus',
   getFeeMasterByTerm: 'feeTypes/getMasterFees',
-  addfees:'feesPaid/add',
-  editDescription:'feeMaster/edit',
+  addfees: 'feesPaid/add',
+  editDescription: 'feeMaster/edit',
   studentRegistration: 'userDetail/save',
   feePayment: 'feesPaid/add',
   getChildCourse: 'course/child/',
-  getSatffList:'staff/liststaff',
+  getSatffList: 'staff/liststaff',
   getDesginationList: 'staff/designationList',
-  getLeaveMasterList:'leave/getLeaveMasterDetails',
-  getLeaveDetailsList: 'leave/getLeaveDetails'
+  getLeaveMasterList: 'leave/getLeaveMasterDetails',
+  getLeaveDetailsList: 'leave/getLeaveDetails',
+  getLeaveStatusList: 'leave/getLeaveStatus'
 }
 
 export default apiEndpoints

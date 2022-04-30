@@ -35,7 +35,7 @@ const AddLeave = (): ReactElement => {
     )
 
     const {
-         hrms: {
+        hrms: {
             leaveMaster: {
                 description,
                 leaveDescription,
@@ -50,6 +50,9 @@ const AddLeave = (): ReactElement => {
     const [values, setValues] = useState(leaveDetails)
     const dispatch = useDispatch()
 
+    const canSave =
+        !!values?.leaveName &&
+        !!values?.encashable
 
     useEffect(() => {
         dispatch(updateSelectedUser({
@@ -100,6 +103,7 @@ const AddLeave = (): ReactElement => {
                     />
                 </DropdownWrapper>
                 <SearchButton
+                    disabled={!canSave}
                     onClick={() => {
                         dispatch(AddLeaveapi({ ...values, ...selectedUser }))
                     }}

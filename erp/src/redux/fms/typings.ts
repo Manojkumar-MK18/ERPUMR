@@ -25,6 +25,10 @@ interface User {
   userName: string
 }
 
+export interface coachi {
+  coachingCentreName: string
+}
+
 export interface Student {
   address1?: string
   address2?: string
@@ -34,7 +38,7 @@ export interface Student {
   branchList?: any
   city?: string
   coachingCenterId?: string
-  coachingCentre?: any
+  coachingCentre?: coachi | any
   country?: string
   createdAt?: number
   createdBy?: string
@@ -81,6 +85,7 @@ export interface StudentList {
 
 export interface FeeDetails {
   amount: string | any
+  academicYear?: string | any
 }
 export interface Payment {
   cash: string

@@ -24,6 +24,7 @@ const Receipt = (): ReactElement => {
         }),
         shallowEqual
     )
+console.log(selectedFeetotalDetails );
 
     return (
         <PageWrapper>
@@ -45,8 +46,8 @@ const Receipt = (): ReactElement => {
                     <SectionTitle title='Fee Receipt' />
                 </FlexWrapper>
                 <FeeAction
-                    handleYear={selectedStudentDetails?.academicYear}
-                    handleClass={selectedStudentDetails?.courseId}
+                    handleYear={selectedFeetotalDetails?.academicYear}
+                    handleClass={selectedStudentDetails?.coachingCentre}
                     handleName={selectedStudentDetails?.studentName}
                     handleAdmNo={selectedStudentDetails?.regNo}
                     handleBranch={undefined}
