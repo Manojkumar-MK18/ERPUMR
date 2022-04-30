@@ -44,6 +44,7 @@ import {
   LessonStatus,
   DesginationList,
   StaffDetails,
+  DayReportBook,
 } from 'pages'
 import ProtectedRoute from './containers/ProtectedRoute'
 import Rec from 'pages/StudentRegistration/receipt'
@@ -132,6 +133,7 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.RECEIPT} component={Rec} />
       <ProtectedRoute path={ROUTES.DESGINATION_LIST} component={DesginationList} />
       <ProtectedRoute path={ROUTES.STAFF_VIEW} component={StaffDetails} />
+      <ProtectedRoute path={ROUTES.DAYBOOK_REPORT} component={DayReportBook} />
     </Switch>
   )
 }

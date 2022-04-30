@@ -40,6 +40,7 @@ import AssignLesson from './LessonPlane/Assign Lesson'
 import LessonStatus from './LessonPlane/LessonStatus'
 import DesginationList from './HumanResources/Desgination'
 import StaffDetails from './StaffRegistration/View'
+import DayReportBook from './ReportModule/daybook'
 
 export {
   Dashboard,
@@ -83,5 +84,6 @@ export {
   AssignLesson,
   LessonStatus,
   DesginationList,
-  StaffDetails
+  StaffDetails,
+  DayReportBook
 }

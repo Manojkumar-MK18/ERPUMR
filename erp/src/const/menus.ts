@@ -168,7 +168,7 @@ const admin: Array<Menu> = [
     ]
   },
   {
-    icon: ['fas', 'home'],
+    icon: ['fas', 'user-tie'],
     label: 'HRMS',
     to: '',
     childs: [
@@ -206,6 +206,18 @@ const admin: Array<Menu> = [
         icon: ['fas', 'bars'],
         label: 'Leave Status',
         to: ROUTES.LEAVE_STATUS
+      }
+    ]
+  },
+  {
+    icon: ['fas', 'home'],
+    label: 'Report Module',
+    to: '',
+    childs: [
+      {
+        icon: ['fas', 'bars'],
+        label: 'Day Book Report',
+        to: ROUTES.DAYBOOK_REPORT
       }
     ]
   }

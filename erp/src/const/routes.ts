@@ -42,7 +42,8 @@ const ROUTES = {
   LESSON_STATUS:'/lessonStatus',
   RECEIPT:'/recipt',
   DESGINATION_LIST:'/desginationList',
-  STAFF_VIEW: '/staffView'
+  STAFF_VIEW: '/staffView',
+  DAYBOOK_REPORT: '/dayBookReport'
 }
 
 export default ROUTES
