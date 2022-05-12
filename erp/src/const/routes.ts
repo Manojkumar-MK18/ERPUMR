@@ -44,7 +44,8 @@ const ROUTES = {
   DESGINATION_LIST:'/desginationList',
   STAFF_VIEW: '/staffView',
   DAYBOOK_REPORT: '/dayBookReport',
-  VIEW_PRIVLEGES_ASSIGNED:'/viewPrivilegesAssigned'
+  VIEW_PRIVLEGES_ASSIGNED:'/viewPrivilegesAssigned',
+  EXAMPLE:'/example'
 }
 
 export default ROUTES

@@ -45,6 +45,7 @@ export interface Student {
   courseId?: any
   dob?: string
   email?: string
+  courseName?:string
   enrollmentNumber?: string
   fatherName?: string
   firstName?: string

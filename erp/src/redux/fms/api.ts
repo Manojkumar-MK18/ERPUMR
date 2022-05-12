@@ -132,7 +132,7 @@ export const addFeePayment = createAsyncThunk(
         return rejectWithValue(strings.pay.pamentFailed)
       }
       if (response?.data) {
-        history.push(ROUTES.RECEIPT)
+        history.push(ROUTES.EXAMPLE )
       }
       return response?.data
     } catch (error) {
