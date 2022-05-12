@@ -41,6 +41,7 @@ import LessonStatus from './LessonPlane/LessonStatus'
 import DesginationList from './HumanResources/Desgination'
 import StaffDetails from './StaffRegistration/View'
 import DayReportBook from './ReportModule/daybook'
+import ViewPrivilegesAssigned from './Settings/ViewPrivileges/View'
 
 export {
   Dashboard,
@@ -85,5 +86,6 @@ export {
   LessonStatus,
   DesginationList,
   StaffDetails,
-  DayReportBook
+  DayReportBook,
+  ViewPrivilegesAssigned
 }

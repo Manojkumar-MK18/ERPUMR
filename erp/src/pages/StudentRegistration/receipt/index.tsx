@@ -1,13 +1,15 @@
+/* eslint-disable no-unused-vars */
 import { FlexWrapper, PageWrapper, SectionTitle, TableHeader, TableRow } from 'components'
 import { TableWrapper } from 'components/PrivilegesTable'
 import { ReactElement } from 'react'
-import { Table } from 'react-bootstrap'
+import { Button, Table } from 'react-bootstrap'
 import { H4, H5 } from 'typography'
 import { tableHeader, tableHeaderMain } from './const'
 import { Border, FeeAction, FeeFooter, ReceiptLogo, ReceiptLogoWrapper, Subtitle } from './subcomponent'
 import logo from '../../../assests/falcon.png'
 import { shallowEqual, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
+import { useHistory } from 'react-router-dom'
 
 const Receipt = (): ReactElement => {
     const {
@@ -24,7 +26,8 @@ const Receipt = (): ReactElement => {
         }),
         shallowEqual
     )
-console.log(selectedFeetotalDetails );
+    const history = useHistory()
+    console.log(selectedFeetotalDetails);
 
     return (
         <PageWrapper>
@@ -64,7 +67,7 @@ console.log(selectedFeetotalDetails );
                         </TableHeader>
                         <tbody>
                             <td>DSE5643-09</td>
-                            <td>{`${selectedPaymentMode?.cash}${selectedPaymentMode?.cash === 'Online' ? ( selectedPaymentMode?.dateOn ) : ''}`}</td>
+                            <td>{`${selectedPaymentMode?.cash}${selectedPaymentMode?.cash === 'Online' ? (selectedPaymentMode?.dateOn) : ''}`}</td>
                             <td>{`${new Date().toLocaleDateString()}`} </td>
                         </tbody>
                     </Table>

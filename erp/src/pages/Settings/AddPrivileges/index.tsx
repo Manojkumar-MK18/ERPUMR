@@ -1,5 +1,6 @@
 import {
     Button,
+    DropdownWrapper,
     EditableDropdown,
     FlexWrapper,
     PageWrapper,
@@ -7,26 +8,51 @@ import {
     TableHeader,
     TableRow,
 } from "../../../components"
-import { ReactElement, useState } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import { TableWrapper } from '../../../components/PrivilegesTable'
 import { Form, Table } from "react-bootstrap"
 import { CheckBoxWrapper, TableDisplayWrapper } from "./subcomponent"
+import { shallowEqual, useDispatch, useSelector } from "react-redux"
+import { RootState } from "redux/store"
+import { getInstituteDropdown } from "helpers"
+import { getInstitutes } from "redux/academic/api"
 
 const AddPrivileges = (): ReactElement => {
+    const { acamedic: {
+        instituteList
+    } } = useSelector((state: RootState) => state, shallowEqual)
+
     // eslint-disable-next-line no-unused-vars
     const [isSelectAll, setIsSelectAll] = useState(false)
+
+    const dispatch = useDispatch()
+    const institutes = instituteList ? getInstituteDropdown(instituteList) : []
+
+    useEffect(() => {
+        dispatch(getInstitutes())
+    })
+
     return (
         <PageWrapper>
             <SectionTitle title="Add Privileges" />
             <FlexWrapper>
-                <EditableDropdown
-                    dropdownList={[]}
-                    title="Admin"
-                    width="30%"
-                    placeholder={"Select Admin"}
-                    handleSelect={() => { }}
-                />
-                <Button style={{ marginBottom: "0px" }}>Submit</Button>
+                <DropdownWrapper>
+                    <EditableDropdown
+                        dropdownList={institutes}
+                        title="Institute"
+                        placeholder={"Select Institutes"}
+                        handleSelect={() => { }}
+                    />
+                </DropdownWrapper>
+                <DropdownWrapper>
+                    <EditableDropdown
+                        dropdownList={[]}
+                        title="Role"
+                        placeholder={"Select Role"}
+                        handleSelect={() => { }}
+                    />
+                </DropdownWrapper>
+                <Button style={{ marginBottom: "12px" }}>Submit</Button>
             </FlexWrapper>
             <>
                 <CheckBoxWrapper noPadding justifyContent="space-between">
@@ -201,7 +227,7 @@ const AddPrivileges = (): ReactElement => {
 
                 </TableDisplayWrapper>
             </>
-            <CheckBoxWrapper noPadding  justifyContent="start">
+            <CheckBoxWrapper noPadding justifyContent="start">
                 <Button>Update</Button>
             </CheckBoxWrapper>
         </PageWrapper>

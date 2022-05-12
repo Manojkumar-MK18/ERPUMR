@@ -43,7 +43,8 @@ const ROUTES = {
   RECEIPT:'/recipt',
   DESGINATION_LIST:'/desginationList',
   STAFF_VIEW: '/staffView',
-  DAYBOOK_REPORT: '/dayBookReport'
+  DAYBOOK_REPORT: '/dayBookReport',
+  VIEW_PRIVLEGES_ASSIGNED:'/viewPrivilegesAssigned'
 }
 
 export default ROUTES

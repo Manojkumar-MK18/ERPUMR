@@ -12,14 +12,11 @@ import {
 } from 'components'
 import { ReactElement, useState } from 'react'
 import { Table } from 'react-bootstrap'
-import { shallowEqual, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'redux/store'
-import { initialValues, tableHeader } from './const'
-import DatePicker from 'react-datepicker'
-import { DatePickerWrapper } from 'pages/subcomponents'
-import { format } from 'date-fns'
-import { DATE_FORMAT_YYYYMMDD } from 'const/dateFormat'
-import { DropdownListProps } from 'components/EditableDropdown/typings'
+import { tableHeader } from './const'
+import { fetchDayBookReport } from 'redux/report/api'
+import { validateDateOfBirth } from 'helpers/formValidation'
 
 const DayReportBook = (): ReactElement => {
     const {
@@ -28,78 +25,76 @@ const DayReportBook = (): ReactElement => {
         }
     } = useSelector((state: RootState) => state, shallowEqual)
 
-    const [values, setValues] = useState(initialValues)
-    console.log(values);
+    const dispatch = useDispatch()
+
+    const [startDate, setStartDate] = useState('')
+    const [feesType, setFeesType] = useState('')
+    const [startDateError, setStartDateError] = useState('')
+    const [endDate, setEndDate] = useState('')
+    const [endDateError, setEndDateError] = useState('')
+
+    console.log(startDate);
+    console.log(endDate);
 
     return (
         <PageWrapper>
             <SectionTitle title='Day Book Reports' />
             <FlexWrapper noPadding>
                 <DropdownWrapper>
-                    <DatePickerWrapper>
-                        <DatePicker
-                            selected={values?.fromDate ? new Date(values?.fromDate) : new Date()}
-                            onSelect={(date: Date) => {
-                                setValues({
-                                    ...values,
-                                    fromDate: date ? format(date, DATE_FORMAT_YYYYMMDD) : ''
-                                })
-                            }}
-                            onChange={(date: Date) => {
-                                setValues({
-                                    ...values,
-                                    fromDate: date ? format(date, DATE_FORMAT_YYYYMMDD) : ''
-                                })
-                            }}
-                            placeholderText={'From Date'}
-                            customInput={
-                                <Input
-                                    value={values?.fromDate}
-                                    label="From Date"
-                                />
-                            }
-                        />
-                    </DatePickerWrapper>
-                </DropdownWrapper>
-                <DropdownWrapper>
-                    <DatePickerWrapper>
-                        <DatePicker
-                            selected={values?.toDate ? new Date(values?.toDate) : new Date()}
-                            onSelect={(date: Date) => {
-                                setValues({
-                                    ...values,
-                                    toDate: date ? format(date, DATE_FORMAT_YYYYMMDD) : ''
-                                })
-                            }}
-                            onChange={(date: Date) => {
-                                setValues({
-                                    ...values,
-                                    toDate: date ? format(date, DATE_FORMAT_YYYYMMDD) : ''
-                                })
-                            }}
-                            placeholderText={'To Date'}
-                            customInput={
-                                <Input
-                                    value={values?.fromDate}
-                                    label="To Date"
-                                />
-                            }
-                        />
-                    </DatePickerWrapper>
-                </DropdownWrapper>
-                <DropdownWrapper>
                     <EditableDropdown
                         dropdownList={feeTypeList}
                         title="Fee Type"
                         placeholder='Select Fee Type'
-                        handleSelect={(value: DropdownListProps) => {
-                            setValues({
-                                ...values, acedemicYear: value?.name
-                            })
+                        handleSelect={(value) => {
+                            setFeesType(value)
                         }}
                     />
                 </DropdownWrapper>
-                <Button style={{ marginTop: "24px" }}>Submit</Button>
+                <DropdownWrapper>
+                    <Input
+                        label={'Start Date'}
+                        placeholder={'enterDob'}
+                        value={startDate}
+                        isRequired
+                        width="100%"
+                        onBlur={() => {
+                            const error = validateDateOfBirth(startDate)
+                            setStartDateError(error)
+                        }}
+                        error={startDateError}
+                        onChange={(value: string) => {
+                            setStartDate(value)
+                        }}
+                        height="50px"
+                    />
+                </DropdownWrapper>
+                <DropdownWrapper>
+                    <Input
+                        label={'End Date'}
+                        placeholder={'enterDob'}
+                        value={endDate}
+                        isRequired
+                        onBlur={() => {
+                            const error = validateDateOfBirth(endDate)
+                            setEndDateError(error)
+                        }}
+                        error={endDateError }
+                        width="100%"
+                        onChange={(value: string) => {
+                            setEndDate(value)
+                        }}
+                        height="50px"
+                    />
+                </DropdownWrapper>
+                <Button
+                    onClick={() => {
+                        dispatch(fetchDayBookReport({
+                            from: startDate,
+                            toDate: endDate,
+                            type: feesType
+                        }))
+                    }}
+                    style={{ marginTop: "24px" }}>Submit</Button>
             </FlexWrapper>
             <>
                 <FlexWrapper justifyContent='end'>

@@ -29,7 +29,8 @@ const apiEndpoints = {
   getDesginationList: 'staff/designationList',
   getLeaveMasterList: 'leave/getLeaveMasterDetails',
   getLeaveDetailsList: 'leave/getLeaveDetails',
-  getLeaveStatusList: 'leave/getLeaveStatus'
+  getLeaveStatusList: 'leave/getLeaveStatus',
+  getDayBookReport: 'feesPaid/search'
 }
 
 export default apiEndpoints
