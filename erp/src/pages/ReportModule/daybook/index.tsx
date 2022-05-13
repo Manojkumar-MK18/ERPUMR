@@ -105,6 +105,7 @@ const DayBookReport = (): ReactElement => {
                     />
                 </DropdownWrapper>
                 <Button
+                    style={{ marginTop: '24px' }}
                     onClick={() => {
                         dispatch(
                             fetchDayBookReport({
@@ -118,6 +119,11 @@ const DayBookReport = (): ReactElement => {
                     {search}
                 </Button>
             </FlexWrapper>
+            <div>
+                <FlexWrapper justifyContent='center'>
+                    <Button>Export to Excel</Button>
+                </FlexWrapper>
+            </div>
             <div>
                 <TableWrapper>
                     <Table size="sm" responsive="sm">
