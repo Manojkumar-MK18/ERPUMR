@@ -120,7 +120,7 @@ const DayBookReport = (): ReactElement => {
                 </Button>
             </FlexWrapper>
             <div>
-                <FlexWrapper justifyContent='center'>
+                <FlexWrapper justifyContent='end'>
                     <Button>Export to Excel</Button>
                 </FlexWrapper>
             </div>
