@@ -8,7 +8,6 @@ export const tableHeader = [
     "Admission Number",
     "Fee Description",
     "Fee Paid",
-    "Fee",
     "Cashier"
 ]
 

@@ -8,7 +8,7 @@ import {
 import strings from 'locale/en'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { getFeeMaster, updateTotalFeeDetails } from 'redux/fms/actions'
+import { getFeeDescriptions, getFeeMaster, updateTotalFeeDetails } from 'redux/fms/actions'
 import getDescriptionDropdown from 'helpers/getDescriptionDropdown'
 import { resetPaymentValues } from '../const'
 import { PayProps } from '../typings'
@@ -19,13 +19,13 @@ import { DATE_FORMAT_MMDDYYYY } from 'const/dateFormat'
 const Pay = ({ values, setValues }: PayProps): ReactElement => {
   const {
     acamedic: { feeTypeList, courseList, termList, paymentModes },
-    fms: { feeMasterList }
+    fms: { feeMasterList, feeDescriptionList }
   } = useSelector((state: RootState) => state, shallowEqual)
   const dispatch = useDispatch()
   const [resetValues, setResetValues] = useState(resetPaymentValues)
   const [showOtherAmount, setShowOtherAmount] = useState(false)
   const filteredDescriptions = values.feeType
-    ? feeMasterList.filter(
+    ? feeDescriptionList.filter(
       (description) => description.title === values.feeType
     )
     : []
@@ -104,6 +104,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
 
   useEffect(() => {
     dispatch(getFeeMaster())
+    dispatch(getFeeDescriptions())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

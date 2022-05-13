@@ -1,67 +1,85 @@
+import { ReactElement, useState } from 'react'
 import {
-    Button,
-    DropdownWrapper,
-    EditableDropdown,
-    FlexWrapper,
-    Input,
     PageWrapper,
     SectionTitle,
+    FlexWrapper,
+    DropdownWrapper,
+    EditableDropdown,
+    Input,
+    TableWrapper,
     TableHeader,
     TableRow,
-    TableWrapper
+    Button
 } from 'components'
-import { ReactElement, useState } from 'react'
-import { Table } from 'react-bootstrap'
-import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import strings from 'locale/en'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { tableHeader } from './const'
-import { fetchDayBookReport } from 'redux/report/api'
 import { validateDateOfBirth } from 'helpers/formValidation'
+import Table from 'react-bootstrap/Table'
+import { tableHeader } from './const'
+import { fetchDayBookReport } from 'redux/report/action'
+import moment from 'moment'
 
-const DayReportBook = (): ReactElement => {
+const DayBookReport = (): ReactElement => {
     const {
-        acamedic: {
-            feeTypeList
-        }
-    } = useSelector((state: RootState) => state, shallowEqual)
-
-    const dispatch = useDispatch()
+        acamedic: { feeTypeList },
+        report: { dayBookReportList },
+        cashier
+    } = useSelector((state: RootState) =>
+    ({
+        acamedic: state.acamedic,
+        report: state.report,
+        cashier: state.user.userInfo?.userDetail.firstName
+    }),
+        shallowEqual
+    )
 
     const [startDate, setStartDate] = useState('')
     const [feesType, setFeesType] = useState('')
     const [startDateError, setStartDateError] = useState('')
     const [endDate, setEndDate] = useState('')
     const [endDateError, setEndDateError] = useState('')
+    const dispatch = useDispatch()
 
-    console.log(startDate);
-    console.log(endDate);
+    const {
+        fms: {
+            feeDescription: { feeType, selectFeeType }
+        },
+        dayBookReport: { title, startDateLabel, endDateLabel },
+        studentRegistration: {
+            childInformation: { enterDob }
+        },
+        button: { search }
+    } = strings
 
     return (
-        <PageWrapper>
-            <SectionTitle title='Day Book Reports' />
-            <FlexWrapper noPadding>
+        <PageWrapper id="container">
+            <SectionTitle title={title} />
+            <FlexWrapper width="100%">
                 <DropdownWrapper>
                     <EditableDropdown
                         dropdownList={feeTypeList}
-                        title="Fee Type"
-                        placeholder='Select Fee Type'
-                        handleSelect={(value) => {
-                            setFeesType(value)
+                        title={feeType}
+                        placeholder={selectFeeType}
+                        onBlur={() => { }}
+                        error={''}
+                        handleSelect={(item) => {
+                            setFeesType(item.name)
                         }}
                     />
                 </DropdownWrapper>
                 <DropdownWrapper>
                     <Input
-                        label={'Start Date'}
-                        placeholder={'enterDob'}
+                        label={startDateLabel}
+                        placeholder={enterDob}
                         value={startDate}
-                        isRequired
-                        width="100%"
                         onBlur={() => {
                             const error = validateDateOfBirth(startDate)
                             setStartDateError(error)
                         }}
                         error={startDateError}
+                        isRequired
+                        width="100%"
                         onChange={(value: string) => {
                             setStartDate(value)
                         }}
@@ -70,15 +88,15 @@ const DayReportBook = (): ReactElement => {
                 </DropdownWrapper>
                 <DropdownWrapper>
                     <Input
-                        label={'End Date'}
-                        placeholder={'enterDob'}
+                        label={endDateLabel}
+                        placeholder={enterDob}
                         value={endDate}
-                        isRequired
                         onBlur={() => {
                             const error = validateDateOfBirth(endDate)
                             setEndDateError(error)
                         }}
-                        error={endDateError }
+                        error={endDateError}
+                        isRequired
                         width="100%"
                         onChange={(value: string) => {
                             setEndDate(value)
@@ -88,47 +106,62 @@ const DayReportBook = (): ReactElement => {
                 </DropdownWrapper>
                 <Button
                     onClick={() => {
-                        dispatch(fetchDayBookReport({
-                            from: startDate,
-                            toDate: endDate,
-                            type: feesType
-                        }))
+                        dispatch(
+                            fetchDayBookReport({
+                                fromDate: startDate,
+                                toDate: endDate,
+                                type: feesType
+                            })
+                        )
                     }}
-                    style={{ marginTop: "24px" }}>Submit</Button>
+                >
+                    {search}
+                </Button>
             </FlexWrapper>
-            <>
-                <FlexWrapper justifyContent='end'>
-                    <Button>Export to Excel</Button>
-                </FlexWrapper>
+            <div>
                 <TableWrapper>
-                    <Table size='sm' responsive="sm">
+                    <Table size="sm" responsive="sm">
                         <TableHeader>
                             <TableRow>
-                                {tableHeader.map((header, index) => (
-                                    <th key={`report-${index}`}>{header}</th>
+                                {tableHeader?.map((header, index) => (
+                                    <th key={`header-${index}`}>{header}</th>
                                 ))}
                             </TableRow>
                         </TableHeader>
                         <tbody>
-                            <TableRow>
-                                <td>Date</td>
-                                <td>Receipt number</td>
-                                <td>Course</td>
-                                <td>Branch</td>
-                                <td>Batch</td>
-                                <td>Name</td>
-                                <td>Admission Number</td>
-                                <td>Fee Description</td>
-                                <td>Fee Paid</td>
-                                <td>Fee</td>
-                                <td>Cashier</td>
-                            </TableRow>
+                            {dayBookReportList.map(
+                                (
+                                    {
+                                        id,
+                                        description = '',
+                                        createdAt = '',
+                                        userDetail: { studentName, regNo },
+                                        paid
+                                    },
+                                    index
+                                ) => {
+                                    return (
+                                        <TableRow key={`index-${index}`}>
+                                            <td>{moment(createdAt).format('YYYY-MM-DD')}</td>
+                                            <td>{id}</td>
+                                            <td>{'-course-'}</td>
+                                            <td>{'-Branch-'}</td>
+                                            <td>{'-batch'}</td>
+                                            <td>{studentName}</td>
+                                            <td>{regNo}</td>
+                                            <td>{description}</td>
+                                            <td>{paid ? 'Yes' : 'No'}</td>
+                                            <td>{cashier}</td>
+                                        </TableRow>
+                                    )
+                                }
+                            )}
                         </tbody>
                     </Table>
                 </TableWrapper>
-            </>
+            </div>
         </PageWrapper>
     )
 }
 
-export default DayReportBook
+export default DayBookReport

@@ -163,6 +163,12 @@ const strings = {
     addYear: 'Add Year',
     yearPlaceholder: 'Year'
   },
+  dayBookReport: {
+    title: 'Day Book Report',
+    startDateLabel: 'Start Date',
+    endDateLabel: 'End Date',
+    error: 'Unable to fetch records'
+  },
   fms: {
     feeDescription: {
       feeDescriptionList: 'Fee Description List',
