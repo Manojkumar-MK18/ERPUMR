@@ -30,7 +30,11 @@ const apiEndpoints = {
   getLeaveMasterList: 'leave/getLeaveMasterDetails',
   getLeaveDetailsList: 'leave/getLeaveDetails',
   getLeaveStatusList: 'leave/getLeaveStatus',
-  getDayBookReport: 'feesPaid/search'
+  getDayBookReport: 'feesPaid/search',
+  assignLessonPlane: 'lessonplan/assignlessonplan',
+  lessonPlanDetails: 'lessonplan/lessonplandetail',
+  lesson: 'lessonplan/lessonplanbydate',
+  ggg:'role/securerole'
 }
 
 export default apiEndpoints

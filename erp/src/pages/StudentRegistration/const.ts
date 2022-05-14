@@ -2,7 +2,7 @@ export const tableHeader = [
   'SNo',
   'Student Name',
   'Course',
-  'Admission No',   
+  'Admission No',
   'Action'
 ]
 
@@ -20,7 +20,8 @@ export const initialPaymentValues = {
   courseId: '',
   term: '',
   referenceId: '',
-  dateOn:''
+  dateOn: '',
+  balance: true
 }
 
 export const resetPaymentValues = {

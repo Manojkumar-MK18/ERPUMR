@@ -46,7 +46,9 @@ const AssignLesson = (): ReactElement => {
                         isRequired
                     />
                 </DropdownWrapper>
-                <Button style={{ marginTop: "24px" }}>Assign</Button>
+                <Button
+                    onClick={() => { }}
+                    style={{ marginTop: "24px" }}>Assign</Button>
             </FlexWrapper>
             <>
                 <TableWrapper>

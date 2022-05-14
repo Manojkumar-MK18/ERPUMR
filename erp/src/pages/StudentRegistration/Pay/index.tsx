@@ -3,7 +3,7 @@ import {
   FlexWrapper,
   EditableDropdown,
   DropdownWrapper,
-  Input
+  Input,
 } from 'components'
 import strings from 'locale/en'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
@@ -19,8 +19,13 @@ import { DATE_FORMAT_MMDDYYYY } from 'const/dateFormat'
 const Pay = ({ values, setValues }: PayProps): ReactElement => {
   const {
     acamedic: { feeTypeList, courseList, termList, paymentModes },
-    fms: { feeMasterList, feeDescriptionList }
-  } = useSelector((state: RootState) => state, shallowEqual)
+    fms: { feeMasterList, feeDescriptionList, selectedFeetotalDetails }
+  } = useSelector((state: RootState) => ({
+    acamedic: state.acamedic,
+    fms: state.fms
+  }),
+    shallowEqual)
+
   const dispatch = useDispatch()
   const [resetValues, setResetValues] = useState(resetPaymentValues)
   const [showOtherAmount, setShowOtherAmount] = useState(false)
@@ -107,6 +112,10 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
     dispatch(getFeeDescriptions())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  console.log(amountToPay);
+
+
 
   return (
     <FlexWrapper width="100%" justifyContent="center">
@@ -253,29 +262,34 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
         />
       </DropdownWrapper>
       {showOtherAmount && (
-        <DropdownWrapper width="50%">
-          <Input
-            label={otherAmount}
-            placeholder={otherAmountPlaceHolder}
-            value={values?.amount}
-            onBlur={() => { }}
-            error={''}
-            width="100%"
-            onChange={(value: string) => {
-              const amountValue = Number(value)
-              if (amountValue > 0 && !isNaN(amountValue)) {
-                setValues({
-                  ...values,
-                  amount: value,
-                  paymentMode: '',
-                  referenceId: ''
-                })
-              }
-            }}
-            height="50px" />
-        </DropdownWrapper>
+        <>
+          <DropdownWrapper width="50%">
+            <Input
+              label={otherAmount}
+              placeholder={otherAmountPlaceHolder}
+              value={values?.amount}
+              onBlur={() => { }}
+              error={''}
+              width="100%"
+              onChange={(value: string) => {
+                const amountValue = Number(value)
+                if (amountValue > 0 && !isNaN(amountValue)) {
+                  setValues({
+                    ...values,
+                    amount: value,
+                    paymentMode: '',
+                    referenceId: ''
+                  })
+                }
+              }}
+              height="50px" />
+          </DropdownWrapper>
+          <DropdownWrapper width='50%'>
+            <b>Balance: {values?.amount ? <span style={{ color: 'red' }}> {selectedFeetotalDetails?.amount - values?.amount}</span> : ''}</b>
+          </DropdownWrapper>
+        </>
       )}
-      <DropdownWrapper width="50%">
+      <DropdownWrapper width='50%'>
         <EditableDropdown
           dropdownList={paymentModes}
           title={paymentTypeLabel}
@@ -293,54 +307,56 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
           reset={resetValues?.paymentMode}
         />
       </DropdownWrapper>
-      {values?.paymentMode === 'Online' && (
-        <>
-          <DropdownWrapper width="50%">
-            <Input
-              placeholder={referenceId}
-              value={values?.referenceId}
-              onBlur={() => { }}
-              error={''}
-              onChange={(value: string) => {
-                setValues({
-                  ...values,
-                  referenceId: value
-                })
-                setResetValues(resetPaymentValues)
-              }}
-              height="50px"
-            />
-          </DropdownWrapper>
-          <DropdownWrapper width='50%'>
-            <DatePicker
-              selected={values?.dateOn ? new Date(values?.dateOn) : new Date()}
-              onSelect={(dates: Date) => {
-                setValues({
-                  ...values,
-                  dateOn: dates ? format(dates, DATE_FORMAT_MMDDYYYY) : ''
-                })
-              }}
-              onChange={(dates: Date) => {
-                setValues({
-                  ...values,
-                  dateOn: dates ? format(dates, DATE_FORMAT_MMDDYYYY) : ''
-                })
-              }}
-              placeholderText={'Date'}
-              customInput={
-                <Input
-                  value={values?.dateOn}
-                  isRequired
-                  inputType="text"
-                  placeholder={'From Date'}
-                  suffix={['far', 'calendar']}
-                />
-              }
-            />
-          </DropdownWrapper>
-        </>
-      )}
-    </FlexWrapper>
+      {
+        values?.paymentMode === 'Online' && (
+          <>
+            <DropdownWrapper width="50%">
+              <Input
+                placeholder={referenceId}
+                value={values?.referenceId}
+                onBlur={() => { }}
+                error={''}
+                onChange={(value: string) => {
+                  setValues({
+                    ...values,
+                    referenceId: value
+                  })
+                  setResetValues(resetPaymentValues)
+                }}
+                height="50px"
+              />
+            </DropdownWrapper>
+            <DropdownWrapper width='50%'>
+              <DatePicker
+                selected={values?.dateOn ? new Date(values?.dateOn) : new Date()}
+                onSelect={(dates: Date) => {
+                  setValues({
+                    ...values,
+                    dateOn: dates ? format(dates, DATE_FORMAT_MMDDYYYY) : ''
+                  })
+                }}
+                onChange={(dates: Date) => {
+                  setValues({
+                    ...values,
+                    dateOn: dates ? format(dates, DATE_FORMAT_MMDDYYYY) : ''
+                  })
+                }}
+                placeholderText={'Date'}
+                customInput={
+                  <Input
+                    value={values?.dateOn}
+                    isRequired
+                    inputType="text"
+                    placeholder={'From Date'}
+                    suffix={['far', 'calendar']}
+                  />
+                }
+              />
+            </DropdownWrapper>
+          </>
+        )
+      }
+    </FlexWrapper >
   )
 }
 

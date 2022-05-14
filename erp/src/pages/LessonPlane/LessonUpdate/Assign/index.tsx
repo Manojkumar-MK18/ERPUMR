@@ -1,12 +1,14 @@
 import { DropdownWrapper, EditableDropdown, FlexWrapper, Input } from 'components'
 import { DatePickerWrapper } from 'pages/subcomponents'
-import { ReactElement, useEffect, useState } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import getCourses, { getChildCourses } from 'redux/academic/api'
 import { RootState } from 'redux/store'
 import { AssignProps } from '../typing'
 import DatePicker from 'react-datepicker'
 import { DropdownListProps } from 'components/EditableDropdown/typings'
+import { format } from 'date-fns'
+import { DATE_FORMAT_MMDDYYYY } from 'const/dateFormat'
 
 const AssignList = ({ values, setValues }: AssignProps): ReactElement => {
     const {
@@ -22,13 +24,13 @@ const AssignList = ({ values, setValues }: AssignProps): ReactElement => {
     }))
 
     const dispatch = useDispatch()
-    const [date, setDate] = useState<any>(new Date())
 
     useEffect(() => {
         dispatch(getCourses())
         /* eslint-disable react-hooks/exhaustive-deps */
     }, [])
-console.log(values?.date );
+
+    console.log(values);
 
     return (
         <FlexWrapper width="100%" justifyContent="center">
@@ -91,19 +93,25 @@ console.log(values?.date );
             <DropdownWrapper width='50%'>
                 <DatePickerWrapper>
                     <DatePicker
-                        selected={date}
-                        onSelect={(date: Date) => setDate(date)}
-                        onChange={(date: Date) => setDate(date)}
+                        selected={values?.date ? new Date(values?.date) : new Date()}
+                        onSelect={(datees: Date) => {
+                            setValues({
+                                ...values,
+                                date: datees ? format(datees, DATE_FORMAT_MMDDYYYY) : ''
+                            })
+                        }}
+                        onChange={(datees: Date) => {
+                            setValues({
+                                ...values,
+                                date: datees ? format(datees, DATE_FORMAT_MMDDYYYY) : '' 
+                            })
+                        }}
                         customInput={
                             <Input
-                                value={date}
+                                value={values?.date}
                                 label={'Select Assign Date'}
                                 isRequired
                                 suffix={['far', 'calendar']}
-                                onChange={(date) => {
-                                    setDate(date)
-                                    setValues({...values, date:date})
-                                }}
                             />
                         }
                     />
