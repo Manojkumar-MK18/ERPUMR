@@ -1,4 +1,4 @@
-export const tableHeader = ['Dr Ledger', 'Amount', 'Add', 'Remove']
+export const tableHeader = ['SN.No', 'Receipt Id', 'Name', 'Mode of Payment','Action']
 
 export const feeDescriptionTableHeader = [
   'FeeDescription',

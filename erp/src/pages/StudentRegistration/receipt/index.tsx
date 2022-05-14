@@ -86,12 +86,13 @@ const Receipt = (): ReactElement => {
                             <tbody>
                                 <TableRow>
                                     <td>1</td>
-                                    <td >
-                                        <div >ACADEMIC FEES</div>
-                                        <div>Remarks</div>
+                                    <td>
+                                        <div style={{ borderBottom: '1px solid lightgray', padding: '5px' }}>ACADEMIC FEES</div>
+                                        <div style={{ padding: '5px' }}>Remarks</div>
                                     </td>
                                     <td>
-                                        <div>₹ 100</div>
+                                        <div style={{ borderBottom: '1px solid lightgray', padding: '5px' }}>₹ 100</div>
+                                        <div style={{ padding: '5px' }}></div>
                                     </td>
                                 </TableRow>
                             </tbody>
@@ -164,11 +165,12 @@ const Receipt = (): ReactElement => {
                                 <TableRow>
                                     <td>1</td>
                                     <td >
-                                        <div >ACADEMIC FEES</div>
-                                        <div>Remarks</div>
+                                        <div style={{ borderBottom: '1px solid lightgray', padding: '5px' }}>ACADEMIC FEES</div>
+                                        <div style={{ padding: '5px' }}>Remarks</div>
                                     </td>
                                     <td>
-                                        <div>₹ 100</div>
+                                        <div style={{ borderBottom: '1px solid lightgray', padding: '5px' }}>₹ 100</div>
+                                        <div style={{ padding: '5px' }}></div>
                                     </td>
                                 </TableRow>
                             </tbody>

@@ -29,6 +29,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
   const dispatch = useDispatch()
   const [resetValues, setResetValues] = useState(resetPaymentValues)
   const [showOtherAmount, setShowOtherAmount] = useState(false)
+  
   const filteredDescriptions = values.feeType
     ? feeDescriptionList.filter(
       (description) => description.title === values.feeType
