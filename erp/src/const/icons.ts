@@ -20,7 +20,8 @@ import {
   faPlusCircle,
   faBook,
   faUserTie,
-  faPrint
+  faPrint,
+  faClipboardList
 } from '@fortawesome/free-solid-svg-icons'
 import { faUser, faEdit, faTrashAlt, faEye, } from '@fortawesome/free-regular-svg-icons'
 
@@ -49,5 +50,6 @@ library.add(
   faEye,
   faBook,
   faUserTie,
-  faPrint
+  faPrint,
+  faClipboardList
 )

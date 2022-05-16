@@ -48,6 +48,14 @@ const LessonUpdate = (): ReactElement => {
         /* eslint-disable react-hooks/exhaustive-deps */
     }, [])
 
+    const canSave =
+        !!values?.course &&
+        !!values?.subject &&
+        !!values?.chapter &&
+        !!values?.topic &&
+        !!values?.date
+
+
     return (
         <PageWrapper>
             <SectionTitle title='Lesson Updates' />
@@ -123,6 +131,7 @@ const LessonUpdate = (): ReactElement => {
                     isLargeModal={true}
                     title="Select Course & Subject"
                     description=''
+                    isDisabled={!canSave}
                 >
                     <AssignList values={values} setValues={setValues} />
                 </BootstrapModal>

@@ -210,7 +210,7 @@ const admin: Array<Menu> = [
     ]
   },
   {
-    icon: ['fas', 'home'],
+    icon: ['fas', 'clipboard-list'],
     label: 'Report Module',
     to: '',
     childs: [

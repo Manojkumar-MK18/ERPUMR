@@ -1,6 +1,6 @@
 import { DropdownWrapper, EditableDropdown, FlexWrapper, Input } from 'components'
 import { DatePickerWrapper } from 'pages/subcomponents'
-import { ReactElement, useEffect } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import getCourses, { getChildCourses } from 'redux/academic/api'
 import { RootState } from 'redux/store'
@@ -9,6 +9,7 @@ import DatePicker from 'react-datepicker'
 import { DropdownListProps } from 'components/EditableDropdown/typings'
 import { format } from 'date-fns'
 import { DATE_FORMAT_MMDDYYYY } from 'const/dateFormat'
+import { resetLessonValues } from '../const'
 
 const AssignList = ({ values, setValues }: AssignProps): ReactElement => {
     const {
@@ -24,6 +25,7 @@ const AssignList = ({ values, setValues }: AssignProps): ReactElement => {
     }))
 
     const dispatch = useDispatch()
+    const [resetValues, setResetValues] = useState(resetLessonValues)
 
     useEffect(() => {
         dispatch(getCourses())
@@ -44,7 +46,15 @@ const AssignList = ({ values, setValues }: AssignProps): ReactElement => {
                             courseId: item?.id,
                             type: 'SUBJECT'
                         }))
+                        setResetValues({
+                            ...resetLessonValues,
+                            chapter: true,
+                            subject: true,
+                            topic: true,
+                            date: true
+                        })
                     }}
+                    reset={resetValues?.course}
                 />
             </DropdownWrapper>
             <DropdownWrapper width='50%'>
@@ -59,7 +69,14 @@ const AssignList = ({ values, setValues }: AssignProps): ReactElement => {
                             courseId: item?.id,
                             type: 'CHAPTER'
                         }))
+                        setResetValues({
+                            ...resetLessonValues,
+                            chapter: true,
+                            topic: true,
+                            date: true
+                        })
                     }}
+                    reset={resetValues?.subject}
                 />
             </DropdownWrapper>
             <DropdownWrapper width='50%'>
@@ -74,7 +91,13 @@ const AssignList = ({ values, setValues }: AssignProps): ReactElement => {
                             courseId: item?.id,
                             type: 'TOPIC'
                         }))
+                        setResetValues({
+                            ...resetLessonValues,
+                            topic: true,
+                            date: true
+                        })
                     }}
+                    reset={resetValues?.chapter}
                 />
             </DropdownWrapper>
             <DropdownWrapper width='50%'>
@@ -85,7 +108,12 @@ const AssignList = ({ values, setValues }: AssignProps): ReactElement => {
                     dropdownList={topicList}
                     handleSelect={(item: DropdownListProps) => {
                         setValues({ ...values, topic: item?.name })
+                        setResetValues({
+                            ...resetLessonValues,
+                            date: true
+                        })
                     }}
+                    reset={resetValues?.topic}
                 />
             </DropdownWrapper>
             <DropdownWrapper width='50%'>
@@ -101,7 +129,7 @@ const AssignList = ({ values, setValues }: AssignProps): ReactElement => {
                         onChange={(datees: Date) => {
                             setValues({
                                 ...values,
-                                date: datees ? format(datees, DATE_FORMAT_MMDDYYYY) : '' 
+                                date: datees ? format(datees, DATE_FORMAT_MMDDYYYY) : ''
                             })
                         }}
                         customInput={

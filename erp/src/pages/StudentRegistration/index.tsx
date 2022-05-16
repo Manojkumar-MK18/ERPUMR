@@ -60,13 +60,13 @@ const StudentRegistartion = (): ReactElement => {
     totalPages = 0,
     page = 0
   } = studentApplicationList || {}
-  
+
   const [payId, setPayId] = useState('')
   const [values, setValues] = useState(initialPaymentValues)
   const [resetValuesState, setResetValuesState] = useState(resetValues)
   const [registrationList, setRegistrationList] = useState<Array<Student>>([])
   const filteredList = registrationList.length > 0 ? registrationList : content
-  
+
   console.log(filteredList);
   console.log(registrationList);
 
@@ -83,15 +83,13 @@ const StudentRegistartion = (): ReactElement => {
     !!values?.feeType &&
     !!values?.description &&
     !!values?.courseId &&
-    !!values?.term &&
+    !!values?.term && 
     !!values?.amount &&
     !!values?.paymentMode
-  console.log(values)
 
   useEffect(() => {
     dispatch(getStudentAdmissionList(1))
     dispatch(getCourses())
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
