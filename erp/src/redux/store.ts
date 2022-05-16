@@ -7,6 +7,7 @@ import financeReducer from './finance/reducer'
 import fms from './fms/reducer'
 import leaveReducer from './Leave/reducer'
 import reportReducer from './report/reducer'
+import lessonReducer from './lesson/reducer'
 
 const initialState = {}
 
@@ -18,7 +19,8 @@ const rootReducer = {
   finance: financeReducer,
   fms: fms,
   leave: leaveReducer,
-  report: reportReducer
+  report: reportReducer,
+  lesson: lessonReducer
 }
 
 export const store = configureStore({

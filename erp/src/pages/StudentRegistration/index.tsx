@@ -54,11 +54,13 @@ const StudentRegistartion = (): ReactElement => {
   } = strings
   const history = useHistory()
   const dispatch = useDispatch()
+
   const {
     content = [],
     totalPages = 0,
     page = 0
   } = studentApplicationList || {}
+  
   const [payId, setPayId] = useState('')
   const [values, setValues] = useState(initialPaymentValues)
   const [resetValuesState, setResetValuesState] = useState(resetValues)

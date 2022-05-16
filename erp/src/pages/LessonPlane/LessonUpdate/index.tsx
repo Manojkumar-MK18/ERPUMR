@@ -5,6 +5,7 @@ import {
     Icon,
     PageWrapper,
     SectionTitle,
+    TableFooter,
     TableHeader,
     TableRow,
     TableWrapper
@@ -12,19 +13,39 @@ import {
 import { Table } from 'react-bootstrap'
 import { initialModalValues, tableHeader } from './const'
 import { BootstrapModal } from './subcomponent'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import getCourses from 'redux/academic/api'
 import AssignList from './Assign'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { AssignLessonPalnApi, LessonPlaneListApi } from 'redux/lesson/api'
+import { RootState } from 'redux/store'
+import { LessonPlaneList } from 'redux/lesson/typing'
 
 const LessonUpdate = (): ReactElement => {
+
+    const {
+        lessonPlaneList
+    } = useSelector(
+        (state: RootState) => ({
+            lessonPlaneList: state.lesson.lessonPlaneList
+        })
+    )
+
+    const {
+        lessonplan = [],
+        totalPages = 0,
+        currentPage = 0
+    } = lessonPlaneList || {}
 
     const dispatch = useDispatch()
     const [courseModal, showCourseModal] = useState('')
     const [values, setValues] = useState(initialModalValues)
-
+    // eslint-disable-next-line no-unused-vars
+    const [lessonList, setLessonList] = useState<Array<LessonPlaneList>>([])
+    const filteredList = lessonList.length > 0 ? lessonList : lessonplan
     useEffect(() => {
         dispatch(getCourses())
+        dispatch(LessonPlaneListApi(1))
         /* eslint-disable react-hooks/exhaustive-deps */
     }, [])
 
@@ -49,19 +70,37 @@ const LessonUpdate = (): ReactElement => {
                             </TableRow>
                         </TableHeader>
                         <tbody>
-                            <TableRow>
-                                <td>1</td>
-                                <td>Course</td>
-                                <td>Subject</td>
-                                <td>Chapter</td>
-                                <td>
-                                    <Icon>
-                                        <FontAwesomeIcon icon={['far', 'edit']} /> 
-                                    </Icon>
-                                </td>
-                            </TableRow>
+                            {filteredList?.map((
+                                {
+                                    assignedDate,
+                                    chapter,
+                                    course,
+                                    topic,
+                                    subject
+                                },
+                                index
+                            ) => {
+                                <TableRow key={`lesson-${index}`}>
+                                    <td>{assignedDate}</td>
+                                    <td>{course}</td>
+                                    <td>{chapter}</td>
+                                    <td>{topic}</td>
+                                    <td>{subject}</td>
+                                    <td>
+                                        <Icon>
+                                            <FontAwesomeIcon icon={['far', 'edit']} />
+                                        </Icon>
+                                    </td>
+                                </TableRow>
+                            })}
                         </tbody>
                     </Table>
+                    <TableFooter
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        handleNext={() => { }}
+                        handlePrevious={() => { }}
+                    />
                 </TableWrapper>
             </>
             {courseModal &&
@@ -69,6 +108,13 @@ const LessonUpdate = (): ReactElement => {
                     handleCancel={() => showCourseModal('')}
                     handleSubmit={() => {
                         showCourseModal('')
+                        dispatch(AssignLessonPalnApi({
+                            course: values?.course,
+                            subject: values?.subject,
+                            chapter: values?.chapter,
+                            topic: values?.topic,
+                            assignedDate: values?.date
+                        }))
                     }}
                     isLargeModal={true}
                     title="Select Course & Subject"

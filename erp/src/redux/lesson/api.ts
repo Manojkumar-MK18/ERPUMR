@@ -28,3 +28,11 @@ export const AssignLessonPalnApi = createAsyncThunk(
         return response?.data
     }
 )
+
+export const LessonPlaneListApi = createAsyncThunk(
+    'lessonPale/List',
+    async (page: number): Promise<any> => {
+        const response = await api.get(`${apiEndpoints.lessonplanebyPage}?page=${page}&size=30`)
+        return response?.data
+    }
+)

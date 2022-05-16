@@ -32,6 +32,9 @@ const apiEndpoints = {
   getLeaveStatusList: 'leave/getLeaveStatus',
   getDayBookReport: 'feesPaid/search',
   assignLessonPlane: 'lessonplan/assignlessonplan',
+  lessonplanebyPage: 'lessonplan/lessonplanbypage',
+
+
   lessonPlanDetails: 'lessonplan/lessonplandetail',
   lesson: 'lessonplan/lessonplanbydate',
   ggg:'role/securerole'
