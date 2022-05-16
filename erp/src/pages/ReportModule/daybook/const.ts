@@ -16,3 +16,15 @@ export const initialValues = {
     toDate: '',
     acedemicYear: ''
 }
+
+export const Exceldatas = [
+    {
+        SNo: '',
+        Receiptnumber: '',
+        Course: '',
+        Branch: '',
+        Batch: '',
+        Name: '',
+        FeeDescription: '',
+    }
+]

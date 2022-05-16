@@ -16,9 +16,10 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
 import { validateDateOfBirth } from 'helpers/formValidation'
 import Table from 'react-bootstrap/Table'
-import { tableHeader } from './const'
+import { tableHeader, Exceldatas } from './const'
 import { fetchDayBookReport } from 'redux/report/action'
 import moment from 'moment'
+import { ExportToExcel } from './Excel'
 
 const DayBookReport = (): ReactElement => {
     const {
@@ -51,6 +52,10 @@ const DayBookReport = (): ReactElement => {
         },
         button: { search }
     } = strings
+
+    // eslint-disable-next-line no-unused-vars
+    const [data, setData] = useState(Exceldatas)
+    const fileName = "dayBookReport"
 
     return (
         <PageWrapper id="container">
@@ -121,7 +126,7 @@ const DayBookReport = (): ReactElement => {
             </FlexWrapper>
             <div>
                 <FlexWrapper justifyContent='end'>
-                    <Button>Export to Excel</Button>
+                    <ExportToExcel apiData={data} fileName={fileName} />
                 </FlexWrapper>
             </div>
             <div>
