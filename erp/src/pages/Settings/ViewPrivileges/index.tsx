@@ -10,10 +10,12 @@ import {
     TableWrapper,
     Icon
 } from 'components'
+import ROUTES from 'const/routes'
 import { getInstituteDropdown } from 'helpers'
 import { ReactElement, useEffect } from 'react'
 import { Table } from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { getInstitutes } from 'redux/academic/api'
 import { RootState } from 'redux/store'
 import { tableHeader } from './const'
@@ -26,6 +28,7 @@ const ViewPrivileges = (): ReactElement => {
         }
     } = useSelector((state: RootState) => state, shallowEqual)
 
+    const history = useHistory()
     const dispatch = useDispatch()
     const institutes = instituteList ? getInstituteDropdown(instituteList) : []
 
@@ -63,7 +66,9 @@ const ViewPrivileges = (): ReactElement => {
                                 <td>
                                     <Icon
                                         variant="outline-light"
-                                        onClick={() => { }}
+                                        onClick={() => {
+                                            history.push(ROUTES.VIEW_PRIVLEGES_ASSIGNED) 
+                                        }}
                                     >
                                         <FontAwesomeIcon icon={['far', 'eye']} />
                                     </Icon>
