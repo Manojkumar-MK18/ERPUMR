@@ -29,7 +29,8 @@ const LessonStatus = (): ReactElement => {
                         handleSelect={() => { }}
                     />
                 </DropdownWrapper>
-                <Button style={{ marginTop: "24px" }}>
+                <Button 
+                style={{ marginTop: "24px" }}>
                     Submit
                 </Button>
             </FlexWrapper>

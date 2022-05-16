@@ -1,7 +1,3 @@
-export interface LessonplaebyDatePayload {
-    date: string | any
-}
-
 export interface LessonPlaneList {
     course: string
     subject: string

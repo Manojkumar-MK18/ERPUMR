@@ -66,6 +66,7 @@ const StudentRegistartion = (): ReactElement => {
   const [resetValuesState, setResetValuesState] = useState(resetValues)
   const [registrationList, setRegistrationList] = useState<Array<Student>>([])
   const filteredList = registrationList.length > 0 ? registrationList : content
+  
   console.log(filteredList);
   console.log(registrationList);
 

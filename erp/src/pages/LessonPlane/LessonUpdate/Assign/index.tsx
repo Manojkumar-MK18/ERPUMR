@@ -30,8 +30,6 @@ const AssignList = ({ values, setValues }: AssignProps): ReactElement => {
         /* eslint-disable react-hooks/exhaustive-deps */
     }, [])
 
-    console.log(values);
-
     return (
         <FlexWrapper width="100%" justifyContent="center">
             <DropdownWrapper width='50%'>

@@ -14,7 +14,6 @@ import { Table } from 'react-bootstrap'
 import { initialModalValues, tableHeader } from './const'
 import { BootstrapModal } from './subcomponent'
 import { useDispatch, useSelector } from 'react-redux'
-import getCourses from 'redux/academic/api'
 import AssignList from './Assign'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AssignLessonPalnApi, LessonPlaneListApi } from 'redux/lesson/api'
@@ -43,8 +42,8 @@ const LessonUpdate = (): ReactElement => {
     // eslint-disable-next-line no-unused-vars
     const [lessonList, setLessonList] = useState<Array<LessonPlaneList>>([])
     const filteredList = lessonList.length > 0 ? lessonList : lessonplan
+
     useEffect(() => {
-        dispatch(getCourses())
         dispatch(LessonPlaneListApi(1))
         /* eslint-disable react-hooks/exhaustive-deps */
     }, [])
@@ -81,6 +80,7 @@ const LessonUpdate = (): ReactElement => {
                                 index
                             ) => {
                                 <TableRow key={`lesson-${index}`}>
+                                    <td>{index + 1}</td>
                                     <td>{assignedDate}</td>
                                     <td>{course}</td>
                                     <td>{chapter}</td>
@@ -98,8 +98,12 @@ const LessonUpdate = (): ReactElement => {
                     <TableFooter
                         currentPage={currentPage}
                         totalPages={totalPages}
-                        handleNext={() => { }}
-                        handlePrevious={() => { }}
+                        handleNext={() => {
+                            dispatch(LessonPlaneListApi(currentPage + 1))
+                        }}
+                        handlePrevious={() => {
+                            dispatch(LessonPlaneListApi(currentPage - 1))
+                        }}
                     />
                 </TableWrapper>
             </>
