@@ -24,13 +24,11 @@ import { ExportToExcel } from './Excel'
 const DayBookReport = (): ReactElement => {
     const {
         acamedic: { feeTypeList },
-        report: { dayBookReportList },
-        cashier
+        report: { dayBookReportList }
     } = useSelector((state: RootState) =>
     ({
         acamedic: state.acamedic,
-        report: state.report,
-        cashier: state.user.userInfo?.userDetail.firstName
+        report: state.report
     }),
         shallowEqual
     )
@@ -146,8 +144,9 @@ const DayBookReport = (): ReactElement => {
                                         id,
                                         description = '',
                                         createdAt = '',
-                                        userDetail: { studentName, regNo },
-                                        paid
+                                        userDetail: { studentName, admissionNumber },
+                                        amount,
+                                        modeOfPayment
                                     },
                                     index
                                 ) => {
@@ -159,10 +158,11 @@ const DayBookReport = (): ReactElement => {
                                             <td>{'-Branch-'}</td>
                                             <td>{'-batch'}</td>
                                             <td>{studentName}</td>
-                                            <td>{regNo}</td>
+                                            <td>{admissionNumber}</td>
                                             <td>{description}</td>
-                                            <td>{paid ? 'Yes' : 'No'}</td>
-                                            <td>{cashier}</td>
+                                            <td>{amount}</td>
+                                            <td>{modeOfPayment}</td>
+                                            <td>{''}</td>
                                         </TableRow>
                                     )
                                 }

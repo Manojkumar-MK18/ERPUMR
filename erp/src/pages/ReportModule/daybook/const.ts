@@ -1,6 +1,6 @@
 export const tableHeader = [
     "Date",
-    "Receipt number",
+    "Receipt Id",
     "Course",
     "Branch",
     "Batch",
@@ -8,6 +8,7 @@ export const tableHeader = [
     "Admission Number",
     "Fee Description",
     "Fee Paid",
+    "Mode of Payment",
     "Cashier"
 ]
 
