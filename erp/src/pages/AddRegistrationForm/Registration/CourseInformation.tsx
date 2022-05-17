@@ -19,6 +19,7 @@ import {
   getBatchDropdown
 } from 'helpers'
 import { ChildInformation } from 'redux/studentRegistration/typings'
+import { AdminType } from 'const'
 
 
 const CourseInformation = (): ReactElement => {
@@ -33,11 +34,15 @@ const CourseInformation = (): ReactElement => {
       branchList,
       batchList
     },
-    childInformation
+    childInformation,
+    role = "",
+    coachingCenterId = ""
   } = useSelector(
     (state: RootState) => ({
       academic: state.acamedic,
-      childInformation: state.studentRegistration.childInformation as ChildInformation
+      childInformation: state.studentRegistration.childInformation as ChildInformation,
+      role: state.user.userInfo?.role,
+      coachingCenterId: state.user.userInfo?.userDetail.coachingCenterId
     }),
     shallowEqual
   )
@@ -68,11 +73,15 @@ const CourseInformation = (): ReactElement => {
   const batches = batchList ? getBatchDropdown(batchList) : []
 
   useEffect(() => {
-    dispatch(getCourses())
-    dispatch(getInstitutes())
+    if (role !== AdminType.SUPERADMIN) {
+      dispatch(updateChildInformation({ instituteId: coachingCenterId }))
+      dispatch(getAllCoursesByInstitute(coachingCenterId))
+    } else {
+      dispatch(getCourses())
+      dispatch(getInstitutes())
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
+  }, [role])
 
   return (
     <PageWrapper>
@@ -103,20 +112,21 @@ const CourseInformation = (): ReactElement => {
               }
             />
           </DropdownWrapper>
-          <DropdownWrapper>
-            <EditableDropdown
-              dropdownList={institutes}
-              title={instituteName}
-              placeholder={selectInstituteName}
-              isRequired
-              handleSelect={(item) => {
-                dispatch(updateChildInformation({ instituteId: item.id }));
-                dispatch(getAllCoursesByInstitute(item.id));
+          {role === AdminType.SUPERADMIN && (
+            <DropdownWrapper>
+              <EditableDropdown
+                dropdownList={institutes}
+                title={instituteName}
+                placeholder={selectInstituteName}
+                isRequired
+                handleSelect={(item) => {
+                  dispatch(updateChildInformation({ instituteId: item.id }));
+                  dispatch(getAllCoursesByInstitute(item.id));
 
-              }}
-            />
-
-          </DropdownWrapper>
+                }}
+              />
+            </DropdownWrapper>
+          )}
           <DropdownWrapper>
             <EditableDropdown
               dropdownList={courseList}

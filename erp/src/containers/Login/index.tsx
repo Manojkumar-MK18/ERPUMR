@@ -1,4 +1,4 @@
-import { ReactElement, SyntheticEvent, ChangeEvent } from 'react'
+import { ReactElement, SyntheticEvent, ChangeEvent, useEffect } from 'react'
 import { InputGroup, FormControl } from 'react-bootstrap'
 import {
   Title,
@@ -24,15 +24,23 @@ import {
 import { RootState } from 'redux/store'
 import useBreakpoint from 'use-breakpoint'
 import BREAKPOINTS from 'const/breakpoint'
+import history from 'const/history'
+import ROUTES from 'const/routes'
 
 const Login = (): ReactElement => {
-  const { userName, password, userNameError, passwordError, isLoading } =
+  const { userName, password, userNameError, passwordError, isLoading, isLoggedIn } =
     useSelector((state: RootState) => state.user, shallowEqual)
   const {
     login: { title, description, submit }
   } = strings
   const dispatch = useDispatch()
   const { breakpoint } = useBreakpoint(BREAKPOINTS)
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.push(ROUTES.DASHBORAD)
+    }
+  }, [isLoggedIn])
 
   return (
     <LoginWrapper>

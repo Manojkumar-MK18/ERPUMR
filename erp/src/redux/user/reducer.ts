@@ -50,6 +50,7 @@ export const userSlice = createSlice({
   extraReducers: {
     [handleAuthenticate.fulfilled.toString()]: (state, action) => {
       state.isLoading = false
+      state.isLoggedIn = action.payload
       state.userInfo = action.payload
     },
   }
