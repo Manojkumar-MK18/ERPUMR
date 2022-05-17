@@ -39,7 +39,7 @@ const FeeReceipt = (): ReactElement => {
       </FlexWrapper>
       <>
         <TableWrapper>
-          <Table size='sm' responsive="sm"> 
+          <Table size='sm' responsive="sm">
             <TableHeader>
               <TableRow>
                 {tableHeader.map((header, index) => (
@@ -50,9 +50,12 @@ const FeeReceipt = (): ReactElement => {
             <tbody>
               <TableRow>
                 <td>1</td>
-                <td>Receipt Id</td>
-                <td>Name</td>
-                <td>Mode of Payment</td>
+                <td>Fee receipt number</td>
+                <td>Student Name</td>
+                <td>Father Name</td>
+                <td>Course</td>
+                <td>Amount </td>
+                <td>Parent Mobile number</td>
                 <td>
                   <Icon
                     variant='outline-secondary'

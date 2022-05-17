@@ -1,4 +1,4 @@
-export const tableHeader = ['SN.No', 'Receipt Id', 'Name', 'Mode of Payment','Action']
+export const tableHeader = ['SNo', 'Fee receipt number', 'Student Name', 'Father Name', 'Course', 'Amount ', 'Parent Mobile number', 'view PDF']
 
 export const feeDescriptionTableHeader = [
   'FeeDescription',
