@@ -93,6 +93,44 @@ export interface Payment {
   dateOn: string
 }
 
+export interface feAddResponse {
+  amount: string
+  balance: string
+  createdAt: string
+  createdBy: null
+  date: string
+  description: string
+  id: string
+  modeOfPayment: string
+  paid: string
+  paidTypes: string
+  referenceId: string
+  studentId: string
+  studentRef: string
+  updatedAt: string
+  updatedBy: string
+  userDetail: string
+}
+
+export interface getAllfee {
+  amount: string
+  balance: string
+  createdAt: string
+  createdBy: string
+  date: string
+  description: string
+  id: string
+  modeOfPayment: string
+  paid: string
+  paidTypes: string
+  referenceId: string
+  studentId: string
+  studentRef: string
+  updatedAt: string
+  updatedBy: string
+  userDetail: string
+}
+
 export interface AddFeeDescriptionState {
   feeDescriptionList: Array<AddFeeDescriptionResponse>
   feeDescriptionListDropdown: DropdownList
@@ -108,6 +146,8 @@ export interface AddFeeDescriptionState {
   selectedFeetotalDetails: FeeDetails | null
   selectedPaymentMode: Payment | null
   receiptlist: Array<any>
+  feeAdd: feAddResponse | null
+  getallFee: Array<getAllfee>
 }
 
 export interface AddFeeMasterPayload {

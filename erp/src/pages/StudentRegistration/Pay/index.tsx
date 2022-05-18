@@ -114,10 +114,6 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  console.log(amountToPay);
-
-
-
   return (
     <FlexWrapper width="100%" justifyContent="center">
       <DropdownWrapper width="50%">

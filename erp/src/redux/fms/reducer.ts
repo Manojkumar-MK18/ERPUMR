@@ -14,7 +14,8 @@ import {
   deleteFeeMaster,
   getStudentAdmissionList,
   addFeePayment,
-  fetchReceiptlist
+  fetchReceiptlist,
+  getAllFees
 } from './api'
 import strings from 'locale/en'
 import getFeeDescriptionDropdown from 'pages/FeesManagementSystem/AddFeeMaster/helpers'
@@ -33,7 +34,9 @@ const initialState: AddFeeDescriptionState = {
   selectedFeeDetails: null,
   selectedFeetotalDetails: null,
   selectedPaymentMode: null,
-  receiptlist: []
+  receiptlist: [],
+  feeAdd: null,
+  getallFee: []
 }
 
 export const fmsSlice = createSlice({
@@ -129,6 +132,10 @@ export const fmsSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
+    [addFeePayment.fulfilled.toString()]: (state, action) => {
+      state.isLoading = false
+      state.feeAdd = action?.payload
+    },
     [fetchReceiptlist.pending.toString()]: (state) => {
       state.isLoading = true
     },
@@ -140,6 +147,13 @@ export const fmsSlice = createSlice({
       state.isLoading = false
       state.error = action.payload
     },
+    [getAllFees.fulfilled.toString()]: (
+      state,
+      action
+    ) => {
+      state.isLoading = false
+      state.getallFee = action?.payload
+    }
   }
 })
 

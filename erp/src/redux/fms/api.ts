@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import apiEndpoints from 'const/apiEndpoints'
 import api from 'services'
-import { AddFeeDescriptionPayload, AddFeeMasterPayload } from './typings'
+import { AddFeeDescriptionPayload, AddFeeMasterPayload, feAddResponse, getAllfee } from './typings'
 import history from 'const/history'
 import strings from 'locale/en'
 import ROUTES from 'const/routes'
@@ -124,7 +124,7 @@ export const editFeeDescriptionRequest = createAsyncThunk(
 
 export const addFeePayment = createAsyncThunk(
   'fms/addFeePayment',
-  async (payload: any, { rejectWithValue }): Promise<any> => {
+  async (payload: any, { rejectWithValue }): Promise<feAddResponse | any> => {
     try {
       const response = await api.put(`${apiEndpoints.feePayment}`, payload)
       console.log(response)
@@ -156,5 +156,13 @@ export const fetchReceiptlist = createAsyncThunk(
       rejectWithValue('error')
 
     }
+  }
+)
+
+export const getAllFees = createAsyncThunk(
+  'fees/allfees',
+  async (): Promise<Array<getAllfee>> => {
+    const response = await api.get(apiEndpoints.getallFees)
+    return response?.data
   }
 )

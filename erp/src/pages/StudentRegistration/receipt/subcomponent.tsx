@@ -33,6 +33,7 @@ interface FeesProps {
   handleAdmNo: string | any
   handleBranch: string | any
   handleBatch: string | any
+  handleStudentId: string | any
 }
 
 export const FeeAction = ({
@@ -41,7 +42,8 @@ export const FeeAction = ({
   handleName,
   handleYear,
   handleBatch,
-  handleBranch
+  handleBranch,
+  handleStudentId
 }: FeesProps): ReactElement => {
   return (
     <PageWrapper>
@@ -57,7 +59,9 @@ export const FeeAction = ({
         </H4>
       </FlexWrapper>
       <FlexWrapper justifyContent="space-between" noPadding height={47}>
-       
+        <H4>
+          Receipt Id:<b>{handleStudentId}</b>
+        </H4>
         <H4>
           Course:<b>{handleClass}</b>
         </H4>

@@ -83,7 +83,7 @@ const StudentRegistartion = (): ReactElement => {
     !!values?.feeType &&
     !!values?.description &&
     !!values?.courseId &&
-    !!values?.term && 
+    !!values?.term &&
     !!values?.amount &&
     !!values?.paymentMode
 

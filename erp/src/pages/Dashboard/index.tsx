@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
 import {
   SectionTitle,
   PageWrapper,
@@ -12,8 +12,20 @@ import BREAKPOINTS from 'const/breakpoint'
 import IncomeDashboard from './IncomeDashboard'
 import { Srm } from './subcomponents'
 import strings from 'locale/en'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { getAllFees } from 'redux/fms/api'
+import { RootState } from 'redux/store'
 
 const Dashboard = (): ReactElement => {
+
+  const {
+    fms: {
+      // eslint-disable-next-line no-unused-vars
+      getallFee
+    }
+  } = useSelector((state: RootState) => state, shallowEqual
+  )
+
   const { breakpoint } = useBreakpoint(BREAKPOINTS)
   const isTablet = breakpoint === 'tablet'
   const isMobile = breakpoint === 'mobile'
@@ -31,6 +43,18 @@ const Dashboard = (): ReactElement => {
       title
     }
   } = strings
+
+  const dispatch = useDispatch()
+
+  const Amount = getallFee.map((fee) => (fee?.amount))
+
+console.log(Number(Amount[1])+Number(Amount[2]));
+
+
+  useEffect(() => {
+    dispatch(getAllFees())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <PageWrapper id="container">

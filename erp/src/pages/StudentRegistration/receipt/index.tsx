@@ -14,18 +14,18 @@ const Receipt = (): ReactElement => {
         selectedStudentDetails,
         selectedFeeDetails,
         selectedFeetotalDetails,
-        selectedPaymentMode
+        selectedPaymentMode,
+        studentRef
     } = useSelector(
         (state: RootState) => ({
             selectedStudentDetails: state.fms.selectedStudentDetails,
             selectedFeeDetails: state.fms.selectedFeeDetails,
             selectedFeetotalDetails: state.fms.selectedFeetotalDetails,
-            selectedPaymentMode: state.fms.selectedPaymentMode
+            selectedPaymentMode: state.fms.selectedPaymentMode,
+            studentRef: state.fms.feeAdd?.studentRef
         }),
         shallowEqual
     )
-
-    console.log(selectedFeetotalDetails);
 
     return (
         <PageWrapper >
@@ -53,6 +53,7 @@ const Receipt = (): ReactElement => {
                     handleAdmNo={selectedStudentDetails?.regNo}
                     handleBranch={undefined}
                     handleBatch={undefined}
+                    handleStudentId={studentRef}
                 />
                 <TableWrapper>
                     <Table size='sm' responsive="sm">
@@ -130,8 +131,8 @@ const Receipt = (): ReactElement => {
                     handleName={selectedStudentDetails?.studentName}
                     handleAdmNo={selectedStudentDetails?.regNo}
                     handleBranch={undefined}
-                    handleBatch={undefined}
-                />
+                    handleBatch={undefined} 
+                    handleStudentId={studentRef}                />
                 <TableWrapper>
                     <Table size='sm' responsive="sm">
                         <TableHeader>

@@ -34,7 +34,8 @@ const apiEndpoints = {
   assignLessonPlane: 'lessonplan/assignlessonplan',
   lessonplanebyPage: 'lessonplan/lessonplanbypage',
   lessonPlaneList: 'lessonplan/lessonplanlist',
-  feeReceiptList: 'feesPaid/search'
+  feeReceiptList: 'feesPaid/search',
+  getallFees: 'feesPaid/all'
 }
 
 export default apiEndpoints
