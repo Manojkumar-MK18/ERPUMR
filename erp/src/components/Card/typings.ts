@@ -4,7 +4,7 @@ export interface CardProps {
   width: string
   height: string
   title: string
-  subTitle: string
+  subTitle: any 
   variant: 'danger' | 'info' | 'primary' | 'warning'
   icon: IconProp
 }

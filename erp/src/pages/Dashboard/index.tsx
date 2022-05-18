@@ -46,10 +46,8 @@ const Dashboard = (): ReactElement => {
 
   const dispatch = useDispatch()
 
-  const Amount = getallFee.map((fee) => (fee?.amount))
-
-console.log(Number(Amount[1])+Number(Amount[2]));
-
+  const sumofAmount = getallFee.reduce((sum, current) => Number(sum) + Number(current.amount), 0);
+  const sumofBalance = getallFee.reduce((sum, current) => Number(sum) + Number(current.balance), 0);
 
   useEffect(() => {
     dispatch(getAllFees())
@@ -80,7 +78,7 @@ console.log(Number(Amount[1])+Number(Amount[2]));
           width={isMobile ? '100%' : isTablet ? '40%' : '22%'}
           height="165px"
           title={totalFeeReceived}
-          subTitle={'240'}
+          subTitle={sumofAmount}
           variant="primary"
           icon={['fas', 'rupee-sign']}
         />
@@ -88,7 +86,7 @@ console.log(Number(Amount[1])+Number(Amount[2]));
           width={isMobile ? '100%' : isTablet ? '40%' : '22%'}
           height="165px"
           title={balanceFee}
-          subTitle={'240'}
+          subTitle={sumofBalance}
           variant="info"
           icon={['fas', 'rupee-sign']}
         />

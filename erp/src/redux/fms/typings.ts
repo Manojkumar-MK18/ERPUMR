@@ -113,7 +113,7 @@ export interface feAddResponse {
 }
 
 export interface getAllfee {
-  amount: string
+  amount: number
   balance: string
   createdAt: string
   createdBy: string
