@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
 import {
   PageWrapper,
   FlexWrapper,
@@ -15,6 +15,10 @@ import strings from 'locale/en'
 import { Table } from 'react-bootstrap'
 import { tableHeader } from './const'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useDispatch } from 'react-redux'
+import { fetchReceiptlist } from 'redux/fms/api'
+import { useHistory } from 'react-router-dom'
+import ROUTES from 'const/routes'
 
 const FeeReceipt = (): ReactElement => {
 
@@ -24,18 +28,34 @@ const FeeReceipt = (): ReactElement => {
     }
   } = strings
 
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const [receiptId, setReceiptId] = useState('')
+  console.log(receiptId);
+
   return (
     <PageWrapper id="container">
       <SectionTitle title={receipt} />
       <FlexWrapper>
         <DropdownWrapper>
           <Input
-            value=''
+            value={receiptId}
             label='Receipt Id'
             placeholder='Enter Receipt ID'
+            onChange={(value: string) => {
+              setReceiptId(value)
+            }}
           />
         </DropdownWrapper>
-        <Button style={{ marginTop: '25px' }}>Search</Button>
+        <Button
+          onClick={() => {
+            dispatch(fetchReceiptlist({
+              studentId: receiptId
+            }))
+          }}
+          style={{ marginTop: '25px' }}
+        >Search</Button>
       </FlexWrapper>
       <>
         <TableWrapper>
@@ -59,7 +79,9 @@ const FeeReceipt = (): ReactElement => {
                 <td>
                   <Icon
                     variant='outline-secondary'
-                    onClick={() => { }}
+                    onClick={() => {
+                      history.push(ROUTES.RECEIPTPRINT)
+                    }}
                   >
                     <FontAwesomeIcon icon={['far', 'eye']} />
                   </Icon>

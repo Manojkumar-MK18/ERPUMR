@@ -1,4 +1,5 @@
-import { ReactElement } from 'react'
+/* eslint-disable no-unused-vars */
+import { ReactElement, useEffect } from 'react'
 import {
   SectionTitle,
   PageWrapper,
@@ -6,69 +7,123 @@ import {
   DropdownWrapper,
   EditableDropdown,
   Input,
-  FileUploader
+  Button,
+  TableWrapper,
+  TableHeader,
+  TableRow
 } from 'components'
 import strings from 'locale/en'
-import { useSelector, shallowEqual } from 'react-redux'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
+import getCourses, { getChildCourses } from 'redux/academic/api'
+import { Table } from 'react-bootstrap'
 
 const StudentConsession = (): ReactElement => {
-  const { semester } = useSelector(
-    (state: RootState) => state.acamedic,
+  const {
+    acamedic: {
+      courseList,
+    }
+  } = useSelector(
+    (state: RootState) =>
+    ({
+      acamedic: state.acamedic
+    }),
     shallowEqual
   )
 
   const {
-    stuentConsession: { title, students },
-    studentRegistration: {
-      semesterOrClass,
-      childInformation: { fatherName }
+    stuentConsession: {
+      title,
+      admissionId,
+      placeholderadmission,
+      course,
+      batch,
+      branch,
+      mobile,
+      placeholder: {
+        coursePlaceholder,
+        batchPlaceholder,
+        branchPlaceholder,
+        mobileplaceholder
+      }
+    },
+    button: {
+      search,
     }
   } = strings
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getCourses())
+  })
 
   return (
     <PageWrapper id="container">
       <SectionTitle title={title} />
+      <FlexWrapper hasBorder >
+        <DropdownWrapper>
+          <Input
+            value=''
+            label={admissionId}
+            placeholder={placeholderadmission}
+          />
+        </DropdownWrapper>
+        <Button style={{ marginTop: '25px' }}>{search}</Button>
+      </FlexWrapper>
       <FlexWrapper>
         <DropdownWrapper>
           <EditableDropdown
-            dropdownList={semester}
-            title={semesterOrClass}
-            placeholder={semesterOrClass}
-            onBlur={() => {}}
-            error={''}
-            handleSelect={() => {}}
-            isRequired
+            title={course}
+            dropdownList={courseList}
+            placeholder={coursePlaceholder}
+            handleSelect={(item) => { }}
           />
         </DropdownWrapper>
         <DropdownWrapper>
           <EditableDropdown
             dropdownList={[]}
-            title={students}
-            placeholder={students}
-            onBlur={() => {}}
-            error={''}
-            handleSelect={() => {}}
-            isRequired
+            title={branch}
+            placeholder={branchPlaceholder}
+            handleSelect={() => { }}
+          />
+        </DropdownWrapper>
+        <DropdownWrapper>
+          <EditableDropdown
+            dropdownList={[]}
+            title={batch}
+            placeholder={batchPlaceholder}
+            handleSelect={() => { }}
           />
         </DropdownWrapper>
         <DropdownWrapper>
           <Input
-            label={fatherName}
-            placeholder={fatherName}
-            value={''}
-            onBlur={() => {}}
-            error={''}
-            width="100%"
-            onChange={(value: string) => {
-              console.log(value)
-            }}
+            value=""
+            label={mobile}
             height="50px"
-            isDisabled
+            placeholder={mobileplaceholder}
           />
         </DropdownWrapper>
       </FlexWrapper>
-      <FileUploader type="image" />
+      <FlexWrapper justifyContent='center' noPadding>
+        <Button>{'Submit'}</Button>
+      </FlexWrapper>
+      <>
+        {/* <TableWrapper>
+          <Table size='sm' responsive="sm">
+            <TableHeader>
+              <TableRow>
+
+              </TableRow>
+            </TableHeader>
+            <tbody>
+              <TableRow>
+ 
+              </TableRow>
+            </tbody>
+          </Table>
+        </TableWrapper> */}
+      </>
     </PageWrapper>
   )
 }

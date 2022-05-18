@@ -132,12 +132,29 @@ export const addFeePayment = createAsyncThunk(
         return rejectWithValue(strings.pay.pamentFailed)
       }
       if (response?.data) {
-        history.push(ROUTES.EXAMPLE )
+        history.push(ROUTES.RECEIPTPRINT)
       }
       return response?.data
     } catch (error) {
       console.log(error)
       return rejectWithValue(strings.pay.pamentFailed)
+    }
+  }
+)
+
+export const fetchReceiptlist = createAsyncThunk(
+  'feelist/fetchfeeList',
+  async (payload: any, { rejectWithValue }): Promise<any> => {
+    try {
+      const response = await api.put(`${apiEndpoints.feeReceiptList}`, payload)
+      if (!response) {
+        return rejectWithValue('Error')
+      }
+      return response?.data
+    } catch (error) {
+      console.log(error);
+      rejectWithValue('error')
+
     }
   }
 )

@@ -45,7 +45,7 @@ export interface Student {
   courseId?: any
   dob?: string
   email?: string
-  courseName?:string
+  courseName?: string
   enrollmentNumber?: string
   fatherName?: string
   firstName?: string
@@ -107,6 +107,7 @@ export interface AddFeeDescriptionState {
   selectedFeeDetails: FeeDetails | null
   selectedFeetotalDetails: FeeDetails | null
   selectedPaymentMode: Payment | null
+  receiptlist: Array<any>
 }
 
 export interface AddFeeMasterPayload {

@@ -96,7 +96,19 @@ const strings = {
   },
   stuentConsession: {
     title: 'Student Concession',
-    students: 'Students'
+    students: 'Students',
+    admissionId: 'Admission Number',
+    placeholderadmission: 'Enter Admission Number',
+    course: 'Course',
+    branch: 'Branch',
+    batch: 'Batch',
+    mobile: 'Mobile Number(Optional)',
+    placeholder: {
+      coursePlaceholder: 'Select Course',
+      branchPlaceholder: 'Select Branch',
+      batchPlaceholder: 'Select Batch',
+      mobileplaceholder: 'Enter Mobile Num..'
+    }
   },
   changeStudentFee: {
     title: 'Change/Upgrade Fees',

@@ -42,6 +42,7 @@ import DesginationList from './HumanResources/Desgination'
 import StaffDetails from './StaffRegistration/View'
 import DayReportBook from './ReportModule/daybook'
 import ViewPrivilegesAssigned from './Settings/ViewPrivileges/View'
+import Print from './StudentRegistration/receipt/print'
 
 export {
   Dashboard,
@@ -87,5 +88,6 @@ export {
   DesginationList,
   StaffDetails,
   DayReportBook,
-  ViewPrivilegesAssigned
+  ViewPrivilegesAssigned,
+  Print
 }
