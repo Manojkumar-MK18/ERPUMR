@@ -1,6 +1,6 @@
 import StudentRegistration, { FeesAdd, getFeeMasterByTerm, OnChangeHandler, updateStudentIdForFees } from './typings'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import addNewStudent, { fessPaid, getFeeMasterByTermApi } from './api'
+import { addNewStudent, fessPaid, getFeeMasterByTermApi } from './api'
 import strings from 'locale/en'
 
 const initialState: StudentRegistration = {
@@ -65,7 +65,7 @@ const initialState: StudentRegistration = {
     yearOfPassing: '',
     obtainedMarks: '',
     percentage: '',
-    status:''
+    status: ''
   },
   error: '',
   isLoading: false,
@@ -132,7 +132,7 @@ export const studentRegistrationSlice = createSlice({
     },
     updateSelectedStudentId: (state, action: PayloadAction<updateStudentIdForFees>) => {
       state.selectStudentId = action?.payload
-  },
+    },
   },
   extraReducers: {
     [addNewStudent.pending.toString()]: (state) => {

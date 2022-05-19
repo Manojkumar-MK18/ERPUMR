@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { ReactElement, useEffect, useState } from 'react'
 import {
   FlexWrapper,
@@ -19,7 +20,7 @@ import { DATE_FORMAT_MMDDYYYY } from 'const/dateFormat'
 const Pay = ({ values, setValues }: PayProps): ReactElement => {
   const {
     acamedic: { feeTypeList, courseList, termList, paymentModes },
-    fms: { feeMasterList, feeDescriptionList, selectedFeetotalDetails }
+    fms: { feeMasterList, feeDescriptionList, selectedFeetotalDetails, selectedStudentDetails }
   } = useSelector((state: RootState) => ({
     acamedic: state.acamedic,
     fms: state.fms
@@ -29,7 +30,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
   const dispatch = useDispatch()
   const [resetValues, setResetValues] = useState(resetPaymentValues)
   const [showOtherAmount, setShowOtherAmount] = useState(false)
-  
+
   const filteredDescriptions = values.feeType
     ? feeDescriptionList.filter(
       (description) => description.title === values.feeType
@@ -51,7 +52,6 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
 
   const termsToPay = coursesToFilter.filter(
     (course) =>
-      course.courseId === values?.courseId &&
       course.description === values?.description &&
       course.title === values?.feeType
   )
@@ -61,7 +61,6 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
 
   const amountToPay = coursesToFilter.find(
     (course) =>
-      course.courseId === values?.courseId &&
       course.description === values?.description &&
       course.title === values?.feeType &&
       course.terms === values?.term
@@ -101,12 +100,10 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
       referenceId
     },
     studentRegistration: {
-      childInformation: { selectCourse, course, selectTerm, term }
+      childInformation: { course, selectTerm, term }
     },
     finance: { otherAmount, otherAmountPlaceHolder }
   } = strings
-
-  //const [fromDate, setFromDate] = useState<any>(new Date())
 
   useEffect(() => {
     dispatch(getFeeMaster())
@@ -175,7 +172,15 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
           reset={resetValues?.description}
         />
       </DropdownWrapper>
-      <DropdownWrapper width="50%">
+      <DropdownWrapper width="50%" >
+        <Input
+          value={selectedStudentDetails?.coachingCentre}
+          isDisabled
+          height='50px'
+          label={course}
+        />
+      </DropdownWrapper>
+      {/* <DropdownWrapper width="50%">
         <EditableDropdown
           dropdownList={filteredCourses}
           title={course}
@@ -201,7 +206,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
           }}
           reset={resetValues?.courseId}
         />
-      </DropdownWrapper>
+      </DropdownWrapper> */}
       <DropdownWrapper width="50%">
         <EditableDropdown
           dropdownList={[...terms]}

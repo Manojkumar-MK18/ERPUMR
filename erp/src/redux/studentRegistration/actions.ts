@@ -1,5 +1,5 @@
 import { studentRegistrationSlice } from './reducer'
-import addNewStudent from './api'
+import {addNewStudent} from './api'
 
 const {
   updateChildInformation,

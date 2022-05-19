@@ -82,7 +82,6 @@ const StudentRegistartion = (): ReactElement => {
   const canSubmit =
     !!values?.feeType &&
     !!values?.description &&
-    !!values?.courseId &&
     !!values?.term &&
     !!values?.amount &&
     !!values?.paymentMode

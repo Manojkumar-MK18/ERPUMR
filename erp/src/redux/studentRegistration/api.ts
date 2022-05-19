@@ -8,9 +8,9 @@ import history from 'const/history'
 import { FeesAdd } from './typings'
 import strings from 'locale/en'
 
-const addNewStudent = createAsyncThunk(
+export const addNewStudent = createAsyncThunk(
   'studentRegistration/new',
-  async (_undefined, { getState,rejectWithValue }): Promise<any> => {
+  async (_undefined, { getState, rejectWithValue }): Promise<any> => {
     const {
       studentRegistration: {
         childInformation: {
@@ -139,16 +139,16 @@ const addNewStudent = createAsyncThunk(
 
       if (response) {
         history.goBack()
-      } else {
-        return rejectWithValue(strings?.validationMessages?.studentRegistration)
       }
-
       return response?.data
+    } else {
+      return rejectWithValue(strings?.validationMessages?.studentRegistration)
     }
   }
 )
 
-export default addNewStudent
+
+
 
 export const getFeeMasterByTermApi = createAsyncThunk(
   'feeMaster/getFeeMaster',
