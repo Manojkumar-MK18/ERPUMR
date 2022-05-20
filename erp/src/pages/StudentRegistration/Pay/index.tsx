@@ -20,7 +20,7 @@ import { DATE_FORMAT_MMDDYYYY } from 'const/dateFormat'
 const Pay = ({ values, setValues }: PayProps): ReactElement => {
   const {
     acamedic: { feeTypeList, courseList, termList, paymentModes },
-    fms: { feeMasterList, feeDescriptionList, selectedFeetotalDetails, selectedStudentDetails }
+    fms: { feeMasterList, feeDescriptionList, selectedStudentDetails }
   } = useSelector((state: RootState) => ({
     acamedic: state.acamedic,
     fms: state.fms
@@ -82,6 +82,9 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
         name: 'Other'
       }
     ]
+
+  const sum = coursesToFilter.reduce((sum, current) => Number(sum) + Number(current.amount), 0)
+  console.log(sum);
 
   const {
     fms: {
@@ -171,6 +174,11 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
           }}
           reset={resetValues?.description}
         />
+      </DropdownWrapper>
+      <DropdownWrapper width="50%">
+        {values?.description && (
+          <>Total:<span style={{ color: 'red' }}> {sum}</span></>
+        )}
       </DropdownWrapper>
       <DropdownWrapper width="50%" >
         <Input
@@ -287,7 +295,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
               height="50px" />
           </DropdownWrapper>
           <DropdownWrapper width='50%'>
-            <b>Balance: {values?.amount ? <span style={{ color: 'red' }}> {selectedFeetotalDetails?.amount - values?.amount}</span> : ''}</b>
+            <b>Balance: {values?.amount ? <span style={{ color: 'red' }}> {sum - values?.amount}</span> : ''}</b>
           </DropdownWrapper>
         </>
       )}
