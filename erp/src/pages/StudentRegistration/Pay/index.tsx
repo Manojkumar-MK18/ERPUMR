@@ -256,7 +256,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
               referenceId: ''
             })
             dispatch(updateTotalFeeDetails({
-              amount: amountToPay?.amount,
+              amount:sum,
               academicYear: amountToPay?.academicYear
             }))
             if (item.name === 'Other') {
