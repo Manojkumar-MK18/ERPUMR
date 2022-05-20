@@ -84,7 +84,6 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
     ]
 
   const sum = coursesToFilter.reduce((sum, current) => Number(sum) + Number(current.amount), 0)
-  console.log(sum);
 
   const {
     fms: {
@@ -140,7 +139,8 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
               term: true,
               amount: true,
               paymentMode: true,
-              referenceId: true
+              referenceId: true,
+              bankName: true
             })
           }}
           reset={resetValues?.feeType}
@@ -169,7 +169,8 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
               term: true,
               amount: true,
               paymentMode: true,
-              referenceId: true
+              referenceId: true,
+              bankName: true
             })
           }}
           reset={resetValues?.description}
@@ -234,7 +235,8 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
               ...resetPaymentValues,
               amount: true,
               paymentMode: true,
-              referenceId: true
+              referenceId: true,
+              bankName: true
             })
           }}
           reset={resetValues?.term}
@@ -256,7 +258,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
               referenceId: ''
             })
             dispatch(updateTotalFeeDetails({
-              amount:sum,
+              amount: sum,
               academicYear: amountToPay?.academicYear
             }))
             if (item.name === 'Other') {
@@ -265,7 +267,8 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
             setResetValues({
               ...resetPaymentValues,
               paymentMode: true,
-              referenceId: true
+              referenceId: true,
+              bankName: true
             })
           }}
           reset={resetValues?.amount}
@@ -294,11 +297,11 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
               }}
               height="50px" />
           </DropdownWrapper>
-          <DropdownWrapper width='50%'>
-            <b>Balance: {values?.amount ? <span style={{ color: 'red' }}> {sum - values?.amount}</span> : ''}</b>
-          </DropdownWrapper>
         </>
       )}
+      <DropdownWrapper width='50%'>
+        <b>Balance: {values?.amount ? <span style={{ color: 'red' }}> {sum - values?.amount}</span> : ''}</b>
+      </DropdownWrapper>
       <DropdownWrapper width='50%'>
         <EditableDropdown
           dropdownList={paymentModes}
@@ -312,7 +315,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
               paymentMode: item.name,
               referenceId: ''
             })
-            setResetValues({ ...resetPaymentValues, referenceId: true })
+            setResetValues({ ...resetPaymentValues, referenceId: true, bankName: true })
           }}
           reset={resetValues?.paymentMode}
         />
@@ -331,9 +334,23 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
                     ...values,
                     referenceId: value
                   })
+                  setResetValues({ ...resetPaymentValues, bankName: true })
+                }}
+                height="40px"
+              />
+            </DropdownWrapper>
+            <DropdownWrapper width='50%'>
+              <Input
+                value={values?.bankName}
+                placeholder="Enter Bank Name"
+                height='30px'
+                onChange={(value: string) => {
+                  setValues({
+                    ...values,
+                    bankName: value
+                  })
                   setResetValues(resetPaymentValues)
                 }}
-                height="50px"
               />
             </DropdownWrapper>
             <DropdownWrapper width='50%'>

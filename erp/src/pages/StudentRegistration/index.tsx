@@ -273,7 +273,8 @@ const StudentRegistartion = (): ReactElement => {
               paidTypes: [values?.feeType],
               date: values?.dateOn,
               balance: Number(selectedFeetotalDetails?.amount) - Number(values?.amount),
-              cashier: cashierName
+              cashier: cashierName,
+              bankName:values?.bankName
             }
             dispatch(addFeePayment(payload))
             dispatch(updatePaymentMode({
