@@ -2,13 +2,11 @@ export const tableHeader = [
     "Date",
     "Receipt Id",
     "Course",
-    "Branch",
-    "Batch",
+    "Mode of Payment",
     'Name',
     "Admission Number",
     "Fee Description",
     "Fee Paid",
-    "Mode of Payment",
     "Cashier"
 ]
 

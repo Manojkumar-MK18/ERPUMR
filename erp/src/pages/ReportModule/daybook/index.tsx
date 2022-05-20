@@ -162,13 +162,11 @@ const DayBookReport = (): ReactElement => {
                                             <td>{moment(createdAt).format('YYYY-MM-DD')}</td>
                                             <td>{id}</td>
                                             <td>{'-course-'}</td>
-                                            <td>{'-Branch-'}</td>
-                                            <td>{'-batch'}</td>
+                                            <td>{modeOfPayment}</td>
                                             <td>{studentName}</td>
                                             <td>{admissionNumber}</td>
                                             <td>{description}</td>
                                             <td>{amount}</td>
-                                            <td>{modeOfPayment}</td>
                                             <td>{cashier}</td>
                                         </TableRow>
                                     )
