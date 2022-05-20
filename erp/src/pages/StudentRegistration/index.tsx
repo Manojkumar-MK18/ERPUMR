@@ -34,10 +34,12 @@ import { initialPaymentValues } from './const'
 const StudentRegistartion = (): ReactElement => {
   const {
     acamedic: { academicYear: academicYearList, year: yearList, courseList },
-    fms: { studentApplicationList, isLoading, selectedFeetotalDetails }
+    fms: { studentApplicationList, isLoading, selectedFeetotalDetails },
+    cashierName
   } = useSelector((state: RootState) => ({
     acamedic: state.acamedic,
-    fms: state.fms
+    fms: state.fms,
+    cashierName: state.user.userInfo?.userDetail.firstName
   }), shallowEqual)
   const {
     studentRegistration: {
@@ -270,7 +272,8 @@ const StudentRegistartion = (): ReactElement => {
               description: values?.description,
               paidTypes: [values?.feeType],
               date: values?.dateOn,
-              balance: Number(selectedFeetotalDetails?.amount) - Number(values?.amount)
+              balance: Number(selectedFeetotalDetails?.amount) - Number(values?.amount),
+              cashier: cashierName
             }
             dispatch(addFeePayment(payload))
             dispatch(updatePaymentMode({
