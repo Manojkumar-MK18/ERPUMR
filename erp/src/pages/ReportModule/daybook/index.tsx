@@ -38,8 +38,10 @@ const DayBookReport = (): ReactElement => {
     const [startDateError, setStartDateError] = useState('')
     const [endDate, setEndDate] = useState('')
     const [endDateError, setEndDateError] = useState('')
-    
+
     const dispatch = useDispatch()
+
+    const sum = dayBookReportList.reduce((sum, current) => Number(sum) + Number(current.amount), 0);
 
     const {
         fms: {
@@ -126,6 +128,9 @@ const DayBookReport = (): ReactElement => {
             <div>
                 <FlexWrapper justifyContent='end'>
                     <ExportToExcel apiData={data} fileName={fileName} />
+                </FlexWrapper>
+                <FlexWrapper>
+                    <>Total:{sum}</>
                 </FlexWrapper>
             </div>
             <div>
