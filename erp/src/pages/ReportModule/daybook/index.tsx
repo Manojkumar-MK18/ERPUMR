@@ -147,7 +147,8 @@ const DayBookReport = (): ReactElement => {
                                         createdAt = '',
                                         userDetail: { studentName, admissionNumber },
                                         amount,
-                                        modeOfPayment
+                                        modeOfPayment,
+                                        cashier
                                     },
                                     index
                                 ) => {
@@ -163,7 +164,7 @@ const DayBookReport = (): ReactElement => {
                                             <td>{description}</td>
                                             <td>{amount}</td>
                                             <td>{modeOfPayment}</td>
-                                            <td>{''}</td>
+                                            <td>{cashier}</td>
                                         </TableRow>
                                     )
                                 }
