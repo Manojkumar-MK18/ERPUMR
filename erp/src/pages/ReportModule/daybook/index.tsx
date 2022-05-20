@@ -20,6 +20,7 @@ import { tableHeader, Exceldatas } from './const'
 import { fetchDayBookReport } from 'redux/report/action'
 import moment from 'moment'
 import { ExportToExcel } from './Excel'
+import { Span } from 'typography'
 
 const DayBookReport = (): ReactElement => {
     const {
@@ -38,10 +39,13 @@ const DayBookReport = (): ReactElement => {
     const [startDateError, setStartDateError] = useState('')
     const [endDate, setEndDate] = useState('')
     const [endDateError, setEndDateError] = useState('')
+    const [showAmount, setShoeAmount] = useState('')
 
     const dispatch = useDispatch()
 
-    const sum = dayBookReportList.reduce((sum, current) => Number(sum) + Number(current.amount), 0);
+    const sumofTotalAmount = dayBookReportList.reduce((sum, current) => Number(sum) + Number(current.amount), 0);
+    const sumofTotalAmounst = dayBookReportList.map((val) => val.modeOfPayment)
+    console.log(sumofTotalAmounst?.filter);
 
     const {
         fms: {
@@ -120,6 +124,7 @@ const DayBookReport = (): ReactElement => {
                                 type: feesType
                             })
                         )
+                        setShoeAmount('sum')
                     }}
                 >
                     {search}
@@ -129,9 +134,11 @@ const DayBookReport = (): ReactElement => {
                 <FlexWrapper justifyContent='end'>
                     <ExportToExcel apiData={data} fileName={fileName} />
                 </FlexWrapper>
-                <FlexWrapper>
-                    <>Total:{sum}</>
-                </FlexWrapper>
+                {showAmount && (
+                    <FlexWrapper justifyContent='space-between'>
+                        <Span>Total:<b>{sumofTotalAmount}</b></Span>
+                    </FlexWrapper>
+                )}
             </div>
             <div>
                 <TableWrapper>
