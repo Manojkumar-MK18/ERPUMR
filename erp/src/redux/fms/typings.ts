@@ -35,6 +35,7 @@ export interface Student {
   batchIds?: any
   batchList?: any
   branchIds?: any
+  admissionNumber?: string
   branchList?: any
   city?: string
   coachingCenterId?: string

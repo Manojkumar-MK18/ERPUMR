@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ReactElement, useEffect, useState } from 'react'
 import {
   FlexWrapper,
@@ -12,7 +13,8 @@ import {
   TabWrapper,
   TableFooter,
   Loader,
-  Modal
+  Modal,
+  Input
 } from 'components'
 import Tabs from 'react-bootstrap/esm/Tabs'
 import Tab from 'react-bootstrap/esm/Tab'
@@ -68,6 +70,7 @@ const StudentRegistartion = (): ReactElement => {
   const [resetValuesState, setResetValuesState] = useState(resetValues)
   const [registrationList, setRegistrationList] = useState<Array<Student>>([])
   const filteredList = registrationList.length > 0 ? registrationList : content
+  const [searchTerm, setSearchTerm] = useState('')
 
   console.log(filteredList);
   console.log(registrationList);
@@ -173,6 +176,16 @@ const StudentRegistartion = (): ReactElement => {
           <Button onClick={clearValues}>{clear}</Button>
         </DropdownWrapper>
       </FlexWrapper>
+      <FlexWrapper justifyContent='end' noPadding>
+        <Input
+        value={searchTerm}
+        width="30%"
+        placeholder={'Search '}
+        onChange={(value:string)=>{
+          setSearchTerm(value)
+        }}
+        />
+      </FlexWrapper>
       <TabWrapper>
         <Tabs
           defaultActiveKey="applicationList"
@@ -202,7 +215,67 @@ const StudentRegistartion = (): ReactElement => {
                 </TableRow>
               </TableHeader>
               <tbody>
-                {filteredList?.map(
+                {filteredList.filter((values) => {
+                  if (searchTerm === "") {
+                    return values
+                  } else if (
+                    values.studentName?.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    return values
+                  }
+                }).map(({
+                  studentName = '',
+                  courseId = '',
+                  regNo,
+                  admissionNumber,
+                  userId = '',
+                  mobileNumber,
+                  fatherName,
+                  coachingCentre
+                },
+                  index
+                ) => {
+                  const selectedCourse = courseList.find(
+                    (course) => course.id === courseId
+                  )
+                  return (
+                    <TableRow key={index}>
+                      <td>{index + 1}</td>
+                      <td>{studentName}</td>
+                      <td>{selectedCourse?.name || coachingCentre?.coachingCentreName}</td>
+                      <td>{admissionNumber}</td>
+                      <td>
+                        <ActionWrapper
+                          handlePay={() => {
+                            setPayId(userId)
+                            dispatch(updateStudentDetails({
+                              studentName: studentName,
+                              regNo: regNo,
+                              mobileNumber: mobileNumber,
+                              fatherName: fatherName,
+                              coachingCentre: coachingCentre?.coachingCentreName
+                            }))
+                          }}
+                        />
+                      </td>
+                    </TableRow>
+                  )
+                })}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                {/* {filteredList?.map(
                   (
                     {
                       studentName = '',
@@ -241,7 +314,7 @@ const StudentRegistartion = (): ReactElement => {
                       </TableRow>
                     )
                   }
-                )}
+                )} */}
               </tbody>
             </Table>
             <TableFooter
@@ -274,7 +347,7 @@ const StudentRegistartion = (): ReactElement => {
               date: values?.dateOn,
               balance: Number(selectedFeetotalDetails?.amount) - Number(values?.amount),
               cashier: cashierName,
-              bankName:values?.bankName
+              bankName: values?.bankName
             }
             dispatch(addFeePayment(payload))
             dispatch(updatePaymentMode({
