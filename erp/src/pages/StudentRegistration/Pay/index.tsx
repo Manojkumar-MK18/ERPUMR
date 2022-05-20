@@ -323,7 +323,7 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
         />
       </DropdownWrapper>
       {
-        values?.paymentMode === 'Cash' && (
+        values?.paymentMode === 'Cash' ? '' : (
           <>
             <DropdownWrapper width="50%">
               <Input
