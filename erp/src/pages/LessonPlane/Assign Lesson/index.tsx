@@ -22,7 +22,7 @@ import getCourses, { getAdminList, getBranches, getChildCourses, getInstitutes }
 import { AssignLessonPlaneUser } from "redux/lesson/api"
 import { LessonAssignPayload } from "redux/lesson/typing"
 import { RootState } from "redux/store"
-import { InitialState, tableHeader } from "./const"
+import { InitialState, resetAllValues, tableHeader } from "./const"
 import DatePicker from 'react-datepicker'
 import { format } from 'date-fns'
 import { DATE_FORMAT_YYYYMMDD } from 'const/dateFormat'
@@ -41,14 +41,12 @@ const AssignLesson = (): ReactElement => {
         lesson,
         statusList,
         teachers,
-        userDetail
     } = useSelector(
         (state: RootState) => ({
             acamedic: state.acamedic,
             lesson: state.lesson.lessonAssign as LessonAssignPayload,
             statusList: state.lesson.statusList,
-            teachers: state.acamedic.admin?.adminList,
-            userDetail: state.user.userInfo?.userDetail
+            teachers: state.acamedic.admin?.adminList
         }),
         shallowEqual
     )
@@ -57,9 +55,20 @@ const AssignLesson = (): ReactElement => {
 
     const [values, setValues] = useState(lesson || {})
     const [valuesLessonList, setLessonList] = useState(InitialState)
+    const [resetValues, setresetValues] = useState(resetAllValues)
 
-    // eslint-disable-next-line no-unused-vars
-    const defaultInstituteId = userDetail?.coachingCenterId || ''
+    const clearValues = () => {
+        setresetValues({
+            institute: true,
+            course: true,
+            subject: true,
+            chapter: true,
+            topic: true,
+            assignedDate: true,
+            status: true
+        })
+        setLessonList(InitialState)
+    }
 
     const institutes = instituteList ? getInstituteDropdown(instituteList) : []
     const branches = branchList ? getBranchDropdown(branchList) : []
@@ -85,10 +94,20 @@ const AssignLesson = (): ReactElement => {
                                 coachingCentreId: item?.id,
                                 type: AdminType.INSTITUTEADMIN
                             }))
+                            setresetValues({
+                                ...resetAllValues,
+                                subject: true,
+                                course: true,
+                                chapter: true,
+                                topic: true,
+                                assignedDate: true,
+                                status: true,
+                            })
                         }}
                         placeholder="Select Institutes"
                         title="Institute"
                         isRequired
+                        reset={resetValues?.institute}
                     />
                 </DropdownWrapper>
                 <DropdownWrapper>
@@ -128,10 +147,19 @@ const AssignLesson = (): ReactElement => {
                                 courseId: item?.id,
                                 type: 'SUBJECT'
                             }))
+                            setresetValues({
+                                ...resetAllValues,
+                                subject: true,
+                                chapter: true,
+                                topic: true,
+                                assignedDate: true,
+                                status: true,
+                            })
                         }}
                         placeholder="Select Course"
                         title="Course"
                         isRequired
+                        reset={resetValues?.course}
                     />
                 </DropdownWrapper>
                 <DropdownWrapper>
@@ -145,10 +173,18 @@ const AssignLesson = (): ReactElement => {
                                 courseId: item?.id,
                                 type: 'CHAPTER'
                             }))
+                            setresetValues({
+                                ...resetAllValues,
+                                chapter: true,
+                                topic: true,
+                                status: true,
+                                assignedDate: true
+                            })
                         }}
                         placeholder="Select Subject"
                         title="Subject"
                         isRequired
+                        reset={resetValues?.subject}
                     />
                 </DropdownWrapper>
                 <DropdownWrapper>
@@ -162,8 +198,15 @@ const AssignLesson = (): ReactElement => {
                                 courseId: item?.id,
                                 type: 'TOPIC'
                             }))
+                            setresetValues({
+                                ...resetAllValues,
+                                status: true,
+                                topic: true,
+                                assignedDate: true
+                            })
                         }}
                         placeholder="Select Chapter"
+                        reset={resetValues?.chapter}
                         title="Chapter"
                         isRequired
                     />
@@ -175,8 +218,14 @@ const AssignLesson = (): ReactElement => {
                             setLessonList({
                                 ...valuesLessonList, topic: item.name
                             })
+                            setresetValues({
+                                ...resetAllValues,
+                                status: true,
+                                assignedDate: true
+                            })
                         }}
                         placeholder="Select Topic"
+                        reset={resetValues?.topic}
                         title="Topic"
                         isRequired
                     />
@@ -213,10 +262,15 @@ const AssignLesson = (): ReactElement => {
                         dropdownList={statusList}
                         handleSelect={(item) => {
                             setValues({ ...values, status: item?.name })
+                            setresetValues({
+                                ...resetAllValues,
+                                assignedDate: true
+                            })
                         }}
                         placeholder="Select Status"
                         title="Status"
                         isRequired
+                        reset={resetValues?.status}
                     />
                 </DropdownWrapper>
                 <Button
@@ -236,6 +290,7 @@ const AssignLesson = (): ReactElement => {
                             ],
                             status: values?.status
                         }))
+                        clearValues()
                     }}
                     style={{ marginTop: "24px" }}>Assign</Button>
             </FlexWrapper>
