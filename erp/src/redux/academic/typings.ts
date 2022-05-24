@@ -1,3 +1,4 @@
+import { AdminType } from 'const' 
 import { Dropdown } from '../typings'
 
 export type DropdownList = Array<Dropdown>
@@ -192,3 +193,9 @@ export interface getBatchesForCoursePayload {
   courseId: string
   branchId: string
 }
+
+export interface GetBranchesPayload {
+  coachingCentreId: string
+  type?: AdminType
+}
+ 

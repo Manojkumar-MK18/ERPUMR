@@ -1,5 +1,3 @@
-import { Teacher } from "redux/academic/typings"
-
 export type AdminType =
     | 'SUPERADMIN'
     | 'BRANCHADMIN'
@@ -73,7 +71,7 @@ export interface Admin {
 
 
 export interface GetTeacherResponse {
-    adminList: Array<Teacher>
+    adminList: Array<Admin>
     page: number
     pageSize: number
     totalCount: number
@@ -93,8 +91,8 @@ export interface LessonPalne {
 
 export interface LessonAssignPayload {
     institute: string
-    lessonplanList: Array<LessonPalne>
-    listofBranches: Array<string>
+    lessonplanList?: Array<LessonPalne>
+    listofBranches: any
     listOfFaculties: Array<string>
     status: string
 }

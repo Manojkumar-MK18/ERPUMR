@@ -9,8 +9,9 @@ import {
   getBatchesForCoursePayload,
   Batch,
   GetChildCoursesPayload,
-  GetChildCoursesResponse
-} from './typings'
+  GetChildCoursesResponse,
+  GetBranchesPayload, 
+} from './typings' 
 
 export const getCourses = createAsyncThunk(
   'academic/getCourses',
@@ -82,5 +83,19 @@ export const getChildCourses = createAsyncThunk(
   }: GetChildCoursesPayload): Promise<GetChildCoursesResponse> => {
     const { data } = await api.get(`${apiEndpoints.getChildCourse}${courseId}`)
     return { response: data?.data, type }
+  }
+)
+
+export const getBranches = createAsyncThunk(
+  'coachingCenter/getBranches',
+  async (
+    { coachingCentreId, type }: GetBranchesPayload,
+    { dispatch }
+  ): Promise<Array<Branch>> => {
+    const response = await api.get(
+      `${apiEndpoints.getBranches}?coachingCentreId=${coachingCentreId}`
+    )
+    type && dispatch(({ coachingCentreId, type }))
+    return response?.data
   }
 )

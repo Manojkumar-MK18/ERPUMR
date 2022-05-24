@@ -8,14 +8,9 @@ export const tableHeader = [
 ]
 
 export const InitialState = {
-    institute: "",
-    lessonplanList: '',
     course: "",
     subject: "",
     chapter: "  ",
-    topic: "",
-    assignedDate: "",
-    listofBranches: [],
-    listOfFaculties: [],
-    status: ""
+    topic: "", 
+
 }

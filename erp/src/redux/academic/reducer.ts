@@ -41,7 +41,8 @@ import getCourses, {
   getBranchesByInstitute,
   getAllCoursesByInstitute,
   getBatchesForCourse,
-  getChildCourses
+  getChildCourses,
+  getBranches
 } from './api'
 import getCoursesDropdown from './helpers'
 
@@ -113,6 +114,12 @@ export const academicSlice = createSlice({
       state.instituteList = action.payload
     },
     [getBranchesByInstitute.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<Array<Branch>>
+    ) => {
+      state.branchList = action.payload
+    },
+    [getBranches.fulfilled.toString()]: (
       state,
       action: PayloadAction<Array<Branch>>
     ) => {

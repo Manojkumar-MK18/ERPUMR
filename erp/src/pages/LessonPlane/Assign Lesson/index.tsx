@@ -10,15 +10,17 @@ import {
     TableRow,
     TableWrapper
 } from "components"
+import { DropdownListProps } from "components/EditableDropdown/typings"
+import { AdminType } from "const"
 import { getBranchDropdown, getInstituteDropdown } from "helpers"
 import { ReactElement, useEffect, useState } from "react"
 import { Table } from "react-bootstrap"
 import { shallowEqual, useDispatch, useSelector } from "react-redux"
-import getCourses, { getBranchesByInstitute, getChildCourses, getInstitutes } from "redux/academic/api"
+import getCourses, { getBranches, getChildCourses, getInstitutes } from "redux/academic/api"
 import { AssignLessonPlaneUser } from "redux/lesson/api"
 import { LessonAssignPayload } from "redux/lesson/typing"
 import { RootState } from "redux/store"
-import { tableHeader } from "./const"
+import { InitialState, tableHeader } from "./const"
 
 const AssignLesson = (): ReactElement => {
     const {
@@ -28,13 +30,13 @@ const AssignLesson = (): ReactElement => {
             subjectlist,
             chapterList,
             topicList,
-            branchList
+            branchList,
         },
         lesson
     } = useSelector(
         (state: RootState) => ({
             acamedic: state.acamedic,
-            lesson: state.lesson.lessonAssign as LessonAssignPayload
+            lesson: state.lesson.lessonAssign as LessonAssignPayload, 
         }),
         shallowEqual
     )
@@ -42,6 +44,7 @@ const AssignLesson = (): ReactElement => {
     const dispatch = useDispatch()
 
     const [values, setValues] = useState(lesson || {})
+    const [values2, setValues2] = useState(InitialState)
 
     const institutes = instituteList ? getInstituteDropdown(instituteList) : []
     const branches = branchList ? getBranchDropdown(branchList) : []
@@ -60,12 +63,11 @@ const AssignLesson = (): ReactElement => {
                 <DropdownWrapper>
                     <EditableDropdown
                         dropdownList={institutes}
-                        isMultiChoice 
                         handleSelect={(item) => {
                             setValues({ ...values, institute: item?.name })
-                            dispatch(getBranchesByInstitute({
+                            dispatch(getBranches({
                                 coachingCentreId: item?.id,
-                                courseId:''
+                                type: AdminType.INSTITUTEADMIN
                             }))
                         }}
                         placeholder="Select Institutes"
@@ -77,8 +79,10 @@ const AssignLesson = (): ReactElement => {
                     <EditableDropdown
                         dropdownList={branches}
                         isMultiChoice
-                        handleSelect={(item) => {
-                            setValues({ ...values, institute: item?.name })
+                        handleMultiSelect={(items) => {
+                            const ids = items.map((item: DropdownListProps) => item?.name)
+
+                            setValues({ ...values, listofBranches: ids })
                         }}
                         placeholder="Select Branch"
                         title="Branch"
@@ -87,9 +91,18 @@ const AssignLesson = (): ReactElement => {
                 </DropdownWrapper>
                 <DropdownWrapper>
                     <EditableDropdown
+                        dropdownList={[]}
+                        handleSelect={() => { }}
+                        placeholder="Select Faculty"
+                        title="Faculty"
+                        isRequired
+                    />
+                </DropdownWrapper>
+                <DropdownWrapper>
+                    <EditableDropdown
                         dropdownList={courseList}
                         handleSelect={(item) => {
-                            setValues({ ...values, lessonplanList: [{ course: item?.name }] })
+                            setValues2({ ...values2, course: item?.name })
                             dispatch(getChildCourses({
                                 courseId: item?.id,
                                 type: 'SUBJECT'
@@ -104,7 +117,7 @@ const AssignLesson = (): ReactElement => {
                     <EditableDropdown
                         dropdownList={subjectlist}
                         handleSelect={(item) => {
-                            setValues({ ...values, lessonplanList: [{ subject: item?.name }] })
+                            setValues2({ ...values2, subject: item?.name })
                             dispatch(getChildCourses({
                                 courseId: item?.id,
                                 type: 'CHAPTER'
@@ -119,7 +132,7 @@ const AssignLesson = (): ReactElement => {
                     <EditableDropdown
                         dropdownList={chapterList}
                         handleSelect={(item) => {
-                            setValues({ ...values, lessonplanList: [{ chapter: item?.name }] })
+                            setValues2({ ...values2, chapter: item?.name })
                             dispatch(getChildCourses({
                                 courseId: item?.id,
                                 type: 'TOPIC'
@@ -134,28 +147,16 @@ const AssignLesson = (): ReactElement => {
                     <EditableDropdown
                         dropdownList={topicList}
                         handleSelect={(item) => {
-                            setValues({ ...values, lessonplanList: [{ topic: item?.name }] })
+                            setValues2({ ...values2, topic: item?.name })
                         }}
                         placeholder="Select Topic"
                         title="Topic"
                         isRequired
                     />
                 </DropdownWrapper>
-                <DropdownWrapper>
-                    <EditableDropdown
-                        dropdownList={[]}
-                        handleSelect={() => { }}
-                        placeholder="Select Faculty"
-                        title="Faculty"
-                        isRequired
-                    />
-                </DropdownWrapper>
                 <Button
                     onClick={() => {
-                        dispatch(AssignLessonPlaneUser({
-                            institute: values?.institute,
-                            lessonplanList: []
-                        }))
+                        dispatch(AssignLessonPlaneUser(values))
                     }}
                     style={{ marginTop: "24px" }}>Assign</Button>
             </FlexWrapper>

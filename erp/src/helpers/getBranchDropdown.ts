@@ -5,14 +5,14 @@ interface DropdownListProps {
   id: string
 }
 
-const getBranchDropdown = (
+const getBranchDropDown = (
   branches: Array<Branch>
 ): Array<DropdownListProps> => {
-  const branchList = branches.map((branch: Branch) => ({
+  const branchDropdown = branches.map((branch: Branch) => ({
     id: branch?.id,
     name: branch?.branchName
   }))
-  return branchList
+  return branchDropdown
 }
-
-export default getBranchDropdown
+ 
+export default getBranchDropDown

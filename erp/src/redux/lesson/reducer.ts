@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { LessonPlaneListApi } from './api'
-import { InitialState, LessonPlaneListResponse } from './typing'
+import { LessonPlaneListApi, TeacherList } from './api'
+import { Admin, InitialState, LessonPlaneListResponse } from './typing'
 
 const initialState: InitialState = {
     isLoading: false,
@@ -21,6 +21,12 @@ export const lessonSlice = createSlice({
         ) => {
             state.isLoading = false
             state.lessonPlaneList = action?.payload
+        },
+        [TeacherList.fulfilled.toString()]: (
+            state,
+            action: PayloadAction<Array<Admin>>
+        ) => {
+            state.teacherList = action.payload
         }
     }
 })

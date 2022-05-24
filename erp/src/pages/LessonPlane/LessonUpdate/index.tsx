@@ -16,23 +16,17 @@ import { BootstrapModal } from './subcomponent'
 import { useDispatch, useSelector } from 'react-redux'
 import AssignList from './Assign'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { AssignLessonPalnApi, LessonPlaneListApi, TeacherList } from 'redux/lesson/api'
+import { AssignLessonPalnApi, LessonPlaneListApi } from 'redux/lesson/api'
 import { RootState } from 'redux/store'
 import { LessonPlaneList } from 'redux/lesson/typing'
-import AdminType from 'const/admin'
-import getTeacherDropDown from 'helpers/getTeacherDropDown'
 
 const LessonUpdate = (): ReactElement => {
 
     const {
         lessonPlaneList,
-        acamedic: {
-            teachersList
-        }
     } = useSelector(
         (state: RootState) => ({
-            lessonPlaneList: state.lesson.lessonPlaneList,
-            acamedic: state.acamedic
+            lessonPlaneList: state.lesson.lessonPlaneList
         })
     )
 
@@ -49,16 +43,9 @@ const LessonUpdate = (): ReactElement => {
     const [lessonList, setLessonList] = useState<Array<LessonPlaneList>>([])
     const filteredList = lessonList.length > 0 ? lessonList : lessonplan
 
-    // eslint-disable-next-line no-unused-vars
-    const te = teachersList ? getTeacherDropDown(teachersList) : []
-    console.log(teachersList.map((c) => c?.firstName));
-
     useEffect(() => {
         dispatch(LessonPlaneListApi(1))
-        dispatch(TeacherList({
-            type: AdminType.TEACHER
-        }))
-        /* eslint-disable react-hooks/exhaustive-deps */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const canSave =
