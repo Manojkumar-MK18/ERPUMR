@@ -6,3 +6,16 @@ export const tableHeader = [
     'Faculty',
     'Edit'
 ]
+
+export const InitialState = {
+    institute: "",
+    lessonplanList: '',
+    course: "",
+    subject: "",
+    chapter: "  ",
+    topic: "",
+    assignedDate: "",
+    listofBranches: [],
+    listOfFaculties: [],
+    status: ""
+}

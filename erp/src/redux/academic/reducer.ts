@@ -81,7 +81,8 @@ const initialState: AcademicState = {
   subjectlist: [],
   chapterList: [],
   topicList: [],
-  statuslist: status
+  statuslist: status,
+  teachersList: []
 }
 
 export const academicSlice = createSlice({

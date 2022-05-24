@@ -17,6 +17,7 @@ export const ListInput = styled(InputGroup)`
   .dropdown-menu.show {
     max-height: 300px;
     overflow: auto;
+    transform: translate(0, 40px) !important;
   }
 `
 
@@ -26,16 +27,9 @@ export const Title = styled(H3)`
 
 export const DropdownInput = styled(FormControl)`
   background: ${colors.white} !important;
-  &.form-control.is-valid {
-    border-color: ${({ theme: { dropDown } }) => dropDown.success};
-  }
-
-  &.form-control.is-invalid {
-    border-color: ${({ theme: { dropDown } }) => dropDown.error};
-  }
 
   &.is-valid + #dropdown-id {
-    border-color: ${({ theme: { dropDown } }) => dropDown.success};
+    border-color: ${({ theme: { dropDown } }) => dropDown.success} !important;
   }
 
   &.is-invalid + #dropdown-id {
@@ -55,4 +49,7 @@ export const EditDropdownWrapper = styled.div<EditDropdownWrapperProps>`
 pointer-events: none;
 opacity: 0.7;
 `}
+  .form-control.is-valid {
+    border-color: ${({ theme: { dropDown } }) => dropDown.success} !important;
+  }
 `

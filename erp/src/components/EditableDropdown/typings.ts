@@ -10,12 +10,16 @@ export interface EditableDropdownProps {
   dropdownList: Array<DropdownListProps>
   placeholder: string
   //eslint-disable-next-line no-unused-vars
-  handleSelect: (arg: any) => void
+  handleSelect?: (item: any) => void
   onBlur?: () => void
   error?: string
   isDisabled?: boolean
   defaultValue?: DropdownListProps | null
-  reset?: boolean
+  clearValue?: boolean
+  isMultiChoice?: boolean
+  //eslint-disable-next-line no-unused-vars
+  handleMultiSelect?: (item: any) => void,
+  reset?:boolean
 }
 
 export interface EditDropdownWrapperProps {

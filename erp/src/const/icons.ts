@@ -21,7 +21,8 @@ import {
   faBook,
   faUserTie,
   faPrint,
-  faClipboardList
+  faClipboardList,
+  faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons'
 import { faUser, faEdit, faTrashAlt, faEye, } from '@fortawesome/free-regular-svg-icons'
 
@@ -50,6 +51,7 @@ library.add(
   faEye,
   faBook,
   faUserTie,
+  faTimesCircle,
   faPrint,
   faClipboardList
 )

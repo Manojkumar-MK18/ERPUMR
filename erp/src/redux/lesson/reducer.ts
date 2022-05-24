@@ -4,7 +4,9 @@ import { InitialState, LessonPlaneListResponse } from './typing'
 
 const initialState: InitialState = {
     isLoading: false,
-    lessonPlaneList: null
+    lessonPlaneList: null,
+    teacherList: [],
+    lessonAssign: null
 }
 
 

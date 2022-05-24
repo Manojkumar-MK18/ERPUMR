@@ -83,6 +83,55 @@ export interface Batch {
   course?: any
 }
 
+export interface Teacher {
+  aadhar: string
+  academicYear: string
+  address: string
+  address1: string
+  address2: string
+  admissionNumber: string
+  admissionType: string
+  bloodGroup: string
+  board: string
+
+  bulk: string
+  caste: string
+  challenged: string
+  city: string
+  classId: string
+  coachingCenterId: string
+
+  combination: string
+  community: string
+  country: string
+  createdAt: 1623588168000
+  createdBy: string
+  district: string
+  dob: string
+  email: string
+  fatherName: string
+  firstName: string
+  gender: string
+  id: string
+  lang1: string
+  lang2: string
+  lastAttended: string
+  lastName: string
+  markObtained: string
+  medium: string
+  mobileNumber: string
+  nationality: string
+  newType: string
+  parentNumber: string
+  regNo: string
+  religion: string
+  salutation: string
+  shortDiscription: string
+  state: string
+  status: string
+  subject: string
+}
+
 export interface GetChildCoursesPayload {
   courseId: string
   type: string
@@ -126,6 +175,7 @@ export interface AcademicState {
   subjects: Array<Course>
   chapters: Array<Course>
   topics: Array<Course>
+  teachersList: Array<Teacher>
   subjectlist: DropdownList
   chapterList: DropdownList
   topicList: DropdownList

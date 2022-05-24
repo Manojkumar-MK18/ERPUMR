@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import apiEndpoints from "const/apiEndpoints";
 import api from "services";
+import { GetTeacherPayload,GetTeacherResponse } from "./typing";
 
 export const AssignLessonPalnApi = createAsyncThunk(
     'lessonPlane/AssignLessonPlane',
@@ -18,11 +19,46 @@ export const LessonPlaneListApi = createAsyncThunk(
     }
 )
 
-//ntwor
-export const lessonPlaneListApi2 = createAsyncThunk(
-    'lesson/list',
-    async (): Promise<Array<any>> => {
-        const response = await api.get(apiEndpoints.lessonPlaneList)
+export const TeacherList = createAsyncThunk(
+    'list/getTeacherList',
+    async ({
+        coachingCentreId,
+        branchId,
+        batchId,
+        pageNo,
+        type
+    }: GetTeacherPayload): Promise<GetTeacherResponse> => {
+        const payloadData = {
+            ascDesc: 'Desc',
+            batchIds: null,
+            branchIds: null,
+            coachingCenterId: null,
+            pageNo: pageNo || 1,
+            pageSize: 20,
+            searchCriteria: { userType: type },
+            sortBy: 'created_at'
+        }
+        const {
+            data: { data: adminList, page, pageSize, totalCount, totalPages }
+        } = await api.post(`${apiEndpoints.getTeacherList}`, payloadData)
+        const responseData = {
+            adminList,
+            page,
+            pageSize,
+            totalCount,
+            totalPages,
+            coachingCentreId: coachingCentreId || '',
+            branchId: branchId || '',
+            batchId: batchId || ''
+        }
+        return responseData
+    }
+) 
+
+export const AssignLessonPlaneUser = createAsyncThunk(
+    'lessonPlane/AssignLessonPlaneUser',
+    async (requestPayload: any): Promise<any> => {
+        const response = await api.post(`${apiEndpoints.getAssignLessonPalne}`, requestPayload)
         return response?.data
     }
 )
