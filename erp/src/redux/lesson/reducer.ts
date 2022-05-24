@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { LessonPlaneListApi, TeacherList } from './api'
 import { Admin, InitialState, LessonPlaneListResponse } from './typing'
+import { status } from './const'
 
 const initialState: InitialState = {
     isLoading: false,
     lessonPlaneList: null,
     teacherList: [],
-    lessonAssign: null
+    lessonAssign: null,
+    statusList: status
 }
 
 

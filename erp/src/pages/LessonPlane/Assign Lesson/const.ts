@@ -12,5 +12,5 @@ export const InitialState = {
     subject: "",
     chapter: "  ",
     topic: "", 
-
+    assignedDate:''
 }

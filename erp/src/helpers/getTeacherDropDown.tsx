@@ -1,16 +1,12 @@
-import { Teacher } from "redux/academic/typings"
+import { Admin } from 'redux/lesson/typing'
+import { DropdownListProps } from '../components/EditableDropdown/typings'
 
-interface DropdownListProps {
-    name: string
-    id: string
-}
-
-const getTeacherDropDown = (teachers: Array<Teacher>): Array<DropdownListProps> => {
-    const teacherList = teachers.map((teacher: Teacher) => ({
-        id: teacher?.id,
-        name: teacher?.firstName
+const getUserDropdown = (users: Array<Admin>): Array<DropdownListProps> => {
+    const userList = users.map(({ id, firstName, lastName }: Admin) => ({
+        id: id,
+        name: `${firstName} ${lastName}`
     }))
-    return teacherList
+    return userList
 }
 
-export default getTeacherDropDown
+export default getUserDropdown

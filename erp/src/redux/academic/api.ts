@@ -10,8 +10,47 @@ import {
   Batch,
   GetChildCoursesPayload,
   GetChildCoursesResponse,
-  GetBranchesPayload, 
+  GetBranchesPayload,
+  GetAdminResponse,
+  GetAdminPayload, 
 } from './typings' 
+
+export const getAdminList = createAsyncThunk(
+  'coachingCenter/getAdminList',
+  async ({
+    coachingCentreId,
+    branchId,
+    batchId,
+    pageNo,
+    type
+  }: GetAdminPayload): Promise<GetAdminResponse> => {
+    const payloadData = {
+      ascDesc: 'Desc',
+      batchIds: batchId ? [batchId] : null,
+      branchIds: branchId ? [branchId] : null,
+      coachingCenterId: coachingCentreId || null,
+      pageNo: pageNo || 1,
+      pageSize: 20,
+      searchCriteria: { userType: type },
+      sortBy: 'created_at'
+    }
+
+    const {
+      data: { data: adminList, page, pageSize, totalCount, totalPages }
+    } = await api.post(`${apiEndpoints.getAdminList}`, payloadData)
+    const responseData = {
+      adminList,
+      page,
+      pageSize,
+      totalCount,
+      totalPages,
+      coachingCentreId: coachingCentreId || '',
+      branchId: branchId || '',
+      batchId: batchId || ''
+    }
+    return responseData
+  }
+)
 
 export const getCourses = createAsyncThunk(
   'academic/getCourses',

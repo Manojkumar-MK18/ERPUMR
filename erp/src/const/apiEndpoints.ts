@@ -38,7 +38,9 @@ const apiEndpoints = {
   getallFees: 'feesPaid/all',
   getTeacherList: 'userDetail/search',
   getAssignLessonPalne: 'lessonplan/lessonplanuser',
-  getBranches:'coachingCentreBranch/branchByCoachingCentreId', 
+  getBranches: 'coachingCentreBranch/branchByCoachingCentreId',
+  getAdminList: 'userDetail/search',
+
 }
 
 export default apiEndpoints

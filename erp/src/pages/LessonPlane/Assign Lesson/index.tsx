@@ -4,6 +4,7 @@ import {
     DropdownWrapper,
     EditableDropdown,
     FlexWrapper, Icon,
+    Input,
     PageWrapper,
     SectionTitle,
     TableHeader,
@@ -13,14 +14,19 @@ import {
 import { DropdownListProps } from "components/EditableDropdown/typings"
 import { AdminType } from "const"
 import { getBranchDropdown, getInstituteDropdown } from "helpers"
+import { DatePickerWrapper } from "pages/subcomponents"
 import { ReactElement, useEffect, useState } from "react"
 import { Table } from "react-bootstrap"
 import { shallowEqual, useDispatch, useSelector } from "react-redux"
-import getCourses, { getBranches, getChildCourses, getInstitutes } from "redux/academic/api"
+import getCourses, { getAdminList, getBranches, getChildCourses, getInstitutes } from "redux/academic/api"
 import { AssignLessonPlaneUser } from "redux/lesson/api"
 import { LessonAssignPayload } from "redux/lesson/typing"
 import { RootState } from "redux/store"
 import { InitialState, tableHeader } from "./const"
+import DatePicker from 'react-datepicker'
+import { format } from 'date-fns'
+import { DATE_FORMAT_YYYYMMDD } from 'const/dateFormat'
+import getUserDropdown from "helpers/getTeacherDropDown"
 
 const AssignLesson = (): ReactElement => {
     const {
@@ -32,11 +38,17 @@ const AssignLesson = (): ReactElement => {
             topicList,
             branchList,
         },
-        lesson
+        lesson,
+        statusList,
+        teachers,
+        userDetail
     } = useSelector(
         (state: RootState) => ({
             acamedic: state.acamedic,
-            lesson: state.lesson.lessonAssign as LessonAssignPayload, 
+            lesson: state.lesson.lessonAssign as LessonAssignPayload,
+            statusList: state.lesson.statusList,
+            teachers: state.acamedic.admin?.adminList,
+            userDetail: state.user.userInfo?.userDetail
         }),
         shallowEqual
     )
@@ -44,17 +56,21 @@ const AssignLesson = (): ReactElement => {
     const dispatch = useDispatch()
 
     const [values, setValues] = useState(lesson || {})
-    const [values2, setValues2] = useState(InitialState)
+    const [valuesLessonList, setLessonList] = useState(InitialState)
+
+    // eslint-disable-next-line no-unused-vars
+    const defaultInstituteId = userDetail?.coachingCenterId || ''
 
     const institutes = instituteList ? getInstituteDropdown(instituteList) : []
     const branches = branchList ? getBranchDropdown(branchList) : []
+    const teacherList = teachers ? getUserDropdown(teachers) : []
 
     useEffect(() => {
         dispatch(getCourses())
         dispatch(getInstitutes())
+        dispatch(getAdminList({ type: AdminType.TEACHER, }))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    console.log();
 
     return (
         <PageWrapper>
@@ -81,7 +97,6 @@ const AssignLesson = (): ReactElement => {
                         isMultiChoice
                         handleMultiSelect={(items) => {
                             const ids = items.map((item: DropdownListProps) => item?.name)
-
                             setValues({ ...values, listofBranches: ids })
                         }}
                         placeholder="Select Branch"
@@ -91,8 +106,12 @@ const AssignLesson = (): ReactElement => {
                 </DropdownWrapper>
                 <DropdownWrapper>
                     <EditableDropdown
-                        dropdownList={[]}
-                        handleSelect={() => { }}
+                        dropdownList={teacherList}
+                        isMultiChoice
+                        handleMultiSelect={(items) => {
+                            const ids = items.map((item: DropdownListProps) => item?.name)
+                            setValues({ ...values, listOfFaculties: ids })
+                        }}
                         placeholder="Select Faculty"
                         title="Faculty"
                         isRequired
@@ -102,7 +121,9 @@ const AssignLesson = (): ReactElement => {
                     <EditableDropdown
                         dropdownList={courseList}
                         handleSelect={(item) => {
-                            setValues2({ ...values2, course: item?.name })
+                            setLessonList({
+                                ...valuesLessonList, course: item.name
+                            })
                             dispatch(getChildCourses({
                                 courseId: item?.id,
                                 type: 'SUBJECT'
@@ -117,7 +138,9 @@ const AssignLesson = (): ReactElement => {
                     <EditableDropdown
                         dropdownList={subjectlist}
                         handleSelect={(item) => {
-                            setValues2({ ...values2, subject: item?.name })
+                            setLessonList({
+                                ...valuesLessonList, subject: item.name
+                            })
                             dispatch(getChildCourses({
                                 courseId: item?.id,
                                 type: 'CHAPTER'
@@ -132,7 +155,9 @@ const AssignLesson = (): ReactElement => {
                     <EditableDropdown
                         dropdownList={chapterList}
                         handleSelect={(item) => {
-                            setValues2({ ...values2, chapter: item?.name })
+                            setLessonList({
+                                ...valuesLessonList, chapter: item.name
+                            })
                             dispatch(getChildCourses({
                                 courseId: item?.id,
                                 type: 'TOPIC'
@@ -147,16 +172,70 @@ const AssignLesson = (): ReactElement => {
                     <EditableDropdown
                         dropdownList={topicList}
                         handleSelect={(item) => {
-                            setValues2({ ...values2, topic: item?.name })
+                            setLessonList({
+                                ...valuesLessonList, topic: item.name
+                            })
                         }}
                         placeholder="Select Topic"
                         title="Topic"
                         isRequired
                     />
                 </DropdownWrapper>
+                <DropdownWrapper>
+                    <DatePickerWrapper>
+                        <DatePicker
+                            selected={valuesLessonList?.assignedDate ? new Date(valuesLessonList?.assignedDate) : new Date()}
+                            onSelect={(datees: Date) => {
+                                setLessonList({
+                                    ...valuesLessonList,
+                                    assignedDate: datees ? format(datees, DATE_FORMAT_YYYYMMDD) : ''
+                                })
+                            }}
+                            onChange={(datees: Date) => {
+                                setLessonList({
+                                    ...valuesLessonList,
+                                    assignedDate: datees ? format(datees, DATE_FORMAT_YYYYMMDD) : ''
+                                })
+                            }}
+                            customInput={
+                                <Input
+                                    value={valuesLessonList?.assignedDate}
+                                    label={'Assign Date'}
+                                    isRequired
+                                    suffix={['far', 'calendar']}
+                                />
+                            }
+                        />
+                    </DatePickerWrapper>
+                </DropdownWrapper>
+                <DropdownWrapper>
+                    <EditableDropdown
+                        dropdownList={statusList}
+                        handleSelect={(item) => {
+                            setValues({ ...values, status: item?.name })
+                        }}
+                        placeholder="Select Status"
+                        title="Status"
+                        isRequired
+                    />
+                </DropdownWrapper>
                 <Button
                     onClick={() => {
-                        dispatch(AssignLessonPlaneUser(values))
+                        dispatch(AssignLessonPlaneUser({
+                            institute: values?.institute,
+                            listofBranches: values?.listofBranches,
+                            listOfFaculties: values?.listOfFaculties,
+                            lessonplanList: [
+                                {
+                                    course: valuesLessonList?.course,
+                                    subject: valuesLessonList?.subject,
+                                    chapter: valuesLessonList?.chapter,
+                                    topic: valuesLessonList?.topic,
+                                    assignedDate: valuesLessonList?.assignedDate
+                                }
+                            ],
+                            status: values?.status
+                        }))
                     }}
                     style={{ marginTop: "24px" }}>Assign</Button>
             </FlexWrapper>

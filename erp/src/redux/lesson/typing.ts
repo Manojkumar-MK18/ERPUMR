@@ -1,3 +1,8 @@
+import { Teacher } from "redux/academic/typings"
+import { Dropdown } from "redux/typings"
+
+export type DropdownList = Array<Dropdown>
+
 export type AdminType =
     | 'SUPERADMIN'
     | 'BRANCHADMIN'
@@ -71,7 +76,7 @@ export interface Admin {
 
 
 export interface GetTeacherResponse {
-    adminList: Array<Admin>
+    adminList: Array<Teacher>
     page: number
     pageSize: number
     totalCount: number
@@ -85,15 +90,14 @@ export interface LessonPalne {
     course?: string
     subject?: string
     chapter?: string
-    topic?: string
-    assignedDate?: string
+    topic?: string 
 }
 
 export interface LessonAssignPayload {
     institute: string
-    lessonplanList?: Array<LessonPalne>
+    lessonplanList: Array<LessonPalne>
     listofBranches: any
-    listOfFaculties: Array<string>
+    listOfFaculties: any
     status: string
 }
 
@@ -101,5 +105,6 @@ export interface InitialState {
     isLoading: boolean
     lessonPlaneList: LessonPlaneListResponse | null
     teacherList: Array<Admin>
-    lessonAssign: LessonAssignPayload | null
+    lessonAssign: LessonAssignPayload | null,
+    statusList:DropdownList
 }

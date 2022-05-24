@@ -1,4 +1,5 @@
-import { AdminType } from 'const' 
+import { AdminType } from 'const'
+import { Admin } from 'redux/lesson/typing'
 import { Dropdown } from '../typings'
 
 export type DropdownList = Array<Dropdown>
@@ -176,11 +177,11 @@ export interface AcademicState {
   subjects: Array<Course>
   chapters: Array<Course>
   topics: Array<Course>
-  teachersList: Array<Teacher>
   subjectlist: DropdownList
   chapterList: DropdownList
   topicList: DropdownList
   statuslist: DropdownList
+  admin: GetAdminResponse | null
 }
 
 export interface getBranchesForCoursePayload {
@@ -198,4 +199,22 @@ export interface GetBranchesPayload {
   coachingCentreId: string
   type?: AdminType
 }
- 
+
+export interface GetAdminPayload {
+  coachingCentreId?: string
+  branchId?: string
+  batchId?: string
+  pageNo?: number
+  type: AdminType
+}
+
+export interface GetAdminResponse {
+  adminList: Array<Admin>
+  page: number
+  pageSize: number
+  totalCount: number
+  totalPages: number
+  coachingCentreId: string
+  branchId: string
+  batchId: string
+}

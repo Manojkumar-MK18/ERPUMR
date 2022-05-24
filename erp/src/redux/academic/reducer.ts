@@ -5,6 +5,7 @@ import {
   Branch,
   Course,
   DropdownList,
+  GetAdminResponse,
   GetChildCoursesResponse,
   Institute
 } from './typings'
@@ -42,7 +43,8 @@ import getCourses, {
   getAllCoursesByInstitute,
   getBatchesForCourse,
   getChildCourses,
-  getBranches
+  getBranches,
+  getAdminList
 } from './api'
 import getCoursesDropdown from './helpers'
 
@@ -83,7 +85,7 @@ const initialState: AcademicState = {
   chapterList: [],
   topicList: [],
   statuslist: status,
-  teachersList: []
+  admin: null
 }
 
 export const academicSlice = createSlice({
@@ -156,6 +158,12 @@ export const academicSlice = createSlice({
           state.topicList = getCoursesDropdown(response)
           break
       }
+    },
+    [getAdminList.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<GetAdminResponse>
+    ) => {
+      state.admin = action.payload
     }
   }
 })
