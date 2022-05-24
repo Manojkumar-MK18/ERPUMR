@@ -328,6 +328,10 @@ export const feeTypeList = [
   {
     id: 'additional',
     name: 'Additional Fees'
+  },
+  {
+    id: 'all',
+    name: 'ALL'
   }
 ]
 

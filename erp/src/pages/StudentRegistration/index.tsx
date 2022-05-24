@@ -178,12 +178,12 @@ const StudentRegistartion = (): ReactElement => {
       </FlexWrapper>
       <FlexWrapper justifyContent='end' noPadding>
         <Input
-        value={searchTerm}
-        width="30%"
-        placeholder={'Search '}
-        onChange={(value:string)=>{
-          setSearchTerm(value)
-        }}
+          value={searchTerm}
+          width="30%"
+          placeholder={'Search '}
+          onChange={(value: string) => {
+            setSearchTerm(value)
+          }}
         />
       </FlexWrapper>
       <TabWrapper>
@@ -260,61 +260,6 @@ const StudentRegistartion = (): ReactElement => {
                     </TableRow>
                   )
                 })}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                {/* {filteredList?.map(
-                  (
-                    {
-                      studentName = '',
-                      courseId = '',
-                      regNo,
-                      userId = '',
-                      mobileNumber,
-                      fatherName,
-                      coachingCentre
-                    },
-                    index
-                  ) => {
-                    const selectedCourse = courseList.find(
-                      (course) => course.id === courseId
-                    )
-                    return (
-                      <TableRow key={`student-list${index}`}>
-                        <td>{index + 1}</td>
-                        <td>{studentName}</td>
-                        <td>{selectedCourse?.name || coachingCentre?.coachingCentreName}</td>
-                        <td>{regNo}</td>
-                        <td>
-                          <ActionWrapper
-                            handlePay={() => {
-                              setPayId(userId)
-                              dispatch(updateStudentDetails({
-                                studentName: studentName,
-                                regNo: regNo,
-                                mobileNumber: mobileNumber,
-                                fatherName: fatherName,
-                                coachingCentre: coachingCentre?.coachingCentreName
-                              }))
-                            }}
-                          />
-                        </td>
-                      </TableRow>
-                    )
-                  }
-                )} */}
               </tbody>
             </Table>
             <TableFooter
@@ -347,7 +292,8 @@ const StudentRegistartion = (): ReactElement => {
               date: values?.dateOn,
               balance: Number(selectedFeetotalDetails?.amount) - Number(values?.amount),
               cashier: cashierName,
-              bankName: values?.bankName
+              bankName: values?.bankName,
+              status: 'ACTIVE'
             }
             dispatch(addFeePayment(payload))
             dispatch(updatePaymentMode({
