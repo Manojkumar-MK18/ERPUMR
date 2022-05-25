@@ -219,7 +219,11 @@ const StudentRegistartion = (): ReactElement => {
                   if (searchTerm === "") {
                     return values
                   } else if (
-                    values.studentName?.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    values.studentName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    values.admissionNumber?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    values.mobileNumber?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    values.fatherName?.toLowerCase().includes(searchTerm.toLowerCase())
+                  ) {
                     return values
                   }
                 }).map(({
@@ -230,7 +234,7 @@ const StudentRegistartion = (): ReactElement => {
                   userId = '',
                   mobileNumber,
                   fatherName,
-                  coachingCentre
+                  coachingCentre,
                 },
                   index
                 ) => {
