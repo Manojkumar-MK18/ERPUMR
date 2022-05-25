@@ -62,6 +62,11 @@ const DayBookReport = (): ReactElement => {
     const [data, setData] = useState(Exceldatas)
     const fileName = "dayBookReport"
 
+    const canSearch =
+        !!startDate &&
+        !!endDate &&
+        !!feeType
+
     return (
         <PageWrapper id="container">
             <SectionTitle title={title} />
@@ -116,6 +121,7 @@ const DayBookReport = (): ReactElement => {
                 </DropdownWrapper>
                 <Button
                     style={{ marginTop: '24px' }}
+                    disabled={!canSearch}
                     onClick={() => {
                         dispatch(
                             fetchDayBookReport({
