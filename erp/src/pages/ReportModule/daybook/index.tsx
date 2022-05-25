@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import {
     PageWrapper,
     SectionTitle,
@@ -21,15 +21,21 @@ import { fetchDayBookReport } from 'redux/report/action'
 import moment from 'moment'
 import { ExportToExcel } from './Excel'
 import { Span } from 'typography'
+import AdminType from 'const/admin'
+import { fetchdayBookReportByInstitte } from 'redux/report/api'
 
 const DayBookReport = (): ReactElement => {
     const {
         acamedic: { feeTypeList },
-        report: { dayBookReportList }
+        report: { dayBookReportList },
+        role = "",
+        coachingCenterId = ""
     } = useSelector((state: RootState) =>
     ({
         acamedic: state.acamedic,
-        report: state.report
+        report: state.report,
+        role: state.user.userInfo?.role,
+        coachingCenterId: state.user.userInfo?.userDetail.coachingCenterId
     }),
         shallowEqual
     )
@@ -66,6 +72,12 @@ const DayBookReport = (): ReactElement => {
         !!startDate &&
         !!endDate &&
         !!feeType
+
+    useEffect(() => {
+        if (role !== AdminType.SUPERADMIN) {
+            dispatch(fetchdayBookReportByInstitte({ coachingCenterId: coachingCenterId }))
+        }
+    })
 
     return (
         <PageWrapper id="container">

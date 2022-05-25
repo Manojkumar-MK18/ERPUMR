@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchDayBookReport } from './api'
+import { fetchDayBookReport, fetchdayBookReportByInstitte } from './api'
 import { InitialState } from './types'
 
 const initialState: InitialState = {
@@ -24,6 +24,10 @@ export const studentRegistrationSlice = createSlice({
             state.isLoading = false
             state.error = action.payload
         },
+        [fetchdayBookReportByInstitte.fulfilled.toString()]: (state, action) => {
+            state.isLoading = false
+            state.dayBookReportList = action.payload
+        }
     }
 })
 
