@@ -82,72 +82,76 @@ const DayBookReport = (): ReactElement => {
     return (
         <PageWrapper id="container">
             <SectionTitle title={title} />
-            <FlexWrapper width="100%">
-                <DropdownWrapper>
-                    <EditableDropdown
-                        dropdownList={feeTypeList}
-                        title={feeType}
-                        placeholder={selectFeeType}
-                        onBlur={() => { }}
-                        error={''}
-                        handleSelect={(item) => {
-                            setFeesType(item.name)
+            {role === AdminType.SUPERADMIN && (
+
+
+                <FlexWrapper width="100%">
+                    <DropdownWrapper>
+                        <EditableDropdown
+                            dropdownList={feeTypeList}
+                            title={feeType}
+                            placeholder={selectFeeType}
+                            onBlur={() => { }}
+                            error={''}
+                            handleSelect={(item) => {
+                                setFeesType(item.name)
+                            }}
+                        />
+                    </DropdownWrapper>
+                    <DropdownWrapper>
+                        <Input
+                            label={startDateLabel}
+                            placeholder={enterDob}
+                            value={startDate}
+                            onBlur={() => {
+                                const error = validateDateOfBirth(startDate)
+                                setStartDateError(error)
+                            }}
+                            error={startDateError}
+                            isRequired
+                            width="100%"
+                            onChange={(value: string) => {
+                                setStartDate(value)
+                            }}
+                            height="50px"
+                        />
+                    </DropdownWrapper>
+                    <DropdownWrapper>
+                        <Input
+                            label={endDateLabel}
+                            placeholder={enterDob}
+                            value={endDate}
+                            onBlur={() => {
+                                const error = validateDateOfBirth(endDate)
+                                setEndDateError(error)
+                            }}
+                            error={endDateError}
+                            isRequired
+                            width="100%"
+                            onChange={(value: string) => {
+                                setEndDate(value)
+                            }}
+                            height="50px"
+                        />
+                    </DropdownWrapper>
+                    <Button
+                        style={{ marginTop: '24px' }}
+                        disabled={!canSearch}
+                        onClick={() => {
+                            dispatch(
+                                fetchDayBookReport({
+                                    fromDate: startDate,
+                                    toDate: endDate,
+                                    type: feesType
+                                })
+                            )
+                            setShoeAmount('sum')
                         }}
-                    />
-                </DropdownWrapper>
-                <DropdownWrapper>
-                    <Input
-                        label={startDateLabel}
-                        placeholder={enterDob}
-                        value={startDate}
-                        onBlur={() => {
-                            const error = validateDateOfBirth(startDate)
-                            setStartDateError(error)
-                        }}
-                        error={startDateError}
-                        isRequired
-                        width="100%"
-                        onChange={(value: string) => {
-                            setStartDate(value)
-                        }}
-                        height="50px"
-                    />
-                </DropdownWrapper>
-                <DropdownWrapper>
-                    <Input
-                        label={endDateLabel}
-                        placeholder={enterDob}
-                        value={endDate}
-                        onBlur={() => {
-                            const error = validateDateOfBirth(endDate)
-                            setEndDateError(error)
-                        }}
-                        error={endDateError}
-                        isRequired
-                        width="100%"
-                        onChange={(value: string) => {
-                            setEndDate(value)
-                        }}
-                        height="50px"
-                    />
-                </DropdownWrapper>
-                <Button
-                    style={{ marginTop: '24px' }}
-                    disabled={!canSearch}
-                    onClick={() => {
-                        dispatch(
-                            fetchDayBookReport({
-                                fromDate: startDate,
-                                toDate: endDate,
-                                type: feesType
-                            })
-                        )
-                        setShoeAmount('sum')
-                    }}
-                >
-                    {search}
-                </Button>
-            </FlexWrapper>
+                    >
+                        {search}
+                    </Button>
+                </FlexWrapper>
+            )}
             <div>
                 <FlexWrapper justifyContent='end'>
                     <ExportToExcel apiData={data} fileName={fileName} />
