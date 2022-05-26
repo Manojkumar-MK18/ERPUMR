@@ -417,6 +417,15 @@ const strings = {
     mobileno: ' Mobile No',
     mail: 'E-Mail Id',
     qualification: 'Qualification'
+  },
+  staffManagement: {
+    title: 'Staff Management',
+    selectEmployeePlaceholder: 'Select Employee',
+    selectEmployee: 'Employee',
+    selectDate: 'MM-DD-YYYY',
+    date: 'Date',
+    status: 'Status',
+    selectStatus: 'Select Status'
   }
 }
 

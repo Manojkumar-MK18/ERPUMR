@@ -41,12 +41,14 @@ const AssignLesson = (): ReactElement => {
         lesson,
         statusList,
         teachers,
+        role = ""
     } = useSelector(
         (state: RootState) => ({
             acamedic: state.acamedic,
             lesson: state.lesson.lessonAssign as LessonAssignPayload,
             statusList: state.lesson.statusList,
-            teachers: state.acamedic.admin?.adminList
+            teachers: state.acamedic.admin?.adminList,
+            role: state.user.userInfo?.role
         }),
         shallowEqual
     )
@@ -84,7 +86,7 @@ const AssignLesson = (): ReactElement => {
     return (
         <PageWrapper>
             <SectionTitle title="Assign Lesson" />
-            <FlexWrapper>
+            <FlexWrapper noPadding>
                 <DropdownWrapper>
                     <EditableDropdown
                         dropdownList={institutes}
@@ -257,22 +259,26 @@ const AssignLesson = (): ReactElement => {
                         />
                     </DatePickerWrapper>
                 </DropdownWrapper>
-                <DropdownWrapper>
-                    <EditableDropdown
-                        dropdownList={statusList}
-                        handleSelect={(item) => {
-                            setValues({ ...values, status: item?.name })
-                            setresetValues({
-                                ...resetAllValues,
-                                assignedDate: true
-                            })
-                        }}
-                        placeholder="Select Status"
-                        title="Status"
-                        isRequired
-                        reset={resetValues?.status}
-                    />
-                </DropdownWrapper>
+                {role === AdminType.TEACHER && (
+                    <DropdownWrapper>
+                        <EditableDropdown
+                            dropdownList={statusList}
+                            handleSelect={(item) => {
+                                setValues({ ...values, status: item?.name })
+                                setresetValues({
+                                    ...resetAllValues,
+                                    assignedDate: true
+                                })
+                            }}
+                            placeholder="Select Status"
+                            title="Status"
+                            isRequired
+                            reset={resetValues?.status}
+                        />
+                    </DropdownWrapper>
+                )}
+            </FlexWrapper>
+            <FlexWrapper justifyContent="center" >
                 <Button
                     onClick={() => {
                         dispatch(AssignLessonPlaneUser({
@@ -292,7 +298,10 @@ const AssignLesson = (): ReactElement => {
                         }))
                         clearValues()
                     }}
-                    style={{ marginTop: "24px" }}>Assign</Button>
+                    style={{ marginTop: "24px" }}
+                >
+                    Assign
+                </Button>
             </FlexWrapper>
             <>
                 <TableWrapper>

@@ -671,3 +671,14 @@ export const status = [
     name: 'INACTIVE'
   }
 ]
+
+export const attendanceStatus = [
+  {
+    id: 'present',
+    name: 'Present'
+  },
+  {
+    id: 'absent',
+    name: 'Absent'
+  }
+]

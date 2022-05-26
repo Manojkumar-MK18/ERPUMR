@@ -38,14 +38,15 @@ const ROUTES = {
   STUDENT_PAY: '/studentPay',
   LEAVE_STATUS: '/leaveStatus',
   LESSON_UPDATES: '/lessonUpdates',
-  ASSIGN_LESSON:'/assignLesson',
-  LESSON_STATUS:'/lessonStatus',
-  RECEIPT:'/recipt',
-  DESGINATION_LIST:'/desginationList',
+  ASSIGN_LESSON: '/assignLesson',
+  LESSON_STATUS: '/lessonStatus',
+  RECEIPT: '/recipt',
+  DESGINATION_LIST: '/desginationList',
   STAFF_VIEW: '/staffView',
   DAYBOOK_REPORT: '/dayBookReport',
-  VIEW_PRIVLEGES_ASSIGNED:'/viewPrivilegesAssigned',
-  RECEIPTPRINT:'/print'
+  VIEW_PRIVLEGES_ASSIGNED: '/viewPrivilegesAssigned',
+  RECEIPTPRINT: '/print',
+  STAFF_ATTENANCE: '/staffAttenance'
 }
 
 export default ROUTES

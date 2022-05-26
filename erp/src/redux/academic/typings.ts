@@ -181,7 +181,8 @@ export interface AcademicState {
   chapterList: DropdownList
   topicList: DropdownList
   statuslist: DropdownList
-  admin: GetAdminResponse | null
+  admin: GetAdminResponse | null,
+  attenanceList: DropdownList
 }
 
 export interface getBranchesForCoursePayload {

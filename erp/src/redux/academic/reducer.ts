@@ -35,7 +35,8 @@ import {
   mediumList,
   qualififactionList,
   paymentModes,
-  status
+  status,
+  attendanceStatus
 } from './const'
 import getCourses, {
   getInstitutes,
@@ -85,7 +86,8 @@ const initialState: AcademicState = {
   chapterList: [],
   topicList: [],
   statuslist: status,
-  admin: null
+  admin: null,
+  attenanceList: attendanceStatus
 }
 
 export const academicSlice = createSlice({

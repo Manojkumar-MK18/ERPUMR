@@ -185,7 +185,7 @@ const admin: Array<Menu> = [
       {
         icon: ['fas', 'bars'],
         label: 'Staff Registration',
-        to: ROUTES.STAFFREGISTRATION 
+        to: ROUTES.STAFFREGISTRATION
       },
       {
         icon: ['fas', 'bars'],
@@ -206,6 +206,11 @@ const admin: Array<Menu> = [
         icon: ['fas', 'bars'],
         label: 'Leave Status',
         to: ROUTES.LEAVE_STATUS
+      },
+      {
+        icon: ['fas', 'bars'],
+        label: 'Staff Management',
+        to: ROUTES.STAFF_ATTENANCE
       }
     ]
   },

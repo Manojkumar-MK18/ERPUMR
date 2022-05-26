@@ -46,7 +46,8 @@ import {
   StaffDetails,
   DayReportBook,
   ViewPrivilegesAssigned,
-  Print
+  Print,
+  StaffManagement
 } from 'pages'
 import ProtectedRoute from './containers/ProtectedRoute'
 import Rec from 'pages/StudentRegistration/receipt'
@@ -138,6 +139,7 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.DAYBOOK_REPORT} component={DayReportBook} />
       <ProtectedRoute path={ROUTES.VIEW_PRIVLEGES_ASSIGNED} component={ViewPrivilegesAssigned} />
       <ProtectedRoute path={ROUTES.RECEIPTPRINT} component={Print} />
+      <ProtectedRoute path={ROUTES.STAFF_ATTENANCE} component={StaffManagement} />
     </Switch>
   )
 }
