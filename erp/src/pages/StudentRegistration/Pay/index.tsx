@@ -322,68 +322,67 @@ const Pay = ({ values, setValues }: PayProps): ReactElement => {
           reset={resetValues?.paymentMode}
         />
       </DropdownWrapper>
-      {
-        values?.paymentMode === 'Cash' ? '' : (
-          <>
-            <DropdownWrapper width="50%">
-              <Input
-                placeholder={referenceId}
-                value={values?.referenceId}
-                onBlur={() => { }}
-                error={''}
-                onChange={(value: string) => {
-                  setValues({
-                    ...values,
-                    referenceId: value
-                  })
-                  setResetValues({ ...resetPaymentValues, bankName: true })
-                }}
-                height="40px"
-              />
-            </DropdownWrapper>
-            <DropdownWrapper width='50%'>
-              <Input
-                value={values?.bankName}
-                placeholder="Enter Bank Name"
-                height='30px'
-                onChange={(value: string) => {
-                  setValues({
-                    ...values,
-                    bankName: value
-                  })
-                  setResetValues(resetPaymentValues)
-                }}
-              />
-            </DropdownWrapper>
-            <DropdownWrapper width='50%'>
-              <DatePicker
-                selected={values?.dateOn ? new Date(values?.dateOn) : new Date()}
-                onSelect={(dates: Date) => {
-                  setValues({
-                    ...values,
-                    dateOn: dates ? format(dates, DATE_FORMAT_MMDDYYYY) : ''
-                  })
-                }}
-                onChange={(dates: Date) => {
-                  setValues({
-                    ...values,
-                    dateOn: dates ? format(dates, DATE_FORMAT_MMDDYYYY) : ''
-                  })
-                }}
-                placeholderText={'Date'}
-                customInput={
-                  <Input
-                    value={values?.dateOn}
-                    isRequired
-                    inputType="text"
-                    placeholder={'From Date'}
-                    suffix={['far', 'calendar']}
-                  />
-                }
-              />
-            </DropdownWrapper>
-          </>
-        )
+      {values?.paymentMode !== 'Cash' && (
+        <>
+          <DropdownWrapper width="50%">
+            <Input
+              placeholder={referenceId}
+              value={values?.referenceId}
+              onBlur={() => { }}
+              error={''}
+              onChange={(value: string) => {
+                setValues({
+                  ...values,
+                  referenceId: value
+                })
+                setResetValues({ ...resetPaymentValues, bankName: true })
+              }}
+              height="40px"
+            />
+          </DropdownWrapper>
+          <DropdownWrapper width='50%'>
+            <Input
+              value={values?.bankName}
+              placeholder="Enter Bank Name"
+              height='30px'
+              onChange={(value: string) => {
+                setValues({
+                  ...values,
+                  bankName: value
+                })
+                setResetValues(resetPaymentValues)
+              }}
+            />
+          </DropdownWrapper>
+          <DropdownWrapper width='50%'>
+            <DatePicker
+              selected={values?.dateOn ? new Date(values?.dateOn) : new Date()}
+              onSelect={(dates: Date) => {
+                setValues({
+                  ...values,
+                  dateOn: dates ? format(dates, DATE_FORMAT_MMDDYYYY) : ''
+                })
+              }}
+              onChange={(dates: Date) => {
+                setValues({
+                  ...values,
+                  dateOn: dates ? format(dates, DATE_FORMAT_MMDDYYYY) : ''
+                })
+              }}
+              placeholderText={'Date'}
+              customInput={
+                <Input
+                  value={values?.dateOn}
+                  isRequired
+                  inputType="text"
+                  placeholder={'From Date'}
+                  suffix={['far', 'calendar']}
+                />
+              }
+            />
+          </DropdownWrapper>
+        </>
+      )
       }
     </FlexWrapper >
   )
