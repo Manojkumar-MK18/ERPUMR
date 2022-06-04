@@ -23,13 +23,26 @@ const AddRole = (): ReactElement => {
   } = strings
 
   const [isSelectAll, setIsSelectAll] = useState(false)
+  const [isSingleSelect, setIsSingleSelect] = useState<Array<any>>([]);
+  const [list] = useState(dataList1);
 
   const handleSelectAll = () => {
     setIsSelectAll(!isSelectAll);
+    setIsSingleSelect(list.map((li) => li?.name))
+    if (isSelectAll) {
+      setIsSingleSelect([]);
+    }
   };
 
-  console.log(isSelectAll);
-  
+  const handleClick = (e: any) => {
+    const { name, checked } = e.target;
+    setIsSingleSelect([...isSingleSelect, name]);
+    if (!checked) {
+      setIsSingleSelect(isSingleSelect.filter(item => item !== name));
+    }
+  };
+
+  console.log(isSingleSelect);
 
   return (
     <PageWrapper id="container">
@@ -57,7 +70,7 @@ const AddRole = (): ReactElement => {
           <SectionTitle title="Select Priviliges" />
           <div id="check">
             <Form.Check onClick={handleSelectAll} checked={isSelectAll}></Form.Check>
-            {isSelectAll ? 'DeSelect All' : 'Select All'}
+            {isSelectAll ? 'Un Select All' : 'Select All'}
           </div>
         </CheckBoxWrapper>
         <TableDisplayWrapper>
@@ -68,7 +81,7 @@ const AddRole = (): ReactElement => {
                 <td>Privileges</td>
               </TableHeader>
               <tbody >
-                {dataList1.slice(0, 18).map((data, index) => (
+                {list.slice(0, 18).map((data, index) => (
                   <TableRow key={index}>
                     <td>{data.name}</td>
                     <td>
@@ -76,7 +89,8 @@ const AddRole = (): ReactElement => {
                         key={data?.id}
                         name={data?.name}
                         id={data?.id}
-                        checked={isSelectAll}
+                        onClick={handleClick}
+                        checked={isSingleSelect.includes(data?.name)}
                       />
                     </td>
                   </TableRow>
@@ -99,7 +113,8 @@ const AddRole = (): ReactElement => {
                         key={data?.id}
                         name={data?.name}
                         id={data?.id}
-                        checked={isSelectAll}
+                        onClick={handleClick}
+                        checked={isSingleSelect.includes(data?.name)}
                       />
                     </td>
                   </TableRow>
