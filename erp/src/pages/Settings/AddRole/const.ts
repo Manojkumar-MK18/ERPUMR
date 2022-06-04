@@ -1,4 +1,4 @@
-export const tableHeader = ['S.No', 'Role', 'Date', 'Operations']
+export const tableHeader = ['Menu', 'Privileges']
 
 export const dataList1 = [
     {

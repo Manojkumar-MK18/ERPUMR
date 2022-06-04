@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { ReactElement, useState, useEffect, SyntheticEvent } from 'react'
+import { ReactElement, useState } from 'react'
 import strings from 'locale/en'
 import {
   FlexWrapper,
@@ -13,7 +12,9 @@ import {
 import { CheckBoxWrapper, TableDisplayWrapper } from './subcomponent'
 import { TableWrapper } from '../../../components/PrivilegesTable'
 import { Form, Table } from "react-bootstrap"
-import { dataList1 } from './const'
+import { dataList1, tableHeader } from './const'
+import { useDispatch } from 'react-redux'
+import { saveRole } from 'redux/settings/api'
 
 const AddRole = (): ReactElement => {
 
@@ -25,6 +26,8 @@ const AddRole = (): ReactElement => {
   const [isSelectAll, setIsSelectAll] = useState(false)
   const [isSingleSelect, setIsSingleSelect] = useState<Array<any>>([]);
   const [list] = useState(dataList1);
+
+  const dispatch = useDispatch()
 
   const handleSelectAll = () => {
     setIsSelectAll(!isSelectAll);
@@ -42,7 +45,6 @@ const AddRole = (): ReactElement => {
     }
   };
 
-  console.log(isSingleSelect);
 
   return (
     <PageWrapper id="container">
@@ -69,7 +71,7 @@ const AddRole = (): ReactElement => {
         <CheckBoxWrapper noPadding justifyContent="space-between">
           <SectionTitle title="Select Priviliges" />
           <div id="check">
-            <Form.Check onClick={handleSelectAll} checked={isSelectAll}></Form.Check>
+            <Form.Check style={{ paddingRight: '10px' }} onClick={handleSelectAll} checked={isSelectAll}></Form.Check>
             {isSelectAll ? 'Un Select All' : 'Select All'}
           </div>
         </CheckBoxWrapper>
@@ -77,8 +79,9 @@ const AddRole = (): ReactElement => {
           <TableWrapper>
             <Table size="sm" responsive="sm">
               <TableHeader>
-                <td>Menu</td>
-                <td>Privileges</td>
+                {tableHeader.map((header, index) => (
+                  <td key={index}>{header}</td>
+                ))}
               </TableHeader>
               <tbody >
                 {list.slice(0, 18).map((data, index) => (
@@ -101,8 +104,9 @@ const AddRole = (): ReactElement => {
           <TableWrapper>
             <Table size="sm" responsive="sm">
               <TableHeader>
-                <td>Menu</td>
-                <td>Privileges</td>
+                {tableHeader.map((header, index) => (
+                  <td key={index}>{header}</td>
+                ))}
               </TableHeader>
               <tbody >
                 {dataList1.slice(18, 36).map((data, index) => (
@@ -125,7 +129,14 @@ const AddRole = (): ReactElement => {
         </TableDisplayWrapper>
       </>
       <CheckBoxWrapper noPadding justifyContent="start">
-        <Button>Update</Button>
+        <Button
+          onClick={() => {
+            console.log(isSingleSelect);
+            dispatch(saveRole({
+              name: isSingleSelect
+            }))
+          }}
+        >Update</Button>
       </CheckBoxWrapper>
     </PageWrapper >
   )
