@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import apiEndpoints from "const/apiEndpoints";
 import api from "services";
-import { GetTeacherPayload,GetTeacherResponse } from "./typing";
+import { GetTeacherPayload, GetTeacherResponse } from "./typing";
 
 export const AssignLessonPalnApi = createAsyncThunk(
     'lessonPlane/AssignLessonPlane',
@@ -53,12 +53,20 @@ export const TeacherList = createAsyncThunk(
         }
         return responseData
     }
-) 
+)
 
 export const AssignLessonPlaneUser = createAsyncThunk(
     'lessonPlane/AssignLessonPlaneUser',
     async (requestPayload: any): Promise<any> => {
         const response = await api.post(`${apiEndpoints.getAssignLessonPalne}`, requestPayload)
+        return response?.data
+    }
+)
+
+export const lessonPalnelist = createAsyncThunk(
+    'lesson/getlesson',
+    async (): Promise<any> => {
+        const response = await api.get(apiEndpoints.getLessonList)
         return response?.data
     }
 )

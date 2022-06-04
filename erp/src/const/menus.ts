@@ -19,16 +19,6 @@ const admin: Array<Menu> = [
       },
       {
         icon: ['fas', 'bars'],
-        label: 'Add Role User',
-        to: ROUTES.ADD_ROLEUSER
-      },
-      {
-        icon: ['fas', 'bars'],
-        label: 'Add Privileges',
-        to: ROUTES.ADD_PIVILEGES
-      },
-      {
-        icon: ['fas', 'bars'],
         label: 'View Privileges',
         to: ROUTES.VIEW_PIVILEGES
       }

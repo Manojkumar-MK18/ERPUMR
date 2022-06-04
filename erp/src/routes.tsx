@@ -33,9 +33,7 @@ import {
   LeaveApproval,
   StaffRegistration,
   AddStaffRegistration,
-  Desgination,
-  AddRoleUser,
-  AddPrivileges,
+  Desgination, 
   ViewPrivileges,
   StudentPay,
   LeaveStatus,
@@ -124,9 +122,7 @@ const Routes = () => {
         path={ROUTES.ADDSTAFFREGISTRATION}
         component={AddStaffRegistration}
       />
-      <ProtectedRoute path={ROUTES.DESGINATION} component={Desgination} />
-      <ProtectedRoute path={ROUTES.ADD_ROLEUSER} component={AddRoleUser} />
-      <ProtectedRoute path={ROUTES.ADD_PIVILEGES} component={AddPrivileges} />
+      <ProtectedRoute path={ROUTES.DESGINATION} component={Desgination} /> 
       <ProtectedRoute path={ROUTES.VIEW_PIVILEGES} component={ViewPrivileges} />
       <ProtectedRoute path={ROUTES.STUDENT_PAY} component={StudentPay} />
       <ProtectedRoute path={ROUTES.LEAVE_STATUS} component={LeaveStatus} />

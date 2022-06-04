@@ -39,7 +39,7 @@ const ViewPrivileges = (): ReactElement => {
     return (
         <PageWrapper>
             <SectionTitle title='View Privileges' />
-            <FlexWrapper >
+            <FlexWrapper>
                 <EditableDropdown
                     placeholder='Select Institute'
                     title='Select Role'
@@ -67,7 +67,7 @@ const ViewPrivileges = (): ReactElement => {
                                     <Icon
                                         variant="outline-light"
                                         onClick={() => {
-                                            history.push(ROUTES.VIEW_PRIVLEGES_ASSIGNED) 
+                                            history.push(ROUTES.VIEW_PRIVLEGES_ASSIGNED)
                                         }}
                                     >
                                         <FontAwesomeIcon icon={['far', 'eye']} />

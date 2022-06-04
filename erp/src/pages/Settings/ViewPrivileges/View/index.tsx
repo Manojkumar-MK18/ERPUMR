@@ -1,5 +1,5 @@
 import { PageWrapper, SectionTitle, TableHeader, TableRow, TableWrapper } from 'components'
-import { TableDisplayWrapper } from 'pages/Settings/AddPrivileges/subcomponent'
+import { TableDisplayWrapper } from '../../AddRole/subcomponent'
 import { ReactElement } from 'react'
 import { Form, Table } from 'react-bootstrap'
 

@@ -19,7 +19,7 @@ import { ReactElement, useEffect, useState } from "react"
 import { Table } from "react-bootstrap"
 import { shallowEqual, useDispatch, useSelector } from "react-redux"
 import getCourses, { getAdminList, getBranches, getChildCourses, getInstitutes } from "redux/academic/api"
-import { AssignLessonPlaneUser } from "redux/lesson/api"
+import { AssignLessonPlaneUser, lessonPalnelist } from "redux/lesson/api"
 import { LessonAssignPayload } from "redux/lesson/typing"
 import { RootState } from "redux/store"
 import { InitialState, resetAllValues, tableHeader } from "./const"
@@ -78,6 +78,7 @@ const AssignLesson = (): ReactElement => {
 
     useEffect(() => {
         dispatch(getCourses())
+        dispatch(lessonPalnelist())
         dispatch(getInstitutes())
         dispatch(getAdminList({ type: AdminType.TEACHER, }))
         // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -29,9 +29,7 @@ import LeaveApplication from './HumanResources/LeaveApplication'
 import LeaveApproval from './HumanResources/LeaveApproval'
 import StaffRegistration from './StaffRegistration'
 import AddStaffRegistration from './StaffRegistration/AddRegistration'
-import Desgination from './HumanResources/Desgination/AddDesgination'
-import AddRoleUser from './Settings/AddRoleUser'
-import AddPrivileges from './Settings/AddPrivileges'
+import Desgination from './HumanResources/Desgination/AddDesgination' 
 import ViewPrivileges from './Settings/ViewPrivileges'
 import StudentPay from './StudentRegistration/Pay'
 import LeaveStatus from './HumanResources/LeaveStatus'
@@ -77,9 +75,7 @@ export {
   LeaveApproval,
   StaffRegistration,
   AddStaffRegistration,
-  Desgination,
-  AddRoleUser,
-  AddPrivileges,
+  Desgination, 
   ViewPrivileges,
   StudentPay,
   LeaveStatus,
