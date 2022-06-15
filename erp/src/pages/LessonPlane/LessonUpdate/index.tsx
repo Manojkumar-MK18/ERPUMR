@@ -83,7 +83,7 @@ const LessonUpdate = (): ReactElement => {
                                 data?.courseLessonDetailDaos.map((list) => {
                                     return (
                                         <TableRow key={index}>
-                                            <td>{index }</td>
+                                            <td>{index - 6}</td>
                                             <td>{list?.course}</td>
                                             <td>{list?.subject}</td>
                                             <td>{list?.chapter}</td>

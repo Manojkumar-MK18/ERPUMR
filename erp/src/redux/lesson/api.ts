@@ -94,6 +94,9 @@ export const assignLessonNameByTeacher = createAsyncThunk(
     'lesson/assignLesson',
     async (requestPayload: AssignLessonByTeacher): Promise<LessonNameResponse> => {
         const response = await api.post(`${apiEndpoints.assignLessonplaneByTeacher}`, requestPayload)
+        if (response?.data) {
+            history.push(ROUTES.LESSON_UPDATES)
+        }
         return response?.data
     }
 )
