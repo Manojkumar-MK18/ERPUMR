@@ -131,7 +131,7 @@ const AddRole = (): ReactElement => {
       <CheckBoxWrapper noPadding justifyContent="start">
         <Button
           onClick={() => {
-            console.log(isSingleSelect);
+            alert(isSingleSelect) 
             dispatch(saveRole({
               name: isSingleSelect
             }))

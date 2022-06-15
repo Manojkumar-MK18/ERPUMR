@@ -34,7 +34,8 @@ const ViewPrivileges = (): ReactElement => {
 
     useEffect(() => {
         dispatch(getInstitutes())
-    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     return (
         <PageWrapper>

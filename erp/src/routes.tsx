@@ -33,7 +33,7 @@ import {
   LeaveApproval,
   StaffRegistration,
   AddStaffRegistration,
-  Desgination, 
+  Desgination,
   ViewPrivileges,
   StudentPay,
   LeaveStatus,
@@ -45,7 +45,8 @@ import {
   DayReportBook,
   ViewPrivilegesAssigned,
   Print,
-  StaffManagement
+  StaffManagement,
+  CreateLesson
 } from 'pages'
 import ProtectedRoute from './containers/ProtectedRoute'
 import Rec from 'pages/StudentRegistration/receipt'
@@ -122,7 +123,7 @@ const Routes = () => {
         path={ROUTES.ADDSTAFFREGISTRATION}
         component={AddStaffRegistration}
       />
-      <ProtectedRoute path={ROUTES.DESGINATION} component={Desgination} /> 
+      <ProtectedRoute path={ROUTES.DESGINATION} component={Desgination} />
       <ProtectedRoute path={ROUTES.VIEW_PIVILEGES} component={ViewPrivileges} />
       <ProtectedRoute path={ROUTES.STUDENT_PAY} component={StudentPay} />
       <ProtectedRoute path={ROUTES.LEAVE_STATUS} component={LeaveStatus} />
@@ -136,6 +137,7 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.VIEW_PRIVLEGES_ASSIGNED} component={ViewPrivilegesAssigned} />
       <ProtectedRoute path={ROUTES.RECEIPTPRINT} component={Print} />
       <ProtectedRoute path={ROUTES.STAFF_ATTENANCE} component={StaffManagement} />
+      <ProtectedRoute path={ROUTES.CREATE_LESSON} component={CreateLesson} />
     </Switch>
   )
 }

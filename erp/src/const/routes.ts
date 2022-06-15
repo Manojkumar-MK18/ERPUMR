@@ -44,7 +44,8 @@ const ROUTES = {
   DAYBOOK_REPORT: '/dayBookReport',
   VIEW_PRIVLEGES_ASSIGNED: '/viewPrivilegesAssigned',
   RECEIPTPRINT: '/print',
-  STAFF_ATTENANCE: '/staffAttenance'
+  STAFF_ATTENANCE: '/staffAttenance',
+  CREATE_LESSON:'/createLesson'
 }
 
 export default ROUTES

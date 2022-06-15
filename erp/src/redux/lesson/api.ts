@@ -1,7 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import apiEndpoints from "const/apiEndpoints";
+import history from "const/history";
+import ROUTES from "const/routes";
 import api from "services";
-import { GetTeacherPayload, GetTeacherResponse } from "./typing";
+import {
+    AssignLessonByTeacher,
+    CourseLessonDetailResponse,
+    GetTeacherPayload,
+    GetTeacherResponse,
+    LessonNameResponse
+} from "./typing";
 
 export const AssignLessonPalnApi = createAsyncThunk(
     'lessonPlane/AssignLessonPlane',
@@ -67,6 +75,33 @@ export const lessonPalnelist = createAsyncThunk(
     'lesson/getlesson',
     async (): Promise<any> => {
         const response = await api.get(apiEndpoints.getLessonList)
+        return response?.data
+    }
+)
+
+export const createLessonNameApi = createAsyncThunk(
+    'lesson/createLesson',
+    async (requestPayload: any): Promise<any> => {
+        const response = await api.post(`${apiEndpoints.createLessonName}`, requestPayload)
+        if (response?.data) {
+            history.push(ROUTES.CREATE_LESSON)
+        }
+        return response?.data
+    }
+)
+
+export const assignLessonNameByTeacher = createAsyncThunk(
+    'lesson/assignLesson',
+    async (requestPayload: AssignLessonByTeacher): Promise<LessonNameResponse> => {
+        const response = await api.post(`${apiEndpoints.assignLessonplaneByTeacher}`, requestPayload)
+        return response?.data
+    }
+)
+
+export const getLessonplan = createAsyncThunk(
+    'lesson/getLessonPalne',
+    async (): Promise<CourseLessonDetailResponse> => {
+        const response = await api.get(apiEndpoints.getLessonPlane)
         return response?.data
     }
 )

@@ -3,17 +3,19 @@ export const tableHeader = [
     'Course',
     'Subject',
     'Chapter',
-    'Edit'
+    'Topic',
+    'Faculty Name'
 ]
-
-export const initialModalValues = {
+export const initialValues = {
     course: '',
     subject: '',
     chapter: '',
     topic: '',
-    date: ''
+    date: '',
+    name: '',
+    userId: '',
+    id: ''
 }
-
 export const resetLessonValues = {
     course: false,
     subject: false,

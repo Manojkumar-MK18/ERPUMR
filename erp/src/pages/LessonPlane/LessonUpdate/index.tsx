@@ -1,8 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { ReactElement, useEffect, useState } from 'react'
 import {
     Button,
+    DropdownWrapper,
     FlexWrapper,
     Icon,
+    Input,
     PageWrapper,
     SectionTitle,
     TableFooter,
@@ -11,12 +14,11 @@ import {
     TableWrapper
 } from 'components'
 import { Table } from 'react-bootstrap'
-import { initialModalValues, tableHeader } from './const'
+import { tableHeader } from './const'
 import { BootstrapModal } from './subcomponent'
 import { useDispatch, useSelector } from 'react-redux'
-import AssignList from './Assign'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { AssignLessonPalnApi, LessonPlaneListApi } from 'redux/lesson/api'
+import { LessonPlaneListApi, createLessonNameApi, getLessonplan } from 'redux/lesson/api'
 import { RootState } from 'redux/store'
 import { LessonPlaneList } from 'redux/lesson/typing'
 
@@ -24,9 +26,13 @@ const LessonUpdate = (): ReactElement => {
 
     const {
         lessonPlaneList,
+        createLessonname,
+        getLessonList
     } = useSelector(
         (state: RootState) => ({
-            lessonPlaneList: state.lesson.lessonPlaneList
+            lessonPlaneList: state.lesson.lessonPlaneList,
+            createLessonname: state.lesson.lessonName,
+            getLessonList: state.lesson.getAllLessonPlane
         })
     )
 
@@ -38,23 +44,19 @@ const LessonUpdate = (): ReactElement => {
 
     const dispatch = useDispatch()
     const [courseModal, showCourseModal] = useState('')
-    const [values, setValues] = useState(initialModalValues)
+    const [values, setValues] = useState(createLessonname)
     // eslint-disable-next-line no-unused-vars
     const [lessonList, setLessonList] = useState<Array<LessonPlaneList>>([])
     const filteredList = lessonList.length > 0 ? lessonList : lessonplan
 
     useEffect(() => {
         dispatch(LessonPlaneListApi(1))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        dispatch(getLessonplan())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const canSave =
-        !!values?.course &&
-        !!values?.subject &&
-        !!values?.chapter &&
-        !!values?.topic &&
-        !!values?.date
-
+        !!values?.name
 
     return (
         <PageWrapper>
@@ -77,42 +79,22 @@ const LessonUpdate = (): ReactElement => {
                             </TableRow>
                         </TableHeader>
                         <tbody>
-                            {filteredList?.map((
-                                {
-                                    assignedDate,
-                                    chapter,
-                                    course,
-                                    topic,
-                                    subject
-                                },
-                                index
-                            ) => {
-                                <TableRow key={`lesson-${index}`}>
-                                    <td>{index + 1}</td>
-                                    <td>{assignedDate}</td>
-                                    <td>{course}</td>
-                                    <td>{chapter}</td>
-                                    <td>{topic}</td>
-                                    <td>{subject}</td>
-                                    <td>
-                                        <Icon>
-                                            <FontAwesomeIcon icon={['far', 'edit']} />
-                                        </Icon>
-                                    </td>
-                                </TableRow>
-                            })}
+                            {getLessonList?.map((data, index) => (
+                                data?.courseLessonDetailDaos.map((list) => {
+                                    return (
+                                        <TableRow key={index}>
+                                            <td>{index }</td>
+                                            <td>{list?.course}</td>
+                                            <td>{list?.subject}</td>
+                                            <td>{list?.chapter}</td>
+                                            <td>{list?.topic}</td>
+                                            <td>{list?.userName}</td>
+                                        </TableRow>
+                                    )
+                                })
+                            ))}
                         </tbody>
                     </Table>
-                    <TableFooter
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        handleNext={() => {
-                            dispatch(LessonPlaneListApi(currentPage + 1))
-                        }}
-                        handlePrevious={() => {
-                            dispatch(LessonPlaneListApi(currentPage - 1))
-                        }}
-                    />
                 </TableWrapper>
             </>
             {courseModal &&
@@ -120,20 +102,26 @@ const LessonUpdate = (): ReactElement => {
                     handleCancel={() => showCourseModal('')}
                     handleSubmit={() => {
                         showCourseModal('')
-                        dispatch(AssignLessonPalnApi({
-                            course: values?.course,
-                            subject: values?.subject,
-                            chapter: values?.chapter,
-                            topic: values?.topic,
-                            assignedDate: values?.date
-                        }))
+                        dispatch(createLessonNameApi(values))
                     }}
                     isLargeModal={true}
-                    title="Select Course & Subject"
+                    title="Lesson Name"
                     description=''
                     isDisabled={!canSave}
                 >
-                    <AssignList values={values} setValues={setValues} />
+                    <FlexWrapper width="100%" justifyContent="center">
+                        <DropdownWrapper width='50%'>
+                            <Input
+                                value={values?.name}
+                                label='Lesson Name'
+                                isRequired
+                                placeholder="Enter Lesson Name"
+                                onChange={(value: string) => {
+                                    setValues({ ...values, name: value })
+                                }}
+                            />
+                        </DropdownWrapper>
+                    </FlexWrapper>
                 </BootstrapModal>
             }
         </PageWrapper>

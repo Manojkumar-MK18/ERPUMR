@@ -84,6 +84,9 @@ const AssignLesson = (): ReactElement => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    console.log(valuesLessonList?.assignedDate);
+
+
     return (
         <PageWrapper>
             <SectionTitle title="Assign Lesson" />
@@ -92,7 +95,7 @@ const AssignLesson = (): ReactElement => {
                     <EditableDropdown
                         dropdownList={institutes}
                         handleSelect={(item) => {
-                            setValues({ ...values, institute: item?.name })
+                            setValues({ ...values, institute: item?.id })
                             dispatch(getBranches({
                                 coachingCentreId: item?.id,
                                 type: AdminType.INSTITUTEADMIN

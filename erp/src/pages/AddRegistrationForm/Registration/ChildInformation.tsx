@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ReactElement, useState } from 'react'
 import {
   PageWrapper,
@@ -13,6 +14,9 @@ import { updateChildInformation } from 'redux/studentRegistration/actions'
 import strings from 'locale/en'
 import { checkBoxDropdownList } from 'const'
 import { validateAadhar, validateDateOfBirth } from 'helpers/formValidation'
+import DatePicker from 'react-datepicker'
+import { format } from 'date-fns'
+import { DATE_FORMAT_YYYYMMDD } from '../../../const/dateFormat'
 
 const ChildInformation = (): ReactElement => {
   const {
@@ -80,6 +84,10 @@ const ChildInformation = (): ReactElement => {
       }
     }
   } = strings
+
+  console.log(dateOfBirth);
+  console.log(studentsName);
+
 
   return (
     <PageWrapper>
@@ -164,6 +172,34 @@ const ChildInformation = (): ReactElement => {
                 dispatch(updateChildInformation({ dateOfBirth: value }))
               }}
               height="50px"
+            />
+          </DropdownWrapper>
+          <DropdownWrapper>
+            <DatePicker
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+              selected={dateOfBirth ? new Date(dateOfBirth) : new Date()}
+              onSelect={(date: Date) =>
+                updateChildInformation({
+                  dateOfBirth: date ? format(date, DATE_FORMAT_YYYYMMDD) : ''
+                })
+              }
+              onChange={(date: Date) =>
+                updateChildInformation({
+                  dateOfBirth: date ? format(date, DATE_FORMAT_YYYYMMDD) : ''
+                })
+              }
+              placeholderText={enterDob}
+              customInput={
+                <Input
+                  value={dateOfBirth}
+                  label={dobLabel}
+                  placeholder={enterDob}
+                  height="50px"
+                  suffix={['far', 'calendar']}
+                />
+              }
             />
           </DropdownWrapper>
           <DropdownWrapper>

@@ -90,7 +90,7 @@ export interface LessonPalne {
     course?: string
     subject?: string
     chapter?: string
-    topic?: string 
+    topic?: string
 }
 
 export interface LessonAssignPayload {
@@ -101,10 +101,62 @@ export interface LessonAssignPayload {
     status: string
 }
 
+export interface LessonName {
+    name: string
+}
+
+export interface LessonNameResponse {
+    courseId: string
+}
+
+export interface courseLessonAssignDetail {
+    userId: string
+    name: any
+    date: string
+}
+
+export interface courseLessonDetail {
+    course: string
+    subject: string
+    chapter: string
+    topic: string
+}
+
+export interface AssignLessonByTeacher {
+    id: string
+    courseLessonAssignDetailDao: Array<courseLessonAssignDetail>
+    courseLessonDetailDao: Array<courseLessonDetail>
+}
+
+export interface CourseLessonDetailResponse {
+    chapter: string
+    completionDate: string
+    course: string
+    date: string
+    detailAssignId: string
+    sessionName: string
+    status: string
+    subject: string
+    topic: string
+    userId: string
+    userName: string
+}
+
+export interface getLessonPlaneResponse {
+    courseId: string
+    courseLessonDetailDaos: Array<CourseLessonDetailResponse>
+    name: string
+    type: string
+}
+
 export interface InitialState {
     isLoading: boolean
     lessonPlaneList: LessonPlaneListResponse | null
     teacherList: Array<Admin>
     lessonAssign: LessonAssignPayload | null,
-    statusList:DropdownList
+    statusList: DropdownList,
+    lessonName: LessonName,
+    lessonNameResponse: LessonNameResponse
+    assignLesoonNameByTeacher: AssignLessonByTeacher,
+    getAllLessonPlane: Array<getLessonPlaneResponse> | null
 }
