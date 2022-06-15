@@ -85,10 +85,6 @@ const ChildInformation = (): ReactElement => {
     }
   } = strings
 
-  console.log(dateOfBirth);
-  console.log(studentsName);
-
-
   return (
     <PageWrapper>
       <InfoWrapper>
@@ -157,38 +153,17 @@ const ChildInformation = (): ReactElement => {
             />
           </DropdownWrapper>
           <DropdownWrapper>
-            <Input
-              label={dobLabel}
-              placeholder={enterDob}
-              value={dateOfBirth}
-              onBlur={() => {
-                const error = validateDateOfBirth(dateOfBirth)
-                setDobError(error)
-              }}
-              error={dobError}
-              isRequired
-              width="100%"
-              onChange={(value: string) => {
-                dispatch(updateChildInformation({ dateOfBirth: value }))
-              }}
-              height="50px"
-            />
-          </DropdownWrapper>
-          <DropdownWrapper>
             <DatePicker
               showMonthDropdown
               showYearDropdown
               dropdownMode="select"
               selected={dateOfBirth ? new Date(dateOfBirth) : new Date()}
               onSelect={(date: Date) =>
-                updateChildInformation({
-                  dateOfBirth: date ? format(date, DATE_FORMAT_YYYYMMDD) : ''
-                })
+                dispatch(updateChildInformation({ dateOfBirth: date ? format(date, DATE_FORMAT_YYYYMMDD) : '' }))
               }
-              onChange={(date: Date) =>
-                updateChildInformation({
-                  dateOfBirth: date ? format(date, DATE_FORMAT_YYYYMMDD) : ''
-                })
+              onChange={(date: Date) => {
+                dispatch(updateChildInformation({ dateOfBirth: date ? format(date, DATE_FORMAT_YYYYMMDD) : '' }))
+              }
               }
               placeholderText={enterDob}
               customInput={
@@ -198,6 +173,9 @@ const ChildInformation = (): ReactElement => {
                   placeholder={enterDob}
                   height="50px"
                   suffix={['far', 'calendar']}
+                  onChange={(value: string) => {
+                    dispatch(updateChildInformation({ dateOfBirth: value }))
+                  }}
                 />
               }
             />
