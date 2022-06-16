@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ReactElement, useEffect, useState } from 'react'
 import {
   PageWrapper,
@@ -66,19 +67,19 @@ const AddFeeDescription = (): ReactElement => {
 
   const [values, setValues] = useState<AddFeeDescriptionValues>({
     ...initialState,
-    description: editFeeMaster?.description || initialState.description ,
+    description: editFeeMaster?.description || initialState.description,
     title: filteredFeeType?.name || initialState.title,
   })
   // eslint-disable-next-line no-unused-vars
-  const canSave = 
-  !!values.title && 
-  !!values.description
+  const canSave =
+    !!values.title &&
+    !!values.description
 
   const isEdit = editDescriptionId > 0
 
   useEffect(() => {
     dispatch(getFeeDescriptions())
-    return () => { 
+    return () => {
       dispatch(updateEditDescriptionId(0))
       dispatch(updateEditFeeMaster(null))
     }
@@ -109,7 +110,7 @@ const AddFeeDescription = (): ReactElement => {
                   title: item.name
                 })
               }}
-              defaultValue={feeTypeDefaultValue}
+              defaultValue={isEdit ? feeTypeDefaultValue : null}
             />
           </DropdownWrapper>
           <DropdownWrapper width="90%">
@@ -140,17 +141,17 @@ const AddFeeDescription = (): ReactElement => {
                     title,
                     description,
                   } = values
-                   editFeeMaster
-                   ? dispatch(
+                  editFeeMaster
+                    ? dispatch(
                       editFeeDescriptionRequest({
                         id: `${editFeeMaster?.id}`,
                         title,
                         description,
                       })
                     )
-                    : dispatch (addNewFeeDescription({
+                    : dispatch(addNewFeeDescription({
                       title,
-                      description 
+                      description
                     }))
                 }}
               >

@@ -149,8 +149,8 @@ const AddFeeMaster = (): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  console.log(values?.title); 
-  
+  console.log(values?.title);
+
 
   return (
     <PageWrapper id="container">
