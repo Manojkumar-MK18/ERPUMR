@@ -125,7 +125,7 @@ const Dashboard = (): ReactElement => {
           icon={['fas', 'university']}
         />
       </FlexWrapper>
-      <IncomeDashboard />
+      <IncomeDashboard /> 
       <FlexWrapper justifyContent="flex-start">
         <Stickies
           width={isMobile ? '100%' : isTablet ? '40%' : '22%'}

@@ -26,8 +26,7 @@ export const addNewStudent = createAsyncThunk(
           dateOfBirth,
           nationality,
           religion,
-          aadharNumber,
-          userName,
+          aadharNumber, 
           passwordUpdated,
           admissionType,
           primaryLanguage,
@@ -86,8 +85,7 @@ export const addNewStudent = createAsyncThunk(
       taluk &&
       city &&
       country &&
-      postal &&
-      userName &&
+      postal && 
       passwordUpdated
     ) {
       const requestPayload = {
@@ -126,8 +124,7 @@ export const addNewStudent = createAsyncThunk(
         country: country,
         coachingCenterId: instituteId,
         branchIds: [branchId],
-        batchIds: [batchId],
-        userName,
+        batchIds: [batchId], 
         passwordUpdated: passwordUpdated,
         roleId: getRoleId(AdminType.STUDENT),
         status: 'ACTIVE'

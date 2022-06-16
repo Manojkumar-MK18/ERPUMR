@@ -1,5 +1,6 @@
 export const tableHeader = [
-    'S.No',
+    'S.No', 
+    'Date', 
     'Course',
     'Subject',
     'Chapter',

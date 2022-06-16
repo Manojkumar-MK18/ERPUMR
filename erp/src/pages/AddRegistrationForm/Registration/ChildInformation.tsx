@@ -155,7 +155,7 @@ const ChildInformation = (): ReactElement => {
           <DropdownWrapper>
             <DatePicker
               showMonthDropdown
-              showYearDropdown
+              showYearDropdown 
               dropdownMode="select"
               selected={dateOfBirth ? new Date(dateOfBirth) : new Date()}
               onSelect={(date: Date) =>
@@ -294,8 +294,7 @@ const ChildInformation = (): ReactElement => {
               label={userNameLabel}
               placeholder={userNamePlaceholder}
               value={userName}
-              onBlur={() => { }}
-              isRequired
+              onBlur={() => { }} 
               error={''}
               width="100%"
               onChange={(value: string) => {
@@ -309,8 +308,7 @@ const ChildInformation = (): ReactElement => {
               label={passwordLabel}
               placeholder={passwordPlaceHolder}
               value={passwordUpdated}
-              onBlur={() => { }}
-              isRequired
+              onBlur={() => { }} 
               error={''}
               width="100%"
               onChange={(value: string) => {

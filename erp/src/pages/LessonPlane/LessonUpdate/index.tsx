@@ -21,6 +21,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LessonPlaneListApi, createLessonNameApi, getLessonplan } from 'redux/lesson/api'
 import { RootState } from 'redux/store'
 import { LessonPlaneList } from 'redux/lesson/typing'
+import moment from 'moment'
 
 const LessonUpdate = (): ReactElement => {
 
@@ -83,7 +84,8 @@ const LessonUpdate = (): ReactElement => {
                                 data?.courseLessonDetailDaos.map((list) => {
                                     return (
                                         <TableRow key={index}>
-                                            <td>{index - 6}</td>
+                                            <td>{index - 6}</td> 
+                                            <td>{moment(list?.assignedDate).format('YYYY-MM-DD')}</td>
                                             <td>{list?.course}</td>
                                             <td>{list?.subject}</td>
                                             <td>{list?.chapter}</td>
@@ -93,6 +95,24 @@ const LessonUpdate = (): ReactElement => {
                                     )
                                 })
                             ))}
+                            {/* {getLessonList?.map((data, index) => {
+                                const {
+                                    name,
+                                    courseLessonDetailDaos
+                                } = data
+                                return (
+                                    <TableRow key={index}>
+                                        <td>{index + 1}</td>
+                                        <td>{name}</td>
+                                        <td>{courseLessonDetailDaos.map((xx) => xx?.course)}</td>
+                                        <td>{courseLessonDetailDaos.map((xx) => xx?.subject)}</td>
+                                        <td>{courseLessonDetailDaos.map((xx) => xx?.chapter)}</td>
+                                        <td>{courseLessonDetailDaos.map((xx) => xx?.topic)}</td>
+                                        <td>{courseLessonDetailDaos.map((xx) => xx?.userName)}</td> 
+                                    </TableRow>
+
+                                )
+                            })} */}
                         </tbody>
                     </Table>
                 </TableWrapper>

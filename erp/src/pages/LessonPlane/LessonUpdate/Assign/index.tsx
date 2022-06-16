@@ -7,7 +7,7 @@ import { RootState } from 'redux/store'
 import DatePicker from 'react-datepicker'
 import { DropdownListProps } from 'components/EditableDropdown/typings'
 import { format } from 'date-fns'
-import { DATE_FORMAT_MMDDYYYY } from 'const/dateFormat'
+import { DATE_FORMAT_YYYYMMDD } from 'const/dateFormat'
 import { initialValues, resetLessonValues } from '../const'
 import getUserDropdown from 'helpers/getTeacherDropDown'
 import { AdminType } from 'const'
@@ -149,13 +149,13 @@ const CreateLesson = (): ReactElement => {
                             onSelect={(datees: Date) => {
                                 setValues({
                                     ...values,
-                                    date: datees ? format(datees, DATE_FORMAT_MMDDYYYY) : ''
+                                    date: datees ? format(datees, DATE_FORMAT_YYYYMMDD) : ''
                                 })
                             }}
                             onChange={(datees: Date) => {
                                 setValues({
                                     ...values,
-                                    date: datees ? format(datees, DATE_FORMAT_MMDDYYYY) : ''
+                                    date: datees ? format(datees, DATE_FORMAT_YYYYMMDD) : ''
                                 })
                             }}
                             customInput={

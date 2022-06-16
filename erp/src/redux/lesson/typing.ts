@@ -140,6 +140,7 @@ export interface CourseLessonDetailResponse {
     topic: string
     userId: string
     userName: string
+    assignedDate: string
 }
 
 export interface getLessonPlaneResponse {
