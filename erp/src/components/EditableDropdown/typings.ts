@@ -18,8 +18,8 @@ export interface EditableDropdownProps {
   clearValue?: boolean
   isMultiChoice?: boolean
   //eslint-disable-next-line no-unused-vars
-  handleMultiSelect?: (item: any) => void,
-  reset?:boolean
+  handleMultiSelect?: (item: any) => void
+  reset?: boolean
 }
 
 export interface EditDropdownWrapperProps {
