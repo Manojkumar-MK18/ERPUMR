@@ -33,7 +33,7 @@ const AddFeeMaster = (): ReactElement => {
       termList,
       registrationTypeList,
     },
-    fms: { isLoading, editFeeMaster,feeDescriptionListDropdown }
+    fms: { isLoading, editFeeMaster, feeDescriptionListDropdown }
   } = useSelector((state: RootState) => state, shallowEqual)
 
   const filteredFeeType = editFeeMaster
@@ -76,7 +76,7 @@ const AddFeeMaster = (): ReactElement => {
   const filteredDescriptionList = editFeeMaster
     ? feeDescriptionListDropdown.find((type) => type.name === editFeeMaster.description)
     : null
- 
+
   const desDefaultValue = {
     id: filteredDescriptionList?.id || '',
     name: filteredDescriptionList?.name || ''
@@ -149,6 +149,9 @@ const AddFeeMaster = (): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  console.log(values?.title); 
+  
+
   return (
     <PageWrapper id="container">
       <SectionTitle
@@ -185,7 +188,7 @@ const AddFeeMaster = (): ReactElement => {
                 description: item.name
               })
             }}
-            defaultValue={desDefaultValue }
+            defaultValue={desDefaultValue}
           />
         </DropdownWrapper>
         <DropdownWrapper>
