@@ -166,7 +166,7 @@ const AddFeeMaster = (): ReactElement => {
             placeholder={feeType}
             onBlur={() => { }}
             error={''}
-            defaultValue={feeTypeDefaultValue}
+            defaultValue={editFeeMaster ? feeTypeDefaultValue : null}
             handleSelect={(item) => {
               setValues({
                 ...values,
@@ -188,7 +188,7 @@ const AddFeeMaster = (): ReactElement => {
                 description: item.name
               })
             }}
-            defaultValue={desDefaultValue}
+            defaultValue={editFeeMaster ? desDefaultValue : null}
           />
         </DropdownWrapper>
         <DropdownWrapper>
@@ -204,7 +204,7 @@ const AddFeeMaster = (): ReactElement => {
                 regType: item.name
               })
             }}
-            defaultValue={RegDefaultValue}
+            defaultValue={editFeeMaster ? RegDefaultValue : null}
           />
         </DropdownWrapper>
         <DropdownWrapper>
@@ -220,7 +220,7 @@ const AddFeeMaster = (): ReactElement => {
                 academicYear: item.name
               })
             }}
-            defaultValue={academicDefaultValue}
+            defaultValue={editFeeMaster ? academicDefaultValue : null}
           />
         </DropdownWrapper>
         <DropdownWrapper>
@@ -236,7 +236,7 @@ const AddFeeMaster = (): ReactElement => {
                 year: item.name
               })
             }}
-            defaultValue={yearDefaultValue}
+            defaultValue={editFeeMaster ? yearDefaultValue : null}
           />
         </DropdownWrapper>
         <DropdownWrapper>
@@ -252,7 +252,7 @@ const AddFeeMaster = (): ReactElement => {
                 courseId: item.id
               })
             }}
-            defaultValue={courseDefaultValue}
+            defaultValue={editFeeMaster ? courseDefaultValue : null}
           />
         </DropdownWrapper>
         <DropdownWrapper>
@@ -268,7 +268,7 @@ const AddFeeMaster = (): ReactElement => {
                 terms: item.name
               })
             }}
-            defaultValue={termDefaultValue}
+            defaultValue={editFeeMaster ? termDefaultValue : null}
           />
         </DropdownWrapper>
         <DropdownWrapper>
