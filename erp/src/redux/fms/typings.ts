@@ -105,7 +105,7 @@ export interface feAddResponse {
   modeOfPayment: string
   paid: string
   paidTypes: string
-  referenceId: string
+  receiptId: string
   studentId: string
   studentRef: string
   updatedAt: string

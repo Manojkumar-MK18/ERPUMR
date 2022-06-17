@@ -14,18 +14,19 @@ const Receipt = (): ReactElement => {
         selectedStudentDetails,
         selectedFeeDetails,
         selectedFeetotalDetails,
-        selectedPaymentMode,
-        studentRef
+        selectedPaymentMode, 
+        referenceIdData
     } = useSelector(
         (state: RootState) => ({
             selectedStudentDetails: state.fms.selectedStudentDetails,
             selectedFeeDetails: state.fms.selectedFeeDetails,
             selectedFeetotalDetails: state.fms.selectedFeetotalDetails,
-            selectedPaymentMode: state.fms.selectedPaymentMode,
-            studentRef: state.fms.feeAdd?.studentRef
+            selectedPaymentMode: state.fms.selectedPaymentMode, 
+            referenceIdData: state.fms.feeAdd?.receiptId
         }),
         shallowEqual
     )
+console.log(referenceIdData);
 
     return (
         <PageWrapper >
@@ -53,7 +54,7 @@ const Receipt = (): ReactElement => {
                     handleAdmNo={selectedStudentDetails?.regNo}
                     handleBranch={undefined}
                     handleBatch={undefined}
-                    handleStudentId={studentRef}
+                    handleStudentId={referenceIdData}
                 />
                 <TableWrapper>
                     <Table size='sm' responsive="sm">
@@ -65,7 +66,7 @@ const Receipt = (): ReactElement => {
                             </TableRow>
                         </TableHeader>
                         <tbody>
-                            <td>DSE5643-09</td>
+                            <td>{referenceIdData}</td>
                             <td>{`${selectedPaymentMode?.cash}${selectedPaymentMode?.cash === 'Online' ? (selectedPaymentMode?.dateOn) : ''}`}</td>
                             <td>{`${new Date().toLocaleDateString()}`} </td>
                         </tbody>
@@ -89,7 +90,7 @@ const Receipt = (): ReactElement => {
                                         <div style={{ padding: '5px' }}>Remarks</div>
                                     </td>
                                     <td>
-                                        <div style={{ borderBottom: '1px solid lightgray', padding: '5px' }}>₹ 100</div>
+                                        <div style={{ borderBottom: '1px solid lightgray', padding: '5px' }}>₹ {selectedFeetotalDetails?.amount}</div>
                                         <div style={{ padding: '5px' }}></div>
                                     </td>
                                 </TableRow>
@@ -131,8 +132,8 @@ const Receipt = (): ReactElement => {
                     handleName={selectedStudentDetails?.studentName}
                     handleAdmNo={selectedStudentDetails?.regNo}
                     handleBranch={undefined}
-                    handleBatch={undefined} 
-                    handleStudentId={studentRef}                />
+                    handleBatch={undefined}
+                    handleStudentId={referenceIdData} />
                 <TableWrapper>
                     <Table size='sm' responsive="sm">
                         <TableHeader>
@@ -167,7 +168,7 @@ const Receipt = (): ReactElement => {
                                         <div style={{ padding: '5px' }}>Remarks</div>
                                     </td>
                                     <td>
-                                        <div style={{ borderBottom: '1px solid lightgray', padding: '5px' }}>₹ 100</div>
+                                        <div style={{ borderBottom: '1px solid lightgray', padding: '5px' }}>₹ {selectedFeetotalDetails?.amount}</div>
                                         <div style={{ padding: '5px' }}></div>
                                     </td>
                                 </TableRow>
