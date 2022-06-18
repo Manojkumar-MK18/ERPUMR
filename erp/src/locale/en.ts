@@ -92,7 +92,8 @@ const strings = {
     dragAndDropText: 'DRAG AND DROP FILE TO UPLOAD',
     upload: 'Upload File',
     docFilesOnly: 'UPLOAD ONLY .DOC FILES',
-    imageOnly: 'UPLOAD ONLY .PNG/.JPG FILES'
+    imageOnly: 'UPLOAD ONLY .PNG/.JPG FILES',
+    assignment: 'UPLOAD ONLY .PDF,.DOCX,.JPG,.JPEG,.SVG,.PNG FILES'
   },
   stuentConsession: {
     title: 'Student Concession',

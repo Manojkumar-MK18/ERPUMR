@@ -45,7 +45,8 @@ import getCourses, {
   getBatchesForCourse,
   getChildCourses,
   getBranches,
-  getAdminList
+  getAdminList,
+  getBatches
 } from './api'
 import getCoursesDropdown from './helpers'
 
@@ -166,7 +167,13 @@ export const academicSlice = createSlice({
       action: PayloadAction<GetAdminResponse>
     ) => {
       state.admin = action.payload
-    }
+    },
+    [getBatches.fulfilled.toString()]: (
+      state,
+      action: PayloadAction<Array<Batch>>
+    ) => {
+      state.batchList = action?.payload
+    },
   }
 })
 

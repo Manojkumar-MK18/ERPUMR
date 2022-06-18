@@ -215,6 +215,11 @@ const admin: Array<Menu> = [
         to: ROUTES.DAYBOOK_REPORT
       }
     ]
+  },
+  {
+    icon: ['fas', 'user-tie'],
+    label: 'Falcon Bulk Upload',
+    to: ROUTES.BULK_ENTRY,
   }
 ]
 

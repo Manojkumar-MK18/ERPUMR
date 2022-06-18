@@ -12,7 +12,8 @@ import {
   GetChildCoursesResponse,
   GetBranchesPayload,
   GetAdminResponse,
-  GetAdminPayload, 
+  GetAdminPayload,
+  GetBatchesPayload, 
 } from './typings' 
 
 export const getAdminList = createAsyncThunk(
@@ -135,6 +136,20 @@ export const getBranches = createAsyncThunk(
       `${apiEndpoints.getBranches}?coachingCentreId=${coachingCentreId}`
     )
     type && dispatch(({ coachingCentreId, type }))
+    return response?.data
+  }
+)
+
+export const getBatches = createAsyncThunk(
+  'coachingCenter/getBatches',
+  async (
+    { coachingCentreId, branchId, type }: GetBatchesPayload,
+    { dispatch }
+  ): Promise<Array<Batch>> => {
+    const response = await api.get(
+      `${apiEndpoints.getBatches}?coachingCentreId=${coachingCentreId}&branchIds=${branchId}`
+    )
+    type && dispatch(getAdminList({ coachingCentreId, branchId, type }))
     return response?.data
   }
 )

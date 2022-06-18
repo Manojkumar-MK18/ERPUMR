@@ -31,7 +31,7 @@ const ROUTES = {
   ADD_LEAVE: '/addLeave',
   LEAVE_APPLICATION: '/leaveApplication',
   LEAVE_APPROVAL: '/leaveApproval',
-  DESGINATION: '/desgination', 
+  DESGINATION: '/desgination',
   VIEW_PIVILEGES: '/viewPrivileges',
   STUDENT_PAY: '/studentPay',
   LEAVE_STATUS: '/leaveStatus',
@@ -45,7 +45,8 @@ const ROUTES = {
   VIEW_PRIVLEGES_ASSIGNED: '/viewPrivilegesAssigned',
   RECEIPTPRINT: '/print',
   STAFF_ATTENANCE: '/staffAttenance',
-  CREATE_LESSON:'/createLesson'
+  CREATE_LESSON: '/createLesson',
+  BULK_ENTRY: '/bulkEntry'
 }
 
 export default ROUTES

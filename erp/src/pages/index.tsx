@@ -43,6 +43,7 @@ import ViewPrivilegesAssigned from './Settings/ViewPrivileges/View'
 import Print from './StudentRegistration/receipt/print'
 import StaffManagement from './HumanResources/staffAttenance'
 import CreateLesson from './LessonPlane/LessonUpdate/Assign'
+import BulkUpload from './StudentBulkUpload'
 
 export {
   Dashboard,
@@ -89,5 +90,6 @@ export {
   ViewPrivilegesAssigned,
   Print,
   StaffManagement,
-  CreateLesson
+  CreateLesson,
+  BulkUpload
 }

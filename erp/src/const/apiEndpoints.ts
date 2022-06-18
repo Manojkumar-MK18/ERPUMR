@@ -45,7 +45,8 @@ const apiEndpoints = {
   saveRole: 'role/save',
   createLessonName: 'lessonPlan/init',
   assignLessonplaneByTeacher: 'lessonPlan/update',
-  getLessonPlane: 'lessonPlan/getAll'
+  getLessonPlane: 'lessonPlan/getAll',
+  getBatches:'batch/getBatches'
 }
 
 export default apiEndpoints

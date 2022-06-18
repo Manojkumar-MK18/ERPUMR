@@ -4,7 +4,8 @@ import getCourses, {
   getBranchesByInstitute,
   getAllCoursesByInstitute,
   getBatchesForCourse,
-  getChildCourses
+  getChildCourses,
+  getBatches
 } from './api'
 
 const { updateSemester, updateAcademicYear, updateYear } = academicSlice.actions
@@ -18,5 +19,6 @@ export {
   getBranchesByInstitute,
   getAllCoursesByInstitute,
   getBatchesForCourse,
-  getChildCourses
+  getChildCourses,
+  getBatches
 }

@@ -144,6 +144,12 @@ export interface GetChildCoursesResponse {
   type?: string
 }
 
+export interface GetBatchesPayload {
+  coachingCentreId: string
+  branchId: string
+  type?: AdminType
+}
+
 export interface AcademicState {
   semester: DropdownList
   academicYear: DropdownList
@@ -182,7 +188,7 @@ export interface AcademicState {
   topicList: DropdownList
   statuslist: DropdownList
   admin: GetAdminResponse | null,
-  attenanceList: DropdownList
+  attenanceList: DropdownList, 
 }
 
 export interface getBranchesForCoursePayload {

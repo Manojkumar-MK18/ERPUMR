@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Button from '../../components/Button'
 
 export const FileUploadWrapper = styled.div`
   width: 60%;
@@ -16,4 +17,13 @@ export const FileUploadWrapper = styled.div`
     margin: 12px auto;
     min-width: 30%;
   }
+`
+
+export const FileInput = styled.input`
+  opacity: 0;
+  position: absolute;
+`
+
+export const FileInputButton = styled(Button)`
+  position: relative;
 `
