@@ -62,7 +62,7 @@ const LessonUpdate = (): ReactElement => {
     return (
         <PageWrapper>
             <SectionTitle title='Lesson Updates' />
-            <FlexWrapper justifyContent='end'>
+            <FlexWrapper justifyContent='end' noPadding>
                 <Button
                     onClick={() => {
                         showCourseModal('t')
@@ -83,8 +83,7 @@ const LessonUpdate = (): ReactElement => {
                             {getLessonList?.map((data, index) => (
                                 data?.courseLessonDetailDaos.map((list) => {
                                     return (
-                                        <TableRow key={index}>
-                                            <td>{index - 6}</td> 
+                                        <TableRow key={index}> 
                                             <td>{moment(list?.assignedDate).format('YYYY-MM-DD')}</td>
                                             <td>{list?.course}</td>
                                             <td>{list?.subject}</td>
