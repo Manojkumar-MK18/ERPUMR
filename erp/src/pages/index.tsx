@@ -33,8 +33,7 @@ import Desgination from './HumanResources/Desgination/AddDesgination'
 import ViewPrivileges from './Settings/ViewPrivileges'
 import StudentPay from './StudentRegistration/Pay'
 import LeaveStatus from './HumanResources/LeaveStatus'
-import LessonUpdate from './LessonPlane/LessonUpdate'
-import AssignLesson from './LessonPlane/Assign Lesson'
+import LessonUpdate from './LessonPlane/LessonUpdate' 
 import LessonStatus from './LessonPlane/LessonStatus'
 import DesginationList from './HumanResources/Desgination'
 import StaffDetails from './StaffRegistration/View'
@@ -81,8 +80,7 @@ export {
   ViewPrivileges,
   StudentPay,
   LeaveStatus,
-  LessonUpdate,
-  AssignLesson,
+  LessonUpdate, 
   LessonStatus,
   DesginationList,
   StaffDetails,

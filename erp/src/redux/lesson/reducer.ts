@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { createLessonNameApi, getLessonplan, LessonPlaneListApi, TeacherList } from './api'
-import { Admin, getLessonPlaneResponse, InitialState, LessonName, LessonNameResponse, LessonPlaneListResponse } from './typing'
+import { createLessonNameApi, getLessonbyUserId, getLessonplan, LessonPlaneListApi, TeacherList } from './api'
+import { Admin, getLessonPlaneResponse, InitialState, LessonName, LessonNameResponse, LessonPlaneListResponse, lessonResponse } from './typing'
 import { status } from './const'
 
 const initialState: InitialState = {
@@ -20,7 +20,8 @@ const initialState: InitialState = {
     lessonNameResponse: {
         courseId: ''
     },
-    getAllLessonPlane: []
+    getAllLessonPlane: [],
+    getLessonResponsebyUserId: []
 }
 
 
@@ -59,6 +60,12 @@ export const lessonSlice = createSlice({
             action: PayloadAction<Array<getLessonPlaneResponse>>
         ) => {
             state.getAllLessonPlane = action.payload
+        },
+        [getLessonbyUserId.fulfilled.toString()]: (
+            state,
+            action: PayloadAction<Array<lessonResponse>>
+        ) => {
+            state.getLessonResponsebyUserId = action.payload
         }
     }
 })

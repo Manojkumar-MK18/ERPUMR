@@ -108,3 +108,11 @@ export const getLessonplan = createAsyncThunk(
         return response?.data
     }
 )
+
+export const getLessonbyUserId = createAsyncThunk(
+    'lesson/Getlesson',
+    async (userId: string): Promise<any> => {
+        const response = await api.get(`${apiEndpoints.getLesson}/${userId}`,)
+        return response?.data
+    }
+)

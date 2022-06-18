@@ -37,8 +37,7 @@ import {
   ViewPrivileges,
   StudentPay,
   LeaveStatus,
-  LessonUpdate,
-  AssignLesson,
+  LessonUpdate, 
   LessonStatus,
   DesginationList,
   StaffDetails,
@@ -128,8 +127,7 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.VIEW_PIVILEGES} component={ViewPrivileges} />
       <ProtectedRoute path={ROUTES.STUDENT_PAY} component={StudentPay} />
       <ProtectedRoute path={ROUTES.LEAVE_STATUS} component={LeaveStatus} />
-      <ProtectedRoute path={ROUTES.LESSON_UPDATES} component={LessonUpdate} />
-      <ProtectedRoute path={ROUTES.ASSIGN_LESSON} component={AssignLesson} />
+      <ProtectedRoute path={ROUTES.LESSON_UPDATES} component={LessonUpdate} /> 
       <ProtectedRoute path={ROUTES.LESSON_STATUS} component={LessonStatus} />
       <ProtectedRoute path={ROUTES.RECEIPT} component={Rec} />
       <ProtectedRoute path={ROUTES.DESGINATION_LIST} component={DesginationList} />

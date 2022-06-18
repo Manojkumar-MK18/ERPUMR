@@ -1,6 +1,14 @@
 export const tableHeader = [
-    'Date',
+    'Sno',
+    'Assigned Date',
+    'Course',
+    'Subject',
+    'Chapter',
     'Topic',
     'Status',
-    'Edit'
+    'Completed Date', 
 ]
+
+export const initialValues = {
+    id: ''
+}

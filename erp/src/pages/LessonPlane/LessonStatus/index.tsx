@@ -1,9 +1,8 @@
-import { ReactElement } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import {
     DropdownWrapper,
     EditableDropdown,
     FlexWrapper,
-    Icon,
     PageWrapper,
     SectionTitle,
     TableHeader,
@@ -12,25 +11,56 @@ import {
     Button
 } from "components"
 import { Table } from "react-bootstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { tableHeader } from "./const"
-import { ActionButton } from "pages/HumanResources/LeaveApproval/subcomponents"
+import { initialValues, tableHeader } from "./const"
+import { useDispatch, useSelector } from "react-redux"
+import { getLessonbyUserId } from "redux/lesson/api"
+import { RootState } from "redux/store"
+import getUserDropdown from "helpers/getTeacherDropDown"
+import { getAdminList } from "redux/academic/api"
+import AdminType from "const/admin"
+import moment from "moment"
 
 const LessonStatus = (): ReactElement => {
+    const {
+        teachers,
+        getLessonResponsebyUserId
+    } = useSelector(
+        (state: RootState) => ({
+            teachers: state.acamedic.admin?.adminList,
+            getLessonResponsebyUserId: state.lesson.getLessonResponsebyUserId
+        })
+    )
+
+    const dispatch = useDispatch()
+
+    const [values, setValues] = useState(initialValues)
+    const teacherList = teachers ? getUserDropdown(teachers) : []
+
+    useEffect(() => {
+        dispatch(getAdminList({ type: AdminType.TEACHER }))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     return (
         <PageWrapper>
             <SectionTitle title="Lesson Status" />
             <FlexWrapper>
                 <DropdownWrapper>
                     <EditableDropdown
-                        dropdownList={[]}
+                        dropdownList={teacherList}
                         placeholder='Select Faculty'
                         title="Faculty"
-                        handleSelect={() => { }}
+                        handleSelect={(item) => {
+                            setValues({
+                                ...values,
+                                id: item?.id
+                            })
+                            dispatch(getLessonbyUserId(item?.id))
+                        }}
                     />
                 </DropdownWrapper>
-                <Button 
-                style={{ marginTop: "24px" }}>
+                <Button
+                    style={{ marginTop: "24px" }}>
                     Submit
                 </Button>
             </FlexWrapper>
@@ -45,29 +75,18 @@ const LessonStatus = (): ReactElement => {
                             </TableRow>
                         </TableHeader>
                         <tbody>
-                            <TableRow>
-                                <td>Date</td>
-                                <td>Topic</td>
-                                <td>
-                                    <ActionButton
-                                        variant="outline-secondary"
-                                        onClick={() => { }}
-                                    >
-                                        Completed
-                                    </ActionButton>
-                                    <ActionButton
-                                        variant="outline-danger"
-                                        onClick={() => { }}
-                                    >
-                                        NotCompleted
-                                    </ActionButton>
-                                </td>
-                                <td>
-                                    <Icon>
-                                        <FontAwesomeIcon icon={['far', 'edit']} />
-                                    </Icon>
-                                </td>
-                            </TableRow>
+                            {getLessonResponsebyUserId.map((data, index) => (
+                                <TableRow key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{data?.assignedDate ? moment(data?.assignedDate).format('DD-MM-yyyy') : '-'}</td>
+                                    <td>{data?.course}</td>
+                                    <td>{data?.subject}</td>
+                                    <td>{data?.chapter}</td>
+                                    <td>{data?.topic}</td>
+                                    <td>{data?.status}</td>
+                                    <td>{data?.completionDate ? moment(data?.completionDate).format('DD-MM-yyyy') : '-'}</td>
+                                </TableRow>
+                            ))}
                         </tbody>
                     </Table>
                 </TableWrapper>

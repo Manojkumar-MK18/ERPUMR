@@ -150,6 +150,21 @@ export interface getLessonPlaneResponse {
     type: string
 }
 
+export interface lessonResponse {
+    assignedDate: null
+    chapter: string
+    completionDate: string
+    course: string
+    date: null
+    detailAssignId: string
+    sessionName: string
+    status: string
+    subject: string
+    topic: string
+    userId: string
+    userName: string
+}
+
 export interface InitialState {
     isLoading: boolean
     lessonPlaneList: LessonPlaneListResponse | null
@@ -160,4 +175,5 @@ export interface InitialState {
     lessonNameResponse: LessonNameResponse
     assignLesoonNameByTeacher: AssignLessonByTeacher,
     getAllLessonPlane: Array<getLessonPlaneResponse> | null
+    getLessonResponsebyUserId: Array<lessonResponse>
 }

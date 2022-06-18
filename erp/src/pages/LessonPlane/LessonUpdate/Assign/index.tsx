@@ -41,7 +41,6 @@ const CreateLesson = (): ReactElement => {
         dispatch(getAdminList({ type: AdminType.TEACHER, }))
         /* eslint-disable react-hooks/exhaustive-deps */
     }, [])
-    console.log(teacherList);
 
     return (
         <PageWrapper>
