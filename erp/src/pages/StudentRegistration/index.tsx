@@ -53,7 +53,7 @@ const StudentRegistartion = (): ReactElement => {
       academicYear,
       year,
       addRegistration,
-      applicationList, 
+      applicationList,
       onlineApplication,
       childInformation: { selectCourse, course }
     },
@@ -205,7 +205,7 @@ const StudentRegistartion = (): ReactElement => {
             eventKey="onlineApplication"
             title={onlineApplication}
             disabled
-          ></Tab> 
+          ></Tab>
         </Tabs>
       </TabWrapper>
       {isLoading ? (
@@ -243,7 +243,7 @@ const StudentRegistartion = (): ReactElement => {
                   fatherName,
                   firstName,
                   coachingCentre,
-                  batchList: [{ course: { courseName } }]
+                  //batchList: [{ course: { courseName } }]
                 },
                   index
                 ) => {
@@ -253,8 +253,7 @@ const StudentRegistartion = (): ReactElement => {
                   return (
                     <TableRow key={index}>
                       <td>{selectedCourse?.name || coachingCentre?.coachingCentreName}</td>
-                      <td>{studentName === null ? firstName : studentName}</td>
-                      <td>{courseName}</td>
+                      <td>{studentName === null ? firstName : studentName}</td> 
                       <td>{admissionNumber}</td>
                       <td>
                         <ActionWrapper
