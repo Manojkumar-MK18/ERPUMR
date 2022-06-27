@@ -35,7 +35,7 @@ const ROUTES = {
   VIEW_PIVILEGES: '/viewPrivileges',
   STUDENT_PAY: '/studentPay',
   LEAVE_STATUS: '/leaveStatus',
-  LESSON_UPDATES: '/lessonUpdates', 
+  LESSON_UPDATES: '/lessonUpdates',
   LESSON_STATUS: '/lessonStatus',
   RECEIPT: '/recipt',
   DESGINATION_LIST: '/desginationList',
@@ -45,7 +45,8 @@ const ROUTES = {
   RECEIPTPRINT: '/print',
   STAFF_ATTENANCE: '/staffAttenance',
   CREATE_LESSON: '/createLesson',
-  BULK_ENTRY: '/bulkEntry'
+  BULK_ENTRY: '/bulkEntry',
+  STUDENT_PAYMENT: '/payment'
 }
 
 export default ROUTES

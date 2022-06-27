@@ -46,7 +46,8 @@ import {
   Print,
   StaffManagement,
   CreateLesson,
-  BulkUpload
+  BulkUpload,
+  Payment
 } from 'pages'
 import ProtectedRoute from './containers/ProtectedRoute'
 import Rec from 'pages/StudentRegistration/receipt'
@@ -138,6 +139,7 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.STAFF_ATTENANCE} component={StaffManagement} />
       <ProtectedRoute path={ROUTES.CREATE_LESSON} component={CreateLesson} />
       <ProtectedRoute path={ROUTES.BULK_ENTRY} component={BulkUpload} />
+      < Route path={ROUTES.STUDENT_PAYMENT} component={Payment} />
     </Switch>
   )
 }

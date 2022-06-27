@@ -29,11 +29,11 @@ import LeaveApplication from './HumanResources/LeaveApplication'
 import LeaveApproval from './HumanResources/LeaveApproval'
 import StaffRegistration from './StaffRegistration'
 import AddStaffRegistration from './StaffRegistration/AddRegistration'
-import Desgination from './HumanResources/Desgination/AddDesgination' 
+import Desgination from './HumanResources/Desgination/AddDesgination'
 import ViewPrivileges from './Settings/ViewPrivileges'
 import StudentPay from './StudentRegistration/Pay'
 import LeaveStatus from './HumanResources/LeaveStatus'
-import LessonUpdate from './LessonPlane/LessonUpdate' 
+import LessonUpdate from './LessonPlane/LessonUpdate'
 import LessonStatus from './LessonPlane/LessonStatus'
 import DesginationList from './HumanResources/Desgination'
 import StaffDetails from './StaffRegistration/View'
@@ -43,6 +43,7 @@ import Print from './StudentRegistration/receipt/print'
 import StaffManagement from './HumanResources/staffAttenance'
 import CreateLesson from './LessonPlane/LessonUpdate/Assign'
 import BulkUpload from './StudentBulkUpload'
+import Payment from './StudentRegistration/Payment'
 
 export {
   Dashboard,
@@ -76,11 +77,11 @@ export {
   LeaveApproval,
   StaffRegistration,
   AddStaffRegistration,
-  Desgination, 
+  Desgination,
   ViewPrivileges,
   StudentPay,
   LeaveStatus,
-  LessonUpdate, 
+  LessonUpdate,
   LessonStatus,
   DesginationList,
   StaffDetails,
@@ -89,5 +90,6 @@ export {
   Print,
   StaffManagement,
   CreateLesson,
-  BulkUpload
+  BulkUpload,
+  Payment
 }
