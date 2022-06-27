@@ -253,7 +253,7 @@ const StudentRegistartion = (): ReactElement => {
                   return (
                     <TableRow key={index}>
                       <td>{selectedCourse?.name || coachingCentre?.coachingCentreName}</td>
-                      <td>{studentName === null ? firstName : studentName}</td> 
+                      <td>{studentName === null ? firstName : studentName}</td>
                       <td>{admissionNumber}</td>
                       <td>
                         <ActionWrapper
@@ -268,7 +268,7 @@ const StudentRegistartion = (): ReactElement => {
                             }))
                           }}
                         />
-                      </td>
+                      </td> 
                     </TableRow>
                   )
                 })}

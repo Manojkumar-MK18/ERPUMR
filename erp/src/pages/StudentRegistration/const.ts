@@ -1,6 +1,6 @@
-export const tableHeader = [ 
+export const tableHeader = [
   'Institute Name',
-  'Student Name', 
+  'Student Name',
   'Admission No',
   'Action'
 ]
@@ -20,7 +20,7 @@ export const initialPaymentValues = {
   term: '',
   referenceId: '',
   dateOn: '',
-  bankName:'',
+  bankName: '',
   balance: true
 }
 
@@ -32,5 +32,16 @@ export const resetPaymentValues = {
   courseId: false,
   term: false,
   referenceId: false,
-  bankName:false
+  bankName: false
 }
+
+export const feesTableHeader = [
+  'fees Description',
+  'Total',
+  'Paid',
+  'Pre-Con',
+  'Balance',
+  "Con.",
+  'Con%',
+  'Received'
+]
