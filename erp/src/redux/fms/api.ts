@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import apiEndpoints from 'const/apiEndpoints'
 import api from 'services'
-import { AddFeeDescriptionPayload, AddFeeMasterPayload, feAddResponse, getAllfee } from './typings'
+import { AddFeeDescriptionPayload, AddFeeMasterPayload, feAddResponse, getAllfee, GetStudentResponse, StudentListPayload } from './typings'
 import history from 'const/history'
 import strings from 'locale/en'
 import ROUTES from 'const/routes'
@@ -164,5 +164,41 @@ export const getAllFees = createAsyncThunk(
   async (): Promise<Array<getAllfee>> => {
     const response = await api.get(apiEndpoints.getallFees)
     return response?.data
+  }
+)
+
+export const getStudentList = createAsyncThunk(
+  'coachingId/allStudent',
+  async ({
+    coachingCentreId,
+    batchId,
+    branchId,
+    pageNo,
+    type
+  }: StudentListPayload): Promise<GetStudentResponse> => {
+    const requestPayload = {
+      ascDesc: 'Desc',
+      batchIds: batchId ? [batchId] : null,
+      branchIds: branchId ? [branchId] : null,
+      coachingCenterId: coachingCentreId || null,
+      pageNo: pageNo || 1,
+      pageSize: 20,
+      searchCriteria: { userType: type },
+      sortBy: 'created_at'
+    }
+    const {
+      data: { data: adminList, page, pageSize, totalCount, totalPages }
+    } = await api.post(`${apiEndpoints.getAllStudentList}`, requestPayload)
+    const responseDate = {
+      adminList,
+      page,
+      pageSize,
+      totalCount,
+      totalPages,
+      coachingCentreId: coachingCentreId || '',
+      branchId: branchId || '',
+      batchId: batchId || ''
+    }
+    return responseDate
   }
 )

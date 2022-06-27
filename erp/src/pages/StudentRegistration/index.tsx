@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import { ReactElement, useEffect, useState } from 'react'
 import {
   FlexWrapper,
@@ -32,16 +32,20 @@ import { Student } from 'redux/fms/typings'
 import Pay from './Pay'
 import strings from 'locale/en'
 import { initialPaymentValues } from './const'
+import { getStudentList } from 'redux/fms/api'
+import AdminType from 'const/admin'
 
 const StudentRegistartion = (): ReactElement => {
   const {
     acamedic: { academicYear: academicYearList, year: yearList, courseList },
-    fms: { studentApplicationList, isLoading, selectedFeetotalDetails },
-    cashierName
+    fms: { isLoading, selectedFeetotalDetails, getAllStudentList },
+    cashierName,
+    userDetail
   } = useSelector((state: RootState) => ({
     acamedic: state.acamedic,
     fms: state.fms,
-    cashierName: state.user.userInfo?.userDetail.firstName
+    cashierName: state.user.userInfo?.userDetail.firstName,
+    userDetail: state.user.userInfo?.userDetail
   }), shallowEqual)
   const {
     studentRegistration: {
@@ -49,8 +53,7 @@ const StudentRegistartion = (): ReactElement => {
       academicYear,
       year,
       addRegistration,
-      applicationList,
-      admittedList,
+      applicationList, 
       onlineApplication,
       childInformation: { selectCourse, course }
     },
@@ -59,21 +62,25 @@ const StudentRegistartion = (): ReactElement => {
   const history = useHistory()
   const dispatch = useDispatch()
 
+
+
   const {
-    content = [],
-    totalPages = 0,
-    page = 0
-  } = studentApplicationList || {}
+    adminList,
+    page = 1,
+    totalPages = 1,
+    coachingCentreId,
+    branchId,
+    batchId
+  } = getAllStudentList || {}
+
+  const instituteId = userDetail?.coachingCenterId || coachingCentreId || ''
 
   const [payId, setPayId] = useState('')
   const [values, setValues] = useState(initialPaymentValues)
   const [resetValuesState, setResetValuesState] = useState(resetValues)
   const [registrationList, setRegistrationList] = useState<Array<Student>>([])
-  const filteredList = registrationList.length > 0 ? registrationList : content
+  const filteredList = registrationList.length > 0 ? registrationList : adminList
   const [searchTerm, setSearchTerm] = useState('')
-
-  console.log(filteredList);
-  console.log(registrationList);
 
   const clearValues = () => {
     setResetValuesState({
@@ -93,6 +100,7 @@ const StudentRegistartion = (): ReactElement => {
 
   useEffect(() => {
     dispatch(getStudentAdmissionList(1))
+    dispatch(getStudentList({ type: AdminType.STUDENT }))
     dispatch(getCourses())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -197,8 +205,7 @@ const StudentRegistartion = (): ReactElement => {
             eventKey="onlineApplication"
             title={onlineApplication}
             disabled
-          ></Tab>
-          <Tab eventKey="admittedList" title={admittedList} disabled></Tab>
+          ></Tab> 
         </Tabs>
       </TabWrapper>
       {isLoading ? (
@@ -215,7 +222,7 @@ const StudentRegistartion = (): ReactElement => {
                 </TableRow>
               </TableHeader>
               <tbody>
-                {filteredList.filter((values) => {
+                {filteredList?.filter((values) => {
                   if (searchTerm === "") {
                     return values
                   } else if (
@@ -234,7 +241,9 @@ const StudentRegistartion = (): ReactElement => {
                   userId = '',
                   mobileNumber,
                   fatherName,
+                  firstName,
                   coachingCentre,
+                  batchList: [{ course: { courseName } }]
                 },
                   index
                 ) => {
@@ -243,9 +252,9 @@ const StudentRegistartion = (): ReactElement => {
                   )
                   return (
                     <TableRow key={index}>
-                      <td>{index + 1}</td>
-                      <td>{studentName}</td>
                       <td>{selectedCourse?.name || coachingCentre?.coachingCentreName}</td>
+                      <td>{studentName === null ? firstName : studentName}</td>
+                      <td>{courseName}</td>
                       <td>{admissionNumber}</td>
                       <td>
                         <ActionWrapper
@@ -270,10 +279,22 @@ const StudentRegistartion = (): ReactElement => {
               currentPage={page}
               totalPages={totalPages}
               handleNext={() => {
-                dispatch(getStudentAdmissionList(page + 1))
+                dispatch(getStudentList({
+                  type: AdminType.STUDENT,
+                  pageNo: page + 1,
+                  batchId,
+                  branchId,
+                  coachingCentreId: instituteId
+                }))
               }}
               handlePrevious={() => {
-                dispatch(getStudentAdmissionList(page - 1))
+                dispatch(getStudentList({
+                  type: AdminType.STUDENT,
+                  pageNo: page - 1,
+                  batchId,
+                  branchId,
+                  coachingCentreId: instituteId
+                }))
               }}
             />
           </TableWrapper>

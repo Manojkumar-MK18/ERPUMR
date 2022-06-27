@@ -11,7 +11,7 @@ export const ActionWrapper = ({
     <div>
       <Button onClick={handlePay}>{strings.studentRegistration.pay}</Button>
       <Icon variant="outline-light" onClick={() => {}}>
-        <FontAwesomeIcon icon={['far', 'trash-alt']} />
+        <FontAwesomeIcon icon={['far', 'edit']} />
       </Icon>
     </div>
   )

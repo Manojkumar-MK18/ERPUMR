@@ -48,6 +48,7 @@ const apiEndpoints = {
   getLessonPlane: 'lessonPlan/getAll',
   getBatches: 'batch/getBatches',
   getLesson: 'lessonPlan/getByUserId',
+  getAllStudentList: 'userDetail/search'
 }
 
 export default apiEndpoints

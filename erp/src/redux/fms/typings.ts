@@ -1,5 +1,13 @@
 import { Dropdown } from '../typings'
 
+export type AdminType =
+  | 'SUPERADMIN'
+  | 'BRANCHADMIN'
+  | 'COACHINGADMIN'
+  | 'COACH'
+  | 'STUDENT'
+
+
 export type DropdownList = Array<Dropdown>
 
 export interface AddFeeDescriptionResponse {
@@ -55,7 +63,7 @@ export interface Student {
   mobileNumber?: string
   profileImagePath?: any
   qualification?: string
-  salutation?: string
+  salutation?: string 
   shortDiscription?: string
   state?: string
   status?: string
@@ -132,24 +140,6 @@ export interface getAllfee {
   userDetail: string
 }
 
-export interface AddFeeDescriptionState {
-  feeDescriptionList: Array<AddFeeDescriptionResponse>
-  feeDescriptionListDropdown: DropdownList
-  isLoading: boolean
-  editDescriptionId: number
-  feeMasterList: Array<AddFeeDescriptionResponse>
-  editFeeMaster: AddFeeDescriptionResponse | null
-  studentApplicationList: StudentList | null
-  error: string
-  updateStudent: Array<Student>
-  selectedStudentDetails: Student | null
-  selectedFeeDetails: FeeDetails | null
-  selectedFeetotalDetails: FeeDetails | null
-  selectedPaymentMode: Payment | null
-  receiptlist: Array<any>
-  feeAdd: feAddResponse | null
-  getallFee: Array<getAllfee>
-}
 
 export interface AddFeeMasterPayload {
   id?: string
@@ -167,4 +157,43 @@ export interface AddFeeDescriptionPayload {
   id?: any
   title: string
   description: string
+}
+
+export interface StudentListPayload {
+  coachingCentreId?: string
+  branchId?: string
+  batchId?: string
+  pageNo?: number
+  type: AdminType
+}
+
+export interface GetStudentResponse {
+  adminList: Array<Student>
+  page: number
+  pageSize: number
+  totalCount: number
+  totalPages: number
+  coachingCentreId: string
+  branchId: string
+  batchId: string
+}
+
+export interface AddFeeDescriptionState {
+  feeDescriptionList: Array<AddFeeDescriptionResponse>
+  feeDescriptionListDropdown: DropdownList
+  isLoading: boolean
+  editDescriptionId: number
+  feeMasterList: Array<AddFeeDescriptionResponse>
+  editFeeMaster: AddFeeDescriptionResponse | null
+  studentApplicationList: StudentList | null
+  error: string
+  updateStudent: Array<Student>
+  selectedStudentDetails: Student | null
+  selectedFeeDetails: FeeDetails | null
+  selectedFeetotalDetails: FeeDetails | null
+  selectedPaymentMode: Payment | null
+  receiptlist: Array<any>
+  feeAdd: feAddResponse | null
+  getallFee: Array<getAllfee>
+  getAllStudentList: GetStudentResponse | null
 }

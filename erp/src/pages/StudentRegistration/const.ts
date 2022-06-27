@@ -1,5 +1,5 @@
-export const tableHeader = [
-  'SNo',
+export const tableHeader = [ 
+  'Institute Name',
   'Student Name',
   'Course',
   'Admission No',
