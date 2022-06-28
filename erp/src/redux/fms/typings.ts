@@ -11,7 +11,7 @@ export type AdminType =
 export type DropdownList = Array<Dropdown>
 
 export interface AddFeeDescriptionResponse {
-  id: number
+  id: number | any
   description: string
   title: string
   amount: string
@@ -63,7 +63,7 @@ export interface Student {
   mobileNumber?: string
   profileImagePath?: any
   qualification?: string
-  salutation?: string 
+  salutation?: string
   shortDiscription?: string
   state?: string
   status?: string

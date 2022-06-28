@@ -43,6 +43,6 @@ export const feesTableHeader = [
   'Pre-Con',
   'Balance',
   "Con.",
-  'Con%',
+  '',
   'Received'
 ]

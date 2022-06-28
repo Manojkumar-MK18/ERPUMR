@@ -5,7 +5,7 @@ export type InputType = 'text' | 'dropdown'
 export interface InputProps {
   label?: string
   isRequired?: boolean
-  value: string
+  value: string | any
   width?: string
   isDisabled?: boolean
   inputType?: 'text' | 'file' | 'number' | 'textarea' | 'email'

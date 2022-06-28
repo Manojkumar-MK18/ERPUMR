@@ -21,10 +21,13 @@ import {
   resetPaymentValues
 } from '../const'
 import TableHeader, { TableWrapper, TableRow } from './subcomponent'
+import DatePicker from 'react-datepicker'
+import { format } from 'date-fns'
+import { DATE_FORMAT_MMDDYYYY } from 'const/dateFormat'
 
 const Payment = (): ReactElement => {
   const {
-    acamedic: { feeTypeList, termList },
+    acamedic: { feeTypeList, termList, paymentModes },
     fms: { feeMasterList, selectedStudentDetails }
   } = useSelector(
     (state: RootState) => ({
@@ -52,6 +55,8 @@ const Payment = (): ReactElement => {
 
   const [values, setValues] = useState(initialPaymentValues)
   const [resetValues, setResetValues] = useState(resetPaymentValues)
+  const [selectedCheckBox, setSelectedCheckBox] = useState<Array<any>>([]);
+  const [disable, setDisable] = useState(true);
 
   const filteredDescription = values?.feeType
     ? feeMasterList.filter((des) => des?.title === values?.feeType)
@@ -75,16 +80,27 @@ const Payment = (): ReactElement => {
     termList.find((obj) => obj.name === term.terms)
   )
 
-  const sum = coursesToFilter.reduce(
-    (sum, current) => Number(sum) + Number(current.amount),
-    0
-  )
+  const sum = coursesToFilter.reduce((sum, current) => Number(sum) + Number(current.amount), 0)
+  const totalTermAmount = termsToPay.reduce((sum, current) => Number(sum) + Number(current.amount), 0)
+
+  const handleClickCheckBox = (e: any) => {
+    const { name, checked } = e.target;
+    setSelectedCheckBox([...selectedCheckBox, name]);
+    if (checked) {
+      setDisable(false)
+    } else if (!checked) {
+      setSelectedCheckBox(selectedCheckBox.filter(item => item !== name));
+      setDisable(true)
+    }
+  };
 
   useEffect(() => {
     dispatch(getFeeMaster())
     dispatch(getFeeDescriptions())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  console.log(selectedCheckBox);
 
   return (
     <PageWrapper>
@@ -181,14 +197,27 @@ const Payment = (): ReactElement => {
                 {termsToPay.map((data, index) => (
                   <TableRow key={index}>
                     <td>
-                      <Form.Check />
+                      <Form.Check
+                        key={data?.id}
+                        name={data?.terms}
+                        id={data?.id}
+                        checked={selectedCheckBox.includes(data?.terms)}
+                        onClick={handleClickCheckBox}
+                      />
                     </td>
                     <td>{data?.terms}</td>
                     <td className="tableInput">
-                      <Input height="40px" value={  ''} />
+                      <Input
+                        height="40px"
+                        value={data?.amount}
+                      />
                     </td>
                     <td className="tableInput">
-                      <Input height="20px" value={values?.referenceId} />
+                      <Input
+                        height="20px"
+                        placeholder=''
+                        value={values?.referenceId}
+                      />
                     </td>
                     <td className="tableInput">
                       <Input value={''} height="20px" />
@@ -200,7 +229,13 @@ const Payment = (): ReactElement => {
                       <Input value={''} height="20px" />
                     </td>
                     <td className="tableInput">
-                      <Input value={''} height="20px" />
+                    </td>
+                    <td className="tableInput">
+                      <Input
+                        value={''}
+                        height="20px"
+                        isDisabled={disable}
+                      />
                     </td>
                   </TableRow>
                 ))}
@@ -208,10 +243,14 @@ const Payment = (): ReactElement => {
                   <td></td>
                   <td>Total</td>
                   <td className="tableInput">
-                    <Input value={''} height="40px" />
+                    <Input value={totalTermAmount} height="40px" />
                   </td>
                   <td className="tableInput">
-                    <Input value={''} height="20px" />
+                    <Input
+                      value={''}
+                      height="20px"
+                      placeholder='df'
+                    />
                   </td>
                   <td className="tableInput">
                     <Input value={''} height="20px" />
@@ -237,25 +276,54 @@ const Payment = (): ReactElement => {
                 <TableRow>
                   <td></td>
                   <td></td>
-                  <td className="dd">
+                  <td >
                     <div>MOP</div>
                     <EditableDropdown
                       placeholder=""
                       isRequired
-                      dropdownList={[]}
-                      handleSelect={() => { }}
+                      dropdownList={paymentModes}
+                      handleSelect={(item) => {
+                        setValues({
+                          ...values,
+                          paymentMode: item?.name
+                        })
+                      }}
                     />
                   </td>
                   <td colSpan={2}>
-                    <div>Cheque Date</div>
-                    <Input 
-                    value="" 
-                    height="40px" 
-                     />
+                    <div>Date</div>
+                    <DatePicker
+                      selected={values?.dateOn ? new Date(values?.dateOn) : new Date()}
+                      onSelect={(dates: Date) => {
+                        setValues({
+                          ...values,
+                          dateOn: dates ? format(dates, DATE_FORMAT_MMDDYYYY) : ''
+                        })
+                      }}
+                      onChange={(dates: Date) => {
+                        setValues({
+                          ...values,
+                          dateOn: dates ? format(dates, DATE_FORMAT_MMDDYYYY) : ''
+                        })
+                      }}
+                      placeholderText={'Date'}
+                      customInput={
+                        <Input
+                          value={values?.dateOn}
+                          isRequired
+                          inputType="text"
+                          placeholder={'From Date'}
+                          suffix={['far', 'calendar']}
+                        />
+                      }
+                    />
                   </td>
-                  <td>
+                  <td  >
                     <div>Cheque No</div>
-                    <Input value="" height="40px" />
+                    <Input
+                      value=""
+                      height="40px"
+                    />
                   </td>
                   <td>
                     <div>Bank Name</div>

@@ -13,7 +13,7 @@ export const TableWrapper = styled.div`
 export const TableRow = styled.tr`
 vertical-align: baseline;   
 .tableInput{
-  width: 10%; 
+  width: 12%; 
   text-align: center;
 }
 `
