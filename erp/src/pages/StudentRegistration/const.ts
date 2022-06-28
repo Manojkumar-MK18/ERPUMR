@@ -36,6 +36,7 @@ export const resetPaymentValues = {
 }
 
 export const feesTableHeader = [
+  '',
   'fees Description',
   'Total',
   'Paid',

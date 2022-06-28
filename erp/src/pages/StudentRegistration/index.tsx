@@ -269,7 +269,7 @@ const StudentRegistartion = (): ReactElement => {
                           }}
                         />
                       </td>
-                      
+                       
                     </TableRow>
                   )
                 })}

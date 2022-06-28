@@ -205,6 +205,7 @@ const Payment = (): ReactElement => {
                   </TableRow>
                 ))}
                 <TableRow>
+                  <td></td>
                   <td>Total</td>
                   <td className="tableInput">
                     <Input value={''} height="40px" />
@@ -227,12 +228,14 @@ const Payment = (): ReactElement => {
                   </td>
                 </TableRow>
                 <TableRow>
+                  <td> </td>
                   <td>Remarks</td>
                   <td colSpan={6}>
                     <Input inputType="textarea" value={''} height="90px" />
                   </td>
                 </TableRow>
                 <TableRow>
+                  <td></td>
                   <td></td>
                   <td className="dd">
                     <div>MOP</div>
