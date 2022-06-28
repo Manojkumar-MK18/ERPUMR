@@ -10,7 +10,7 @@ import {
 import strings from 'locale/en'
 import getFeeDescriptionDropdown from 'pages/FeesManagementSystem/AddFeeMaster/helpers'
 import { ReactElement, useEffect, useState } from 'react'
-import { Table } from 'react-bootstrap'
+import { Form, Table } from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { getFeeDescriptions, getFeeMaster } from 'redux/fms/api'
 import { RootState } from 'redux/store'
@@ -60,10 +60,10 @@ const Payment = (): ReactElement => {
   const coursesToFilter =
     values.feeType && values.description
       ? feeMasterList.filter(
-          (description) =>
-            description.title === values.feeType &&
-            description.description === values.description
-        )
+        (description) =>
+          description.title === values.feeType &&
+          description.description === values.description
+      )
       : []
 
   const termsToPay = coursesToFilter.filter(
@@ -180,10 +180,89 @@ const Payment = (): ReactElement => {
               <tbody>
                 {termsToPay.map((data, index) => (
                   <TableRow key={index}>
+                    <td>
+                      <Form.Check />
+                    </td>
                     <td>{data?.terms}</td>
-                    <td>{data?.amount}</td>
+                    <td className="tableInput">
+                      <Input height="40px" value={  ''} />
+                    </td>
+                    <td className="tableInput">
+                      <Input height="20px" value={values?.referenceId} />
+                    </td>
+                    <td className="tableInput">
+                      <Input value={''} height="20px" />
+                    </td>
+                    <td className="tableInput">
+                      <Input value={''} height="20px" />
+                    </td>
+                    <td className="tableInput">
+                      <Input value={''} height="20px" />
+                    </td>
+                    <td className="tableInput">
+                      <Input value={''} height="20px" />
+                    </td>
                   </TableRow>
                 ))}
+                <TableRow>
+                  <td>Total</td>
+                  <td className="tableInput">
+                    <Input value={''} height="40px" />
+                  </td>
+                  <td className="tableInput">
+                    <Input value={''} height="20px" />
+                  </td>
+                  <td className="tableInput">
+                    <Input value={''} height="20px" />
+                  </td>
+                  <td className="tableInput">
+                    <Input value={''} height="20px" />
+                  </td>
+                  <td className="tableInput">
+                    <Input value={''} height="20px" />
+                  </td>
+                  <td className="tableInput">Tot.Amt</td>
+                  <td className="tableInput">
+                    <Input value={''} height="20px" />
+                  </td>
+                </TableRow>
+                <TableRow>
+                  <td>Remarks</td>
+                  <td colSpan={6}>
+                    <Input inputType="textarea" value={''} height="90px" />
+                  </td>
+                </TableRow>
+                <TableRow>
+                  <td></td>
+                  <td className="dd">
+                    <div>MOP</div>
+                    <EditableDropdown
+                      placeholder=""
+                      isRequired
+                      dropdownList={[]}
+                      handleSelect={() => { }}
+                    />
+                  </td>
+                  <td colSpan={2}>
+                    <div>Cheque Date</div>
+                    <Input 
+                    value="" 
+                    height="40px" 
+                     />
+                  </td>
+                  <td>
+                    <div>Cheque No</div>
+                    <Input value="" height="40px" />
+                  </td>
+                  <td>
+                    <div>Bank Name</div>
+                    <Input value="" height="40px" />
+                  </td>
+                  <td>Net Payment</td>
+                  <td>
+                    <Input value="" height="40px" />
+                  </td>
+                </TableRow>
               </tbody>
             </Table>
           </TableWrapper>

@@ -8,25 +8,21 @@ export const TableWrapper = styled.div`
   > * table {
     margin-bottom: 0;
   }
-  #privilage {
-    margin-top: 12px;
-    padding: 10px;
-    --bs-gutter-x: 0;
-    width: 100%;
-    > * table {
-      margin-bottom: 0;
-    }
-  }
 `
 
 export const TableRow = styled.tr`
-vertical-align: baseline;  
+vertical-align: baseline;   
+.tableInput{
+  width: 10%; 
+  text-align: center;
+}
 `
 
 const TableHeader = styled.thead`
   background-color: #009EFA;
   color: ${({ theme }) => theme.table.color};
   height: 35px;
+  font-weight: 100;
 `
 
 export default TableHeader
