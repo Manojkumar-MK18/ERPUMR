@@ -269,7 +269,8 @@ const StudentRegistartion = (): ReactElement => {
                             }))
                           }}
                         />
-                      </td> 
+                      </td>
+                       
                     </TableRow>
                   )
                 })}

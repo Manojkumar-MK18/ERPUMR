@@ -26,6 +26,7 @@ import useBreakpoint from 'use-breakpoint'
 import BREAKPOINTS from 'const/breakpoint'
 import history from 'const/history'
 import ROUTES from 'const/routes'
+import logo from '../../assests/falcon.png'
 
 const Login = (): ReactElement => {
   const { userName, password, userNameError, passwordError, isLoading, isLoggedIn } =
@@ -47,7 +48,7 @@ const Login = (): ReactElement => {
       <Container>
         <FormWrapper>
           <LogoWrapper>
-            <Logo src="/images/logo.png" alt="logo" />
+            <Logo src={logo} alt="logo" />
           </LogoWrapper>
           <Title>{title}</Title>
           <SubTitle>{description}</SubTitle>

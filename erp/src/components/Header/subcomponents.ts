@@ -31,9 +31,8 @@ export const HeaderWrapper = styled.header`
 `
 
 export const LogoWrapper = styled.div`
-  width: 120px;
-  height: 35%;
-  display: flex;
+  width: 100px;
+  height: 70%; 
   margin: auto 12px;
 `
 

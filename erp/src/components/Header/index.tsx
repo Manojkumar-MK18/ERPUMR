@@ -20,6 +20,7 @@ import { RootState } from 'redux/store'
 import BREAKPOINTS from 'const/breakpoint'
 import useBreakpoint from 'use-breakpoint'
 import { updateIsMenuOpen } from 'redux/menu/actions'
+import logo from '../../assests/falcon.png'
 
 const Header = (): ReactElement => {
   const {
@@ -42,7 +43,7 @@ const Header = (): ReactElement => {
   return (
     <HeaderWrapper>
       <LogoWrapper>
-        <Logo src="/images/logo.png" alt="logo" />
+        <Logo src={logo} alt="logo" />
       </LogoWrapper>
       {showMenu && (
         <Icon
