@@ -238,7 +238,7 @@ const StudentRegistartion = (): ReactElement => {
                   courseId = '',
                   regNo,
                   admissionNumber,
-                  userId = '',
+                  //userId = '',
                   mobileNumber,
                   fatherName,
                   firstName,
@@ -258,7 +258,7 @@ const StudentRegistartion = (): ReactElement => {
                       <td>
                         <ActionWrapper
                           handlePay={() => {
-                            setPayId(userId)
+                            history.push(ROUTES.STUDENT_PAYMENT)
                             dispatch(updateStudentDetails({
                               studentName: studentName,
                               regNo: regNo,
@@ -269,7 +269,7 @@ const StudentRegistartion = (): ReactElement => {
                           }}
                         />
                       </td>
-                       
+
                     </TableRow>
                   )
                 })}

@@ -37,7 +37,7 @@ import {
   ViewPrivileges,
   StudentPay,
   LeaveStatus,
-  LessonUpdate, 
+  LessonUpdate,
   LessonStatus,
   DesginationList,
   StaffDetails,
@@ -128,7 +128,7 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.VIEW_PIVILEGES} component={ViewPrivileges} />
       <ProtectedRoute path={ROUTES.STUDENT_PAY} component={StudentPay} />
       <ProtectedRoute path={ROUTES.LEAVE_STATUS} component={LeaveStatus} />
-      <ProtectedRoute path={ROUTES.LESSON_UPDATES} component={LessonUpdate} /> 
+      <ProtectedRoute path={ROUTES.LESSON_UPDATES} component={LessonUpdate} />
       <ProtectedRoute path={ROUTES.LESSON_STATUS} component={LessonStatus} />
       <ProtectedRoute path={ROUTES.RECEIPT} component={Rec} />
       <ProtectedRoute path={ROUTES.DESGINATION_LIST} component={DesginationList} />
@@ -139,7 +139,7 @@ const Routes = () => {
       <ProtectedRoute path={ROUTES.STAFF_ATTENANCE} component={StaffManagement} />
       <ProtectedRoute path={ROUTES.CREATE_LESSON} component={CreateLesson} />
       <ProtectedRoute path={ROUTES.BULK_ENTRY} component={BulkUpload} />
-      < Route path={ROUTES.STUDENT_PAYMENT} component={Payment} />
+      <ProtectedRoute path={ROUTES.STUDENT_PAYMENT} component={Payment} />
     </Switch>
   )
 }
