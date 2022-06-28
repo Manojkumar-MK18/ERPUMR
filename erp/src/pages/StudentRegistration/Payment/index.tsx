@@ -104,8 +104,15 @@ const Payment = (): ReactElement => {
 
   return (
     <PageWrapper>
-      <FlexWrapper noPadding>
+      <FlexWrapper noPadding  >
         <SectionTitle title="Pay" hasBackButton />
+      </FlexWrapper>
+      <FlexWrapper noPadding justifyContent='end'>
+        <Input
+          width='20%'
+          value={''}
+          placeholder='Search'
+        />
       </FlexWrapper>
       <div>
         {values?.description && (
@@ -269,7 +276,7 @@ const Payment = (): ReactElement => {
                 <TableRow>
                   <td> </td>
                   <td>Remarks</td>
-                  <td colSpan={6}>
+                  <td colSpan={5}>
                     <Input inputType="textarea" value={''} height="90px" />
                   </td>
                 </TableRow>
@@ -319,7 +326,7 @@ const Payment = (): ReactElement => {
                     />
                   </td>
                   <td  >
-                    <div>Cheque No</div>
+                    <div>Reference Id</div>
                     <Input
                       value=""
                       height="40px"
