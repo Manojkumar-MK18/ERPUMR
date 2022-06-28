@@ -18,6 +18,11 @@ vertical-align: baseline;
 }
 `
 
+export const HelperText = styled.div`
+position: relative;
+top: 30px;
+`
+
 const TableHeader = styled.thead`
   background-color: #009EFA;
   color: ${({ theme }) => theme.table.color};

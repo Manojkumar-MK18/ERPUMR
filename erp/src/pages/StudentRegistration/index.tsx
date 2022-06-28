@@ -25,7 +25,7 @@ import { useHistory } from 'react-router-dom'
 import ROUTES from 'const/routes'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { RootState } from 'redux/store'
-import { getStudentAdmissionList, addFeePayment, updateStudentDetails, updatePaymentMode, updateFeeDetails } from 'redux/fms/actions'
+import { getStudentAdmissionList, addFeePayment, updateStudentDetails } from 'redux/fms/actions'
 import { getCourses } from 'redux/academic/actions'
 import { resetValues } from './const'
 import { Student } from 'redux/fms/typings'
@@ -238,7 +238,7 @@ const StudentRegistartion = (): ReactElement => {
                   courseId = '',
                   regNo,
                   admissionNumber,
-                  //userId = '',
+                  userId = '',
                   mobileNumber,
                   fatherName,
                   firstName,
@@ -264,12 +264,13 @@ const StudentRegistartion = (): ReactElement => {
                               regNo: regNo,
                               mobileNumber: mobileNumber,
                               fatherName: fatherName,
-                              coachingCentre: coachingCentre?.coachingCentreName
+                              coachingCentre: coachingCentre?.coachingCentreName,
+                              userId: userId
                             }))
                           }}
                         />
                       </td>
-                      
+                       
                     </TableRow>
                   )
                 })}
@@ -321,13 +322,6 @@ const StudentRegistartion = (): ReactElement => {
               status: 'ACTIVE'
             }
             dispatch(addFeePayment(payload))
-            dispatch(updatePaymentMode({
-              cash: values?.paymentMode,
-              dateOn: values?.dateOn
-            }))
-            dispatch(updateFeeDetails({
-              amount: values?.amount
-            }))
             dispatch(getStudentAdmissionList(1))
           }}
           handleCancel={() => setPayId('')}

@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import {
+  Button,
   DropdownWrapper,
   EditableDropdown,
   FlexWrapper,
@@ -12,7 +13,7 @@ import getFeeDescriptionDropdown from 'pages/FeesManagementSystem/AddFeeMaster/h
 import { ReactElement, useEffect, useState } from 'react'
 import { Form, Table } from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { getFeeDescriptions, getFeeMaster } from 'redux/fms/api'
+import { addFeePayment, getFeeDescriptions, getFeeMaster } from 'redux/fms/api'
 import { RootState } from 'redux/store'
 import { Body } from 'typography'
 import {
@@ -20,19 +21,25 @@ import {
   initialPaymentValues,
   resetPaymentValues
 } from '../const'
-import TableHeader, { TableWrapper, TableRow } from './subcomponent'
+import TableHeader, { TableWrapper, TableRow, HelperText } from './subcomponent'
 import DatePicker from 'react-datepicker'
 import { format } from 'date-fns'
 import { DATE_FORMAT_MMDDYYYY } from 'const/dateFormat'
+import { ActionButton } from 'pages/HumanResources/LeaveApproval/subcomponents'
+import { useHistory } from 'react-router-dom'
+import { updateFeeDetails, updatePaymentMode, updateTotalFeeDetails } from 'redux/fms/actions'
+import { StringDecoder } from 'string_decoder'
 
 const Payment = (): ReactElement => {
   const {
     acamedic: { feeTypeList, termList, paymentModes },
-    fms: { feeMasterList, selectedStudentDetails }
+    fms: { feeMasterList, selectedStudentDetails },
+    cashierName
   } = useSelector(
     (state: RootState) => ({
       fms: state.fms,
-      acamedic: state.acamedic
+      acamedic: state.acamedic,
+      cashierName: state.user.userInfo?.userDetail.firstName,
     }),
     shallowEqual
   )
@@ -52,11 +59,12 @@ const Payment = (): ReactElement => {
   } = strings
 
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const [values, setValues] = useState(initialPaymentValues)
   const [resetValues, setResetValues] = useState(resetPaymentValues)
   const [selectedCheckBox, setSelectedCheckBox] = useState<Array<any>>([]);
-  const [disable, setDisable] = useState(true);
+  const [disable, setDisable] = useState<any>(true);
 
   const filteredDescription = values?.feeType
     ? feeMasterList.filter((des) => des?.title === values?.feeType)
@@ -80,6 +88,13 @@ const Payment = (): ReactElement => {
     termList.find((obj) => obj.name === term.terms)
   )
 
+  const amountToPay = coursesToFilter.find(
+    (course) =>
+      course.description === values?.description &&
+      course.title === values?.feeType &&
+      course.terms === values?.term
+  )
+
   const sum = coursesToFilter.reduce((sum, current) => Number(sum) + Number(current.amount), 0)
   const totalTermAmount = termsToPay.reduce((sum, current) => Number(sum) + Number(current.amount), 0)
 
@@ -99,8 +114,6 @@ const Payment = (): ReactElement => {
     dispatch(getFeeDescriptions())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  console.log(selectedCheckBox);
 
   return (
     <PageWrapper>
@@ -223,14 +236,14 @@ const Payment = (): ReactElement => {
                       <Input
                         height="20px"
                         placeholder=''
-                        value={values?.referenceId}
+                        value={'0'}
                       />
                     </td>
                     <td className="tableInput">
                       <Input value={''} height="20px" />
                     </td>
                     <td className="tableInput">
-                      <Input value={''} height="20px" />
+                      <Input value={'0'} height="20px" />
                     </td>
                     <td className="tableInput">
                       <Input value={''} height="20px" />
@@ -241,6 +254,9 @@ const Payment = (): ReactElement => {
                       <Input
                         value={''}
                         height="20px"
+                        onChange={(value: string) => {
+                          
+                        }}
                         isDisabled={disable}
                       />
                     </td>
@@ -250,27 +266,42 @@ const Payment = (): ReactElement => {
                   <td></td>
                   <td>Total</td>
                   <td className="tableInput">
-                    <Input value={totalTermAmount} height="40px" />
+                    <Input
+                      value={totalTermAmount}
+                      height="40px"
+                    />
+                  </td>
+                  <td className="tableInput">
+                    <Input
+                      value={'0'}
+                      height="20px"
+                      placeholder=''
+                    />
                   </td>
                   <td className="tableInput">
                     <Input
                       value={''}
                       height="20px"
-                      placeholder='df'
                     />
                   </td>
                   <td className="tableInput">
-                    <Input value={''} height="20px" />
-                  </td>
-                  <td className="tableInput">
-                    <Input value={''} height="20px" />
+                    <Input value={'0'} height="20px" />
                   </td>
                   <td className="tableInput">
                     <Input value={''} height="20px" />
                   </td>
                   <td className="tableInput">Tot.Amt</td>
                   <td className="tableInput">
-                    <Input value={''} height="20px" />
+                    <Input
+                      value={values?.amount}
+                      height="20px"
+                      onChange={(value: string) => {
+                        setValues({
+                          ...values,
+                          amount: value
+                        })
+                      }}
+                    />
                   </td>
                 </TableRow>
                 <TableRow>
@@ -286,7 +317,7 @@ const Payment = (): ReactElement => {
                   <td >
                     <div>MOP</div>
                     <EditableDropdown
-                      placeholder=""
+                      placeholder="MOP"
                       isRequired
                       dropdownList={paymentModes}
                       handleSelect={(item) => {
@@ -328,23 +359,83 @@ const Payment = (): ReactElement => {
                   <td  >
                     <div>Reference Id</div>
                     <Input
-                      value=""
+                      value={values?.referenceId}
                       height="40px"
+                      placeholder='Ref Id'
+                      onChange={(value: string) => {
+                        setValues({
+                          ...values,
+                          referenceId: value
+                        })
+                      }}
                     />
                   </td>
                   <td>
                     <div>Bank Name</div>
-                    <Input value="" height="40px" />
+                    <Input
+                      value={values?.bankName}
+                      height="40px"
+                      placeholder='Bank Name'
+                      onChange={(value: string) => {
+                        setValues({
+                          ...values,
+                          bankName: value
+                        })
+                      }}
+                    />
                   </td>
-                  <td>Net Payment</td>
                   <td>
-                    <Input value="" height="40px" />
+                    <HelperText > Net Payment </HelperText>
+                  </td>
+                  <td >
+                    <HelperText>
+                      <Input value="" height="40px" />
+                    </HelperText>
                   </td>
                 </TableRow>
               </tbody>
             </Table>
           </TableWrapper>
         </>
+      </FlexWrapper>
+      <FlexWrapper justifyContent='center'>
+        <ActionButton
+          onClick={() => {
+            history.goBack()
+          }}
+        >
+          Back
+        </ActionButton>
+        <Button
+          onClick={() => {
+            const payload = {
+              studentId: selectedStudentDetails?.userId,
+              paid: 'paid',
+              amount: values?.amount,
+              referenceId: values?.referenceId,
+              modeOfPayment: values?.paymentMode,
+              description: values?.description,
+              paidTypes: [values?.feeType],
+              date: values?.dateOn,
+              //balance: Number(selectedFeetotalDetails?.amount) - Number(values?.amount),
+              cashier: cashierName,
+              bankName: values?.bankName,
+              status: 'ACTIVE'
+            }
+            dispatch(addFeePayment(payload))
+            dispatch(updatePaymentMode({
+              cash: values?.paymentMode,
+              dateOn: values?.dateOn
+            }))
+            dispatch(updateFeeDetails({
+              amount: values?.amount
+            }))
+            dispatch(updateTotalFeeDetails({
+              amount: sum,
+              academicYear: amountToPay?.academicYear
+            }))
+          }}
+        >Save</Button>
       </FlexWrapper>
     </PageWrapper>
   )
