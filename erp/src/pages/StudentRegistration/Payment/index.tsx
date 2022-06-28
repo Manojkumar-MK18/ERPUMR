@@ -10,8 +10,8 @@ import {
 } from 'components'
 import strings from 'locale/en'
 import getFeeDescriptionDropdown from 'pages/FeesManagementSystem/AddFeeMaster/helpers'
-import { ReactElement, useEffect, useState } from 'react'
-import { Form, Table } from 'react-bootstrap'
+import { ChangeEvent, ReactElement, useEffect, useState } from 'react'
+import { Form, FormControl, Table } from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { addFeePayment, getFeeDescriptions, getFeeMaster } from 'redux/fms/api'
 import { RootState } from 'redux/store'
@@ -33,7 +33,7 @@ import { StringDecoder } from 'string_decoder'
 const Payment = (): ReactElement => {
   const {
     acamedic: { feeTypeList, termList, paymentModes },
-    fms: { feeMasterList, selectedStudentDetails },
+    fms: { feeMasterList, selectedStudentDetails, selectedFeetotalDetails },
     cashierName
   } = useSelector(
     (state: RootState) => ({
@@ -65,6 +65,7 @@ const Payment = (): ReactElement => {
   const [resetValues, setResetValues] = useState(resetPaymentValues)
   const [selectedCheckBox, setSelectedCheckBox] = useState<Array<any>>([]);
   const [disable, setDisable] = useState<any>(true);
+  const [amountData, setamountData] = useState({});
 
   const filteredDescription = values?.feeType
     ? feeMasterList.filter((des) => des?.title === values?.feeType)
@@ -108,6 +109,13 @@ const Payment = (): ReactElement => {
       setDisable(true)
     }
   };
+
+  const handleOnChange = (event: any) => {
+    setamountData({
+      ...amountData,
+      [event.target.name]: event.target.value
+    })
+  }
 
   useEffect(() => {
     dispatch(getFeeMaster())
@@ -251,13 +259,10 @@ const Payment = (): ReactElement => {
                     <td className="tableInput">
                     </td>
                     <td className="tableInput">
-                      <Input
-                        value={''}
-                        height="20px"
-                        onChange={(value: string) => {
-                          
-                        }}
-                        isDisabled={disable}
+                      <FormControl
+                        name={data?.terms}
+                        disabled={disable}
+                        onChange={handleOnChange}
                       />
                     </td>
                   </TableRow>
@@ -300,6 +305,10 @@ const Payment = (): ReactElement => {
                           ...values,
                           amount: value
                         })
+                        dispatch(updateTotalFeeDetails({
+                          amount: sum,
+                          academicYear: amountToPay?.academicYear
+                        }))
                       }}
                     />
                   </td>
@@ -417,7 +426,7 @@ const Payment = (): ReactElement => {
               description: values?.description,
               paidTypes: [values?.feeType],
               date: values?.dateOn,
-              //balance: Number(selectedFeetotalDetails?.amount) - Number(values?.amount),
+              balance: Number(selectedFeetotalDetails?.amount) - Number(values?.amount),
               cashier: cashierName,
               bankName: values?.bankName,
               status: 'ACTIVE'
@@ -429,10 +438,6 @@ const Payment = (): ReactElement => {
             }))
             dispatch(updateFeeDetails({
               amount: values?.amount
-            }))
-            dispatch(updateTotalFeeDetails({
-              amount: sum,
-              academicYear: amountToPay?.academicYear
             }))
           }}
         >Save</Button>
