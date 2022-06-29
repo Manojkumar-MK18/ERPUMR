@@ -46,7 +46,8 @@ const ROUTES = {
   STAFF_ATTENANCE: '/staffAttenance',
   CREATE_LESSON: '/createLesson',
   BULK_ENTRY: '/bulkEntry',
-  STUDENT_PAYMENT: '/payment'
+  STUDENT_PAYMENT: '/payment',
+  PAYMENT_HISTORY: '/paymentHistory'
 }
 
 export default ROUTES

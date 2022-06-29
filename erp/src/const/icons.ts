@@ -23,6 +23,7 @@ import {
   faPrint,
   faClipboardList,
   faTimesCircle,
+  faFileDownload
 } from '@fortawesome/free-solid-svg-icons'
 import { faUser, faEdit, faTrashAlt, faEye, } from '@fortawesome/free-regular-svg-icons'
 
@@ -53,5 +54,6 @@ library.add(
   faUserTie,
   faTimesCircle,
   faPrint,
-  faClipboardList
+  faClipboardList,
+  faFileDownload
 )

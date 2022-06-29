@@ -25,8 +25,7 @@ const Receipt = (): ReactElement => {
             referenceIdData: state.fms.feeAdd?.receiptId
         }),
         shallowEqual
-    )
-console.log(referenceIdData);
+    ) 
 
     return (
         <PageWrapper >

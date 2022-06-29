@@ -134,7 +134,8 @@ const strings = {
     remove: 'Remove',
     cancel: 'Cancel',
     print: 'Print',
-    clear: 'Clear'
+    clear: 'Clear',
+    submit: 'Submit'
   },
   chart: {
     stacked: {
@@ -208,6 +209,10 @@ const strings = {
       remarks: 'Remarks',
       enterRemarks: 'Enter Remarks',
       showHistory: 'Show History'
+    },
+    paymentHistory: {
+      history: 'Payment History',
+      inputPlaceHolder: 'Search'
     }
   },
   validationMessages: {

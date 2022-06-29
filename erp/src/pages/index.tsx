@@ -44,6 +44,7 @@ import StaffManagement from './HumanResources/staffAttenance'
 import CreateLesson from './LessonPlane/LessonUpdate/Assign'
 import BulkUpload from './StudentBulkUpload'
 import Payment from './StudentRegistration/Payment'
+import PaymentHistory from './FeesManagementSystem/paymentHistory'
 
 export {
   Dashboard,
@@ -91,5 +92,6 @@ export {
   StaffManagement,
   CreateLesson,
   BulkUpload,
-  Payment
+  Payment,
+  PaymentHistory
 }

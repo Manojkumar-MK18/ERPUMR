@@ -58,6 +58,11 @@ const admin: Array<Menu> = [
       },
       {
         icon: ['fas', 'bars'],
+        label: 'Payment History',
+        to: ROUTES.PAYMENT_HISTORY
+      },
+      {
+        icon: ['fas', 'bars'],
         label: 'Student Concession',
         to: ROUTES.STUDENT_CONCESSION
       },
@@ -144,7 +149,7 @@ const admin: Array<Menu> = [
         icon: ['fas', 'bars'],
         label: 'Lesson Updates',
         to: ROUTES.LESSON_UPDATES
-      }, 
+      },
       {
         icon: ['fas', 'bars'],
         label: 'Lesson Status',

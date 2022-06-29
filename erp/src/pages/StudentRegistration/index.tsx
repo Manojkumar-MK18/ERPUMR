@@ -270,7 +270,19 @@ const StudentRegistartion = (): ReactElement => {
                           }}
                         />
                       </td>
-                       
+                      <td>
+                        <Button onClick={() => {
+                          setPayId(userId)
+                          dispatch(updateStudentDetails({
+                            studentName: studentName,
+                            regNo: regNo,
+                            mobileNumber: mobileNumber,
+                            fatherName: fatherName,
+                            coachingCentre: coachingCentre?.coachingCentreName
+                          }))
+                        }
+                        }>p</Button>
+                      </td>
                     </TableRow>
                   )
                 })}
